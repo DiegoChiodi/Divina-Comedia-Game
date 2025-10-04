@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://l3mqgvf6yjlg"]
+
+[ext_resource type="Script" uid="uid://dxw1v31on1j6s" path="res://Scripts/main.gd" id="1_sblpm"]
+[ext_resource type="PackedScene" uid="uid://d35d02vpcgrpg" path="res://Scene/controledObject.tscn" id="2_r34rm"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_sblpm")
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_r34rm")]
