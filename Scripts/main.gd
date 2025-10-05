@@ -29,7 +29,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
 
 func center_window(new_size: Vector2i):
 	# define o tamanho da janela
