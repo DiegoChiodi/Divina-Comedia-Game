@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://m2exhdhgmqhi" path="res://Scripts/player.gd" id="1_vtayn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kelma"]
-size = Vector2(48, 48)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8w33"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kelma"]
 size = Vector2(32, 32)
 
 [node name="Player" type="CharacterBody2D"]
@@ -15,14 +15,12 @@ script = ExtResource("1_vtayn")
 offset_right = 32.0
 offset_bottom = 32.0
 
-[node name="Area2D" type="Area2D" parent="." groups=["hbAttack"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_kelma")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_y8w33")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="are_hbTakeDamage" type="Area2D" parent="."]
+position = Vector2(16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
+shape = SubResource("RectangleShape2D_kelma")

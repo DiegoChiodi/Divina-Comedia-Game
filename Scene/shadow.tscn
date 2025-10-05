@@ -25,3 +25,6 @@ shape = SubResource("RectangleShape2D_ki401")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_yws6g")
+
+[connection signal="area_entered" from="col_hbAttack" to="." method="_on_col_hb_attack_area_entered"]
+[connection signal="area_exited" from="col_hbAttack" to="." method="_on_col_hb_attack_area_exited"]

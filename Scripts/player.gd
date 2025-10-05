@@ -1,4 +1,4 @@
-extends Movel
+extends Entity
 class_name Player
 
 #Dash ---------------
@@ -18,16 +18,16 @@ func _physics_process(delta: float) -> void:
 	super.move(delta)
 
 func dash(delta) -> void:
-	var space : bool = Input.is_action_just_pressed("space")
+	var attack : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("left_click")
 	
-	if space && dashPoss:
+	if attack && dashPoss:
 		#Dando dash
 		self.inDash = true
 		self.dashDuringWait = 0.0
 		#cowdow do dash para usar denovo
 		self.dashPoss = false
 		self.dashWait = 0.0
-
+	
 	if self.dashDuringWait < self.dashDuringDelay:
 		self.dashDuringWait += delta
 	else:
@@ -44,7 +44,6 @@ func dash(delta) -> void:
 		self.speedDash = 3
 		self.sprite.modulate = Color(1,0,0)
 	else:
-		move_directionTarget()
 		self.speedDash = 1
 
 func velocityTarget(delta) -> void:
@@ -52,3 +51,13 @@ func velocityTarget(delta) -> void:
 
 func directionTarget() -> void:
 	self.direction = Input.get_vector("left", "right", "up", "down")
+	
+func groupsAdd() -> void:
+	add_to_group("Player")
+	groupRival = "Enemy"
+
+func move_directionTarget() -> void:
+	if inDash:
+		move_direction = (get_global_mouse_position() - self.global_position).normalized()
+	else:
+		super.move_directionTarget()
