@@ -8,7 +8,7 @@ var dashDuringDelay : float = 0.2
 var dashDuringWait : float = self.dashDuringDelay
 var dashSpeedMax : int = 3
 
-var dashDelay : float = 1.0
+var dashDelay : float = 0.6
 var dashWait : float = self.dashDelay
 var dashPoss : bool = false # se é possivel dar dash
 var lockDash : bool = false
@@ -19,9 +19,9 @@ var speedDash : int = 1
 
 func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
-	super.move(delta)
+	super._physics_process(delta)
 
-func dashFunction(delta) -> void:	
+func dashFunction(delta) -> void:
 	var attack : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("left_click")
 	
 	if attack && dash > 0:
@@ -41,7 +41,7 @@ func dashFunction(delta) -> void:
 	
 	if self.dashWait < self.dashDelay:
 		self.dashWait += delta
-		self.sprite.modulate = Color(dashWait , dashWait, 0) #amarelo
+		self.sprite.modulate = Color(0.6 + dashWait / 2 , 0.6 + dashWait / 2, 0) #amarelo
 	elif dash < dashMax:
 		self.dash += 1
 		self.dashWait = 0.0
