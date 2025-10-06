@@ -54,7 +54,6 @@ func dashFunction(delta) -> void:
 		self.sprite.modulate = Color(1,0,0) #vermelho
 	else:
 		self.speedDash = 1
-	print(dash)
 
 func velocityTarget(delta) -> void:
 	velocity = velocity.lerp(move_direction * speed * speedDash, acceleration)
