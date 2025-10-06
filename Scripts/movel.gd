@@ -5,7 +5,8 @@ var move_direction : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
 var impulse : Vector2 = Vector2.ZERO
 
-var speed : float = 250 # Velocidade constante que guia movimento
+var speedFix : float = 250.0
+var speed : float = self.speedFix # Velocidade constante que guia movimento
 var acceleration : float = 0.2  # Fator de suavização
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +23,12 @@ func _physics_process(delta: float) -> void:
 
 func move(delta: float) -> void:
 	move_directionTarget()
+	
+	if impulse.length() > 0.2:
+		speed = speedFix / 0.8
+	else:
+		speed = speedFix
+	
 	if self.move_direction != Vector2.ZERO:
 		velocityTarget(delta)
 	else:
