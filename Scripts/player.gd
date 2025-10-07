@@ -13,6 +13,8 @@ var dashWait : float = self.dashDelay
 var dashPoss : bool = false # se é possivel dar dash
 var lockDash : bool = false
 @onready var sprite : ColorRect = $ColorRect
+@onready var hbTake : Area2D = $are_hbTakeDamage
+@onready var hbAttack : Area2D = $are_hbAttack
 
 var inDash : bool = false
 var speedDash : int = 1
@@ -72,3 +74,10 @@ func move_directionTarget() -> void:
 			lockDash = true
 	else:
 		super.move_directionTarget()
+
+func collidingRival() -> void:
+	super.collidingRival()
+	if inDash:
+		invencible = true
+		invencibleWait = 0.0
+	print(life)

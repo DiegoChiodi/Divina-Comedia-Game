@@ -24,13 +24,15 @@ offset_bottom = 32.0
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
 position = Vector2(16, 16)
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
 shape = SubResource("RectangleShape2D_kelma")
 
-[node name="col_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+[node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="col_hbAttack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_xa75v")
 

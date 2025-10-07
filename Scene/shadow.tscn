@@ -25,11 +25,13 @@ color = Color(0, 0, 0, 1)
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
 position = Vector2(16, 16)
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
 shape = SubResource("RectangleShape2D_b3k1e")
 
 [node name="col_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="col_hbAttack"]
 position = Vector2(16, 16)

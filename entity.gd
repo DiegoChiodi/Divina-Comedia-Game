@@ -30,8 +30,11 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
+	collidingRival()
+	
+func collidingRival() -> void:
 	if colRival:
-		self.takeImpulse((self.position - self.rivalId.position).normalized() * 3)
+		self.takeAttack((self.position - self.rivalId.position).normalized() * 3, self.rivalId.damage)
 
 func groupsAdd() -> void:
 	pass
