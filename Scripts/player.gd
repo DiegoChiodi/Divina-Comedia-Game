@@ -80,4 +80,3 @@ func collidingRival() -> void:
 	if inDash:
 		invencible = true
 		invencibleWait = 0.0
-	print(life)

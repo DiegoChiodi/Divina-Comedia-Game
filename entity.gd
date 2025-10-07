@@ -35,6 +35,10 @@ func _physics_process(delta: float) -> void:
 func collidingRival() -> void:
 	if colRival:
 		self.takeAttack((self.position - self.rivalId.position).normalized() * 3, self.rivalId.damage)
+		rivalId.AttackSucess(self)
+
+func AttackSucess(body : CharacterBody2D) -> void:
+	self.takeImpulse((self.position - self.rivalId.position).normalized() * 3)
 
 func groupsAdd() -> void:
 	pass
@@ -48,6 +52,8 @@ func takeDamage(_damage : float) -> void:
 func takeAttack(_impulse : Vector2, _damage : float):
 	super.takeAttack(_impulse, _damage)
 	takeDamage(_damage)
+
+
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.get_parent().is_in_group(groupRival) and area.is_in_group("hbAttack"):
