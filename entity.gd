@@ -10,7 +10,8 @@ var invencibleDelay : float = 0.2
 var invencibleWait : float = self.invencibleDelay
 
 var groupRival : String = ""
-
+var colRival : bool = false
+var rivalId = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -26,7 +27,12 @@ func _process(delta: float) -> void:
 			invencibleWait += delta
 		else:
 			invencible = false
-	
+
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	if colRival:
+		self.takeImpulse((self.position - self.rivalId.position).normalized() * 3)
+
 func groupsAdd() -> void:
 	pass
 
@@ -39,8 +45,20 @@ func takeDamage(_damage : float) -> void:
 func takeAttack(_impulse : Vector2, _damage : float):
 	super.takeAttack(_impulse, _damage)
 	takeDamage(_damage)
-	
-	
+
+func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
+	if area.get_parent().is_in_group(groupRival) and area.is_in_group("hbAttack"):
+		colRival = true
+		rivalId = area.get_parent()
+
+func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:
+	if area.get_parent().is_in_group(groupRival) and area.is_in_group("hbAttack"):
+		colRival = false
+		rivalId = null
 
 func dead() -> void:
 	pass
+
+func printGrup() -> void:
+	print(groupRival)
+	print(get_groups())

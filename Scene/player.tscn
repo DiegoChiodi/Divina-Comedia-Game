@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d35d02vpcgrpg"]
+[gd_scene load_steps=5 format=3 uid="uid://d35d02vpcgrpg"]
 
 [ext_resource type="Script" uid="uid://m2exhdhgmqhi" path="res://Scripts/player.gd" id="1_vtayn"]
 
@@ -8,19 +8,31 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kelma"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xa75v"]
+size = Vector2(48, 48)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_vtayn")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 32.0
-offset_bottom = 32.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_y8w33")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 32.0
+offset_bottom = 32.0
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
 position = Vector2(16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
 shape = SubResource("RectangleShape2D_kelma")
+
+[node name="col_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="col_hbAttack"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_xa75v")
+
+[connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
+[connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]

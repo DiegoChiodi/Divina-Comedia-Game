@@ -11,6 +11,7 @@ func _physics_process(delta: float) -> void:
 	move_directionTarget()
 	super._physics_process(delta)
 
+
 func setup(_player : Player) -> void:
 	player = _player
 
