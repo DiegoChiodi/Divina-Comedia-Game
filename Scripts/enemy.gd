@@ -3,10 +3,8 @@ class_name Enemy
 
 var player : Player
 var colPlayer : bool = false
-func _ready() -> void:
-	super._ready()
-	speed = 100
-	
+
+
 func _physics_process(delta: float) -> void:
 	move_directionTarget()
 	super._physics_process(delta)

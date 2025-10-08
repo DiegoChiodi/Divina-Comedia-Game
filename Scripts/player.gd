@@ -58,7 +58,10 @@ func dashFunction(delta) -> void:
 		self.speedDash = 1
 
 func velocityTarget(delta) -> void:
-	velocity = velocity.lerp(move_direction * speed * speedDash, acceleration)
+	velocity = velocity.lerp(move_direction * speed, acceleration)
+
+func speedTarget() -> float:
+	return super.speedTarget() * speedDash
 
 func directionTarget() -> void:
 	self.direction = Input.get_vector("left", "right", "up", "down")

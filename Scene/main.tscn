@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://l3mqgvf6yjlg"]
+[gd_scene load_steps=4 format=3 uid="uid://l3mqgvf6yjlg"]
 
 [ext_resource type="Script" uid="uid://dxw1v31on1j6s" path="res://Scripts/main.gd" id="1_sblpm"]
+[ext_resource type="PackedScene" uid="uid://oqe5es64jlt6" path="res://Scene/slowEnemy.tscn" id="3_2wwxx"]
 [ext_resource type="PackedScene" uid="uid://ctywwb1pfgx4y" path="res://Scene/shadow.tscn" id="3_r34rm"]
 
 [node name="Main" type="Node2D"]
@@ -14,4 +15,7 @@ format = 2
 [node name="Grass" type="TileMapLayer" parent="TileMap"]
 
 [node name="Shadow" parent="." instance=ExtResource("3_r34rm")]
-position = Vector2(353, 152)
+position = Vector2(513, 233)
+
+[node name="ConfuseEnemy" parent="." instance=ExtResource("3_2wwxx")]
+position = Vector2(278, 256)

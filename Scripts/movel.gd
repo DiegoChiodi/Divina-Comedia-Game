@@ -4,6 +4,7 @@ class_name Movel
 var move_direction : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
 var impulse : Vector2 = Vector2.ZERO
+var impulseSpeed : float = 1.0
 
 var speedFix : float = 250.0
 var speed : float = self.speedFix # Velocidade constante que guia movimento
@@ -19,15 +20,16 @@ func _process(delta: float) -> void:
 	impulse = impulse.lerp(Vector2.ZERO, acceleration)
 
 func _physics_process(delta: float) -> void:
+	speed = speedTarget()
 	move(delta)
 
 func move(delta: float) -> void:
 	move_directionTarget()
 	
 	if impulse.length() > 0.2:
-		speed = speedFix / 0.8
+		impulseSpeed = 0.8
 	else:
-		speed = speedFix
+		impulseSpeed = 1.0
 	
 	if self.move_direction != Vector2.ZERO:
 		velocityTarget(delta)
@@ -50,3 +52,6 @@ func takeAttack(_impulse : Vector2, _damage : float) -> void:
 
 func takeImpulse(_impulse : Vector2) -> void:
 	impulse = _impulse
+
+func speedTarget() -> float:
+	return speedFix * impulseSpeed
