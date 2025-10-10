@@ -21,14 +21,6 @@ func directionTarget() -> void:
 	if player != null:
 		self.direction = (self.player.position - self.position).normalized()
 
-func _on_col_hb_attack_area_entered(area: Area2D) -> void:
-	if area.get_parent() == player:
-		colPlayer = true
-
-func _on_col_hb_attack_area_exited(area: Area2D) -> void:
-	if area.get_parent() == player:
-		colPlayer = false
-
 func groupsAdd() -> void:
 	add_to_group("Enemy")
 	groupRival = "Player"

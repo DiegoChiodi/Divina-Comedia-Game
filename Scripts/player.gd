@@ -83,3 +83,4 @@ func collidingRival() -> void:
 		invencible = true
 		invencibleWait = 0.0
 	super.collidingRival()
+	

@@ -3,7 +3,7 @@ class_name Entity
 
 var lifeMax : float = 100
 var life : float = lifeMax
-var damage : float = 50
+var damage : float = 20
 
 var invencible : bool = false
 var invencibleDelay : float = 0.2
@@ -42,7 +42,8 @@ func checkCollidingRival() -> bool:
 	return colRival
 
 func AttackSucess(body : CharacterBody2D) -> void:
-	self.takeImpulse((self.position - self.rivalId.position).normalized() * 3)
+	if self.rivalId != null:
+		self.takeImpulse((self.position - self.rivalId.position).normalized() * 3)
 
 func groupsAdd() -> void:
 	pass
@@ -52,12 +53,11 @@ func takeDamage(_damage : float) -> void:
 		life -= damage
 		invencible = true
 		invencibleWait = 0.0
+		scale -= Vector2(0.15,0.15)
 
-func takeAttack(_impulse : Vector2, _damage : float):
+func takeAttack(_impulse : Vector2, _damage : float = 0.0):
 	super.takeAttack(_impulse, _damage)
 	takeDamage(_damage)
-
-
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.get_parent().is_in_group(groupRival) and area.is_in_group("hbAttack"):

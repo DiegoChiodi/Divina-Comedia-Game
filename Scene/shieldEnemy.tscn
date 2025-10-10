@@ -1,39 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctywwb1pfgx4y"]
+[gd_scene load_steps=5 format=3 uid="uid://vxtji0hjwk4t"]
 
-[ext_resource type="Script" uid="uid://b7ggyfwv8bqgm" path="res://Scripts/shadowEnemy.gd" id="1_ki401"]
+[ext_resource type="Script" uid="uid://cu860rmrkq43n" path="res://shieldEnemy.gd" id="1_dymdj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yws6g"]
 size = Vector2(32, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3k1e"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c80tt"]
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
 size = Vector2(48, 48)
 
-[node name="Shadow" type="CharacterBody2D"]
-script = ExtResource("1_ki401")
+[node name="ShieldEnemy" type="CharacterBody2D"]
+script = ExtResource("1_dymdj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16, 16)
+position = Vector2(32, 32)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_yws6g")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 32.0
 offset_bottom = 32.0
-color = Color(0.755386, 0.755386, 0.755386, 1)
+scale = Vector2(2, 2)
+color = Color(0.147315, 4.66387e-05, 0.52959, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
-position = Vector2(16, 16)
+position = Vector2(97, 132)
+scale = Vector2(2, 2)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
-shape = SubResource("RectangleShape2D_b3k1e")
+position = Vector2(-32.5, -50)
+shape = SubResource("RectangleShape2D_c80tt")
 
-[node name="col_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+[node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+scale = Vector2(2, 2)
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="col_hbAttack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_ki401")
 

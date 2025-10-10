@@ -47,7 +47,7 @@ func directionTarget() -> void:
 func move_directionTarget() -> void:
 	self.move_direction = self.direction + impulse
 
-func takeAttack(_impulse : Vector2, _damage : float) -> void:
+func takeAttack(_impulse : Vector2, _damage : float = 0.0) -> void:
 	takeImpulse(_impulse)
 
 func takeImpulse(_impulse : Vector2) -> void:
