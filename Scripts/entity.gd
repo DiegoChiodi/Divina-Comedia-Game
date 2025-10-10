@@ -3,7 +3,7 @@ class_name Entity
 
 var lifeMax : float = 100
 var life : float = lifeMax
-var damage : float = 20
+var damage : float = 50
 
 var invencible : bool = false
 var invencibleDelay : float = 0.2
@@ -30,12 +30,16 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	collidingRival()
 	
+	if checkCollidingRival():
+		collidingRival()
+
 func collidingRival() -> void:
-	if colRival:
-		self.takeAttack((self.position - self.rivalId.position).normalized() * 3, self.rivalId.damage)
-		rivalId.AttackSucess(self)
+	self.takeAttack((self.position - self.rivalId.position).normalized() * 3, self.rivalId.damage)
+	rivalId.AttackSucess(self)
+
+func checkCollidingRival() -> bool:
+	return colRival
 
 func AttackSucess(body : CharacterBody2D) -> void:
 	self.takeImpulse((self.position - self.rivalId.position).normalized() * 3)

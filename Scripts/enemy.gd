@@ -9,10 +9,10 @@ func _physics_process(delta: float) -> void:
 	move_directionTarget()
 	super._physics_process(delta)
 
-func collidingRival() -> void:
+func checkCollidingRival() -> bool:
 	if (rivalId == player and player != null and player.inDash):
-		super.collidingRival()
-	
+		return true
+	return false
 
 func setup(_player : Player) -> void:
 	player = _player
