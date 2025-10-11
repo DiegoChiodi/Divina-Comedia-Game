@@ -1,25 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://l3mqgvf6yjlg"]
+[gd_scene load_steps=2 format=3 uid="uid://l3mqgvf6yjlg"]
 
 [ext_resource type="Script" uid="uid://dxw1v31on1j6s" path="res://Scripts/main.gd" id="1_sblpm"]
-[ext_resource type="PackedScene" uid="uid://c4i3vvwm18cuv" path="res://Scene/confuseEnemy.tscn" id="3_2wwxx"]
-[ext_resource type="PackedScene" uid="uid://ctywwb1pfgx4y" path="res://Scene/shadow.tscn" id="3_r34rm"]
-[ext_resource type="PackedScene" uid="uid://vxtji0hjwk4t" path="res://Scene/shieldEnemy.tscn" id="4_2wwxx"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sblpm")
-
-[node name="TileMap" type="TileMap" parent="."]
-format = 2
-
-[node name="Ground" type="TileMapLayer" parent="TileMap"]
-
-[node name="Grass" type="TileMapLayer" parent="TileMap"]
-
-[node name="Shadow" parent="." instance=ExtResource("3_r34rm")]
-position = Vector2(733, 386)
-
-[node name="ConfuseEnemy" parent="." instance=ExtResource("3_2wwxx")]
-position = Vector2(232, 356)
-
-[node name="ShieldEnemy" parent="." instance=ExtResource("4_2wwxx")]
-position = Vector2(716, 202)

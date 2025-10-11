@@ -33,6 +33,7 @@ func dashFunction(delta) -> void:
 		#cowdow do dash para usar denovo
 		self.dash -= 1
 		self.dashWait = 0.0
+		game_manager.start_shake(1.0,1.5)
 	
 	#Dando dash
 	if self.dashDuringWait < self.dashDuringDelay:
@@ -63,20 +64,20 @@ func velocityTarget(delta) -> void:
 func speedTarget() -> float:
 	return super.speedTarget() * speedDash
 
-func directionTarget() -> void:
+func directionTarget(delta : float) -> void:
 	self.direction = Input.get_vector("left", "right", "up", "down")
 	
 func groupsAdd() -> void:
 	add_to_group("Player")
 	groupRival = "Enemy"
 
-func move_directionTarget() -> void:
+func move_directionTarget(delta : float) -> void:
 	if inDash:
 		if !lockDash:
 			move_direction = (get_global_mouse_position() - self.global_position).normalized()
 			lockDash = true
 	else:
-		super.move_directionTarget()
+		super.move_directionTarget(delta)
 
 func collidingRival() -> void:
 	if inDash:

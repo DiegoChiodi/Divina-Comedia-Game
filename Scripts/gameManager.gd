@@ -1,0 +1,68 @@
+extends Node2D
+
+var camera : Camera = Camera.new()
+var player : Player = preload("res://Scene/player.tscn").instantiate()
+var roomContainer : RoomContainer = RoomContainer.new()
+
+#Scenes
+var debugScene : String = "res://Scene/debugMap.tscn"
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	windowsConf()
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_released("restart"):
+		get_tree().quit()
+		OS.create_instance(["res://Scene/main.tscn"])
+
+
+func init(main : Node2D):
+	self.camera.setup(player, null)
+	camera.limit_left = 0
+	camera.limit_top = 0
+	main.add_child(camera)
+	main.add_child(player)
+	self.roomContainer.setup(player, camera)
+	roomContainer.load_room(debugScene)
+	main.add_child(roomContainer)
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
+	DisplayServer.window_set_size(DisplayServer.screen_get_size())
+	center_window(DisplayServer.screen_get_size())
+
+func center_window(new_size: Vector2i):
+	# define o tamanho da janela
+	DisplayServer.window_set_size(new_size)
+	# pega o tamanho da tela
+	var screen_size = DisplayServer.screen_get_size()
+	# calcula posição para centralizar
+	var pos = (screen_size - new_size) / 2
+	# move a janela
+	DisplayServer.window_set_position(pos)
+
+func tileTemp(room : Node2D) -> void:
+	for i in 32:
+		var square : ColorRect = ColorRect.new()
+		square.size = Vector2(16,16)
+		square.position = Vector2(i * 128, 0)
+		room.add_child(square)
+		for j in 32:
+			var square2 : ColorRect = ColorRect.new()
+			square2.size = Vector2(16,16)
+			square2.position = Vector2(i * 128, j * 128)
+			room.add_child(square2)
+
+func windowsConf() -> void:
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
+	DisplayServer.window_set_size(DisplayServer.screen_get_size())
+	center_window(DisplayServer.screen_get_size())
+
+func start_shake(intensity: float, decay: float = 1.0) -> void:
+	camera.start_shake(intensity,decay)
+
+func resetGame():
+	get_tree().reload_current_scene()

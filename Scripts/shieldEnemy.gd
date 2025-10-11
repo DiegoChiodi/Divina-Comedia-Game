@@ -6,10 +6,11 @@ func _ready() -> void:
 	super._ready()
 	speedFix = 200
 	perseguition = 0.01
+	life = 40
 	
 func checkCollidingRival() -> bool:
 	if (super.checkCollidingRival() and self.rivalId != null
-	and (are_directions_similar(self.direction, self.rivalId.direction, 120)
+	and (are_directions_similar(self.direction, self.rivalId.direction, 45)
 	or self.rivalId.direction.length() > 0.05)):
 		return true
 	return false

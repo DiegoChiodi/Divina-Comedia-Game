@@ -16,7 +16,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	directionTarget()
+	directionTarget(delta)
 	impulse = impulse.lerp(Vector2.ZERO, acceleration)
 
 func _physics_process(delta: float) -> void:
@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 
 func move(delta: float) -> void:
-	move_directionTarget()
+	move_directionTarget(delta)
 	
 	if impulse.length() > 0.2:
 		impulseSpeed = 0.8
@@ -38,13 +38,13 @@ func move(delta: float) -> void:
 	
 	move_and_slide()
 	
-func velocityTarget(delta) -> void:
+func velocityTarget(delta : float) -> void:
 	velocity = velocity.lerp(move_direction * speed, acceleration)
 
-func directionTarget() -> void:
+func directionTarget(delta : float) -> void:
 	pass
 
-func move_directionTarget() -> void:
+func move_directionTarget(delta : float) -> void:
 	self.move_direction = self.direction + impulse
 
 func takeAttack(_impulse : Vector2, _damage : float = 0.0) -> void:

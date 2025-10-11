@@ -8,6 +8,6 @@ func _ready() -> void:
 	speedFix = randi_range(500,800)
 	life = 50
 	
-func directionTarget() -> void:
+func directionTarget(delta : float) -> void:
 	if player != null:
 		self.direction = lerp(self.direction, (self.player.position - self.position).normalized(), perseguition)

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbfu56yvbwemo"]
+
+[ext_resource type="Script" uid="uid://kl241ljj5wbs" path="res://Scripts/RoomControl/debugMap.gd" id="1_bxs1j"]
+[ext_resource type="PackedScene" uid="uid://ctywwb1pfgx4y" path="res://Scene/shadow.tscn" id="2_5ceu0"]
+[ext_resource type="PackedScene" uid="uid://c4i3vvwm18cuv" path="res://Scene/confuseEnemy.tscn" id="3_e0eme"]
+[ext_resource type="PackedScene" uid="uid://vxtji0hjwk4t" path="res://Scene/shieldEnemy.tscn" id="4_48lr7"]
+
+[node name="DebugMap" type="Node2D"]
+script = ExtResource("1_bxs1j")
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="Ground" type="TileMapLayer" parent="TileMap"]
+
+[node name="Grass" type="TileMapLayer" parent="TileMap"]
+
+[node name="Shadow" parent="." instance=ExtResource("2_5ceu0")]
+position = Vector2(864, 526)
+
+[node name="ConfuseEnemy" parent="." instance=ExtResource("3_e0eme")]
+position = Vector2(145, 388)
+
+[node name="ShieldEnemy" parent="." instance=ExtResource("4_48lr7")]
+position = Vector2(943, 165)
+
+[node name="playerSpawn" type="Marker2D" parent="."]
+position = Vector2(494, 254)
