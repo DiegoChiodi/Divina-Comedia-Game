@@ -79,9 +79,9 @@ func move_directionTarget(delta : float) -> void:
 	else:
 		super.move_directionTarget(delta)
 
-func collidingRival() -> void:
+func collidingRival(body) -> void:
 	if inDash:
 		invencible = true
 		invencibleWait = 0.0
-	super.collidingRival()
+	super.collidingRival(body)
 	

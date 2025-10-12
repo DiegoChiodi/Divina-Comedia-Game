@@ -7,8 +7,8 @@ var colPlayer : bool = false
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
-func checkCollidingRival() -> bool:
-	if (rivalId == player and player != null and player.inDash):
+func checkCollidingRival(body) -> bool:
+	if (body == player and player != null and player.inDash):
 		return true
 	return false
 

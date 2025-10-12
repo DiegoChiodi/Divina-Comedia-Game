@@ -11,7 +11,7 @@ var invencibleWait : float = self.invencibleDelay
 
 var groupRival : String = ""
 var colRival : bool = false
-var rivalId = null
+var rivalId : Array[Entity] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -31,19 +31,25 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
-	if checkCollidingRival():
-		collidingRival()
+	checkColliding()
 
-func collidingRival() -> void:
-	self.takeAttack((self.position - self.rivalId.position).normalized() * 3, self.rivalId.damage)
-	rivalId.AttackSucess(self)
+func collidingRival(body) -> void:
+	self.takeAttack((self.position - body.position).normalized() * 3, body.damage)
+	body.AttackSucess(self)
 
-func checkCollidingRival() -> bool:
-	return colRival
+func checkColliding() -> void:
+	if !rivalId.is_empty():
+		for i in rivalId.size():
+			if checkCollidingRival(rivalId[i]):
+				collidingRival(rivalId[i])
+	
+
+func checkCollidingRival(body) -> bool:
+	return body != null and body.is_in_group(groupRival)
 
 func AttackSucess(body : CharacterBody2D) -> void:
-	if self.rivalId != null:
-		self.takeImpulse((self.position - self.rivalId.position).normalized() * 3)
+	if body != null:
+		self.takeImpulse((self.position - body.position).normalized() * 3)
 
 func groupsAdd() -> void:
 	pass
@@ -60,14 +66,12 @@ func takeAttack(_impulse : Vector2, _damage : float = 0.0):
 	takeDamage(_damage)
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
-	if area.get_parent().is_in_group(groupRival) and area.is_in_group("hbAttack"):
-		colRival = true
-		rivalId = area.get_parent()
+	if area.is_in_group("hbAttack"):
+		rivalId.append(area.get_parent())
 
 func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:
-	if area.get_parent().is_in_group(groupRival) and area.is_in_group("hbAttack"):
-		colRival = false
-		rivalId = null
+	if area.is_in_group("hbAttack"):
+		rivalId.erase(area.get_parent())
 
 func dead() -> void:
 	pass
