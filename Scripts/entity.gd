@@ -11,7 +11,7 @@ var invencibleWait : float = self.invencibleDelay
 
 var groupRival : String = ""
 var colRival : bool = false
-var rivalId : Array[Entity] = []
+var bodysCol : Array[Entity] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -38,11 +38,15 @@ func collidingRival(body) -> void:
 	body.AttackSucess(self)
 
 func checkColliding() -> void:
-	if !rivalId.is_empty():
-		for i in rivalId.size():
-			if checkCollidingRival(rivalId[i]):
-				collidingRival(rivalId[i])
+	if !bodysCol.is_empty():
+		for body in bodysCol:
+			if checkCollidingRival(body):
+				collidingRival(body)
+			else:
+				collidingRandom(body)
 	
+func collidingRandom(body) -> void:
+	self.takeImpulse((self.position - body.position).normalized() * 3)
 
 func checkCollidingRival(body) -> bool:
 	return body != null and body.is_in_group(groupRival)
@@ -67,11 +71,11 @@ func takeAttack(_impulse : Vector2, _damage : float = 0.0):
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):
-		rivalId.append(area.get_parent())
+		bodysCol.append(area.get_parent())
 
 func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):
-		rivalId.erase(area.get_parent())
+		bodysCol.erase(area.get_parent())
 
 func dead() -> void:
 	pass
