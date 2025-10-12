@@ -7,13 +7,12 @@ func _ready() -> void:
 	super._ready()
 	speedFix = 200
 	perseguition = 0.01
-	life = 40
+	life = 50
 
 
 func checkCollidingRival(body) -> bool:
 	if (super.checkCollidingRival(body) 
-	and (are_directions_similar(self.direction, (self.position - body.position).normalized(), 90)
-	or body.direction.length() > 0.05)):
+	and are_directions_similar(Vector2.RIGHT.rotated(rotation), (self.position - body.position).normalized(), 90)):
 		return true
 	return false
 	invencibilityActivate()

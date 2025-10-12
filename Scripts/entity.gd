@@ -60,7 +60,7 @@ func groupsAdd() -> void:
 
 func takeDamage(_damage : float) -> void:
 	if !invencible:
-		life -= damage
+		life -= _damage
 		invencible = true
 		invencibleWait = 0.0
 		scale -= Vector2(0.15,0.15)

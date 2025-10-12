@@ -58,4 +58,3 @@ func speedTarget() -> float:
 
 func rotationSet(delta) -> void:
 	self.rotation = lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * delta)
-	print(delta * rotationSpeed)

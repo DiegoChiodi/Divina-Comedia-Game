@@ -21,6 +21,10 @@ var lockDash : bool = false
 var inDash : bool = false
 var speedDash : int = 1
 
+func _ready() -> void:
+	super._ready()
+	damage = 20
+
 func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
 	super._physics_process(delta)

@@ -64,5 +64,19 @@ offset_right = 40.0
 offset_bottom = 48.0
 metadata/_edit_use_anchors_ = true
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 8.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = -8.0
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+color = Color(1, 0, 0, 1)
+
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
