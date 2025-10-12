@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name Movel
 
-var move_direction : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
 var impulse : Vector2 = Vector2.ZERO
 var impulseSpeed : float = 1.0
@@ -18,34 +17,30 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	directionTarget(delta)
 	impulse = impulse.lerp(Vector2.ZERO, acceleration)
+	self.rotation = lerp_angle(self.rotation, (self.direction).angle(), acceleration) 
 
 func _physics_process(delta: float) -> void:
 	speed = speedTarget()
 	move(delta)
 
 func move(delta: float) -> void:
-	move_directionTarget(delta)
-	
 	if impulse.length() > 0.2:
 		impulseSpeed = 0.8
 	else:
 		impulseSpeed = 1.0
 	
-	if self.move_direction != Vector2.ZERO:
+	if self.direction != Vector2.ZERO:
 		velocityTarget(delta)
 	else:
-		velocity = velocity.lerp(move_direction * 0, acceleration)
+		velocity = velocity.lerp(Vector2.ZERO, acceleration)
 	
 	move_and_slide()
 	
 func velocityTarget(delta : float) -> void:
-	velocity = velocity.lerp(move_direction * speed, acceleration)
+	velocity = velocity.lerp((direction + impulse) * speed, acceleration)
 
 func directionTarget(delta : float) -> void:
 	pass
-
-func move_directionTarget(delta : float) -> void:
-	self.move_direction = self.direction + impulse
 
 func takeAttack(_impulse : Vector2, _damage : float = 0.0) -> void:
 	takeImpulse(_impulse)

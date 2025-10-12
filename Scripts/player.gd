@@ -59,29 +59,25 @@ func dashFunction(delta) -> void:
 		self.speedDash = 1
 
 func velocityTarget(delta) -> void:
-	velocity = velocity.lerp(move_direction * speed, acceleration)
+	velocity = velocity.lerp(direction * speed, acceleration)
 
 func speedTarget() -> float:
 	return super.speedTarget() * speedDash
 
 func directionTarget(delta : float) -> void:
-	self.direction = Input.get_vector("left", "right", "up", "down")
+	if inDash:
+		if !lockDash:
+			direction = (get_global_mouse_position() - self.global_position).normalized()
+			lockDash = true
+	else:
+		self.direction = Input.get_vector("left", "right", "up", "down")
 	
 func groupsAdd() -> void:
 	add_to_group("Player")
 	groupRival = "Enemy"
 
-func move_directionTarget(delta : float) -> void:
-	if inDash:
-		if !lockDash:
-			move_direction = (get_global_mouse_position() - self.global_position).normalized()
-			lockDash = true
-	else:
-		super.move_directionTarget(delta)
-
 func collidingRival(body) -> void:
 	if inDash:
-		invencible = true
-		invencibleWait = 0.0
+		invencibilityActivate()
 	super.collidingRival(body)
 	

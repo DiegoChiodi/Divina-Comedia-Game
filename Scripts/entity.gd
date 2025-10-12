@@ -66,8 +66,8 @@ func takeDamage(_damage : float) -> void:
 		scale -= Vector2(0.15,0.15)
 
 func takeAttack(_impulse : Vector2, _damage : float = 0.0):
-	super.takeAttack(_impulse, _damage)
 	takeDamage(_damage)
+	super.takeAttack(_impulse)
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):
@@ -83,3 +83,7 @@ func dead() -> void:
 func printGrup() -> void:
 	print(groupRival)
 	print(get_groups())
+
+func invencibilityActivate() -> void:
+	invencible = true
+	invencibleWait = 0.0
