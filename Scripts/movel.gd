@@ -4,10 +4,12 @@ class_name Movel
 var direction : Vector2 = Vector2.ZERO
 var impulse : Vector2 = Vector2.ZERO
 var impulseSpeed : float = 1.0
+var lastDirection : Vector2 = Vector2.RIGHT
 
 var speedFix : float = 250.0
 var speed : float = self.speedFix # Velocidade constante que guia movimento
 var acceleration : float = 0.2  # Fator de suavização
+var rotationSpeed : float = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,7 +19,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	directionTarget(delta)
 	impulse = impulse.lerp(Vector2.ZERO, acceleration)
-	self.rotation = lerp_angle(self.rotation, (self.direction).angle(), acceleration) 
+	rotationSet(delta)
+	
+	if direction != Vector2.ZERO:
+		lastDirection = direction
 
 func _physics_process(delta: float) -> void:
 	speed = speedTarget()
@@ -50,3 +55,7 @@ func takeImpulse(_impulse : Vector2) -> void:
 
 func speedTarget() -> float:
 	return speedFix * impulseSpeed
+
+func rotationSet(delta) -> void:
+	self.rotation = lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * delta)
+	print(delta * rotationSpeed)

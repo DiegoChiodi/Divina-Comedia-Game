@@ -9,24 +9,22 @@ size = Vector2(32, 32)
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
-size = Vector2(48, 48)
+size = Vector2(34, 34)
 
 [node name="ConfuseEnemy" type="CharacterBody2D"]
-position = Vector2(-16, -16)
 script = ExtResource("1_a1g73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_yws6g")
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
-position = Vector2(16, 16)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
 shape = SubResource("RectangleShape2D_c80tt")
 
 [node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+position = Vector2(-16, -16)
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
@@ -34,8 +32,10 @@ position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_ki401")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 32.0
-offset_bottom = 32.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 color = Color(0.274356, 0.421589, 0.996455, 1)
 
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]

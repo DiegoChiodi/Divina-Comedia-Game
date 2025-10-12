@@ -16,6 +16,8 @@ var lockDash : bool = false
 @onready var hbTake : Area2D = $are_hbTakeDamage
 @onready var hbAttack : Area2D = $are_hbAttack
 
+#direction
+
 var inDash : bool = false
 var speedDash : int = 1
 

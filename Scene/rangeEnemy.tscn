@@ -9,7 +9,7 @@ size = Vector2(32, 32)
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
-size = Vector2(48, 48)
+size = Vector2(34, 34)
 
 [node name="rangeEnemy" type="CharacterBody2D"]
 position = Vector2(-16, -16)
@@ -37,6 +37,7 @@ shape = SubResource("RectangleShape2D_ki401")
 offset_right = 32.0
 offset_bottom = 32.0
 color = Color(0.755386, 0.755386, 0.755386, 1)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]

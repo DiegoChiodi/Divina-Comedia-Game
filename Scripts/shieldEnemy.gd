@@ -29,4 +29,6 @@ func are_directions_similar(a: Vector2, b: Vector2, tolerance_degrees: float = 3
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	self.rotation = lerp_angle(self.rotation, (self.direction).angle(), acceleration) 
+
+func rotationSet(delta) -> void:
+	self.rotation = lerp_angle(self.rotation, (self.lastDirection).angle(), delta)

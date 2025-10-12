@@ -9,19 +9,17 @@ size = Vector2(32, 32)
 size = Vector2(31.5, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
-size = Vector2(48, 48)
+size = Vector2(33, 33)
 
 [node name="ShieldEnemy" type="CharacterBody2D"]
-position = Vector2(-32, -32)
 script = ExtResource("1_dymdj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(32, 32)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_yws6g")
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
-position = Vector2(128, 164)
+position = Vector2(96, 132)
 scale = Vector2(2, 2)
 monitorable = false
 
@@ -30,6 +28,7 @@ position = Vector2(-48.25, -66)
 shape = SubResource("RectangleShape2D_c80tt")
 
 [node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+position = Vector2(-32, -32)
 scale = Vector2(2, 2)
 monitoring = false
 
@@ -38,14 +37,13 @@ position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_ki401")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 32.0
-offset_bottom = 32.0
+offset_left = -32.0
+offset_top = -32.0
 scale = Vector2(2, 2)
 color = Color(0.147315, 4.66387e-05, 0.52959, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="shield" type="Node2D" parent="."]
-position = Vector2(32, 32)
 
 [node name="ColorRect" type="ColorRect" parent="shield"]
 offset_left = 40.0

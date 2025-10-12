@@ -9,28 +9,28 @@ size = Vector2(32, 32)
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xa75v"]
-size = Vector2(48, 48)
+size = Vector2(34, 34)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(-16, -16)
 script = ExtResource("1_vtayn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_y8w33")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 32.0
-offset_bottom = 32.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
-position = Vector2(16, 16)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
 shape = SubResource("RectangleShape2D_kelma")
 
 [node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+position = Vector2(-16, -16)
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
