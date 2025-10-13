@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctywwb1pfgx4y"]
+[gd_scene load_steps=5 format=3 uid="uid://b07deevdlc6bx"]
 
-[ext_resource type="Script" uid="uid://b7ggyfwv8bqgm" path="res://Scripts/shadowEnemy.gd" id="1_ki401"]
+[ext_resource type="Script" uid="uid://np0v0kpyyuo0" path="res://Scripts/Enemys/rangeEnemy.gd" id="1_1clmw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yws6g"]
 size = Vector2(32, 32)
@@ -11,45 +11,46 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
 size = Vector2(34, 34)
 
-[node name="Shadow" type="CharacterBody2D"]
-script = ExtResource("1_ki401")
+[node name="rangeEnemy" type="CharacterBody2D"]
+position = Vector2(-16, -16)
+script = ExtResource("1_1clmw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_yws6g")
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
+position = Vector2(16, 16)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
 shape = SubResource("RectangleShape2D_b3k1e")
 
-[node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
-position = Vector2(-16, -16)
+[node name="col_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="col_hbAttack"]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_ki401")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_right = 32.0
+offset_bottom = 32.0
 color = Color(0.755386, 0.755386, 0.755386, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 4.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = -4.0
+offset_left = 20.0
+offset_top = 4.0
+offset_right = 28.0
+offset_bottom = 12.0
 color = Color(1, 0, 0, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="."]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 12.0
-offset_bottom = 12.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 28.0
+offset_bottom = 28.0
 color = Color(1, 0, 0, 1)
 
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
