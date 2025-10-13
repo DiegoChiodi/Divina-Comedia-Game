@@ -1,0 +1,266 @@
+[gd_scene load_steps=5 format=3 uid="uid://cycr2kuj08aij"]
+
+[ext_resource type="Script" uid="uid://uo1mvqx4v0wm" path="res://Scripts/waspEnemy.gd" id="1_mx6a0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yws6g"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3k1e"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
+size = Vector2(34, 34)
+
+[node name="Wasp" type="CharacterBody2D"]
+scale = Vector2(1.51052, 1.53)
+script = ExtResource("1_mx6a0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yws6g")
+
+[node name="are_hbTakeDamage" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
+shape = SubResource("RectangleShape2D_b3k1e")
+
+[node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+position = Vector2(-16, -16)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_ki401")
+
+[node name="WaspMiny" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="WaspMiny"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.427518, 0.366204)
+color = Color(0.211527, 0.0442607, 2.07143e-05, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="WaspMiny"]
+offset_left = -8.0
+offset_top = -15.0
+offset_bottom = -7.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="WaspMiny"]
+offset_left = -8.0
+offset_top = -9.0
+offset_bottom = -1.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="WaspMiny2" type="Node2D" parent="."]
+position = Vector2(17, 5)
+scale = Vector2(0.455727, 0.33189)
+
+[node name="ColorRect" type="ColorRect" parent="WaspMiny2"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.427518, 0.366204)
+color = Color(0.211527, 0.0442607, 2.07143e-05, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="WaspMiny2"]
+offset_left = -8.0
+offset_top = -15.0
+offset_bottom = -7.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="WaspMiny2"]
+offset_left = -8.0
+offset_top = -9.0
+offset_bottom = -1.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="WaspMiny3" type="Node2D" parent="."]
+position = Vector2(5, 18)
+scale = Vector2(0.666759, 0.531528)
+
+[node name="ColorRect" type="ColorRect" parent="WaspMiny3"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.427518, 0.366204)
+color = Color(0.211527, 0.0442607, 2.07143e-05, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="WaspMiny3"]
+offset_left = -8.0
+offset_top = -15.0
+offset_bottom = -7.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="WaspMiny3"]
+offset_left = -8.0
+offset_top = -9.0
+offset_bottom = -1.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="WaspMiny4" type="Node2D" parent="."]
+position = Vector2(0, 8)
+scale = Vector2(0.806301, 0.485879)
+
+[node name="ColorRect" type="ColorRect" parent="WaspMiny4"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.427518, 0.366204)
+color = Color(0.211527, 0.0442607, 2.07143e-05, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="WaspMiny4"]
+offset_left = -8.0
+offset_top = -15.0
+offset_bottom = -7.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="WaspMiny4"]
+offset_left = -8.0
+offset_top = -9.0
+offset_bottom = -1.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="WaspMiny5" type="Node2D" parent="."]
+position = Vector2(15, -4)
+scale = Vector2(0.666759, 0.531528)
+
+[node name="ColorRect" type="ColorRect" parent="WaspMiny5"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.427518, 0.366204)
+color = Color(0.211527, 0.0442607, 2.07143e-05, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="WaspMiny5"]
+offset_left = -8.0
+offset_top = -15.0
+offset_bottom = -7.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="WaspMiny5"]
+offset_left = -8.0
+offset_top = -9.0
+offset_bottom = -1.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="WaspMiny6" type="Node2D" parent="."]
+position = Vector2(12, 12)
+scale = Vector2(0.455727, 0.33189)
+
+[node name="ColorRect" type="ColorRect" parent="WaspMiny6"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.427518, 0.366204)
+color = Color(0.211527, 0.0442607, 2.07143e-05, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="WaspMiny6"]
+offset_left = -8.0
+offset_top = -15.0
+offset_bottom = -7.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="WaspMiny6"]
+offset_left = -8.0
+offset_top = -9.0
+offset_bottom = -1.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="WaspMiny7" type="Node2D" parent="."]
+position = Vector2(-7, 13)
+scale = Vector2(0.455727, 0.33189)
+
+[node name="ColorRect" type="ColorRect" parent="WaspMiny7"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.427518, 0.366204)
+color = Color(0.211527, 0.0442607, 2.07143e-05, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="WaspMiny7"]
+offset_left = -8.0
+offset_top = -15.0
+offset_bottom = -7.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="WaspMiny7"]
+offset_left = -8.0
+offset_top = -9.0
+offset_bottom = -1.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="WaspMiny8" type="Node2D" parent="."]
+position = Vector2(17.2126, 16.9935)
+scale = Vector2(0.455727, 0.33189)
+
+[node name="ColorRect" type="ColorRect" parent="WaspMiny8"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.427518, 0.366204)
+color = Color(0.211527, 0.0442607, 2.07143e-05, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="WaspMiny8"]
+offset_left = -8.0
+offset_top = -15.0
+offset_bottom = -7.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="WaspMiny8"]
+offset_left = -8.0
+offset_top = -9.0
+offset_bottom = -1.0
+scale = Vector2(0.541486, 0.278305)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
+[connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]

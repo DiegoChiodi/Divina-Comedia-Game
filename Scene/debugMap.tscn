@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbfu56yvbwemo"]
+[gd_scene load_steps=6 format=3 uid="uid://dbfu56yvbwemo"]
 
 [ext_resource type="Script" uid="uid://kl241ljj5wbs" path="res://Scripts/RoomControl/debugMap.gd" id="1_bxs1j"]
 [ext_resource type="PackedScene" uid="uid://ctywwb1pfgx4y" path="res://Scene/shadow.tscn" id="2_5ceu0"]
 [ext_resource type="PackedScene" uid="uid://c4i3vvwm18cuv" path="res://Scene/confuseEnemy.tscn" id="3_e0eme"]
 [ext_resource type="PackedScene" uid="uid://vxtji0hjwk4t" path="res://Scene/shieldEnemy.tscn" id="4_48lr7"]
+[ext_resource type="PackedScene" uid="uid://cycr2kuj08aij" path="res://Scene/waspEnemy.tscn" id="5_5ceu0"]
 
 [node name="DebugMap" type="Node2D"]
 script = ExtResource("1_bxs1j")
@@ -23,6 +24,9 @@ position = Vector2(145, 388)
 
 [node name="ShieldEnemy" parent="." instance=ExtResource("4_48lr7")]
 position = Vector2(943, 165)
+
+[node name="WaspEnemy" parent="." instance=ExtResource("5_5ceu0")]
+position = Vector2(459, 387)
 
 [node name="playerSpawn" type="Marker2D" parent="."]
 position = Vector2(494, 254)
