@@ -1,23 +1,19 @@
 extends Entity
 class_name Enemy
 
-var player : Player
 var colPlayer : bool = false
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
 func checkCollidingRival(body) -> bool:
-	if (body == player and player != null and player.inDash):
+	if (body == game_manager.player and game_manager.player.inDash):
 		return true
 	return false
 
-func setup(_player : Player) -> void:
-	player = _player
-
 func directionTarget(delta) -> void:
-	if player != null:
-		self.direction = (self.player.position - self.position).normalized()
+	if game_manager.player != null:
+		self.direction = (game_manager.player.position - self.position).normalized()
 
 func groupsAdd() -> void:
 	add_to_group("Enemy")

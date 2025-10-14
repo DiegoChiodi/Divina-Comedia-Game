@@ -19,8 +19,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	if life <= 0:
-		self.queue_free()
 	
 	if self.invencible:
 		if invencibleWait < invencibleDelay:
@@ -64,6 +62,8 @@ func takeDamage(_damage : float) -> void:
 		invencible = true
 		invencibleWait = 0.0
 		scale -= Vector2(0.15,0.15)
+		if life <= 0:
+			self.queue_free()
 
 func takeAttack(_impulse : Vector2, _damage : float = 0.0):
 	takeDamage(_damage)

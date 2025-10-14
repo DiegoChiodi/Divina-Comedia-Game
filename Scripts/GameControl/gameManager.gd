@@ -23,7 +23,6 @@ func init(main : Node2D):
 	camera.limit_top = 0
 	main.add_child(camera)
 	main.add_child(player)
-	self.roomContainer.setup(player, camera)
 	roomContainer.load_room(debugScene)
 	main.add_child(roomContainer)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
