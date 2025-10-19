@@ -64,9 +64,6 @@ func dashFunction(delta) -> void:
 	else:
 		self.speedDash = 1
 
-func velocityTarget(delta) -> void:
-	velocity = velocity.lerp(direction * speed, acceleration)
-
 func speedTarget() -> float:
 	return super.speedTarget() * speedDash
 

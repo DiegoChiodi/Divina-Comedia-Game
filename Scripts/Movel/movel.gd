@@ -2,8 +2,8 @@ extends CharacterBody2D
 class_name Movel
 
 var direction : Vector2 = Vector2.ZERO
-var impulse : Vector2 = Vector2.ZERO
-var impulseSpeed : float = 1.0
+var impulseDir : Vector2 = Vector2.ZERO
+var impulseSpeed : float = 1500.0
 var lastDirection : Vector2 = Vector2.RIGHT
 
 var speedFix : float = 250.0
@@ -18,7 +18,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	directionTarget(delta)
-	impulse = impulse.lerp(Vector2.ZERO, acceleration)
+	impulseDir = impulseDir.lerp(Vector2.ZERO,acceleration)
 	rotationSet(delta)
 	
 	if direction != Vector2.ZERO:
@@ -29,12 +29,7 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 
 func move(delta: float) -> void:
-	if impulse.length() > 0.2:
-		impulseSpeed = 0.8
-	else:
-		impulseSpeed = 1.0
-	
-	if self.direction != Vector2.ZERO:
+	if self.direction != Vector2.ZERO or self.impulseDir != Vector2.ZERO:
 		velocityTarget(delta)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, acceleration)
@@ -42,19 +37,17 @@ func move(delta: float) -> void:
 	move_and_slide()
 	
 func velocityTarget(delta : float) -> void:
-	velocity = velocity.lerp((direction + impulse) * speed, acceleration)
+	velocity = velocity.lerp((direction * speed) + (impulseSpeed * impulseDir), acceleration)
 
 func directionTarget(delta : float) -> void:
 	pass
 
-func takeAttack(_impulse : Vector2, _damage : float = 0.0) -> void:
-	takeImpulse(_impulse)
-
-func takeImpulse(_impulse : Vector2) -> void:
-	impulse = _impulse
+func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 1500) -> void:
+	impulseDir = _impulseDir
+	impulseSpeed = _impulseSpeed
 
 func speedTarget() -> float:
-	return speedFix * impulseSpeed
+	return speedFix
 
 func rotationSet(delta) -> void:
 	self.rotation = lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * delta)

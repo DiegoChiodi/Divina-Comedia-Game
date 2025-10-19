@@ -1,9 +1,9 @@
 extends Movel
 class_name Entity
 
-var lifeMax : float = 100
+var lifeMax : float = 100.0
 var life : float = lifeMax
-var damage : float = 20
+var damage : float = 20.0
 
 var invencible : bool = false
 var invencibleDelay : float = 0.2
@@ -28,11 +28,10 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	
 	checkColliding()
 
 func collidingRival(body) -> void:
-	self.takeAttack((self.position - body.position).normalized() * 3, body.damage)
+	self.takeAttack((self.position - body.position).normalized(), body.damage)
 	body.AttackSucess(self)
 
 func checkColliding() -> void:
@@ -44,14 +43,14 @@ func checkColliding() -> void:
 				collidingRandom(body)
 	
 func collidingRandom(body) -> void:
-	self.takeImpulse((self.position - body.position).normalized() * 3)
+	self.takeImpulseDir((self.position - body.position).normalized())
 
 func checkCollidingRival(body) -> bool:
 	return body != null and body.is_in_group(groupRival)
 
 func AttackSucess(body : CharacterBody2D) -> void:
 	if body != null:
-		self.takeImpulse((self.position - body.position).normalized() * 3)
+		self.takeImpulseDir((self.position - body.position).normalized())
 
 func groupsAdd() -> void:
 	pass
@@ -65,9 +64,9 @@ func takeDamage(_damage : float) -> void:
 		if life <= 0:
 			self.queue_free()
 
-func takeAttack(_impulse : Vector2, _damage : float = 0.0):
+func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 2000):
 	takeDamage(_damage)
-	super.takeAttack(_impulse)
+	takeImpulseDir(_impulseDir)
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):

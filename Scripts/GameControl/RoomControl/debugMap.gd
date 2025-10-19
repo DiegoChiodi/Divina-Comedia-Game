@@ -9,7 +9,6 @@ class_name DebugMap
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Enemys
-	slow.speedFix = 0.0
 	shadow.speedFix = 0.0
 	shield.speedFix = 0.0
 	wasp.speedFix = 0.0

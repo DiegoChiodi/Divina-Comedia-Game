@@ -42,18 +42,6 @@ func center_window(new_size: Vector2i):
 	# move a janela
 	DisplayServer.window_set_position(pos)
 
-func tileTemp(room : Node2D) -> void:
-	for i in 32:
-		var square : ColorRect = ColorRect.new()
-		square.size = Vector2(16,16)
-		square.position = Vector2(i * 128, 0)
-		room.add_child(square)
-		for j in 32:
-			var square2 : ColorRect = ColorRect.new()
-			square2.size = Vector2(16,16)
-			square2.position = Vector2(i * 128, j * 128)
-			room.add_child(square2)
-
 func windowsConf() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)

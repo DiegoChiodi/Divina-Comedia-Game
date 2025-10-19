@@ -12,8 +12,19 @@ func load_room(path : String) -> void:
 	self.currentRoom = load(currentRoomPath).instantiate()
 	self.currentRoom.setPlayerSpawn()
 	self.call_deferred('add_child', self.currentRoom)
-	game_manager.tileTemp(self.currentRoom)
+	tileTemp(self.currentRoom)
 
+func tileTemp(room : Node2D) -> void:
+	for i in 32:
+		var square : ColorRect = ColorRect.new()
+		square.size = Vector2(16,16)
+		square.position = Vector2(i * 128, 0)
+		room.add_child(square)
+		for j in 32:
+			var square2 : ColorRect = ColorRect.new()
+			square2.size = Vector2(16,16)
+			square2.position = Vector2(i * 128, j * 128)
+			room.add_child(square2)
 func change_room(path : String) -> void:
 	destroy_room()
 	load_room(path)
