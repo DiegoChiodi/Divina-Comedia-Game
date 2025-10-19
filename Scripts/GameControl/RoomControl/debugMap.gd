@@ -9,9 +9,12 @@ class_name DebugMap
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Enemys
-	shadow.speedFix = 0.0
-	shield.speedFix = 0.0
-	wasp.speedFix = 0.0
+	
+	if false:
+		slow.speedFix = 0.0
+		shadow.speedFix = 0.0
+		shield.speedFix = 0.0
+		wasp.speedFix = 0.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

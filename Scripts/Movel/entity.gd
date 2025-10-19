@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	checkColliding()
 
 func collidingRival(body) -> void:
-	self.takeAttack((self.position - body.position).normalized(), body.damage)
+	self.takeAttack((self.position - body.position).normalized(), body.damage, body.speed)
 	body.AttackSucess(self)
 
 func checkColliding() -> void:
@@ -43,14 +43,14 @@ func checkColliding() -> void:
 				collidingRandom(body)
 	
 func collidingRandom(body) -> void:
-	self.takeImpulseDir((self.position - body.position).normalized())
-
+	self.takeImpulseDir((self.position - body.position).normalized(), self.speed * 3)
+	body.takeImpulseDir((body.position - self.position).normalized(), self.speed * 3)
 func checkCollidingRival(body) -> bool:
 	return body != null and body.is_in_group(groupRival)
 
 func AttackSucess(body : CharacterBody2D) -> void:
 	if body != null:
-		self.takeImpulseDir((self.position - body.position).normalized())
+		self.takeImpulseDir((self.position - body.position).normalized(), self.speed)
 
 func groupsAdd() -> void:
 	pass
