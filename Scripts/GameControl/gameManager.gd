@@ -1,4 +1,18 @@
 extends Node2D
+class_name GameManager
+
+enum MapID {
+	FOREST,
+	TUTORIAL,
+}
+
+enum LevelID {
+	FOREST_00
+}
+
+var level_paths = {
+	LevelID.FOREST_00 : 'res://Scene/level_forest_00.tscn'
+}
 
 var camera : Camera = Camera.new()
 var player : Player = preload("res://Scene/player.tscn").instantiate()
@@ -16,14 +30,13 @@ func _process(delta: float) -> void:
 		get_tree().quit()
 		OS.create_instance(["res://Scene/main.tscn"])
 
-
 func init(main : Node2D):
 	self.camera.setup(player, null)
 	camera.limit_left = 0
 	camera.limit_top = 0
 	main.add_child(camera)
 	main.add_child(player)
-	roomContainer.load_room(debugScene)
+	roomContainer.load_room(level_paths[LevelID.FOREST_00])
 	main.add_child(roomContainer)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -53,3 +66,6 @@ func start_shake(intensity: float, decay: float = 1.0) -> void:
 
 func resetGame():
 	get_tree().reload_current_scene()
+
+func change_room(_path) -> void:
+	pass

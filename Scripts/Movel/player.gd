@@ -29,10 +29,10 @@ func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
 	super._physics_process(delta)
 
-func dashFunction(delta) -> void:
+func dashFunction(_delta) -> void:
 	var attack : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("left_click")
 	
-	if attack && dash > 0:
+	if attack && self.dash > 0:
 		#Dando dash
 		self.inDash = true
 		self.dashDuringWait = 0.0
@@ -43,13 +43,13 @@ func dashFunction(delta) -> void:
 	
 	#Dando dash
 	if self.dashDuringWait < self.dashDuringDelay:
-		self.dashDuringWait += delta
+		self.dashDuringWait += _delta
 	else:
 		self.inDash = false
 		self.lockDash = false
 	
 	if self.dashWait < self.dashDelay:
-		self.dashWait += delta
+		self.dashWait += _delta
 		self.sprite.modulate = Color(0.6 + dashWait / 2 , 0.6 + dashWait / 2, 0) #amarelo
 	elif dash < dashMax:
 		self.dash += 1
@@ -65,22 +65,22 @@ func dashFunction(delta) -> void:
 		self.speedDash = 1
 
 func speedTarget() -> float:
-	return super.speedTarget() * speedDash
+	return super.speedTarget() * self.speedDash
 
-func directionTarget(delta : float) -> void:
-	if inDash:
-		if !lockDash:
-			direction = (get_global_mouse_position() - self.global_position).normalized()
-			lockDash = true
+func directionTarget(_delta : float) -> void:
+	if self.inDash:
+		if !self.lockDash:
+			self.direction = (get_global_mouse_position() - self.global_position).normalized()
+			self.lockDash = true
 	else:
 		self.direction = Input.get_vector("left", "right", "up", "down")
 	
 func groupsAdd() -> void:
-	add_to_group("Player")
-	groupRival = "Enemy"
+	self.add_to_group("Player")
+	self.groupRival = "Enemy"
 
 func collidingRival(body) -> void:
-	if inDash:
+	if self.inDash:
 		invencibilityActivate()
 	super.collidingRival(body)
 	

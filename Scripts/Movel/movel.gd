@@ -15,7 +15,7 @@ var rotationSpeed : float = 15
 func _ready() -> void:
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	directionTarget(delta)
 	impulseDir = impulseDir.lerp(Vector2.ZERO,acceleration)
@@ -24,22 +24,22 @@ func _process(delta: float) -> void:
 	if direction != Vector2.ZERO:
 		lastDirection = direction
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	speed = speedTarget()
-	move(delta)
+	move(_delta)
 
-func move(delta: float) -> void:
+func move(_delta: float) -> void:
 	if self.direction != Vector2.ZERO or self.impulseDir != Vector2.ZERO:
-		velocityTarget(delta)
+		velocityTarget()
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, acceleration)
 	
 	move_and_slide()
 	
-func velocityTarget(delta : float) -> void:
+func velocityTarget() -> void:
 	velocity = velocity.lerp((direction * speed) + (impulseSpeed * impulseDir), acceleration)
 
-func directionTarget(delta : float) -> void:
+func directionTarget(_delta : float) -> void:
 	pass
 
 func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 1500) -> void:
@@ -49,5 +49,5 @@ func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 1500) -> void
 func speedTarget() -> float:
 	return speedFix
 
-func rotationSet(delta) -> void:
-	self.rotation = lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * delta)
+func rotationSet(_delta) -> void:
+	self.rotation = lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)

@@ -15,7 +15,6 @@ func checkCollidingRival(body) -> bool:
 	and are_directions_similar(Vector2.RIGHT.rotated(rotation), (self.position - body.position).normalized(), 90)):
 		return true
 	return false
-	invencibilityActivate()
 
 func are_directions_similar(a: Vector2, b: Vector2, tolerance_degrees: float = 30.0) -> bool:
 	if a == Vector2.ZERO or b == Vector2.ZERO:

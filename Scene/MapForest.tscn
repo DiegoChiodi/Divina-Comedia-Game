@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbcvrtxuukd1p"]
+
+[ext_resource type="Script" uid="uid://dhpfmrt4pvvfr" path="res://Scripts/map_forest.gd" id="1_j5j0j"]
+
+[node name="MapForest" type="Node2D"]
+script = ExtResource("1_j5j0j")
+
+[node name="roomSize" type="Marker2D" parent="."]
+position = Vector2(1811, 1099)

@@ -45,6 +45,7 @@ func checkColliding() -> void:
 func collidingRandom(body) -> void:
 	self.takeImpulseDir((self.position - body.position).normalized(), self.speed * 3)
 	body.takeImpulseDir((body.position - self.position).normalized(), self.speed * 3)
+
 func checkCollidingRival(body) -> bool:
 	return body != null and body.is_in_group(groupRival)
 

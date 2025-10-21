@@ -55,7 +55,7 @@ func start_shake(intensity: float, decay: float = 1.0):
 	shake_amount = intensity
 	shake_decay = decay
 
-func setLimit(_limit : Vector2) -> void:
+func setLimit(_limit : Vector2i) -> void:
 	self.limit_left = 0
 	self.limit_top = 0
 	self.limit_right = _limit.x

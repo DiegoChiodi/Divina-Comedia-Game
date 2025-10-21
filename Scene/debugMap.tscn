@@ -9,13 +9,6 @@
 [node name="DebugMap" type="Node2D"]
 script = ExtResource("1_bxs1j")
 
-[node name="TileMap" type="TileMap" parent="."]
-format = 2
-
-[node name="Ground" type="TileMapLayer" parent="TileMap"]
-
-[node name="Grass" type="TileMapLayer" parent="TileMap"]
-
 [node name="Shadow" parent="." instance=ExtResource("2_5ceu0")]
 position = Vector2(864, 526)
 
