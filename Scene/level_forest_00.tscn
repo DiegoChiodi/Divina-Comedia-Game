@@ -1,13 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://p5f8k37hf6ri"]
+[gd_scene load_steps=5 format=3 uid="uid://p5f8k37hf6ri"]
 
 [ext_resource type="Script" uid="uid://bugeq1tvmyiva" path="res://Scripts/level_forest_00.gd" id="1_p4nya"]
 [ext_resource type="PackedScene" uid="uid://ctywwb1pfgx4y" path="res://Scene/Enemys/shadow.tscn" id="2_si5l5"]
-[ext_resource type="PackedScene" uid="uid://cbcvrtxuukd1p" path="res://Scene/MapForest.tscn" id="3_3juwn"]
+[ext_resource type="PackedScene" uid="uid://cbcvrtxuukd1p" path="res://Scene/map_forest.tscn" id="3_3juwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4nya"]
+size = Vector2(32, 32)
 
 [node name="Level_florest_00" type="Node2D"]
 script = ExtResource("1_p4nya")
 
-[node name="Shadow" parent="." instance=ExtResource("2_si5l5")]
-position = Vector2(410, 229)
-
 [node name="map" parent="." instance=ExtResource("3_3juwn")]
+
+[node name="Shadow" parent="." instance=ExtResource("2_si5l5")]
+position = Vector2(944, 296)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(180, 348)
+
+[node name="ColorRect" type="ColorRect" parent="Area2D"]
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_p4nya")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

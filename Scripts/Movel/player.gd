@@ -83,4 +83,3 @@ func collidingRival(body) -> void:
 	if self.inDash:
 		invencibilityActivate()
 	super.collidingRival(body)
-	

@@ -7,3 +7,6 @@ script = ExtResource("1_j5j0j")
 
 [node name="roomSize" type="Marker2D" parent="."]
 position = Vector2(1811, 1099)
+
+[node name="marker_from_vestibule" type="Marker2D" parent="."]
+position = Vector2(1162, 661)

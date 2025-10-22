@@ -4,14 +4,22 @@ class_name GameManager
 enum MapID {
 	FOREST,
 	TUTORIAL,
+	VESTIBULE
 }
 
 enum LevelID {
-	FOREST_00
+	FOREST_00,
+	VESTIBULE_00
 }
 
-var level_paths = {
-	LevelID.FOREST_00 : 'res://Scene/level_forest_00.tscn'
+var level_paths : Dictionary = {
+	LevelID.FOREST_00 : 'res://Scene/level_forest_00.tscn',
+	LevelID.VESTIBULE_00 : 'res://Scene/level_vestibule_00.tscn'
+}
+
+var marker_names : Dictionary = {
+	LevelID.FOREST_00 : 'marker_from_forest',
+	LevelID.VESTIBULE_00:  'marker_from_vestibule'
 }
 
 var camera : Camera = Camera.new()
@@ -67,5 +75,5 @@ func start_shake(intensity: float, decay: float = 1.0) -> void:
 func resetGame():
 	get_tree().reload_current_scene()
 
-func change_room(_path) -> void:
-	pass
+func change_room(_map_id) -> void:
+	roomContainer.change_room(level_paths[_map_id])

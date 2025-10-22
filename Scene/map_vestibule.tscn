@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://byefhs8t7rlgf"]
+
+[ext_resource type="Script" uid="uid://dros6vwwk611h" path="res://Scripts/map_vestibule.gd" id="1_l51ex"]
+
+[node name="MapVestibule" type="Node2D"]
+script = ExtResource("1_l51ex")
+
+[node name="roomSize" type="Marker2D" parent="."]
+position = Vector2(1811, 1099)
+
+[node name="marker_from_forest" type="Marker2D" parent="."]
+position = Vector2(483, 100)
