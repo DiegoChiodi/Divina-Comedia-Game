@@ -12,7 +12,7 @@ func load_room(path : String) -> void:
 	if !inInit:
 		self.previousMapId = self.currentRoom.map.id
 	self.currentRoom = load(path).instantiate()
-	self.currentRoom._init()
+	self.currentRoom.setup()
 	self.add_child(self.currentRoom)
 	tileTemp(self.currentRoom)
 	

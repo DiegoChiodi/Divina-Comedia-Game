@@ -3,5 +3,5 @@ class_name Level
 
 var map : Map = null
 
-func _init() -> void:
+func setup() -> void:
 	pass
