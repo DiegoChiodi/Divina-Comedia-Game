@@ -76,4 +76,4 @@ func resetGame():
 	get_tree().reload_current_scene()
 
 func change_room(_map_id) -> void:
-	roomContainer.change_room(level_paths[_map_id])
+	roomContainer.call_deferred("change_room", level_paths[_map_id])
