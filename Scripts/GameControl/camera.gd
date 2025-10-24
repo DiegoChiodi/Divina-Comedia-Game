@@ -69,5 +69,8 @@ func setTarget(_target, _posComp) -> void:
 func setPosComp(_posComp) -> void:
 	posComp = _posComp
 
-func setZoom(_zoomTarget : Vector2):
+func setZoom(_zoomTarget : Vector2) -> void:
 	zoomTarget = _zoomTarget
+
+func setPosition(_pos : Vector2) -> void:
+	self.position = _pos

@@ -1,12 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbcvrtxuukd1p"]
+[gd_scene load_steps=3 format=3 uid="uid://cbcvrtxuukd1p"]
 
 [ext_resource type="Script" uid="uid://dhpfmrt4pvvfr" path="res://Scripts/map_forest.gd" id="1_j5j0j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu15"]
+size = Vector2(63.9999, 64)
 
 [node name="MapForest" type="Node2D"]
 script = ExtResource("1_j5j0j")
 
 [node name="roomSize" type="Marker2D" parent="."]
-position = Vector2(1811, 1099)
+position = Vector2(1536, 1024)
 
 [node name="marker_from_vestibule" type="Marker2D" parent="."]
-position = Vector2(1162, 661)
+position = Vector2(1408, 576)
+
+[node name="player_spawn" type="Marker2D" parent="."]
+position = Vector2(1120, 576)
+
+[node name="EnterVestibule" type="Area2D" parent="."]
+position = Vector2(1514, 586)
+
+[node name="ColorRect" type="ColorRect" parent="EnterVestibule"]
+offset_left = -42.0
+offset_top = -42.0
+offset_right = 22.0
+offset_bottom = 22.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterVestibule"]
+position = Vector2(-10, -10)
+shape = SubResource("RectangleShape2D_lnu15")
+
+[connection signal="area_entered" from="EnterVestibule" to="." method="_on_enter_vestibule_area_entered"]

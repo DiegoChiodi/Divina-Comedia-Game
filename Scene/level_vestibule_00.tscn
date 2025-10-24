@@ -10,4 +10,5 @@ script = ExtResource("1_dbkxu")
 [node name="map" parent="." instance=ExtResource("2_xtd66")]
 
 [node name="ShieldEnemy" parent="map" instance=ExtResource("3_xtd66")]
-position = Vector2(116, 351)
+position = Vector2(852, 325)
+rotation = -3.27075

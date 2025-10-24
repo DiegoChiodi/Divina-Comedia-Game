@@ -12,6 +12,7 @@ func load_room(path : String) -> void:
 	if !inInit:
 		self.previousMapId = self.currentRoom.map.id
 	self.currentRoom = load(path).instantiate()
+	self.currentRoom._init()
 	self.add_child(self.currentRoom)
 	tileTemp(self.currentRoom)
 	
@@ -20,6 +21,11 @@ func load_room(path : String) -> void:
 		var marker : Marker2D = currentRoom.map.get_node(marker_name)
 		var position = marker.position
 		game_manager.player.set_deferred("position", position)
+		game_manager.camera.setPosition(position)
+	else:
+		var position = self.currentRoom.map.get_node("player_spawn").position
+		game_manager.player.set_deferred("position", position)
+		game_manager.camera.setPosition(position)
 	inInit = false
 func tileTemp(room : Level) -> void:
 	var color := Color.WHITE

@@ -18,8 +18,8 @@ var level_paths : Dictionary = {
 }
 
 var marker_names : Dictionary = {
-	LevelID.FOREST_00 : 'marker_from_forest',
-	LevelID.VESTIBULE_00:  'marker_from_vestibule'
+	MapID.FOREST : 'marker_from_forest',
+	MapID.VESTIBULE:  'marker_from_vestibule'
 }
 
 var camera : Camera = Camera.new()
