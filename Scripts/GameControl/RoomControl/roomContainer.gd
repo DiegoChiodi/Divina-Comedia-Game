@@ -50,4 +50,3 @@ func change_room(path : String) -> void:
 
 func restart_room() -> void:
 	change_room(currentRoom.get_path())
-	
