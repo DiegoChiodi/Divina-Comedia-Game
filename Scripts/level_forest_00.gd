@@ -11,5 +11,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if shadow == null:
 		global.shadowLive = false
+
 func setup() -> void:
 	self.map = get_node('map')
+	
+	
+	
+	
