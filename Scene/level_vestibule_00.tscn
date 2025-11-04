@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://coaq7pi87l4pf"]
+[gd_scene load_steps=5 format=3 uid="uid://coaq7pi87l4pf"]
 
 [ext_resource type="Script" uid="uid://cf652p7qy2asr" path="res://Scripts/level_vestibule_00.gd" id="1_dbkxu"]
 [ext_resource type="PackedScene" uid="uid://byefhs8t7rlgf" path="res://Scene/map_vestibule.tscn" id="2_xtd66"]
 [ext_resource type="PackedScene" uid="uid://vxtji0hjwk4t" path="res://Scene/Enemys/shieldEnemy.tscn" id="3_xtd66"]
+[ext_resource type="PackedScene" uid="uid://c4i3vvwm18cuv" path="res://Scene/Enemys/confuseEnemy.tscn" id="4_bk76l"]
 
 [node name="Level_vestibule_00" type="Node2D"]
 script = ExtResource("1_dbkxu")
 
 [node name="map" parent="." instance=ExtResource("2_xtd66")]
 
-[node name="ShieldEnemy" parent="map" instance=ExtResource("3_xtd66")]
+[node name="ShieldEnemy" parent="." instance=ExtResource("3_xtd66")]
 position = Vector2(852, 325)
-rotation = -3.27075
+rotation = 3.01244
+
+[node name="ConfuseEnemy" parent="." instance=ExtResource("4_bk76l")]
+position = Vector2(751, 113)

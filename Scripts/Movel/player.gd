@@ -24,7 +24,7 @@ var speedDash : int = 1
 func _ready() -> void:
 	super._ready()
 	damage = 20
-
+	z_index = 1
 func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
 	super._physics_process(delta)

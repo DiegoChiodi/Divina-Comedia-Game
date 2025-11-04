@@ -6,7 +6,7 @@
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c80tt"]
-size = Vector2(31.5, 32)
+size = Vector2(16, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
 size = Vector2(33, 33)
@@ -24,7 +24,7 @@ scale = Vector2(2, 2)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
-position = Vector2(-48.25, -66)
+position = Vector2(-56, -66)
 shape = SubResource("RectangleShape2D_c80tt")
 
 [node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]

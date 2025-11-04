@@ -14,7 +14,6 @@ func load_room(path : String) -> void:
 	self.currentRoom = load(path).instantiate()
 	self.currentRoom.setup()
 	self.add_child(self.currentRoom)
-	tileTemp(self.currentRoom)
 	
 	if !inInit:
 		var marker_name = game_manager.marker_names[previousMapId]
@@ -27,22 +26,6 @@ func load_room(path : String) -> void:
 		game_manager.player.set_deferred("position", position)
 		game_manager.camera.setPosition(position)
 	inInit = false
-func tileTemp(room : Level) -> void:
-	var color := Color.WHITE
-	
-	if room as Level_Florest_00:
-		color = Color(1,0.5,0.5)
-	else:
-		color = Color.GREEN_YELLOW
-	
-	
-	for i in 32:
-		for j in 32:
-			var square2 : ColorRect = ColorRect.new()
-			square2.size = Vector2(16,16)
-			square2.position = Vector2(i * 128, j * 128)
-			square2.modulate = color
-			room.add_child(square2)
 
 func change_room(path : String) -> void:
 	destroy_room()

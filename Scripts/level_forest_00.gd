@@ -14,7 +14,3 @@ func _process(delta: float) -> void:
 
 func setup() -> void:
 	self.map = get_node('map')
-	
-	
-	
-	

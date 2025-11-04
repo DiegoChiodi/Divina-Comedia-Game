@@ -9,13 +9,6 @@ func _ready() -> void:
 	perseguition = 0.01
 	life = 50
 
-
-func checkCollidingRival(body) -> bool:
-	if (super.checkCollidingRival(body) 
-	and are_directions_similar(Vector2.RIGHT.rotated(rotation), (self.position - body.position).normalized(), 90)):
-		return true
-	return false
-
 func are_directions_similar(a: Vector2, b: Vector2, tolerance_degrees: float = 30.0) -> bool:
 	if a == Vector2.ZERO or b == Vector2.ZERO:
 		return false
