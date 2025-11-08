@@ -12,6 +12,8 @@ var invencibleWait : float = self.invencibleDelay
 var groupRival : String = ""
 var colRival : bool = false
 var bodysCol : Array[Entity] = []
+var iniScale : Vector2 = scale
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -61,7 +63,7 @@ func takeDamage(_damage : float) -> void:
 		life -= _damage
 		invencible = true
 		invencibleWait = 0.0
-		scale -= Vector2(0.15,0.15)
+		scale -= iniScale * 0.1
 		if life <= 0:
 			self.queue_free()
 

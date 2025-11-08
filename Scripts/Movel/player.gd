@@ -6,7 +6,7 @@ var dashMax : int = 3
 var dash : int = dashMax
 var dashDuringDelay : float = 0.2
 var dashDuringWait : float = self.dashDuringDelay
-var dashSpeedMax : int = 3
+var dashSpeedMax : int = 4
 
 var dashDelay : float = 0.6
 var dashWait : float = self.dashDelay
@@ -82,4 +82,9 @@ func groupsAdd() -> void:
 func collidingRival(body) -> void:
 	if self.inDash:
 		invencibilityActivate()
+		var disToBody = abs(position.direction_to(body.position))
+		if abs(direction.x + disToBody.x) > abs(direction.y + disToBody.y):
+			pass
+		direction = Vector2.ZERO
+		dashDuringWait = 0.0
 	super.collidingRival(body)

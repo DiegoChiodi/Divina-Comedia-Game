@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://do0g77wlksohw"]
+
+[ext_resource type="Script" uid="uid://77ulsecf4ial" path="res://Scene/Enemys/target.gd" id="1_grphj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yws6g"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c80tt"]
+size = Vector2(16, 32)
+
+[node name="Target" type="CharacterBody2D"]
+script = ExtResource("1_grphj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_yws6g")
+
+[node name="are_hbTakeDamage" type="Area2D" parent="."]
+position = Vector2(96, 132)
+scale = Vector2(2, 2)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
+position = Vector2(-56, -66)
+shape = SubResource("RectangleShape2D_c80tt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -32.0
+offset_top = -32.0
+scale = Vector2(2, 2)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -27.0
+offset_top = -27.0
+offset_right = 27.0
+offset_bottom = 27.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -19.0
+offset_right = 20.0
+offset_bottom = 21.0
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+offset_left = -12.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 14.0
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 3.0
+offset_bottom = 5.0
+color = Color(1, 0, 0, 1)
+
+[connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
+[connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]

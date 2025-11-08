@@ -18,7 +18,8 @@ func _ready() -> void:
 # Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	directionTarget(delta)
-	impulseDir = impulseDir.lerp(Vector2.ZERO,acceleration)
+	#impulseDir = impulseDir.lerp(Vector2.ZERO,acceleration)
+	impulseDir = Vector2.ZERO
 	rotationSet(delta)
 	
 	if direction != Vector2.ZERO:
@@ -34,8 +35,10 @@ func move(_delta: float) -> void:
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, acceleration)
 	
-	move_and_slide()
-	
+	var collision = move_and_collide(velocity * _delta)
+	if collision:
+		velocity = velocity.bounce(collision.get_normal())
+
 func velocityTarget() -> void:
 	velocity = velocity.lerp((direction * speed) + (impulseSpeed * impulseDir), acceleration)
 

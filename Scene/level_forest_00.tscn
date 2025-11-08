@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bugeq1tvmyiva" path="res://Scripts/level_forest_00.gd" id="1_p4nya"]
 [ext_resource type="PackedScene" uid="uid://cbcvrtxuukd1p" path="res://Scene/map_forest.tscn" id="3_3juwn"]
-[ext_resource type="PackedScene" uid="uid://cycr2kuj08aij" path="res://Scene/Enemys/waspEnemy.tscn" id="3_p4nya"]
+[ext_resource type="PackedScene" uid="uid://do0g77wlksohw" path="res://Scene/target.tscn" id="3_p4nya"]
 
 [node name="Level_florest_00" type="Node2D"]
 script = ExtResource("1_p4nya")
@@ -12,5 +12,5 @@ script = ExtResource("1_p4nya")
 [node name="shadow_pos" type="Marker2D" parent="."]
 position = Vector2(944, 296)
 
-[node name="Wasp" parent="." instance=ExtResource("3_p4nya")]
-position = Vector2(912, 440)
+[node name="Target" parent="." instance=ExtResource("3_p4nya")]
+position = Vector2(348, 276)
