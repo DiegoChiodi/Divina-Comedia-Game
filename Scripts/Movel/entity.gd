@@ -6,7 +6,8 @@ var life : float = lifeMax
 var damage : float = 20.0
 
 var invencible : bool = false
-var invencibleDelay : float = 0.2
+const INVENCIBLE : float = 0.2
+var invencibleDelay : float = 0.0
 var invencibleWait : float = self.invencibleDelay
 
 var groupRival : String = ""
@@ -23,8 +24,8 @@ func _process(delta: float) -> void:
 	super._process(delta)
 	
 	if self.invencible:
-		if invencibleWait < invencibleDelay:
-			invencibleWait += delta
+		if invencibleWait > invencibleDelay:
+			invencibleWait -= delta
 		else:
 			invencible = false
 
@@ -61,8 +62,7 @@ func groupsAdd() -> void:
 func takeDamage(_damage : float) -> void:
 	if !invencible:
 		life -= _damage
-		invencible = true
-		invencibleWait = 0.0
+		invencibilityActivate(INVENCIBLE)
 		scale -= iniScale * 0.1
 		if life <= 0:
 			self.queue_free()
@@ -86,6 +86,6 @@ func printGrup() -> void:
 	print(groupRival)
 	print(get_groups())
 
-func invencibilityActivate() -> void:
+func invencibilityActivate(invWait : float) -> void:
 	invencible = true
-	invencibleWait = 0.0
+	invencibleWait = invWait

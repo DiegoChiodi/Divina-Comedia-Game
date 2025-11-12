@@ -2,6 +2,7 @@ extends Enemy
 class_name Target
 
 func _ready() -> void:
+	super._ready()
 	iniScale = Vector2.ZERO
 	
 func speedTarget() -> float:

@@ -8,7 +8,9 @@ var dashDuringDelay : float = 0.2
 var dashDuringWait : float = self.dashDuringDelay
 var dashSpeedMax : int = 4
 
-var dashDelay : float = 0.6
+const INVLASTDASH : float = 0.1
+
+var dashDelay : float = 0.6 - dashDuringDelay
 var dashWait : float = self.dashDelay
 var dashPoss : bool = false # se é possivel dar dash
 var lockDash : bool = false
@@ -32,28 +34,22 @@ func _physics_process(delta: float) -> void:
 func dashFunction(_delta) -> void:
 	var attack : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("left_click")
 	
+	#Começo o dash
 	if attack && self.dash > 0:
-		#Dando dash
 		self.inDash = true
 		self.dashDuringWait = 0.0
 		#cowdow do dash para usar denovo
 		self.dash -= 1
 		self.dashWait = 0.0
 		game_manager.start_shake(1.0,1.5)
+		self.lockDash = false
+		self.invencibilityActivate(dashDuringDelay + 0.1)
 	
 	#Dando dash
 	if self.dashDuringWait < self.dashDuringDelay:
 		self.dashDuringWait += _delta
 	else:
 		self.inDash = false
-		self.lockDash = false
-	
-	if self.dashWait < self.dashDelay:
-		self.dashWait += _delta
-		self.sprite.modulate = Color(0.6 + dashWait / 2 , 0.6 + dashWait / 2, 0) #amarelo
-	elif dash < dashMax:
-		self.dash += 1
-		self.dashWait = 0.0
 	
 	if dash == dashMax:
 		self.sprite.modulate = Color(0,1,0) #Verde
@@ -63,6 +59,13 @@ func dashFunction(_delta) -> void:
 		self.sprite.modulate = Color(1,0,0) #vermelho
 	else:
 		self.speedDash = 1
+		if self.dashWait < self.dashDelay:
+			self.dashWait += _delta
+			self.sprite.modulate = Color(0.6 + dashWait / 2 , 0.6 + dashWait / 2, 0) #amarelo
+		elif dash < dashMax:
+			self.dash += 1
+			self.dashWait = 0.0
+		
 
 func speedTarget() -> float:
 	return super.speedTarget() * self.speedDash
@@ -81,10 +84,10 @@ func groupsAdd() -> void:
 
 func collidingRival(body) -> void:
 	if self.inDash:
-		invencibilityActivate()
-		var disToBody = abs(position.direction_to(body.position))
-		if abs(direction.x + disToBody.x) > abs(direction.y + disToBody.y):
-			pass
-		direction = Vector2.ZERO
-		dashDuringWait = 0.0
+		invencibilityActivate(dashDuringDelay)
 	super.collidingRival(body)
+
+func AttackSucess(body : CharacterBody2D) -> void:
+	super.AttackSucess(body)
+	dashDuringWait -= 0.1
+	direction = velocity.normalized()
