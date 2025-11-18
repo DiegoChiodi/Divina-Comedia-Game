@@ -7,7 +7,7 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
 func checkCollidingRival(body) -> bool:
-	if (body == game_manager.player and game_manager.player.inDash):
+	if (body == game_manager.player):
 		return true
 	return false
 

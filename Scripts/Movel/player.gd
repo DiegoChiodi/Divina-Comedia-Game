@@ -2,44 +2,44 @@ extends Entity
 class_name Player
 
 #Dash ---------------
-var dashMax : int = 3
-var dash : int = dashMax
-var dashDuringDelay : float = 0.2
+var dash : bool = true
+var dashDuringDelay : float = 0.25
 var dashDuringWait : float = self.dashDuringDelay
 var dashSpeedMax : int = 4
+var inDash : bool = false
+var speedDash : int = 1
 
 const INVLASTDASH : float = 0.1
 
-var dashDelay : float = 0.6 - dashDuringDelay
+var dashDelay : float = 2 - dashDuringDelay
 var dashWait : float = self.dashDelay
 var dashPoss : bool = false # se é possivel dar dash
 var lockDash : bool = false
+
+
 @onready var sprite : ColorRect = $ColorRect
 @onready var hbTake : Area2D = $are_hbTakeDamage
 @onready var hbAttack : Area2D = $are_hbAttack
 
-#direction
-
-var inDash : bool = false
-var speedDash : int = 1
 
 func _ready() -> void:
 	super._ready()
 	damage = 20
 	z_index = 1
+
 func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
 	super._physics_process(delta)
 
 func dashFunction(_delta) -> void:
-	var attack : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("left_click")
+	var dashPress : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("left_click")
 	
 	#Começo o dash
-	if attack && self.dash > 0:
+	if dashPress && self.dash:
 		self.inDash = true
 		self.dashDuringWait = 0.0
 		#cowdow do dash para usar denovo
-		self.dash -= 1
+		self.dash = false
 		self.dashWait = 0.0
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false
@@ -51,7 +51,7 @@ func dashFunction(_delta) -> void:
 	else:
 		self.inDash = false
 	
-	if dash == dashMax:
+	if dash:
 		self.sprite.modulate = Color(0,1,0) #Verde
 	
 	if self.inDash:
@@ -59,11 +59,11 @@ func dashFunction(_delta) -> void:
 		self.sprite.modulate = Color(1,0,0) #vermelho
 	else:
 		self.speedDash = 1
-		if self.dashWait < self.dashDelay:
+		if self.dashWait < self.dashDelay and !dash:
 			self.dashWait += _delta
 			self.sprite.modulate = Color(0.6 + dashWait / 2 , 0.6 + dashWait / 2, 0) #amarelo
-		elif dash < dashMax:
-			self.dash += 1
+		else:
+			self.dash = true
 			self.dashWait = 0.0
 		
 

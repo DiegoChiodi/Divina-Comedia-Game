@@ -43,7 +43,7 @@ func move(_delta: float) -> void:
 
 	# 1. Aceleração normal (input)
 	if target_velocity != Vector2.ZERO:
-		velocity = velocity.lerp(target_velocity, acceleration * _delta * 150)
+		velocity = velocity.lerp(target_velocity, acceleration * _delta * 200)
 	else:
 		# Sem input → desaceleração
 		velocity = velocity.lerp(Vector2.ZERO, acceleration)
@@ -71,4 +71,4 @@ func speedTarget() -> float:
 	return speedFix
 
 func rotationSet(_delta) -> void:
-	self.rotation = lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)
+	self.rotation = 0#lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)
