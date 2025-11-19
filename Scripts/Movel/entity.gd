@@ -6,7 +6,7 @@ var life : float = lifeMax
 var damage : float = 20.0
 
 var invencible : bool = false
-const INVENCIBLE : float = 0.2
+const INVENCIBLE : float = 0.3
 var invencibleDelay : float = 0.0
 var invencibleWait : float = self.invencibleDelay
 

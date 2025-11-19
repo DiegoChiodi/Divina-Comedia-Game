@@ -8,7 +8,7 @@ func _ready() -> void:
 		shadow.position = $shadow_pos.position
 		add_child(shadow)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if shadow == null:
 		global.shadowLive = false
 

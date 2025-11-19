@@ -33,7 +33,7 @@ var debugScene : String = "res://Scene/debugMap.tscn"
 func _ready() -> void:
 	windowsConf()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_released("restart"):
 		get_tree().quit()
 		OS.create_instance(["res://Scene/main.tscn"])

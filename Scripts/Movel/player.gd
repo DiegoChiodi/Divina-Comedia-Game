@@ -11,17 +11,18 @@ var speedDash : int = 1
 
 const INVLASTDASH : float = 0.1
 
-var dashDelay : float = 2 - dashDuringDelay
+var dashDelay : float = 2
 var dashWait : float = self.dashDelay
 var dashPoss : bool = false # se é possivel dar dash
 var lockDash : bool = false
 #inAAttack ----------------
+var attack : bool = false
 var inAttack : bool = false
-
+#Tempo atacando
 var attackDuringDelay : float = 0.25
 var attackDuringWait : float = self.attackDuringDelay
-
-var attackDelay : float = 2 - attackDuringDelay
+#Tempo de espera para próximo ataque
+var attackDelay : float = 0.5
 var attackWait : float = self.attackDelay
 
 const HITBOX_X := Vector2(64,96)
@@ -48,9 +49,9 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	pressAttack()
+	checkAttack(delta)
 
-func dashFunction(_delta) -> void:
+func dashFunction(delta) -> void:
 	var dashPress : bool = Input.is_action_just_pressed("space")
 	
 	#Começo o dash
@@ -65,13 +66,13 @@ func dashFunction(_delta) -> void:
 		self.invencibilityActivate(dashDuringDelay + 0.1)
 	
 	#Dando dash
-	if self.dashDuringWait < self.dashDuringDelay:
-		self.dashDuringWait += _delta
-	else:
-		self.inDash = false
-	
 	if dash:
 		self.sprite.modulate = Color(0,1,0) #Verde
+	else:
+		if self.dashDuringWait < self.dashDuringDelay:
+			self.dashDuringWait += delta
+		else:
+			self.inDash = false
 	
 	if self.inDash:
 		self.speedDash = dashSpeedMax
@@ -79,7 +80,7 @@ func dashFunction(_delta) -> void:
 	else:
 		self.speedDash = 1
 		if self.dashWait < self.dashDelay and !dash:
-			self.dashWait += _delta
+			self.dashWait += delta
 			self.sprite.modulate = Color(0.6 + dashWait / 2 , 0.6 + dashWait / 2, 0) #amarelo
 		else:
 			self.dash = true
@@ -89,7 +90,7 @@ func dashFunction(_delta) -> void:
 func speedTarget() -> float:
 	return super.speedTarget() * self.speedDash
 
-func directionTarget(_delta : float) -> void:
+func directionTarget(delta : float) -> void:
 	if self.inDash:
 		if !self.lockDash:
 			self.direction = (get_global_mouse_position() - self.global_position).normalized()
@@ -103,29 +104,42 @@ func groupsAdd() -> void:
 
 func collidingRival(body) -> void:
 	if self.inDash:
-		invencibilityActivate(dashDuringDelay)
+		invencibilityActivate(self.dashDuringDelay)
 	super.collidingRival(body)
 
 func AttackSucess(body : CharacterBody2D) -> void:
 	super.AttackSucess(body)
-	dashDuringWait -= 0.1
-	direction = velocity.normalized()
+	self.dashDuringWait -= 0.1
+	self.direction = velocity.normalized()
 
-func pressAttack() -> void:
-	if Input.is_action_just_pressed("left_click"):
+func checkAttack(delta) -> void:
+	if self.attack and Input.is_action_just_pressed("left_click"):
 		if abs(lastDirection.x) >= abs(lastDirection.y):
-			colHb.shape.size = HITBOX_X
+			self.colHb.shape.size = HITBOX_X
 			if lastDirection.x > 0:
-				colHb.position = attRight.position
+				self.colHb.position = attRight.position
 			else:
-				colHb.position = attLeft.position
+				self.colHb.position = attLeft.position
 		else:
-			colHb.shape.size = HITBOX_Y
+			self.colHb.shape.size = HITBOX_Y
 			if lastDirection.y > 0:
-				colHb.position = attDown.position
+				self.colHb.position = attDown.position
 			else:
-				colHb.position = attUp.position
-		inAttack = true
-		colHb.disabled = !inAttack
-		
-		
+				self.colHb.position = attUp.position
+		self.inAttack = true
+		self.colHb.disabled = !self.inAttack
+		self.attackDuringWait = 0.0
+		self.attackWait = 0.0
+	
+	#Está atacando
+	if self.inAttack:
+		if self.attackDuringWait < self.attackDuringDelay:
+			self.attackDuringWait += delta
+		else:
+			self.inAttack = false
+			self.colHb.disabled = !self.inAttack
+	else:
+		if self.attackWait < self.attackDelay:
+			self.attackWait += delta
+		else:
+			self.attack = true

@@ -24,7 +24,6 @@ offset_right = 16.0
 offset_bottom = 16.0
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
 shape = SubResource("RectangleShape2D_kelma")
@@ -41,6 +40,12 @@ shape = SubResource("RectangleShape2D_xa75v")
 position = Vector2(64, 16)
 
 [node name="Mark_left" type="Marker2D" parent="."]
+position = Vector2(-32, 16)
+
+[node name="Mark_left2" type="Marker2D" parent="."]
+position = Vector2(-32, 16)
+
+[node name="Mark_left3" type="Marker2D" parent="."]
 position = Vector2(-32, 16)
 
 [node name="Mark_up" type="Marker2D" parent="."]

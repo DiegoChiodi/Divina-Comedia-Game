@@ -18,13 +18,13 @@ func load_room(path : String) -> void:
 	if !inInit:
 		var marker_name = game_manager.marker_names[previousMapId]
 		var marker : Marker2D = currentRoom.map.get_node(marker_name)
-		var position = marker.position
-		game_manager.player.set_deferred("position", position)
-		game_manager.camera.setPosition(position)
+		var mark_position = marker.position
+		game_manager.player.set_deferred("position", mark_position)
+		game_manager.camera.setPosition(mark_position)
 	else:
-		var position = self.currentRoom.map.get_node("player_spawn").position
-		game_manager.player.set_deferred("position", position)
-		game_manager.camera.setPosition(position)
+		var mark_position = self.currentRoom.map.get_node("player_spawn").position
+		game_manager.player.set_deferred("position", mark_position)
+		game_manager.camera.setPosition(mark_position)
 	inInit = false
 
 func change_room(path : String) -> void:

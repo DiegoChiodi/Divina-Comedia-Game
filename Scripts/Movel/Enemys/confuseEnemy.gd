@@ -5,7 +5,7 @@ var perseguition : float = 0.02
 
 func _ready() -> void:
 	super._ready()
-	speedFix = randi_range(500,800)
+	speedFix = randi_range(300,600)
 	life = 50
 	
 func directionTarget(_delta : float) -> void:

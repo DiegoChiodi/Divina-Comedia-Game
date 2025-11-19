@@ -22,17 +22,17 @@ func _ready() -> void:
 # Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	directionTarget(delta)
-	impulseDir = impulseDir.lerp(Vector2.ZERO,acceleration)
-	impulseDir = Vector2.ZERO
+	self.impulseDir = self.impulseDir.lerp(Vector2.ZERO, self.acceleration)
+	self.impulseDir = Vector2.ZERO
 	rotationSet(delta)
 	
 	if direction != Vector2.ZERO:
-		lastDirection = direction
+		self.lastDirection = direction
 	
-	if impulseWait >= impulseDelay:
-		impulse = false
+	if self.impulseWait >= self.impulseDelay:
+		self.impulse = false
 	else:
-		impulseWait += delta
+		self.impulseWait += delta
 
 func _physics_process(_delta: float) -> void:
 	speed = speedTarget()
@@ -43,17 +43,17 @@ func move(_delta: float) -> void:
 
 	# 1. Aceleração normal (input)
 	if target_velocity != Vector2.ZERO:
-		velocity = velocity.lerp(target_velocity, acceleration * _delta * 200)
+		self.velocity = self.velocity.lerp(target_velocity, self.acceleration * _delta * 200)
 	else:
 		# Sem input → desaceleração
-		velocity = velocity.lerp(Vector2.ZERO, acceleration)
+		self.velocity = velocity.lerp(Vector2.ZERO, self.acceleration)
 	
 	# 2. Movimento real
-	var collision = move_and_collide(velocity * _delta)
+	var collision = move_and_collide(self.velocity * _delta)
 
 	# 3. Física do ricochete
 	if collision:
-		velocity = velocity.bounce(collision.get_normal())
+		self.velocity = self.velocity.bounce(collision.get_normal())
 
 func velocityTarget() -> Vector2:
 	return velocity.lerp((direction * speed) + (impulseSpeed * impulseDir), acceleration)
@@ -62,13 +62,13 @@ func directionTarget(_delta : float) -> void:
 	pass
 
 func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 1500) -> void:
-	impulseDir = _impulseDir
-	impulseSpeed = _impulseSpeed
-	impulse = true
-	impulseWait = 0.0
+	self.impulseDir = _impulseDir
+	self.impulseSpeed = _impulseSpeed
+	self.impulse = true
+	self.impulseWait = 0.0
 
 func speedTarget() -> float:
-	return speedFix
+	return self.speedFix
 
 func rotationSet(_delta) -> void:
 	self.rotation = 0#lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)
