@@ -9,7 +9,7 @@ size = Vector2(32, 32)
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xa75v"]
-size = Vector2(34, 34)
+size = Vector2(0, 0)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_vtayn")
@@ -36,6 +36,18 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_xa75v")
+
+[node name="Mark_right" type="Marker2D" parent="."]
+position = Vector2(64, 16)
+
+[node name="Mark_left" type="Marker2D" parent="."]
+position = Vector2(-32, 16)
+
+[node name="Mark_up" type="Marker2D" parent="."]
+position = Vector2(16, -32)
+
+[node name="Mark_down" type="Marker2D" parent="."]
+position = Vector2(16, 64)
 
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]

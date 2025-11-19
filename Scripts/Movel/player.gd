@@ -15,12 +15,27 @@ var dashDelay : float = 2 - dashDuringDelay
 var dashWait : float = self.dashDelay
 var dashPoss : bool = false # se é possivel dar dash
 var lockDash : bool = false
+#inAAttack ----------------
+var inAttack : bool = false
 
+var attackDuringDelay : float = 0.25
+var attackDuringWait : float = self.attackDuringDelay
+
+var attackDelay : float = 2 - attackDuringDelay
+var attackWait : float = self.attackDelay
+
+const HITBOX_X := Vector2(64,96)
+const HITBOX_Y := Vector2(96,64)
 
 @onready var sprite : ColorRect = $ColorRect
 @onready var hbTake : Area2D = $are_hbTakeDamage
 @onready var hbAttack : Area2D = $are_hbAttack
-
+@onready var colHb : CollisionShape2D = $are_hbAttack/CollisionShape2D
+#Posições dos ataques
+@onready var attRight : Marker2D = $Mark_right
+@onready var attLeft : Marker2D = $Mark_left
+@onready var attUp : Marker2D = $Mark_up
+@onready var attDown : Marker2D = $Mark_down
 
 func _ready() -> void:
 	super._ready()
@@ -31,8 +46,12 @@ func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
 	super._physics_process(delta)
 
+func _process(delta: float) -> void:
+	super._process(delta)
+	pressAttack()
+
 func dashFunction(_delta) -> void:
-	var dashPress : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("left_click")
+	var dashPress : bool = Input.is_action_just_pressed("space")
 	
 	#Começo o dash
 	if dashPress && self.dash:
@@ -91,3 +110,22 @@ func AttackSucess(body : CharacterBody2D) -> void:
 	super.AttackSucess(body)
 	dashDuringWait -= 0.1
 	direction = velocity.normalized()
+
+func pressAttack() -> void:
+	if Input.is_action_just_pressed("left_click"):
+		if abs(lastDirection.x) >= abs(lastDirection.y):
+			colHb.shape.size = HITBOX_X
+			if lastDirection.x > 0:
+				colHb.position = attRight.position
+			else:
+				colHb.position = attLeft.position
+		else:
+			colHb.shape.size = HITBOX_Y
+			if lastDirection.y > 0:
+				colHb.position = attDown.position
+			else:
+				colHb.position = attUp.position
+		inAttack = true
+		colHb.disabled = !inAttack
+		
+		
