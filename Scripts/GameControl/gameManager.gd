@@ -3,8 +3,8 @@ class_name GameManager
 
 enum MapID {
 	FOREST,
-	TUTORIAL,
-	VESTIBULE
+	VESTIBULE,
+	TUTORIAL
 }
 
 enum LevelID {
@@ -35,8 +35,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_released("restart"):
-		get_tree().quit()
-		OS.create_instance(["res://Scene/main.tscn"])
+		restartRoom()
 
 func init(main : Node2D):
 	self.camera.setup(player, null)
@@ -72,8 +71,16 @@ func windowsConf() -> void:
 func start_shake(intensity: float, decay: float = 1.0) -> void:
 	camera.start_shake(intensity,decay)
 
-func resetGame():
-	get_tree().reload_current_scene()
+func restartRoom():
+	var actualMapId = roomContainer.currentRoom.map.id
+	self.player.queue_free()
+	
+	var newPlayer : Player = preload("res://Scene/player.tscn").instantiate()
+	self.player = newPlayer
+	self.add_child(self.player)
+	self.camera.setup(player, null)
+	roomContainer.restartRoom(level_paths[actualMapId])
+	 
 
 func change_room(_map_id) -> void:
 	roomContainer.call_deferred("change_room", level_paths[_map_id])

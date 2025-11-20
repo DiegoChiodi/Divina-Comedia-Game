@@ -40,8 +40,8 @@ const HITBOX_Y := Vector2(96,64)
 
 func _ready() -> void:
 	super._ready()
-	damage = 20
-	z_index = 1
+	self.damage = 20
+	self.z_index = 1
 
 func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
@@ -49,7 +49,8 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	checkAttack(delta)
+	self.checkAttack(delta)
+	self.scale = iniScale
 
 func dashFunction(delta) -> void:
 	var dashPress : bool = Input.is_action_just_pressed("space")
@@ -66,7 +67,7 @@ func dashFunction(delta) -> void:
 		self.invencibilityActivate(dashDuringDelay + 0.1)
 	
 	#Dando dash
-	if dash:
+	if self.dash:
 		self.sprite.modulate = Color(0,1,0) #Verde
 	else:
 		if self.dashDuringWait < self.dashDuringDelay:
@@ -104,7 +105,7 @@ func groupsAdd() -> void:
 
 func collidingRival(body) -> void:
 	if self.inDash:
-		invencibilityActivate(self.dashDuringDelay)
+		self.invencibilityActivate(self.dashDuringDelay)
 	super.collidingRival(body)
 
 func AttackSucess(body : CharacterBody2D) -> void:
@@ -114,18 +115,18 @@ func AttackSucess(body : CharacterBody2D) -> void:
 
 func checkAttack(delta) -> void:
 	if self.attack and Input.is_action_just_pressed("left_click"):
-		if abs(lastDirection.x) >= abs(lastDirection.y):
-			self.colHb.shape.size = HITBOX_X
-			if lastDirection.x > 0:
-				self.colHb.position = attRight.position
+		if abs(self.lastDirection.x) >= abs(self.lastDirection.y):
+			self.colHb.shape.size = self.HITBOX_X
+			if self.lastDirection.x > 0:
+				self.colHb.position = self.attRight.position
 			else:
-				self.colHb.position = attLeft.position
+				self.colHb.position = self.attLeft.position
 		else:
-			self.colHb.shape.size = HITBOX_Y
-			if lastDirection.y > 0:
-				self.colHb.position = attDown.position
+			self.colHb.shape.size = self.HITBOX_Y
+			if self.lastDirection.y > 0:
+				self.colHb.position = self.attDown.position
 			else:
-				self.colHb.position = attUp.position
+				self.colHb.position = self.attUp.position
 		self.inAttack = true
 		self.colHb.disabled = !self.inAttack
 		self.attackDuringWait = 0.0
