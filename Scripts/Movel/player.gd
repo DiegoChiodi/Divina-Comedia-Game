@@ -64,7 +64,7 @@ func dashFunction(delta) -> void:
 		self.dashWait = 0.0
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false
-		self.invencibilityActivate(dashDuringDelay + 0.1)
+		self.invencibilityActivate(self.dashDuringDelay + 0.1)
 	
 	#Dando dash
 	if self.dash:
@@ -76,7 +76,7 @@ func dashFunction(delta) -> void:
 			self.inDash = false
 	
 	if self.inDash:
-		self.speedDash = dashSpeedMax
+		self.speedDash = self.dashSpeedMax
 		self.sprite.modulate = Color(1,0,0) #vermelho
 	else:
 		self.speedDash = 1
@@ -94,7 +94,6 @@ func speedTarget() -> float:
 func directionTarget(delta : float) -> void:
 	if self.inDash:
 		if !self.lockDash:
-			self.direction = (get_global_mouse_position() - self.global_position).normalized()
 			self.lockDash = true
 	else:
 		self.direction = Input.get_vector("left", "right", "up", "down")
