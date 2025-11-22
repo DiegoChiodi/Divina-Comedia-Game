@@ -23,7 +23,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	directionTarget(delta)
 	self.impulseDir = self.impulseDir.lerp(Vector2.ZERO, self.acceleration)
-	self.impulseDir = Vector2.ZERO
+	print(impulseDir)
 	rotationSet(delta)
 	
 	if direction != Vector2.ZERO:
@@ -61,7 +61,7 @@ func velocityTarget() -> Vector2:
 func directionTarget(_delta : float) -> void:
 	pass
 
-func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 1500) -> void:
+func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 500) -> void:
 	self.impulseDir = _impulseDir
 	self.impulseSpeed = _impulseSpeed
 	self.impulse = true

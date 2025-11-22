@@ -37,11 +37,13 @@ const HITBOX_Y := Vector2(96,64)
 @onready var attLeft : Marker2D = $Mark_left
 @onready var attUp : Marker2D = $Mark_up
 @onready var attDown : Marker2D = $Mark_down
+const KNOCBACKSELFFEELING : float = 3.0
 
 func _ready() -> void:
 	super._ready()
 	self.damage = 20
 	self.z_index = 1
+	self.colHb.disabled = true
 
 func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
@@ -53,7 +55,7 @@ func _process(delta: float) -> void:
 	self.scale = iniScale
 
 func dashFunction(delta) -> void:
-	var dashPress : bool = Input.is_action_just_pressed("space")
+	var dashPress : bool = Input.is_action_just_pressed("space") and direction !=  Vector2.ZERO
 	
 	#Começo o dash
 	if dashPress && self.dash:
@@ -64,6 +66,7 @@ func dashFunction(delta) -> void:
 		self.dashWait = 0.0
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false
+		self.direction = self.lastDirection
 		self.invencibilityActivate(self.dashDuringDelay + 0.1)
 	
 	#Dando dash
@@ -111,9 +114,11 @@ func AttackSucess(body : CharacterBody2D) -> void:
 	super.AttackSucess(body)
 	self.dashDuringWait -= 0.1
 	self.direction = velocity.normalized()
+	takeImpulseDir((self.position - body.position).normalized(), self.KNOCBACKSELFFEELING)
+	print('yes')
 
 func checkAttack(delta) -> void:
-	if self.attack and Input.is_action_just_pressed("left_click"):
+	if self.attack and Input.is_action_just_pressed("left_click") or (Input.is_action_just_pressed("space") and direction ==  Vector2.ZERO):
 		if abs(self.lastDirection.x) >= abs(self.lastDirection.y):
 			self.colHb.shape.size = self.HITBOX_X
 			if self.lastDirection.x > 0:

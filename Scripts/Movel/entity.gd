@@ -11,7 +11,7 @@ var invencibleDelay : float = 0.0
 var invencibleWait : float = self.invencibleDelay
 
 var groupRival : String = ""
-var colRival : bool = false
+var colRival :  = false
 var bodysCol : Array[Entity] = []
 var iniScale : Vector2 = scale
 

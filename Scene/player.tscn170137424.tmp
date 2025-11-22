@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://d35d02vpcgrpg"]
+
+[ext_resource type="Script" uid="uid://m2exhdhgmqhi" path="res://Scripts/Movel/player.gd" id="1_vtayn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8w33"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kelma"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xa75v"]
+size = Vector2(0, 0)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_vtayn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y8w33")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="are_hbTakeDamage" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
+shape = SubResource("RectangleShape2D_kelma")
+
+[node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+position = Vector2(-16, -16)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_xa75v")
+
+[node name="Mark_right" type="Marker2D" parent="."]
+position = Vector2(64, 16)
+
+[node name="Mark_left" type="Marker2D" parent="."]
+position = Vector2(-32, 16)
+
+[node name="Mark_left2" type="Marker2D" parent="."]
+position = Vector2(-32, 16)
+
+[node name="Mark_left3" type="Marker2D" parent="."]
+position = Vector2(-32, 16)
+
+[node name="Mark_up" type="Marker2D" parent="."]
+position = Vector2(16, -32)
+
+[node name="Mark_down" type="Marker2D" parent="."]
+position = Vector2(16, 64)
+
+[connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
+[connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
