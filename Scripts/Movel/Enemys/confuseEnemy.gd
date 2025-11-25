@@ -9,5 +9,5 @@ func _ready() -> void:
 	life = 50
 	
 func directionTarget(_delta : float) -> void:
-	if game_manager.player != null:
+	if game_manager.player != null and self.seeingPlayer:
 		self.direction = lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)

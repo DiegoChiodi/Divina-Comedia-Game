@@ -115,7 +115,6 @@ func AttackSucess(body : CharacterBody2D) -> void:
 	self.dashDuringWait -= 0.1
 	self.direction = velocity.normalized()
 	takeImpulseDir((self.position - body.position).normalized(), self.KNOCBACKSELFFEELING)
-	print('yes')
 
 func checkAttack(delta) -> void:
 	if self.attack and Input.is_action_just_pressed("left_click") or (Input.is_action_just_pressed("space") and direction ==  Vector2.ZERO):

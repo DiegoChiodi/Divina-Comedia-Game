@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://vxtji0hjwk4t"]
+[gd_scene load_steps=6 format=3 uid="uid://vxtji0hjwk4t"]
 
 [ext_resource type="Script" uid="uid://cu860rmrkq43n" path="res://Scripts/Movel/Enemys/shieldEnemy.gd" id="1_dymdj"]
 
@@ -10,6 +10,9 @@ size = Vector2(16, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
 size = Vector2(33, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x24sp"]
+size = Vector2(640, 640)
 
 [node name="ShieldEnemy" type="CharacterBody2D"]
 script = ExtResource("1_dymdj")
@@ -78,5 +81,11 @@ offset_right = 24.0
 offset_bottom = 24.0
 color = Color(1, 0, 0, 1)
 
+[node name="are_checkPlayer" type="Area2D" parent="."]
+
+[node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
+shape = SubResource("RectangleShape2D_x24sp")
+
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
+[connection signal="area_entered" from="are_checkPlayer" to="." method="_on_are_check_player_area_entered"]

@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctywwb1pfgx4y"]
+[gd_scene load_steps=6 format=3 uid="uid://ctywwb1pfgx4y"]
 
 [ext_resource type="Script" uid="uid://b7ggyfwv8bqgm" path="res://Scripts/Movel/Enemys/shadowEnemy.gd" id="1_ki401"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yws6g"]
-size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3k1e"]
 size = Vector2(32, 32)
@@ -11,11 +8,14 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
 size = Vector2(34, 34)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs6ny"]
+size = Vector2(640, 640)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yws6g"]
+size = Vector2(32, 32)
+
 [node name="Shadow" type="CharacterBody2D"]
 script = ExtResource("1_ki401")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_yws6g")
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
 monitorable = false
@@ -52,5 +52,15 @@ offset_right = 12.0
 offset_bottom = 12.0
 color = Color(1, 0, 0, 1)
 
+[node name="are_checkPlayer" type="Area2D" parent="."]
+
+[node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
+shape = SubResource("RectangleShape2D_cs6ny")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yws6g")
+
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
+[connection signal="area_entered" from="are_checkPlayer" to="." method="_on_are_check_player_area_entered"]
+[connection signal="area_exited" from="are_checkPlayer" to="." method="_on_are_check_player_area_exited"]

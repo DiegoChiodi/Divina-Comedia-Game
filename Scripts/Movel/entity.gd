@@ -33,38 +33,38 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	checkColliding()
 
-func collidingRival(body) -> void:
-	self.takeAttack((self.position - body.position).normalized(), body.damage, body.speed)
-	body.AttackSucess(self)
+func collidingRival(_body) -> void:
+	self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed)
+	_body.AttackSucess(self)
 
 func checkColliding() -> void:
 	if !bodysCol.is_empty():
-		for body in bodysCol:
-			if checkCollidingRival(body):
-				collidingRival(body)
+		for _body in bodysCol:
+			if checkCollidingRival(_body):
+				collidingRival(_body)
 			else:
-				collidingRandom(body)
+				collidingRandom(_body)
 	
-func collidingRandom(body) -> void:
-	self.takeImpulseDir((self.position - body.position).normalized(), self.speed * 3)
-	body.takeImpulseDir((body.position - self.position).normalized(), self.speed * 3)
+func collidingRandom(_body) -> void:
+	self.takeImpulseDir((self.position - _body.position).normalized(), self.speed * 3)
+	_body.takeImpulseDir((_body.position - self.position).normalized(), self.speed * 3)
 
-func checkCollidingRival(body) -> bool:
-	return body != null and body.is_in_group(groupRival)
+func checkCollidingRival(_body) -> bool:
+	return _body != null and _body.is_in_group(groupRival)
 
-func AttackSucess(body : CharacterBody2D) -> void:
-	if body != null:
-		self.takeImpulseDir((self.position - body.position).normalized(), self.speed)
+func AttackSucess(_body : CharacterBody2D) -> void:
+	if _body != null:
+		self.takeImpulseDir((self.position - _body.position).normalized(), self.speed)
 
 func groupsAdd() -> void:
 	pass
 
 func takeDamage(_damage : float) -> void:
-	if !invencible:
-		life -= _damage
+	if !self.invencible:
+		self.life -= _damage
 		invencibilityActivate(INVENCIBLE)
-		scale -= iniScale * 0.1
-		if life <= 0:
+		self.scale -= self.iniScale * 0.1
+		if self.life <= 0:
 			self.queue_free()
 
 func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 2000):
@@ -73,19 +73,15 @@ func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : fl
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):
-		bodysCol.append(area.get_parent())
+		self.bodysCol.append(area.get_parent())
 
 func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):
-		bodysCol.erase(area.get_parent())
+		self.bodysCol.erase(area.get_parent())
 
 func dead() -> void:
 	pass
 
-func printGrup() -> void:
-	print(groupRival)
-	print(get_groups())
-
 func invencibilityActivate(invWait : float) -> void:
-	invencible = true
-	invencibleWait = invWait
+	self.invencible = true
+	self.invencibleWait = invWait

@@ -12,7 +12,6 @@ script = ExtResource("1_dbkxu")
 
 [node name="ShieldEnemy" parent="." instance=ExtResource("3_xtd66")]
 position = Vector2(852, 325)
-rotation = 3.01244
 
 [node name="ConfuseEnemy" parent="." instance=ExtResource("4_bk76l")]
 position = Vector2(751, 113)

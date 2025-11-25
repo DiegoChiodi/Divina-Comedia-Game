@@ -1,4 +1,4 @@
-extends BaseScene
+extends Node2D
 class_name DebugMap
 
 @onready var shadow : ShadowEnemy = $Shadow
