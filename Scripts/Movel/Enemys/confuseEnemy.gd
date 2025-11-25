@@ -11,3 +11,7 @@ func _ready() -> void:
 func directionTarget(_delta : float) -> void:
 	if game_manager.player != null and self.seeingPlayer:
 		self.direction = lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)
+	else:
+		if self.inLengthen:
+			return
+		self.direction = self.direction.lerp(Vector2.ZERO,0.1)

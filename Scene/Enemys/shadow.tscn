@@ -60,6 +60,8 @@ shape = SubResource("RectangleShape2D_cs6ny")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_yws6g")
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
 [connection signal="area_entered" from="are_checkPlayer" to="." method="_on_are_check_player_area_entered"]
