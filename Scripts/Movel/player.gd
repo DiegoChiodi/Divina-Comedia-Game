@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 	self.scale = iniScale
 
 func dashFunction(delta) -> void:
-	var dashPress : bool = Input.is_action_just_pressed("space") and direction !=  Vector2.ZERO
+	var dashPress : bool = Input.is_action_just_pressed("space") and self.direction !=  Vector2.ZERO
 	
 	#Começo o dash
 	if dashPress && self.dash:
@@ -81,11 +81,12 @@ func dashFunction(delta) -> void:
 	if self.inDash:
 		self.speedDash = self.dashSpeedMax
 		self.sprite.modulate = Color(1,0,0) #vermelho
+		self.impulseDir = Vector2.ZERO
 	else:
 		self.speedDash = 1
 		if self.dashWait < self.dashDelay and !dash:
 			self.dashWait += delta
-			self.sprite.modulate = Color(0.6 + dashWait / 2 , 0.6 + dashWait / 2, 0) #amarelo
+			self.sprite.modulate = Color(0.6 + self.dashWait / 2 , 0.6 + self.dashWait / 2, 0) #amarelo
 		else:
 			self.dash = true
 			self.dashWait = 0.0
