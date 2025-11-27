@@ -3,9 +3,9 @@ class_name Player
 
 #Dash ---------------
 var dash : bool = true
-var dashDuringDelay : float = 0.2
+var dashDuringDelay : float = 0.25
 var dashDuringWait : float = self.dashDuringDelay
-var dashSpeedMax : int = 4
+var dashSpeedMax : int = 3.5
 var inDash : bool = false
 var speedInDash : int = 1
 var velocityInDash := Vector2.ZERO

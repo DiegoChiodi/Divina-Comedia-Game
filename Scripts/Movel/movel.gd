@@ -51,7 +51,7 @@ func move(_delta: float) -> void:
 
 	# 3. Física do ricochete
 	if collision:
-		self.velocity = self.velocity.bounce(collision.get_normal()) * 1.5
+		self.velocity = self.velocity.bounce(collision.get_normal())
 
 func velocityTarget() -> Vector2:
 	return self.velocity.lerp((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir), self.acceleration)
