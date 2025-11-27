@@ -23,9 +23,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	directionTarget(delta)
 	self.impulseDir = self.impulseDir.lerp(Vector2.ZERO, self.acceleration)
-	rotationSet(delta)
+	self.rotationSet(delta)
 	
-	if direction != Vector2.ZERO:
+	if self.direction != Vector2.ZERO:
 		self.lastDirection = direction
 	
 	if self.impulseWait >= self.impulseDelay:
@@ -34,11 +34,10 @@ func _process(delta: float) -> void:
 		self.impulseWait += delta
 
 func _physics_process(_delta: float) -> void:
-	self.speed = speedTarget()
-	move(_delta)
+	self.move(_delta)
 
 func move(_delta: float) -> void:
-	var target_velocity = velocityTarget()
+	var target_velocity = self.velocityTarget()
 
 	# 1. Aceleração normal (input)
 	if target_velocity != Vector2.ZERO:
@@ -52,10 +51,11 @@ func move(_delta: float) -> void:
 
 	# 3. Física do ricochete
 	if collision:
-		self.velocity = self.velocity.bounce(collision.get_normal())
+		self.velocity = self.velocity.bounce(collision.get_normal()) * 1.5
 
 func velocityTarget() -> Vector2:
-	return velocity.lerp((direction * speed) + (impulseSpeed * impulseDir), acceleration)
+	return self.velocity.lerp((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir), self.acceleration)
+
 
 func directionTarget(_delta : float) -> void:
 	pass

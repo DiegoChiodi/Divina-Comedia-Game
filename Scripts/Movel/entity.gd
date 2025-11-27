@@ -68,8 +68,8 @@ func takeDamage(_damage : float) -> void:
 			self.queue_free()
 
 func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 2000):
-	takeDamage(_damage)
-	takeImpulseDir(_impulseDir)
+	self.takeDamage(_damage)
+	self.takeImpulseDir(_impulseDir)
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):

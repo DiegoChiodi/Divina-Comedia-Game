@@ -5,9 +5,9 @@ class_name ShieldEnemy
 
 func _ready() -> void:
 	super._ready()
-	speedFix = 200
-	perseguition = 0.01
-	life = 50
+	self.speedFix = 200
+	self.perseguition = 0.01
+	self.life = 50
 
 func are_directions_similar(a: Vector2, b: Vector2, tolerance_degrees: float = 30.0) -> bool:
 	if a == Vector2.ZERO or b == Vector2.ZERO:

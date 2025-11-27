@@ -3,11 +3,12 @@ class_name Player
 
 #Dash ---------------
 var dash : bool = true
-var dashDuringDelay : float = 0.25
+var dashDuringDelay : float = 0.2
 var dashDuringWait : float = self.dashDuringDelay
 var dashSpeedMax : int = 4
 var inDash : bool = false
-var speedDash : int = 1
+var speedInDash : int = 1
+var velocityInDash := Vector2.ZERO
 
 const INVLASTDASH : float = 0.1
 
@@ -59,17 +60,25 @@ func dashFunction(delta) -> void:
 	
 	#Começo o dash
 	if dashPress && self.dash:
+		
+		self.speedInDash = self.dashSpeedMax
+		self.velocity *= self.speedInDash
+		
 		self.inDash = true
-		self.dashDuringWait = 0.0
+		
+
 		#cowdow do dash para usar denovo
 		self.dash = false
 		self.dashWait = 0.0
+		self.dashDuringWait = 0.0
+		
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false
 		self.direction = self.lastDirection
 		self.invencibilityActivate(self.dashDuringDelay + 0.1)
+		
 	
-	#Dando dash
+	#Dash carregado
 	if self.dash:
 		self.sprite.modulate = Color(0,1,0) #Verde
 	else:
@@ -78,12 +87,12 @@ func dashFunction(delta) -> void:
 		else:
 			self.inDash = false
 	
+	#Dando dash
 	if self.inDash:
-		self.speedDash = self.dashSpeedMax
 		self.sprite.modulate = Color(1,0,0) #vermelho
 		self.impulseDir = Vector2.ZERO
 	else:
-		self.speedDash = 1
+		self.speedInDash = 1
 		if self.dashWait < self.dashDelay and !dash:
 			self.dashWait += delta
 			self.sprite.modulate = Color(0.6 + self.dashWait / 2 , 0.6 + self.dashWait / 2, 0) #amarelo
@@ -93,7 +102,7 @@ func dashFunction(delta) -> void:
 		
 
 func speedTarget() -> float:
-	return super.speedTarget() * self.speedDash
+	return super.speedTarget() * self.speedInDash
 
 func directionTarget(delta : float) -> void:
 	if self.inDash:
@@ -116,6 +125,11 @@ func AttackSucess(body : CharacterBody2D) -> void:
 	self.dashDuringWait -= 0.1
 	self.direction = velocity.normalized()
 	takeImpulseDir((self.position - body.position).normalized(), self.KNOCBACKSELFFEELING)
+
+func velocityTarget() -> Vector2:
+	if self.inDash:
+		return self.velocity
+	return super.velocityTarget()
 
 func checkAttack(delta) -> void:
 	if self.attack and Input.is_action_just_pressed("left_click") or (Input.is_action_just_pressed("space") and direction ==  Vector2.ZERO):
