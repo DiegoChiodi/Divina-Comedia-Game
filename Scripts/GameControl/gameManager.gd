@@ -45,12 +45,6 @@ func init(main : Node2D):
 	main.add_child(self.player)
 	self.roomContainer.load_room(self.level_paths[LevelID.FOREST_00])
 	main.add_child(roomContainer)
-	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
-	DisplayServer.window_set_size(DisplayServer.screen_get_size())
-	center_window(DisplayServer.screen_get_size())
 
 func center_window(new_size: Vector2i):
 	# define o tamanho da janela

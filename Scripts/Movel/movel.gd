@@ -8,6 +8,7 @@ var lastDirection : Vector2 = Vector2.RIGHT
 
 var speedFix : float = 250.0
 var speed : float = self.speedFix # Velocidade constante que guia movimento
+var workaroundSpeed : float = 200.0
 var acceleration : float = 0.2  # Fator de suavização
 var rotationSpeed : float = 15
 
@@ -41,7 +42,7 @@ func move(_delta: float) -> void:
 
 	# 1. Aceleração normal (input)
 	if target_velocity != Vector2.ZERO:
-		self.velocity = self.velocity.lerp(target_velocity, self.acceleration * _delta * 200)
+		self.velocity = self.velocity.lerp(target_velocity, self.acceleration * _delta * self.workaroundSpeed)
 	else:
 		# Sem input → desaceleração
 		self.velocity = velocity.lerp(Vector2.ZERO, self.acceleration)

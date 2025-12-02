@@ -46,6 +46,7 @@ func _ready() -> void:
 	self.z_index = 1
 	self.colHb.disabled = true
 
+
 func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
 	super._physics_process(delta)
@@ -56,7 +57,7 @@ func _process(delta: float) -> void:
 	self.scale = iniScale
 
 func dashFunction(delta) -> void:
-	var dashPress : bool = Input.is_action_just_pressed("space") and self.direction !=  Vector2.ZERO
+	var dashPress : bool = Input.is_action_just_pressed("space") and self.direction.length() > 0.9
 	
 	#Começo o dash
 	if dashPress && self.dash:
