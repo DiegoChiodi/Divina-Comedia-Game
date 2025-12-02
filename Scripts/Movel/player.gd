@@ -38,7 +38,7 @@ const HITBOX_Y := Vector2(96,64)
 @onready var attLeft : Marker2D = $Mark_left
 @onready var attUp : Marker2D = $Mark_up
 @onready var attDown : Marker2D = $Mark_down
-const KNOCBACKSELFFEELING : float = 3.0
+const KNOCBACKSELFFEELING : float = 250.0
 
 func _ready() -> void:
 	super._ready()
@@ -125,7 +125,7 @@ func AttackSucess(body : CharacterBody2D) -> void:
 	super.AttackSucess(body)
 	self.dashDuringWait -= 0.1
 	self.direction = velocity.normalized()
-	takeImpulseDir((self.position - body.position).normalized(), self.KNOCBACKSELFFEELING)
+	takeImpulseDir(-self.lastDirection, self.KNOCBACKSELFFEELING)
 
 func velocityTarget() -> Vector2:
 	if self.inDash:

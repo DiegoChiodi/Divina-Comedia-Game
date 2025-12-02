@@ -53,6 +53,7 @@ offset_bottom = 12.0
 color = Color(1, 0, 0, 1)
 
 [node name="are_checkPlayer" type="Area2D" parent="."]
+monitorable = false
 
 [node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
 shape = SubResource("RectangleShape2D_cs6ny")

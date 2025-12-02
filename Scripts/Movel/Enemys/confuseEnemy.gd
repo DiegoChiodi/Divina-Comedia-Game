@@ -15,3 +15,7 @@ func directionTarget(_delta : float) -> void:
 		if self.inLengthen:
 			return
 		self.direction = self.direction.lerp(Vector2.ZERO,0.1)
+
+
+func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 500) -> void:
+	super.takeImpulseDir(_impulseDir,_impulseSpeed)

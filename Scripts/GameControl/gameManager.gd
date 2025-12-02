@@ -85,3 +85,6 @@ func startPlayer() -> void:
 func change_room(_map_id) -> void:
 	self.roomContainer.call_deferred("change_room", self.level_paths[_map_id])
 	self.camera.setPosition(self.player.position)
+
+func entityDead(_entity : Entity) -> void:
+	print('dead')

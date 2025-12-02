@@ -40,17 +40,8 @@ func collidingRival(_body) -> void:
 func checkColliding() -> void:
 	if !bodysCol.is_empty():
 		for _body in bodysCol:
-			if checkCollidingRival(_body):
+			if _body.is_in_group(self.groupRival):
 				collidingRival(_body)
-			else:
-				collidingRandom(_body)
-	
-func collidingRandom(_body) -> void:
-	self.takeImpulseDir((self.position - _body.position).normalized(), self.speed * 3)
-	_body.takeImpulseDir((_body.position - self.position).normalized(), self.speed * 3)
-
-func checkCollidingRival(_body) -> bool:
-	return _body != null and _body.is_in_group(groupRival)
 
 func AttackSucess(_body : CharacterBody2D) -> void:
 	if _body != null:
@@ -65,9 +56,9 @@ func takeDamage(_damage : float) -> void:
 		invencibilityActivate(INVENCIBLE)
 		self.scale -= self.iniScale * 0.1
 		if self.life <= 0:
-			self.queue_free()
+			self.dead()
 
-func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 2000):
+func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 3000):
 	self.takeDamage(_damage)
 	self.takeImpulseDir(_impulseDir)
 
@@ -80,7 +71,8 @@ func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:
 		self.bodysCol.erase(area.get_parent())
 
 func dead() -> void:
-	pass
+	game_manager.entityDead(self)
+	self.queue_free()
 
 func invencibilityActivate(invWait : float) -> void:
 	self.invencible = true
