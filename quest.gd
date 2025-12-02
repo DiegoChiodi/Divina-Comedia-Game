@@ -12,4 +12,4 @@ func on_level_unloaded (level_: Level) -> void:
 	pass
 
 func on_enemy_destroyed (enemy: Enemy) -> void:
-	pass
+	print('enemy DEstrotyed')
