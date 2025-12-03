@@ -41,12 +41,12 @@ func groupsAdd() -> void:
 func resetTimer() -> void:
 	if !self.seeingPlayer:
 		self.lengthen()
-		self.timerLengthen.wait_time = randi_range(5,20)
+		self.timerLengthen.wait_time = randi_range(5,12)
 		self.timerLengthen.start()
 
 func _on_are_check_player_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Player:
-		self.seeingPlayer = true
+		self.detectPlayer()
 
 func lengthen() -> void:
 	self.direction = Vector2(randf_range(-1,1),randf_range(-1,1))
@@ -56,3 +56,6 @@ func lengthen() -> void:
 
 func lengthenEnd() -> void:
 	self.inLengthen = false
+
+func detectPlayer() -> void:
+	self.seeingPlayer = true

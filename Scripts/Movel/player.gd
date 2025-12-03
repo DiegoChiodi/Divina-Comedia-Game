@@ -38,7 +38,7 @@ const HITBOX_Y := Vector2(96,64)
 @onready var attLeft : Marker2D = $Mark_left
 @onready var attUp : Marker2D = $Mark_up
 @onready var attDown : Marker2D = $Mark_down
-const KNOCBACKSELFFEELING : float = 250.0
+const KNOCBACKSELFFEELING : float = 1000.0
 
 func _ready() -> void:
 	super._ready()
@@ -66,8 +66,6 @@ func dashFunction(delta) -> void:
 		self.velocity *= self.speedInDash
 		
 		self.inDash = true
-		
-
 		#cowdow do dash para usar denovo
 		self.dash = false
 		self.dashWait = 0.0
@@ -77,7 +75,6 @@ func dashFunction(delta) -> void:
 		self.lockDash = false
 		self.direction = self.lastDirection
 		self.invencibilityActivate(self.dashDuringDelay + 0.1)
-		
 	
 	#Dash carregado
 	if self.dash:
@@ -122,7 +119,6 @@ func collidingRival(body) -> void:
 	super.collidingRival(body)
 
 func AttackSucess(body : CharacterBody2D) -> void:
-	super.AttackSucess(body)
 	self.dashDuringWait -= 0.1
 	self.direction = velocity.normalized()
 	takeImpulseDir(-self.lastDirection, self.KNOCBACKSELFFEELING)

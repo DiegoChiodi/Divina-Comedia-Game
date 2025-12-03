@@ -6,7 +6,7 @@ var life : float = lifeMax
 var damage : float = 20.0
 
 var invencible : bool = false
-const INVENCIBLE : float = 0.3
+const INVENCIBLE : float = 0.35
 var invencibleDelay : float = 0.0
 var invencibleWait : float = self.invencibleDelay
 
@@ -34,8 +34,11 @@ func _physics_process(delta: float) -> void:
 	checkColliding()
 
 func collidingRival(_body) -> void:
+	if !self.invencible:
+		_body.AttackSucess(self)
+
 	self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed)
-	_body.AttackSucess(self)
+	
 
 func checkColliding() -> void:
 	if !bodysCol.is_empty():
@@ -44,22 +47,21 @@ func checkColliding() -> void:
 				collidingRival(_body)
 
 func AttackSucess(_body : CharacterBody2D) -> void:
-	if _body != null:
-		self.takeImpulseDir((self.position - _body.position).normalized(), self.speed)
+	self.takeImpulseDir((self.position - _body.position).normalized(), self.speed)
 
 func groupsAdd() -> void:
 	pass
 
 func takeDamage(_damage : float) -> void:
-	if !self.invencible:
-		self.life -= _damage
-		invencibilityActivate(INVENCIBLE)
-		self.scale -= self.iniScale * 0.1
-		if self.life <= 0:
-			self.dead()
+	self.life -= _damage
+	invencibilityActivate(INVENCIBLE)
+	self.scale -= self.iniScale * 0.1
+	if self.life <= 0:
+		self.dead()
 
 func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 3000):
-	self.takeDamage(_damage)
+	if !self.invencible:
+		self.takeDamage(_damage)
 	self.takeImpulseDir(_impulseDir)
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
