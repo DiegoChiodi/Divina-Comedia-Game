@@ -8,7 +8,7 @@ func _ready() -> void:
 func speedTarget() -> float:
 	return 0.0
 
-func directionTarget(_delta) -> void:
+func directionTarget() -> void:
 	self.direction = Vector2.ZERO
 
 func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 2000):

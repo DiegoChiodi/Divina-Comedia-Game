@@ -5,7 +5,7 @@ class_name Player
 var dash : bool = true
 var dashDuringDelay : float = 0.25
 var dashDuringWait : float = self.dashDuringDelay
-var dashSpeedMax : int = 3.5
+var dashSpeedMax : float = 3.5
 var inDash : bool = false
 var speedInDash : int = 1
 var velocityInDash := Vector2.ZERO
@@ -105,7 +105,7 @@ func dashFunction(delta) -> void:
 func speedTarget() -> float:
 	return super.speedTarget() * self.speedInDash
 
-func directionTarget(delta : float) -> void:
+func directionTarget() -> void:
 	if self.inDash:
 		if !self.lockDash:
 			self.lockDash = true

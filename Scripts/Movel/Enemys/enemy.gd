@@ -26,7 +26,7 @@ func checkCollidingRival(body) -> bool:
 		return true
 	return false
 
-func directionTarget(_delta) -> void:
+func directionTarget() -> void:
 	if game_manager.player != null and self.seeingPlayer:
 		self.direction = (game_manager.player.position - self.position).normalized()
 	else:

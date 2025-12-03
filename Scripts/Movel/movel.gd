@@ -24,7 +24,7 @@ func _ready() -> void:
 
 # Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	directionTarget(delta)
+	directionTarget()
 	self.impulseDir = self.impulseDir.lerp(Vector2.ZERO, self.acceleration)
 	self.rotationSet(delta)
 	
@@ -59,7 +59,7 @@ func move(_delta: float) -> void:
 func velocityTarget() -> Vector2:
 	return self.velocity.lerp((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)), self.acceleration)
 
-func directionTarget(_delta : float) -> void:
+func directionTarget() -> void:
 	pass
 
 func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 500) -> void:
