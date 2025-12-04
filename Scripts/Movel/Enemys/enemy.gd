@@ -13,8 +13,8 @@ func _ready() -> void:
 	add_child(self.timerLengthen)
 	add_child(self.timerLengthenDuration)
 	
-	self.timerLengthen.timeout.connect(resetTimer)
-	self.timerLengthenDuration.timeout.connect(lengthenEnd)
+	self.timerLengthen.timeout.connect(self.resetTimer)
+	self.timerLengthenDuration.timeout.connect(self.lengthenEnd)
 	self.timerLengthen.wait_time = 8
 	self.timerLengthen.start()
 
@@ -45,7 +45,7 @@ func resetTimer() -> void:
 		self.timerLengthen.start()
 
 func _on_are_check_player_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Player:
+	if area.get_parent() is Player and !self.seeingPlayer:
 		self.detectPlayer()
 
 func lengthen() -> void:
