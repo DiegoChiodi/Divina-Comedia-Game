@@ -7,13 +7,20 @@ var damage : float = 20.0
 
 var invencible : bool = false
 const INVENCIBLE : float = 0.35
-var invencibleDelay : float = 0.0
-var invencibleWait : float = self.invencibleDelay
+var invencibleWait : float = 0.0
+
+var damageFlash : bool = false
+const DAMAGEFLASH : float = 0.5
+const DESFREEZEFLASH : float = 0.1
+var damageFlashWait : float = self.DAMAGEFLASH
 
 var groupRival : String = ""
 var colRival :  = false
 var bodysCol : Array[Entity] = []
 var iniScale : Vector2 = scale
+var loseScale : float = 0.1
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,10 +31,17 @@ func _process(delta: float) -> void:
 	super._process(delta)
 	
 	if self.invencible:
-		if invencibleWait > invencibleDelay:
-			invencibleWait -= delta
+		if invencibleWait < INVENCIBLE:
+			invencibleWait += delta
 		else:
 			invencible = false
+	
+	if self.damageFlashWait < self.DAMAGEFLASH:
+		self.damageFlashWait += delta
+		if self.damageFlashWait < self.DESFREEZEFLASH:
+			self.modulate = Color.RED
+		else:
+			self.modulate = self.modulate.lerp(Color.WHITE, delta * 5)
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -54,8 +68,8 @@ func groupsAdd() -> void:
 
 func takeDamage(_damage : float) -> void:
 	self.life -= _damage
-	invencibilityActivate(INVENCIBLE)
-	self.scale -= self.iniScale * 0.1
+	invencibilityActivate()
+	self.scale -= self.iniScale * self.loseScale
 	if self.life <= 0:
 		self.dead()
 
@@ -76,6 +90,7 @@ func dead() -> void:
 	game_manager.entityDead(self)
 	self.queue_free()
 
-func invencibilityActivate(invWait : float) -> void:
+func invencibilityActivate() -> void:
 	self.invencible = true
-	self.invencibleWait = invWait
+	self.invencibleWait = 0.0
+	self.damageFlashWait = 0.0

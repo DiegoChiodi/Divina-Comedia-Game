@@ -9,13 +9,13 @@ size = Vector2(32, 32)
 size = Vector2(34, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cs6ny"]
-size = Vector2(512, 464)
+size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yws6g"]
 size = Vector2(32, 32)
 
 [node name="ShadowBoss" type="CharacterBody2D"]
-scale = Vector2(2, 2)
+scale = Vector2(5, 5)
 script = ExtResource("1_cwku6")
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
@@ -57,7 +57,8 @@ color = Color(1, 0, 0, 1)
 monitorable = false
 
 [node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
-position = Vector2(0, 8)
+position = Vector2(6.86645e-06, 6.86645e-06)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_cs6ny")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

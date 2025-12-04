@@ -23,7 +23,7 @@ var inAttack : bool = false
 var attackDuringDelay : float = 0.25
 var attackDuringWait : float = self.attackDuringDelay
 #Tempo de espera para próximo ataque
-var attackDelay : float = 0.5
+var attackDelay : float = 1.0 + self.attackDuringDelay
 var attackWait : float = self.attackDelay
 
 const HITBOX_X := Vector2(64,96)
@@ -38,7 +38,7 @@ const HITBOX_Y := Vector2(96,64)
 @onready var attLeft : Marker2D = $Mark_left
 @onready var attUp : Marker2D = $Mark_up
 @onready var attDown : Marker2D = $Mark_down
-const KNOCBACKSELFFEELING : float = 1000.0
+const KNOCBACKSELFFEELING : float = 2000.0
 
 func _ready() -> void:
 	super._ready()
@@ -74,7 +74,7 @@ func dashFunction(delta) -> void:
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false
 		self.direction = self.lastDirection
-		self.invencibilityActivate(self.dashDuringDelay + 0.1)
+		self.invencibilityActivate()
 	
 	#Dash carregado
 	if self.dash:
@@ -114,8 +114,6 @@ func groupsAdd() -> void:
 	self.groupRival = "Enemy"
 
 func collidingRival(body) -> void:
-	if self.inDash:
-		self.invencibilityActivate(self.dashDuringDelay)
 	super.collidingRival(body)
 
 func AttackSucess(body : CharacterBody2D) -> void:

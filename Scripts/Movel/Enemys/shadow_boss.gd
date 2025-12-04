@@ -14,14 +14,14 @@ var lastAction : State
 #Dash ------------------
 #Timer
 var timerAttack := Timer.new() 
-const DASHDURATION : float = 2.0
+const DASHDURATION : float = 1.5
 
-const SPEEDDASHMAX : float = 4.0
-var speedDash : float = 1.0
+const SPEEDDASHMAX : float = 3.0
+var speedDash : float = 4.0
 var dashDirection : Vector2 = Vector2.ZERO
 #Rest -----------------
 var timerRest := Timer.new() 
-const RESTDURATION : float = 4.0
+const RESTDURATION : float = 1.0
 
 #Jump ----------------
 const JUMPDURATION : float = 4.0
@@ -33,7 +33,10 @@ const SCRATCHDURATION : float = 1.5
 func _ready() -> void:
 	super._ready()
 	
-	self.speedFix = 100.0
+	self.lifeMax = 500.0
+	self.life = self.lifeMax
+	self.speedFix = 140.0
+	self.loseScale = 0.02
 	
 	self.timerAttack.timeout.connect(self.setRest)
 	self.timerAttack.one_shot = true
@@ -63,12 +66,12 @@ func setNewState() -> void:
 		self.State.DASH:
 			if game_manager.player != null:
 				
-				self.timerAttack.start(DASHDURATION)
+				self.timerAttack.start(self.DASHDURATION)
 				self.dashDirection = (game_manager.player.position - self.position).normalized()
 		self.State.JUMP:
-			self.timerAttack.start(JUMPDURATION)
+			self.timerAttack.start(self.JUMPDURATION)
 		self.State.SCRATCH:
-			self.timerAttack.start(SCRATCHDURATION)
+			self.timerAttack.start(self.SCRATCHDURATION)
 
 func detectPlayer() -> void:
 	super.detectPlayer()

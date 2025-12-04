@@ -1,7 +1,6 @@
 extends Entity
 class_name Enemy
 
-var colPlayer : bool = false
 var colDetectPlayer : Area2D 
 var seeingPlayer : bool = false
 var timerLengthen := Timer.new() 
