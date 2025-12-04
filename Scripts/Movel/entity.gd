@@ -6,7 +6,7 @@ var life : float = lifeMax
 var damage : float = 20.0
 
 var invencible : bool = false
-const INVENCIBLE : float = 0.35
+var invencibleDelay : float = 0.4
 var invencibleWait : float = 0.0
 
 var damageFlash : bool = false
@@ -31,10 +31,10 @@ func _process(delta: float) -> void:
 	super._process(delta)
 	
 	if self.invencible:
-		if invencibleWait < INVENCIBLE:
-			invencibleWait += delta
+		if self.invencibleWait < self.invencibleDelay:
+			self.invencibleWait += delta
 		else:
-			invencible = false
+			self.invencible = false
 	
 	if self.damageFlashWait < self.DAMAGEFLASH:
 		self.damageFlashWait += delta
@@ -52,13 +52,15 @@ func collidingRival(_body) -> void:
 		_body.AttackSucess(self)
 
 	self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed)
-	
 
 func checkColliding() -> void:
-	if !bodysCol.is_empty():
-		for _body in bodysCol:
+	#Entrei na htbox de ataque de alguém
+	if !self.bodysCol.is_empty():
+		for _body in self.bodysCol:
 			if _body.is_in_group(self.groupRival):
 				collidingRival(_body)
+			elif self.is_in_group("Object"):
+					self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed)
 
 func AttackSucess(_body : CharacterBody2D) -> void:
 	self.takeImpulseDir((self.position - _body.position).normalized(), self.speed)

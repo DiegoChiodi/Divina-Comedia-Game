@@ -2,8 +2,7 @@ extends Node
 class_name Quest
 
 var id
-var level_of_map = { }
-signal quest_finished
+var level_of_map = {}
 
 func on_level_loaded (level_: Level) -> void:
 	pass

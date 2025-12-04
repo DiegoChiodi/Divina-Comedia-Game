@@ -26,6 +26,7 @@ quest_manager="*res://quest_managar.gd"
 hbAttack=""
 Player=""
 Enemy=""
+Object=""
 
 [input]
 

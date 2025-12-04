@@ -7,6 +7,7 @@ enum State  {
 	JUMP,
 	REST
 }
+
 var actualAction : State 
 var lastAction : State
 
@@ -53,52 +54,51 @@ func _process(delta: float) -> void:
 	self.stateMachine()
 
 func setNewState() -> void:
-	var keys = self.State.keys() 
+	var keys = State.keys() 
 	
 	var index = randi() % (keys.size() - 1)    # sorteia
 	if self.lastAction == index:
-		setNewState()
+		self.setNewState()
 		return
 	
-	self.actualAction = self.State[keys[index]]
+	self.actualAction = State[keys[index]]
 	self.lastAction = self.actualAction
-	match actualAction:
-		self.State.DASH:
+	match self.actualAction:
+		State.DASH:
 			if game_manager.player != null:
 				
 				self.timerAttack.start(self.DASHDURATION)
 				self.dashDirection = (game_manager.player.position - self.position).normalized()
-		self.State.JUMP:
+		State.JUMP:
 			self.timerAttack.start(self.JUMPDURATION)
-		self.State.SCRATCH:
+		State.SCRATCH:
 			self.timerAttack.start(self.SCRATCHDURATION)
 
 func detectPlayer() -> void:
 	super.detectPlayer()
-	self.actualAction = self.State.DASH
+	self.actualAction = State.DASH
 	self.timerAttack.start(DASHDURATION)
 	self.dashDirection = (game_manager.player.position - self.position).normalized()
 
 func stateMachine() -> void:
-	match actualAction:
-		self.State.DASH:
-			inDash()
-			self.direction = self.dashDirection
-		self.State.JUMP:
-			inJump()
-		self.State.SCRATCH:
-			inScratch()
-		self.State.REST:
-			inRast()
-
+	match self.actualAction:
+		State.DASH:
+			self.inDash()
+		State.JUMP:
+			self.inJump()
+		State.SCRATCH:
+			self.inScratch()
+		State.REST:
+			self.inRast()
 
 func setRest() -> void:
 	self.speedDash = 1.0 #null
-	self.actualAction = self.State.REST
+	self.actualAction = State.REST
 	self.timerRest.start()
 
 func inDash() -> void:
 	self.speedDash = self.SPEEDDASHMAX
+	self.direction = self.dashDirection
 
 func inJump() -> void:
 	pass

@@ -6,12 +6,12 @@ var dash : bool = true
 var dashDuringDelay : float = 0.25
 var dashDuringWait : float = self.dashDuringDelay
 var dashSpeedMax : float = 3.5
-var inDash : bool = false
 var speedInDash : int = 1
 var velocityInDash := Vector2.ZERO
 
 const INVLASTDASH : float = 0.1
 
+var inDash : bool = false
 var dashDelay : float = 2
 var dashWait : float = self.dashDelay
 var dashPoss : bool = false # se é possivel dar dash
@@ -26,6 +26,9 @@ var attackDuringWait : float = self.attackDuringDelay
 var attackDelay : float = 1.0 + self.attackDuringDelay
 var attackWait : float = self.attackDelay
 
+const KNOCBACKSELFFEELING : float = 2000.0
+
+#HITBOX size
 const HITBOX_X := Vector2(64,96)
 const HITBOX_Y := Vector2(96,64)
 
@@ -38,14 +41,13 @@ const HITBOX_Y := Vector2(96,64)
 @onready var attLeft : Marker2D = $Mark_left
 @onready var attUp : Marker2D = $Mark_up
 @onready var attDown : Marker2D = $Mark_down
-const KNOCBACKSELFFEELING : float = 2000.0
 
 func _ready() -> void:
 	super._ready()
 	self.damage = 20
 	self.z_index = 1
 	self.colHb.disabled = true
-
+	self.invencibleDelay = 1.0
 
 func _physics_process(delta: float) -> void:
 	self.dashFunction(delta)
@@ -66,6 +68,7 @@ func dashFunction(delta) -> void:
 		self.velocity *= self.speedInDash
 		
 		self.inDash = true
+		self.ricochet = self.inDash
 		#cowdow do dash para usar denovo
 		self.dash = false
 		self.dashWait = 0.0
@@ -84,6 +87,7 @@ func dashFunction(delta) -> void:
 			self.dashDuringWait += delta
 		else:
 			self.inDash = false
+			self.ricochet = self.inDash
 	
 	#Dando dash
 	if self.inDash:

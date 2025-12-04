@@ -17,4 +17,4 @@ position = Vector2(944, 296)
 position = Vector2(348, 276)
 
 [node name="ShadowBoss" parent="." instance=ExtResource("4_si5l5")]
-position = Vector2(568, 616)
+position = Vector2(996, 712)
