@@ -11,16 +11,25 @@ script = ExtResource("1_p4nya")
 [node name="map" parent="." instance=ExtResource("3_3juwn")]
 
 [node name="shadow_pos" type="Marker2D" parent="."]
-position = Vector2(944, 296)
+position = Vector2(1352, 196)
 
 [node name="Target" parent="." instance=ExtResource("3_p4nya")]
-position = Vector2(348, 276)
+position = Vector2(344, 276)
 
 [node name="ShadowBoss" parent="." instance=ExtResource("4_si5l5")]
-position = Vector2(996, 712)
+position = Vector2(1092, 856)
 
 [node name="Target2" parent="." instance=ExtResource("3_p4nya")]
-position = Vector2(268, 276)
+position = Vector2(520, 260)
 
 [node name="Target3" parent="." instance=ExtResource("3_p4nya")]
 position = Vector2(440, 268)
+
+[node name="Target4" parent="." instance=ExtResource("3_p4nya")]
+position = Vector2(596, 248)
+
+[node name="Target5" parent="." instance=ExtResource("3_p4nya")]
+position = Vector2(676, 248)
+
+[node name="Target6" parent="." instance=ExtResource("3_p4nya")]
+position = Vector2(264, 276)

@@ -16,9 +16,11 @@ var impulseDelay : float =  1.0
 var impulseWait : float = impulseDelay
 var impulsionable : bool = true
 
-
-var pushForce : float = 300.0
+const MINEXTERNALFORCE : float = 300.0
 var external_velocity : Vector2 = Vector2.ZERO
+const PUSHDELAY : float = 0.05
+var pushWait : float = 0.0
+
 var weight : float  = 1.0
 
 var ricochet : bool = false
@@ -39,13 +41,17 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	self.move(_delta)
+	
 
 func move(_delta: float) -> void:
 	var target_velocity = self.velocityTarget()
 	
 	
+	self.external_velocity = self.external_velocity.lerp(Vector2.ZERO, self.acceleration)
 	self.impulseDir = self.impulseDir.lerp(Vector2.ZERO, self.acceleration)
-	self.external_velocity = self.external_velocity.move_toward(Vector2.ZERO, _delta * 1000)
+	
+	if self.pushWait > self.PUSHDELAY:
+		self.pushWait -= _delta
 	
 	# 1. Aceleração normal (input)
 	if target_velocity != Vector2.ZERO:
@@ -53,7 +59,6 @@ func move(_delta: float) -> void:
 	else:
 		# Sem input → desaceleração
 		self.velocity = velocity.lerp(Vector2.ZERO, self.acceleration)
-	
 	# 2. Movimento real
 	var collision = move_and_collide(self.velocity * _delta)
 
@@ -62,13 +67,17 @@ func move(_delta: float) -> void:
 			self.velocity = self.velocity.bounce(collision.get_normal())
 			return
 		var other = collision.get_collider()
-		var force := Vector2.ZERO
+		var dirForce := Vector2.ZERO
+		var force : float = 0.0
 		if sign(abs(-collision.get_normal().x)) > sign(abs(-collision.get_normal().y)):
-			force = Vector2(-collision.get_normal().x,0)
+			dirForce = Vector2(-collision.get_normal().x,0)
 		else:
-			force = Vector2(0,-collision.get_normal().y)
-		other.add_central_force(force * self.velocity.length())
-		return
+			dirForce = Vector2(0,-collision.get_normal().y)
+			
+		force = min(self.MINEXTERNALFORCE, self.velocity.length())
+		other.add_central_force(dirForce * force)
+		print(self.velocity.length())
+
 
 func velocityTarget() -> Vector2:
 	return self.velocity.lerp((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)) + self.external_velocity, self.acceleration)
@@ -90,4 +99,4 @@ func rotationSet(_delta) -> void:
 	self.rotation = 0#lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)
 
 func add_central_force(force: Vector2):
-	self.external_velocity = force
+	self.external_velocity += force
