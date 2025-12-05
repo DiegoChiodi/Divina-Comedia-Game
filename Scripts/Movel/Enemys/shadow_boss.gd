@@ -16,10 +16,13 @@ var lastAction : State
 #Timer
 var timerAttack := Timer.new() 
 const DASHDURATION : float = 1.5
+var dashs : int = 0
 
 const SPEEDDASHMAX : float = 3.0
 var speedDash : float = 4.0
 var dashDirection : Vector2 = Vector2.ZERO
+var dash : bool = false
+const DASHSMAXRANDOM : int = 3
 #Rest -----------------
 var timerRest := Timer.new() 
 const RESTDURATION : float = 1.0
@@ -66,9 +69,7 @@ func setNewState() -> void:
 	match self.actualAction:
 		State.DASH:
 			if game_manager.player != null:
-				
-				self.timerAttack.start(self.DASHDURATION)
-				self.dashDirection = (game_manager.player.position - self.position).normalized()
+				startDash()
 		State.JUMP:
 			self.timerAttack.start(self.JUMPDURATION)
 		State.SCRATCH:
@@ -76,9 +77,7 @@ func setNewState() -> void:
 
 func detectPlayer() -> void:
 	super.detectPlayer()
-	self.actualAction = State.DASH
-	self.timerAttack.start(DASHDURATION)
-	self.dashDirection = (game_manager.player.position - self.position).normalized()
+	self.startDash()
 
 func stateMachine() -> void:
 	match self.actualAction:
@@ -92,9 +91,16 @@ func stateMachine() -> void:
 			self.inRast()
 
 func setRest() -> void:
+	if self.dashs > 0:
+		self.dashs -= 1
+		startDash()
+		return
+	
 	self.speedDash = 1.0 #null
 	self.actualAction = State.REST
 	self.timerRest.start()
+	self.dash = false
+	self.impulsionable = true
 
 func inDash() -> void:
 	self.speedDash = self.SPEEDDASHMAX
@@ -111,3 +117,14 @@ func inRast() -> void:
 
 func speedTarget() -> float:
 	return super.speedTarget() * self.speedDash
+
+func startDash() -> void:
+	self.actualAction = State.DASH
+	self.timerAttack.start(DASHDURATION)
+	self.dashDirection = (game_manager.player.position - self.position).normalized()
+	self.impulsionable = false
+	
+	if !self.dash:
+		self.dashs = randi() % self.DASHSMAXRANDOM
+		self.dash = true
+	print(dashs)

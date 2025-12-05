@@ -14,14 +14,14 @@ var rotationSpeed : float = 15
 
 var impulseDelay : float =  1.0
 var impulseWait : float = impulseDelay
-var impulse : bool = false
+var impulsionable : bool = true
+
 
 var pushForce : float = 300.0
 var external_velocity : Vector2 = Vector2.ZERO
 var weight : float  = 1.0
 
 var ricochet : bool = false
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -34,9 +34,7 @@ func _process(delta: float) -> void:
 	if self.direction != Vector2.ZERO:
 		self.lastDirection = direction
 	
-	if self.impulseWait >= self.impulseDelay:
-		self.impulse = false
-	else:
+	if self.impulseWait <= self.impulseDelay:
 		self.impulseWait += delta
 
 func _physics_process(_delta: float) -> void:
@@ -71,9 +69,6 @@ func move(_delta: float) -> void:
 			force = Vector2(0,-collision.get_normal().y)
 		other.add_central_force(force * self.velocity.length())
 		return
-	
-
-		
 
 func velocityTarget() -> Vector2:
 	return self.velocity.lerp((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)) + self.external_velocity, self.acceleration)
@@ -82,10 +77,10 @@ func directionTarget() -> void:
 	pass
 
 func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 1500) -> void:
-	self.impulseDir = _impulseDir
-	self.impulseSpeed = _impulseSpeed
-	self.impulse = true
-	self.impulseWait = 0.0
+	if self.impulsionable:
+		self.impulseDir = _impulseDir
+		self.impulseSpeed = _impulseSpeed
+		self.impulseWait = 0.0
 
 func speedTarget() -> float:
 	return self.speedFix

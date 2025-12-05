@@ -26,7 +26,7 @@ var attackDuringWait : float = self.attackDuringDelay
 var attackDelay : float = 1.0 + self.attackDuringDelay
 var attackWait : float = self.attackDelay
 
-const KNOCBACKSELFFEELING : float = 2000.0
+const KNOCBACKSELFFEELING : float = 1000.0
 
 #HITBOX size
 const HITBOX_X := Vector2(64,96)

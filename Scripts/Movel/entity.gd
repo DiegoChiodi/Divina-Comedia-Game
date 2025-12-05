@@ -50,7 +50,6 @@ func _physics_process(delta: float) -> void:
 func collidingRival(_body) -> void:
 	if !self.invencible:
 		_body.AttackSucess(self)
-
 	self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed)
 
 func checkColliding() -> void:
@@ -60,7 +59,9 @@ func checkColliding() -> void:
 			if _body.is_in_group(self.groupRival):
 				collidingRival(_body)
 			elif self.is_in_group("Object"):
-					self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed)
+				if !self.invencible:
+					_body.AttackSucess(self)
+				self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed)
 
 func AttackSucess(_body : CharacterBody2D) -> void:
 	self.takeImpulseDir((self.position - _body.position).normalized(), self.speed)
