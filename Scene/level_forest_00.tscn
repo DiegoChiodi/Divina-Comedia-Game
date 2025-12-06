@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bugeq1tvmyiva" path="res://Scripts/level_forest_00.gd" id="1_p4nya"]
 [ext_resource type="PackedScene" uid="uid://cbcvrtxuukd1p" path="res://Scene/map_forest.tscn" id="3_3juwn"]
 [ext_resource type="PackedScene" uid="uid://do0g77wlksohw" path="res://Scene/target.tscn" id="3_p4nya"]
-[ext_resource type="PackedScene" uid="uid://bbb34ijcxaiga" path="res://Scene/shadow_boss.tscn" id="4_si5l5"]
+[ext_resource type="PackedScene" uid="uid://bbb34ijcxaiga" path="res://Scene/bossShadow.tscn" id="4_si5l5"]
 
 [node name="Level_florest_00" type="Node2D"]
 script = ExtResource("1_p4nya")

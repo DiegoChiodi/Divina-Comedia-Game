@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bbb34ijcxaiga"]
 
 [ext_resource type="Script" uid="uid://c5egw3f2guqqm" path="res://Scripts/Movel/Enemys/shadow_boss.gd" id="1_cwku6"]
-[ext_resource type="Script" uid="uid://dg4rgu71gxvwt" path="res://Scene/shadow_shadow_boss.gd" id="2_o7wpx"]
+[ext_resource type="Script" uid="uid://dg4rgu71gxvwt" path="res://Scripts/Movel/Enemys/boss_shadow.gd" id="2_o7wpx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3k1e"]
 size = Vector2(32, 32)

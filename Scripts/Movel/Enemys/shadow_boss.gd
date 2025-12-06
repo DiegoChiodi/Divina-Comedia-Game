@@ -32,6 +32,15 @@ var dashs : int = 0
 const JUMPDURATION : float = 3.0
 const JUMPSPEEDMAX : float = 3.0
 var jumpSpeed : float = 1.0
+#Shadow
+var shadow : BossShadow
+const RADIOUSMAX : float  = 40.0
+const RADIOUSMIN : float = 5.0
+var shaRadious : float = self.RADIOUSMIN
+
+const TRANSPARENCYINIT : float = 0.35
+const TRANSPARENCYFINAL : float = 0.8
+
 #Scratch ------------
 const SCRATCHDURATION : float = 1.5
 
@@ -41,10 +50,12 @@ const SCRATCHDURATION : float = 1.5
 @onready var col : CollisionShape2D = $CollisionShape2D
 #Sprites
 @onready var enemy : Node2D = $Grafics/Enemy
-@onready var shadow : Node2D = $Grafics/Shadow
 
 func _ready() -> void:
 	super._ready()
+	
+	self.shadow = BossShadow.new()
+	add_child(self.shadow)
 	
 	self.lifeMax = 500.0
 	self.life = self.lifeMax
@@ -63,7 +74,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
-	self.stateMachine()
+	self.stateMachine(_delta)
 
 func detectPlayer() -> void:
 	super.detectPlayer()
@@ -77,7 +88,7 @@ func setNewState() -> void:
 		self.setNewState()
 		return
 	
-	self.actualAction = State.JUMP #State[keys[index]]
+	self.actualAction = State[keys[index]]
 	self.lastAction = self.actualAction
 	
 	match self.actualAction:
@@ -88,21 +99,30 @@ func setNewState() -> void:
 			self.timerAttack.start(self.JUMPDURATION)
 			
 			self.attackSpeed = self.JUMPSPEEDMAX
+			#Desativando visibildade e colisões
 			self.enemy.visible = false
 			self.shadow.visible = true
 			self.colTakeD.disabled = true
 			self.colAttack.disabled = true
 			self.col.disabled = true
 			
+			#Atualizando a sombra
+			self.shaRadious = self.RADIOUSMIN
+			self.shadow.modulate.a = self.TRANSPARENCYINIT
+			self.shadow.radious = self.shaRadious
+			self.shadow.queue_redraw()
+			
+			
 		State.SCRATCH: #Start Scratch
 			self.timerAttack.start(self.SCRATCHDURATION)
+			self.attackSpeed = 1.5
 
-func stateMachine() -> void:
+func stateMachine(_delta : float) -> void:
 	match self.actualAction:
 		State.DASH:
 			self.inDash()
 		State.JUMP:
-			self.inJump()
+			self.inJump(_delta)
 		State.SCRATCH:
 			self.inScratch()
 		State.REST:
@@ -127,16 +147,20 @@ func setRest() -> void:
 	
 	self.actualAction = State.REST
 	self.timerRest.start()
-
 func inDash() -> void:
 	pass
 
-func inJump() -> void:
-	
-	if self.timerAttack.time_left < 0.4:
+func inJump(_delta : float) -> void:
+	var seeingPlayer : bool = true
+	if self.timerAttack.time_left < 0.6:
 		self.attackSpeed = lerp(self.attackSpeed, 1.0, 0.98)
-	
-	
+		self.shaRadious = lerp(self.shaRadious, self.RADIOUSMAX, 0.02)
+		seeingPlayer = false
+	else:
+		self.shaRadious += 2 * _delta
+	self.shadow.radious = self.shaRadious
+	self.shadow.queue_redraw()
+	self.shadow.modulate.a = move_toward(self.shadow.modulate.a, self.TRANSPARENCYFINAL, _delta / self.timerAttack.wait_time)
 
 func inScratch() -> void:
 	pass

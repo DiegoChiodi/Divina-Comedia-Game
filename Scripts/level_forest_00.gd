@@ -1,7 +1,7 @@
 extends Level
 class_name Level_Florest_00
 
-var shadow := preload("res://Scene/Enemys/shadow.tscn").instantiate()
+var shadow := preload("res://Scene/Enemys/shadow_enemy.tscn").instantiate()
 
 func _ready() -> void:
 	if global.shadowLive:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ctywwb1pfgx4y"]
 
-[ext_resource type="Script" uid="uid://b7ggyfwv8bqgm" path="res://Scripts/Movel/Enemys/shadowEnemy.gd" id="1_ki401"]
+[ext_resource type="Script" uid="uid://b7ggyfwv8bqgm" path="res://Scripts/Movel/Enemys/shadow_enemy.gd" id="1_uclx1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3k1e"]
 size = Vector2(32, 32)
@@ -15,7 +15,7 @@ size = Vector2(512, 464)
 size = Vector2(32, 32)
 
 [node name="Shadow" type="CharacterBody2D"]
-script = ExtResource("1_ki401")
+script = ExtResource("1_uclx1")
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
 monitorable = false
