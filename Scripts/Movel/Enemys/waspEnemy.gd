@@ -22,5 +22,5 @@ func _process(delta: float) -> void:
 	else:
 		self.disPerWait += delta
 
-func directionTarget() -> void:
-	self.direction = (self.posTarget - self.position).normalized()
+func setDirection() -> Vector2:
+	return (self.posTarget - self.position).normalized()

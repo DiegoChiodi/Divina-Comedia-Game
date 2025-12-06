@@ -8,13 +8,8 @@ func _ready() -> void:
 	speedFix = randi_range(300,600)
 	life = 50
 	
-func directionTarget() -> void:
-	if game_manager.player != null and self.seeingPlayer:
-		self.direction = lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)
-	else:
-		if self.inLengthen:
-			return
-		self.direction = self.direction.lerp(Vector2.ZERO,0.1)
+func setDirection() -> Vector2:
+	return lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)
 
 
 func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 500) -> void:

@@ -37,6 +37,7 @@ shape = SubResource("RectangleShape2D_ki401")
 position = Vector2(4, 4)
 
 [node name="Shadow" type="Node2D" parent="Grafics"]
+visible = false
 script = ExtResource("2_o7wpx")
 
 [node name="Enemy" type="Node2D" parent="Grafics"]

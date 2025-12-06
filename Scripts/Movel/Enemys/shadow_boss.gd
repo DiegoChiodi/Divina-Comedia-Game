@@ -12,29 +12,28 @@ var actualAction : State
 var lastAction : State
 
 #Machine stats --------------------
-#Dash ------------------
-#Timer
-var timerAttack := Timer.new() 
-const DASHDURATION : float = 1.5
-var dashs : int = 0
-
-const SPEEDDASHMAX : float = 3.0
-var speedDash : float = 0.0
-var dashDirection : Vector2 = Vector2.ZERO
-var dash : bool = false
-const DASHSMAXRANDOM : int = 3
-#Rest -----------------
+#Rest ---------------
 var timerRest := Timer.new() 
 const RESTDURATION : float = 1.0
 
-#Jump ----------------
-const JUMPDURATION : float = 4.0
+#Attack----------------------
+var timerAttack := Timer.new() 
+var attackSpeed : float = 1.0
 
+#Dash ----------------
+const DASHDURATION : float = 1.5
+const DASHSPEED : float = 3.0
+
+var dashDirection : Vector2 = Vector2.ZERO
+var dash : bool = false
+const DASHSMAXRANDOM : int = 3
+var dashs : int = 0
+#Jump ----------------
+const JUMPDURATION : float = 3.0
+const JUMPSPEEDMAX : float = 3.0
+var jumpSpeed : float = 1.0
 #Scratch ------------
 const SCRATCHDURATION : float = 1.5
-
-
-
 
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
@@ -88,6 +87,7 @@ func setNewState() -> void:
 		State.JUMP: #Start jump
 			self.timerAttack.start(self.JUMPDURATION)
 			
+			self.attackSpeed = self.JUMPSPEEDMAX
 			self.enemy.visible = false
 			self.shadow.visible = true
 			self.colTakeD.disabled = true
@@ -116,7 +116,7 @@ func setRest() -> void:
 		return
 	
 	self.dash = false
-	self.speedDash = 1.0 #null
+	self.attackSpeed = 1.0 #null
 	self.impulsionable = true
 	#Neutralizando o pulo
 	self.enemy.visible = true
@@ -129,11 +129,14 @@ func setRest() -> void:
 	self.timerRest.start()
 
 func inDash() -> void:
-	self.speedDash = self.SPEEDDASHMAX
-	self.direction = self.dashDirection
+	pass
 
 func inJump() -> void:
-	self.visible = true
+	
+	if self.timerAttack.time_left < 0.4:
+		self.attackSpeed = lerp(self.attackSpeed, 1.0, 0.98)
+	
+	
 
 func inScratch() -> void:
 	pass
@@ -142,14 +145,23 @@ func inRast() -> void:
 	self.direction = Vector2.ZERO
 
 func speedTarget() -> float:
-	return super.speedTarget() * self.speedDash
+	return super.speedTarget() * self.attackSpeed
 
 func startDash() -> void:
 	self.actualAction = State.DASH
 	self.timerAttack.start(self.DASHDURATION)
 	self.dashDirection = (game_manager.player.position - self.position).normalized()
 	self.impulsionable = false
-	
+	self.attackSpeed = self.DASHSPEED
+	self.direction = self.dashDirection
+
 	if !self.dash:
 		self.dashs = randi() % self.DASHSMAXRANDOM
 		self.dash = true
+
+func setDirection() -> Vector2:
+	match self.actualAction:
+		State.DASH:
+			return self.direction
+	
+	return super.setDirection()

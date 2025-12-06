@@ -27,11 +27,14 @@ func checkCollidingRival(body) -> bool:
 
 func directionTarget() -> void:
 	if game_manager.player != null and self.seeingPlayer:
-		self.direction = (game_manager.player.position - self.position).normalized()
+		self.direction = setDirection()
 	else:
 		if self.inLengthen:
 			return
 		self.direction = self.direction.lerp(Vector2.ZERO,0.1)
+
+func setDirection() -> Vector2:
+	return (game_manager.player.position - self.position).normalized()
 
 func groupsAdd() -> void:
 	self.add_to_group("Enemy")
