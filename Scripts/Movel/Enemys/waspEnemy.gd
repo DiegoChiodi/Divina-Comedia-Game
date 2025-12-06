@@ -9,12 +9,12 @@ var posTarget : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	super._ready()
-	speedFix *= 0.9
+	self.speedFix *= 0.9
 	
 func _process(delta: float) -> void:
 	super._process(delta)
 	
-	if self.disPerWait > disPerDelay and game_manager.player != null:
+	if self.disPerWait > self.disPerDelay and game_manager.player != null:
 		self.disPerWait = 0.0
 		self.perseguition.append(game_manager.player.position)
 		if self.perseguition.size() > secondsDis:

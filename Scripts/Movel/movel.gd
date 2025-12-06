@@ -41,6 +41,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	self.move(_delta)
+	self.pushWait += _delta
 	
 
 func move(_delta: float) -> void:
@@ -76,7 +77,6 @@ func move(_delta: float) -> void:
 			
 		force = min(self.MINEXTERNALFORCE, self.velocity.length())
 		other.add_central_force(dirForce * force)
-		print(self.velocity.length())
 
 
 func velocityTarget() -> Vector2:
@@ -99,4 +99,6 @@ func rotationSet(_delta) -> void:
 	self.rotation = 0#lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)
 
 func add_central_force(force: Vector2):
-	self.external_velocity += force
+	if self.pushWait >= PUSHDELAY:
+		self.external_velocity += force
+		self.pushWait = 0.0

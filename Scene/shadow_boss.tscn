@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbb34ijcxaiga"]
+[gd_scene load_steps=7 format=3 uid="uid://bbb34ijcxaiga"]
 
 [ext_resource type="Script" uid="uid://c5egw3f2guqqm" path="res://Scripts/Movel/Enemys/shadow_boss.gd" id="1_cwku6"]
+[ext_resource type="Script" uid="uid://dg4rgu71gxvwt" path="res://Scene/shadow_shadow_boss.gd" id="2_o7wpx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3k1e"]
 size = Vector2(32, 32)
@@ -32,23 +33,28 @@ monitoring = false
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_ki401")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Grafics" type="Node2D" parent="."]
 position = Vector2(4, 4)
 
-[node name="ColorRect" type="ColorRect" parent="Node2D"]
+[node name="Shadow" type="Node2D" parent="Grafics"]
+script = ExtResource("2_o7wpx")
+
+[node name="Enemy" type="Node2D" parent="Grafics"]
+
+[node name="ColorRect" type="ColorRect" parent="Grafics/Enemy"]
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 12.0
 offset_bottom = 12.0
 color = Color(0.755386, 0.755386, 0.755386, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="Node2D"]
+[node name="ColorRect2" type="ColorRect" parent="Grafics/Enemy"]
 offset_top = -16.0
 offset_right = 8.0
 offset_bottom = -8.0
 color = Color(1, 0, 0, 1)
 
-[node name="ColorRect3" type="ColorRect" parent="Node2D"]
+[node name="ColorRect3" type="ColorRect" parent="Grafics/Enemy"]
 offset_right = 8.0
 offset_bottom = 8.0
 color = Color(1, 0, 0, 1)

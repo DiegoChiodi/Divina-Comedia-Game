@@ -6,7 +6,7 @@ var dash : bool = true
 var dashDuringDelay : float = 0.25
 var dashDuringWait : float = self.dashDuringDelay
 var dashSpeedMax : float = 3.5
-var speedInDash : int = 1
+var speedInDash : float = 1
 var velocityInDash := Vector2.ZERO
 
 const INVLASTDASH : float = 0.1
@@ -49,16 +49,16 @@ func _ready() -> void:
 	self.colHb.disabled = true
 	self.invencibleDelay = 1.0
 
-func _physics_process(delta: float) -> void:
-	self.dashFunction(delta)
-	super._physics_process(delta)
+func _physics_process(_delta: float) -> void:
+	self.dashFunction(_delta)
+	super._physics_process(_delta)
 
-func _process(delta: float) -> void:
-	super._process(delta)
-	self.checkAttack(delta)
+func _process(_delta: float) -> void:
+	super._process(_delta)
+	self.checkAttack(_delta)
 	self.scale = iniScale
 
-func dashFunction(delta) -> void:
+func dashFunction(_delta) -> void:
 	var dashPress : bool = Input.is_action_just_pressed("space") and self.direction.length() > 0.9
 	
 	#Começo o dash
@@ -84,7 +84,7 @@ func dashFunction(delta) -> void:
 		self.sprite.modulate = Color(0,1,0) #Verde
 	else:
 		if self.dashDuringWait < self.dashDuringDelay:
-			self.dashDuringWait += delta
+			self.dashDuringWait += _delta
 		else:
 			self.inDash = false
 			self.ricochet = self.inDash
@@ -96,7 +96,7 @@ func dashFunction(delta) -> void:
 	else:
 		self.speedInDash = 1
 		if self.dashWait < self.dashDelay and !dash:
-			self.dashWait += delta
+			self.dashWait += _delta
 			self.sprite.modulate = Color(0.6 + self.dashWait / 2 , 0.6 + self.dashWait / 2, 0) #amarelo
 		else:
 			self.dash = true
@@ -117,10 +117,10 @@ func groupsAdd() -> void:
 	self.add_to_group("Player")
 	self.groupRival = "Enemy"
 
-func collidingRival(body) -> void:
-	super.collidingRival(body)
+func collidingRival(_body) -> void:
+	super.collidingRival(_body)
 
-func AttackSucess(body : CharacterBody2D) -> void:
+func AttackSucess(_body : CharacterBody2D) -> void:
 	self.dashDuringWait -= 0.1
 	self.direction = velocity.normalized()
 	takeImpulseDir(-self.lastDirection, self.KNOCBACKSELFFEELING)
@@ -130,7 +130,7 @@ func velocityTarget() -> Vector2:
 		return self.velocity
 	return super.velocityTarget()
 
-func checkAttack(delta) -> void:
+func checkAttack(_delta) -> void:
 	if self.attack and Input.is_action_just_pressed("left_click") or (Input.is_action_just_pressed("space") and direction ==  Vector2.ZERO):
 		if abs(self.lastDirection.x) >= abs(self.lastDirection.y):
 			self.colHb.shape.size = self.HITBOX_X
@@ -152,12 +152,12 @@ func checkAttack(delta) -> void:
 	#Está atacando
 	if self.inAttack:
 		if self.attackDuringWait < self.attackDuringDelay:
-			self.attackDuringWait += delta
+			self.attackDuringWait += _delta
 		else:
 			self.inAttack = false
 			self.colHb.disabled = !self.inAttack
 	else:
 		if self.attackWait < self.attackDelay:
-			self.attackWait += delta
+			self.attackWait += _delta
 		else:
 			self.attack = true

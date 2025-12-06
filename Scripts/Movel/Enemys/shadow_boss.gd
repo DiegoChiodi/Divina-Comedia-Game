@@ -19,7 +19,7 @@ const DASHDURATION : float = 1.5
 var dashs : int = 0
 
 const SPEEDDASHMAX : float = 3.0
-var speedDash : float = 4.0
+var speedDash : float = 0.0
 var dashDirection : Vector2 = Vector2.ZERO
 var dash : bool = false
 const DASHSMAXRANDOM : int = 3
@@ -33,6 +33,16 @@ const JUMPDURATION : float = 4.0
 #Scratch ------------
 const SCRATCHDURATION : float = 1.5
 
+
+
+
+#Colisões
+@onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
+@onready var colAttack : CollisionShape2D = $are_hbAttack/CollisionShape2D
+@onready var col : CollisionShape2D = $CollisionShape2D
+#Sprites
+@onready var enemy : Node2D = $Grafics/Enemy
+@onready var shadow : Node2D = $Grafics/Shadow
 
 func _ready() -> void:
 	super._ready()
@@ -52,9 +62,13 @@ func _ready() -> void:
 	self.timerRest.wait_time = self.RESTDURATION
 	add_child(self.timerRest)
 
-func _process(delta: float) -> void:
-	super._process(delta)
+func _process(_delta: float) -> void:
+	super._process(_delta)
 	self.stateMachine()
+
+func detectPlayer() -> void:
+	super.detectPlayer()
+	self.startDash()
 
 func setNewState() -> void:
 	var keys = State.keys() 
@@ -64,20 +78,24 @@ func setNewState() -> void:
 		self.setNewState()
 		return
 	
-	self.actualAction = State[keys[index]]
+	self.actualAction = State.JUMP #State[keys[index]]
 	self.lastAction = self.actualAction
+	
 	match self.actualAction:
-		State.DASH:
+		State.DASH: #Start dash
 			if game_manager.player != null:
 				startDash()
-		State.JUMP:
+		State.JUMP: #Start jump
 			self.timerAttack.start(self.JUMPDURATION)
-		State.SCRATCH:
+			
+			self.enemy.visible = false
+			self.shadow.visible = true
+			self.colTakeD.disabled = true
+			self.colAttack.disabled = true
+			self.col.disabled = true
+			
+		State.SCRATCH: #Start Scratch
 			self.timerAttack.start(self.SCRATCHDURATION)
-
-func detectPlayer() -> void:
-	super.detectPlayer()
-	self.startDash()
 
 func stateMachine() -> void:
 	match self.actualAction:
@@ -91,23 +109,31 @@ func stateMachine() -> void:
 			self.inRast()
 
 func setRest() -> void:
+	#Neutralizando o dash
 	if self.dashs > 0:
 		self.dashs -= 1
 		startDash()
 		return
 	
+	self.dash = false
 	self.speedDash = 1.0 #null
+	self.impulsionable = true
+	#Neutralizando o pulo
+	self.enemy.visible = true
+	self.shadow.visible = false
+	self.colTakeD.disabled = false
+	self.colAttack.disabled = false
+	self.col.disabled = false
+	
 	self.actualAction = State.REST
 	self.timerRest.start()
-	self.dash = false
-	self.impulsionable = true
 
 func inDash() -> void:
 	self.speedDash = self.SPEEDDASHMAX
 	self.direction = self.dashDirection
 
 func inJump() -> void:
-	pass
+	self.visible = true
 
 func inScratch() -> void:
 	pass
@@ -120,11 +146,10 @@ func speedTarget() -> float:
 
 func startDash() -> void:
 	self.actualAction = State.DASH
-	self.timerAttack.start(DASHDURATION)
+	self.timerAttack.start(self.DASHDURATION)
 	self.dashDirection = (game_manager.player.position - self.position).normalized()
 	self.impulsionable = false
 	
 	if !self.dash:
 		self.dashs = randi() % self.DASHSMAXRANDOM
 		self.dash = true
-	print(dashs)
