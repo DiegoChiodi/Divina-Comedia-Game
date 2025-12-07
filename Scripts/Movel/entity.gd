@@ -9,10 +9,11 @@ var invencible : bool = false
 var invencibleDelay : float = 0.4
 var invencibleWait : float = 0.0
 
-var damageFlash : bool = false
-const DAMAGEFLASH : float = 0.5
+var damageFlashDelay : float = 0.5
 const DESFREEZEFLASH : float = 0.1
-var damageFlashWait : float = self.DAMAGEFLASH
+var damageFlashWait : float = 100.0 #Alto para n começar piscando já que não tem bool controlando
+const NEUTRALIZATINGDELAY : float = 1.0 
+var neutralizingWait : float = self.NEUTRALIZATINGDELAY
 
 var groupRival : String = ""
 var colRival :  = false
@@ -20,28 +21,28 @@ var bodysCol : Array[Entity] = []
 var iniScale : Vector2 = scale
 var loseScale : float = 0.1
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
 	groupsAdd()
 
-func _process(delta: float) -> void:
-	super._process(delta)
+func _process(_delta: float) -> void:
+	super._process(_delta)
 	
 	if self.invencible:
 		if self.invencibleWait < self.invencibleDelay:
-			self.invencibleWait += delta
+			self.invencibleWait += _delta
 		else:
 			self.invencible = false
 	
-	if self.damageFlashWait < self.DAMAGEFLASH:
-		self.damageFlashWait += delta
-		if self.damageFlashWait < self.DESFREEZEFLASH:
-			self.modulate = Color.RED
-		else:
-			self.modulate = self.modulate.lerp(Color.WHITE, delta * 5)
+	if self.damageFlashWait < self.damageFlashDelay:
+		self.damageFlashWait += _delta
+		damageFlashing(_delta)
+		self.neutralizingWait = 0.0
+	elif self.neutralizingWait < self.NEUTRALIZATINGDELAY:
+		stopFlashing(_delta)
+		self.neutralizingWait += _delta
+
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -93,7 +94,17 @@ func dead() -> void:
 	game_manager.entityDead(self)
 	self.queue_free()
 
-func invencibilityActivate() -> void:
+func invencibilityActivate(_flash : bool = true) -> void:
 	self.invencible = true
 	self.invencibleWait = 0.0
-	self.damageFlashWait = 0.0
+	if _flash:
+		self.damageFlashWait = 0.0
+
+func damageFlashing(_delta : float) -> void:
+	if self.damageFlashWait < self.DESFREEZEFLASH:
+		self.modulate = Color.RED
+	else:
+		self.modulate = self.modulate.lerp(Color.WHITE, _delta * 5)
+
+func stopFlashing(_delta : float) -> void:
+	self.modulate = self.modulate.lerp(Color.WHITE, _delta * 10)

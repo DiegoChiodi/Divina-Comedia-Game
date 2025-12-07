@@ -32,6 +32,12 @@ const KNOCBACKSELFFEELING : float = 1000.0
 const HITBOX_X := Vector2(64,96)
 const HITBOX_Y := Vector2(96,64)
 
+#Blink
+var litghting : bool = false
+const BLINKDELAYINIT : float = 0.25
+var blinkDelay : float = self.BLINKDELAYINIT
+var blinkWait : float = 0.0
+
 @onready var sprite : ColorRect = $ColorRect
 @onready var hbTake : Area2D = $are_hbTakeDamage
 @onready var hbAttack : Area2D = $are_hbAttack
@@ -47,7 +53,8 @@ func _ready() -> void:
 	self.damage = 20
 	self.z_index = 1
 	self.colHb.disabled = true
-	self.invencibleDelay = 1.0
+	self.invencibleDelay = 1.5
+	self.damageFlashDelay = 1.5
 
 func _physics_process(_delta: float) -> void:
 	self.dashFunction(_delta)
@@ -56,7 +63,7 @@ func _physics_process(_delta: float) -> void:
 func _process(_delta: float) -> void:
 	super._process(_delta)
 	self.checkAttack(_delta)
-	self.scale = iniScale
+	self.scale = self.iniScale
 
 func dashFunction(_delta) -> void:
 	var dashPress : bool = Input.is_action_just_pressed("space") and self.direction.length() > 0.9
@@ -77,7 +84,7 @@ func dashFunction(_delta) -> void:
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false
 		self.direction = self.lastDirection
-		self.invencibilityActivate()
+		self.invencibilityActivate(false)
 	
 	#Dash carregado
 	if self.dash:
@@ -101,7 +108,6 @@ func dashFunction(_delta) -> void:
 		else:
 			self.dash = true
 			self.dashWait = 0.0
-		
 
 func speedTarget() -> float:
 	return super.speedTarget() * self.speedInDash
@@ -161,3 +167,20 @@ func checkAttack(_delta) -> void:
 			self.attackWait += _delta
 		else:
 			self.attack = true
+
+func damageFlashing(_delta : float) -> void:
+	if self.blinkWait > self.blinkDelay:
+		self.blinkWait = 0.0
+		self.litghting = !self.litghting
+	else:
+		self.blinkWait += _delta 
+	
+	self.blinkDelay += _delta / 5
+	if self.litghting:
+		self.modulate.a = lerp(self.modulate.a, 1.0, 0.05)
+	else:
+		self.modulate.a = lerp(self.modulate.a, 0.2, 0.1)
+
+func stopFlashing(_delta : float) -> void:
+	self.modulate.a = lerp(self.modulate.a, 1.0, 0.02)
+	self.blinkDelay = self.BLINKDELAYINIT

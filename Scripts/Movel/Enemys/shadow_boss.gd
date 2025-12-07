@@ -29,8 +29,8 @@ var dash : bool = false
 const DASHSMAXRANDOM : int = 3
 var dashs : int = 0
 #Jump ----------------
-const JUMPDURATION : float = 3.0
-const JUMPSPEEDMAX : float = 3.0
+const JUMPDURATION : float = 2.25
+const JUMPSPEEDMAX : float = 3.5
 var jumpSpeed : float = 1.0
 #Shadow
 var shadow : BossShadow
@@ -54,14 +54,15 @@ const SCRATCHDURATION : float = 1.5
 func _ready() -> void:
 	super._ready()
 	
-	self.shadow = BossShadow.new()
-	add_child(self.shadow)
+
 	
 	self.lifeMax = 500.0
 	self.life = self.lifeMax
 	self.speedFix = 140.0
 	self.loseScale = 0.02
 	
+	self.shadow = BossShadow.new()
+	add_child(self.shadow)
 	self.timerAttack.timeout.connect(self.setRest)
 	self.timerAttack.one_shot = true
 	self.timerAttack.wait_time = self.DASHDURATION
@@ -151,11 +152,9 @@ func inDash() -> void:
 	pass
 
 func inJump(_delta : float) -> void:
-	var seeingPlayer : bool = true
 	if self.timerAttack.time_left < 0.6:
 		self.attackSpeed = lerp(self.attackSpeed, 1.0, 0.98)
 		self.shaRadious = lerp(self.shaRadious, self.RADIOUSMAX, 0.02)
-		seeingPlayer = false
 	else:
 		self.shaRadious += 2 * _delta
 	self.shadow.radious = self.shaRadious
