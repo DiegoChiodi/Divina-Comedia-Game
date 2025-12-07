@@ -182,5 +182,5 @@ func damageFlashing(_delta : float) -> void:
 		self.modulate.a = lerp(self.modulate.a, 0.2, 0.1)
 
 func stopFlashing(_delta : float) -> void:
-	self.modulate.a = lerp(self.modulate.a, 1.0, 0.02)
+	self.modulate.a = lerp(self.modulate.a, 1.0, 0.03)
 	self.blinkDelay = self.BLINKDELAYINIT

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbb34ijcxaiga"]
+[gd_scene load_steps=8 format=3 uid="uid://bbb34ijcxaiga"]
 
 [ext_resource type="Script" uid="uid://c5egw3f2guqqm" path="res://Scripts/Movel/Enemys/shadow_boss.gd" id="1_cwku6"]
 [ext_resource type="Script" uid="uid://dg4rgu71gxvwt" path="res://Scripts/Movel/Enemys/boss_shadow.gd" id="2_o7wpx"]
@@ -14,6 +14,9 @@ size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yws6g"]
 size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r2c1m"]
+size = Vector2(37.2816, 6.2136)
 
 [node name="ShadowBoss" type="CharacterBody2D"]
 scale = Vector2(5, 5)
@@ -64,13 +67,27 @@ color = Color(1, 0, 0, 1)
 monitorable = false
 
 [node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
-position = Vector2(6.86645e-06, 6.86645e-06)
+position = Vector2(3.2, -9.6)
 shape = SubResource("RectangleShape2D_cs6ny")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_yws6g")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="are_scratch" type="Area2D" parent="." groups=["hbAttack"]]
+scale = Vector2(1.03, 1.03)
+
+[node name="col_scratch" type="CollisionShape2D" parent="are_scratch"]
+position = Vector2(18.6408, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_r2c1m")
+
+[node name="rec_scratch" type="ColorRect" parent="are_scratch"]
+offset_top = -3.0
+offset_right = 43.0
+offset_bottom = 3.0
+color = Color(0.756863, 0.756863, 0.756863, 1)
 
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]

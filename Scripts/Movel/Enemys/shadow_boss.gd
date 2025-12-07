@@ -3,8 +3,8 @@ class_name ShadowBoss
 
 enum State  {
 	DASH,
-	SCRATCH,
 	JUMP,
+	SCRATCH,
 	REST
 }
 
@@ -42,19 +42,21 @@ const TRANSPARENCYINIT : float = 0.35
 const TRANSPARENCYFINAL : float = 0.8
 
 #Scratch ------------
-const SCRATCHDURATION : float = 1.5
+const SCRATCHDURATION : float = 1.0
+const SCRATCHSPEED : float = 0.0
 
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
 @onready var colAttack : CollisionShape2D = $are_hbAttack/CollisionShape2D
 @onready var col : CollisionShape2D = $CollisionShape2D
+@onready var areScratch : Area2D = $are_scratch
+@onready var colScratch : CollisionShape2D = self.areScratch.get_node("col_scratch")
+@onready var recScratch : ColorRect = self.areScratch.get_node("rec_scratch")
 #Sprites
 @onready var enemy : Node2D = $Grafics/Enemy
 
 func _ready() -> void:
 	super._ready()
-	
-
 	
 	self.lifeMax = 500.0
 	self.life = self.lifeMax
@@ -63,6 +65,9 @@ func _ready() -> void:
 	
 	self.shadow = BossShadow.new()
 	add_child(self.shadow)
+	self.colScratch.disabled = true
+	self.recScratch.visible = false
+	
 	self.timerAttack.timeout.connect(self.setRest)
 	self.timerAttack.one_shot = true
 	self.timerAttack.wait_time = self.DASHDURATION
@@ -78,13 +83,19 @@ func _process(_delta: float) -> void:
 	self.stateMachine(_delta)
 
 func detectPlayer() -> void:
+	pass
 	super.detectPlayer()
 	self.startDash()
 
 func setNewState() -> void:
 	var keys = State.keys() 
+	var playerExi : bool = game_manager.player != null
 	
 	var index = randi() % (keys.size() - 1)    # sorteia
+	
+	if playerExi and self.position.distance_to(game_manager.player.position) < 250 and self.lastAction != State.SCRATCH:
+		index = State.SCRATCH
+	
 	if self.lastAction == index:
 		self.setNewState()
 		return
@@ -116,18 +127,20 @@ func setNewState() -> void:
 			
 		State.SCRATCH: #Start Scratch
 			self.timerAttack.start(self.SCRATCHDURATION)
-			self.attackSpeed = 1.5
+			self.attackSpeed = self.SCRATCHSPEED
+			if game_manager.player != null:
+				self.areScratch.rotation =  (game_manager.player.position - self.position).angle() + 1.5
+				print(self.areScratch.rotation)
+			self.colScratch.disabled = false
+			self.recScratch.visible = true
+			
 
 func stateMachine(_delta : float) -> void:
 	match self.actualAction:
-		State.DASH:
-			self.inDash()
-		State.JUMP:
-			self.inJump(_delta)
-		State.SCRATCH:
-			self.inScratch()
-		State.REST:
-			self.inRast()
+		State.DASH: pass #self.inDash()
+		State.JUMP: self.inJump(_delta)
+		State.SCRATCH: self.inScratch(_delta)
+		State.REST: self.inRast()
 
 func setRest() -> void:
 	#Neutralizando o dash
@@ -137,17 +150,22 @@ func setRest() -> void:
 		return
 	
 	self.dash = false
+	
+	#Neutralizando tudo
 	self.attackSpeed = 1.0 #null
 	self.impulsionable = true
+	self.actualAction = State.REST
+	self.timerRest.start()
 	#Neutralizando o pulo
 	self.enemy.visible = true
 	self.shadow.visible = false
 	self.colTakeD.disabled = false
 	self.colAttack.disabled = false
 	self.col.disabled = false
-	
-	self.actualAction = State.REST
-	self.timerRest.start()
+	#Neutralizando  scratch
+	self.colScratch.disabled = true
+	self.recScratch.visible = false
+
 func inDash() -> void:
 	pass
 
@@ -161,8 +179,8 @@ func inJump(_delta : float) -> void:
 	self.shadow.queue_redraw()
 	self.shadow.modulate.a = move_toward(self.shadow.modulate.a, self.TRANSPARENCYFINAL, _delta / self.timerAttack.wait_time)
 
-func inScratch() -> void:
-	pass
+func inScratch(_delta : float) -> void:
+	self.areScratch.rotation -= _delta * 3.0
 
 func inRast() -> void:
 	self.direction = Vector2.ZERO
@@ -173,7 +191,8 @@ func speedTarget() -> float:
 func startDash() -> void:
 	self.actualAction = State.DASH
 	self.timerAttack.start(self.DASHDURATION)
-	self.dashDirection = (game_manager.player.position - self.position).normalized()
+	if game_manager.player != null:
+		self.dashDirection = (game_manager.player.position - self.position).normalized()
 	self.impulsionable = false
 	self.attackSpeed = self.DASHSPEED
 	self.direction = self.dashDirection

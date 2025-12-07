@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmbsd241t4hac"]
+[gd_scene load_steps=2 format=3 uid="uid://cfgfxlrvkh16t"]
 
-[ext_resource type="Script" uid="uid://c0hn6ropkqkwg" path="res://node_2d.gd" id="1_wtcfe"]
+[sub_resource type="GDScript" id="GDScript_y32ns"]
+script/source = "extends Node2D
+
+@export var raio: float = 50.0
+@export var cor: Color = Color(1.0, 0.0, 0.0) # Vermelho
+@export var preenchido: bool = true
+
+func _process(delta: float) -> void:
+	queue_redraw()
+	
+func _draw():
+	if preenchido:
+		draw_circle(Vector2.ZERO, raio, cor) # Desenha círculo preenchido
+	else:
+		draw_circle(Vector2.ZERO, raio, cor) # Desenha contorno (pode precisar de draw_polygon com muitos pontos para borda fina)
+"
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_wtcfe")
+script = SubResource("GDScript_y32ns")
