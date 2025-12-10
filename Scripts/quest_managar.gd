@@ -3,7 +3,7 @@ class_name QuestManager
 
 enum QuestID {
 	INITIAL,
-	BOSS
+	BOSS,
 }
 
 var current_quest : Quest

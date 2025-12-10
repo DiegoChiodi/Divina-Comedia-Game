@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 func setup() -> void:
 	self.map = get_node('map')
 
-func quest_initial() -> void:
+func init_quest_initial() -> void:
 	shadow.position = $shadow_pos.position
 	shadow2.position = $shadow_pos2.position
 	shadow3.position = $shadow_pos3.position

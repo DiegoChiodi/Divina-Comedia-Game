@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://8su6aslfvug2" path="res://Assets/Sprite-0001.png" id="2_5yj4s"]
 [ext_resource type="Texture2D" uid="uid://dwlktk7go06w1" path="res://Assets/objects.png" id="3_4cbb1"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5yj4s"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4cbb1"]
 texture = ExtResource("2_5yj4s")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -174,7 +174,7 @@ texture = ExtResource("2_5yj4s")
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_5yj4s")
+sources/0 = SubResource("TileSetAtlasSource_4cbb1")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_26qkr"]
 texture = ExtResource("3_4cbb1")
