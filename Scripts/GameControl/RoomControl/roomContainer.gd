@@ -3,11 +3,11 @@ class_name RoomContainer
 
 var currentRoom : Level
 var previousMapId : int = -1
-var previousCurrentRoomTemp : int
 
 var inInit : bool = true
 var restart : bool = false
 var tentativa : int = 0
+var previousCurrentRoomTemp : int
 
 func destroy_room() -> void:
 	self.currentRoom.call_deferred("queue_free")
@@ -15,30 +15,16 @@ func destroy_room() -> void:
 func load_room(path) -> void:
 	#Guarda o id da cena atual que está preste a ser modificada antes que modifique
 	if self.currentRoom != null:
-		self.previousCurrentRoomTemp = self.currentRoom.map.id
+		self.previousCurrentRoomTemp  = self.currentRoom.map.id
 	
 	#Instancia a scena atual, configura e adiciona
 	self.currentRoom = load(path).instantiate()
 	self.currentRoom.setup()
 	self.add_child(self.currentRoom)
 	
-	if self.inInit: #Inicío do jogo, previousMapId = null
-		posPlayerSpawn()
-		self.inInit = false
-		return
+	quest_manager.current_quest.on_level_loaded(self.currentRoom)
 	
-	#Se o jogo acabou de iniciar e previousMapId acabou de ser criado
-	#Estou no mapa inicial e acabei de vir dele
-	if self.restart and self.previousMapId == -1 and self.currentRoom.map.get_node("player_spawn") != null:
-		posPlayerSpawn()
-		self.restart = false
-		return
-	
-	#Para reiniciar no marker certo da scena anterior
-	if !self.restart:
-		self.previousMapId = previousCurrentRoomTemp
-	posPlayerPreviousRomm()
-	self.restart = false
+	self.positionPlayer()
 
 func change_room(path) -> void:
 	destroy_room()
@@ -59,3 +45,22 @@ func posPlayerPreviousRomm() -> void:
 	var mark_position = marker.position
 	game_manager.player.set_deferred("position", mark_position)
 	game_manager.camera.setPosition(mark_position)
+
+func positionPlayer() -> void:
+	if self.inInit: #Inicío do jogo, previousMapId = null
+		posPlayerSpawn()
+		self.inInit = false
+		return
+	
+	#Se o jogo acabou de iniciar e previousMapId acabou de ser criado
+	#Estou no mapa inicial e acabei de vir dele
+	if self.restart and self.previousMapId == -1 and self.currentRoom.map.get_node("player_spawn") != null:
+		posPlayerSpawn()
+		self.restart = false
+		return
+	
+	#Para reiniciar no marker certo da scena anterior
+	if !self.restart:
+		self.previousMapId = self.previousCurrentRoomTemp
+	posPlayerPreviousRomm()
+	self.restart = false

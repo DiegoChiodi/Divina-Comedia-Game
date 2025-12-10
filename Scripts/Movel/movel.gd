@@ -62,12 +62,16 @@ func move(_delta: float) -> void:
 		self.velocity = velocity.lerp(Vector2.ZERO, self.acceleration)
 	# 2. Movimento real
 	var collision = move_and_collide(self.velocity * _delta)
-
+	
 	if collision:
 		if self.ricochet:
 			self.velocity = self.velocity.bounce(collision.get_normal())
 			return
+		
 		var other = collision.get_collider()
+		
+		if !(other is Movel):
+			return
 		var dirForce := Vector2.ZERO
 		var force : float = 0.0
 		if abs(-collision.get_normal().x) > abs(-collision.get_normal().y):
@@ -77,7 +81,6 @@ func move(_delta: float) -> void:
 			
 		force = min(self.MINEXTERNALFORCE, self.velocity.length())
 		other.add_central_force(dirForce * force)
-
 
 func velocityTarget() -> Vector2:
 	return self.velocity.lerp((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)) + self.external_velocity, self.acceleration)

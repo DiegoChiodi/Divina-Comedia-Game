@@ -70,7 +70,6 @@ func restartRoom() -> void:
 	
 	startPlayer()
 	self.camera.setup(self.player, null)
-	
 	self.roomContainer.restartRoom(self.level_paths[actualMapId])
 	self.camera.setPosition(self.player.position)
 

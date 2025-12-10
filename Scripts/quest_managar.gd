@@ -3,13 +3,14 @@ class_name QuestManager
 
 enum QuestID {
 	INITIAL,
-	TEST
+	BOSS
 }
 
 var current_quest : Quest
 
 var quest_types = {
-	QuestID.INITIAL : QuestInitial
+	QuestID.INITIAL : QuestInitial,
+	QuestID.BOSS : QuestBoss
 }
 
 func _init () -> void:

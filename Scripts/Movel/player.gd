@@ -127,9 +127,18 @@ func collidingRival(_body) -> void:
 	super.collidingRival(_body)
 
 func AttackSucess(_body : CharacterBody2D) -> void:
-	self.dashDuringWait -= 0.1
-	self.direction = velocity.normalized()
-	takeImpulseDir(-self.lastDirection, self.KNOCBACKSELFFEELING)
+	if self.inDash:
+		self.dashDuringWait -= 0.1
+		self.direction = velocity.normalized()
+	
+	var impDir : Vector2 = (self.position - _body.position).normalized()
+	var finalImpDir : Vector2 = Vector2.ZERO
+	if abs(impDir.x) >= abs(impDir.y):
+		finalImpDir.x = impDir.x
+	else:
+		finalImpDir.y = impDir.y
+		
+	takeImpulseDir(finalImpDir, self.KNOCBACKSELFFEELING)
 
 func velocityTarget() -> Vector2:
 	if self.inDash:

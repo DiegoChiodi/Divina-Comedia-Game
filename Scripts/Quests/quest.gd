@@ -1,7 +1,7 @@
 extends Node
 class_name Quest
 
-var id
+var id : int
 var level_of_map = {}
 
 func on_level_loaded (_level: Level) -> void:
