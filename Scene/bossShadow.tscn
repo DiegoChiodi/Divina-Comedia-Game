@@ -16,9 +16,10 @@ size = Vector2(128, 128)
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2c1m"]
-size = Vector2(37.2816, 6.2136)
+size = Vector2(37.8641, 6.2136)
 
 [node name="ShadowBoss" type="CharacterBody2D"]
+position = Vector2(-3, 0)
 scale = Vector2(5, 5)
 script = ExtResource("1_cwku6")
 
@@ -63,6 +64,20 @@ offset_right = 8.0
 offset_bottom = 8.0
 color = Color(1, 0, 0, 1)
 
+[node name="helfh bar" type="ColorRect" parent="Grafics/Enemy"]
+offset_left = -19.0
+offset_top = -17.0
+offset_right = -16.0
+offset_bottom = 9.0
+
+[node name="actualHelfhbar" type="ColorRect" parent="Grafics/Enemy"]
+offset_left = -16.2
+offset_top = 8.8
+offset_right = -13.2
+offset_bottom = 34.8
+rotation = 3.14922
+color = Color(1, 0, 0, 1)
+
 [node name="are_checkPlayer" type="Area2D" parent="."]
 monitorable = false
 
@@ -79,13 +94,13 @@ shape = SubResource("RectangleShape2D_yws6g")
 scale = Vector2(1.03, 1.03)
 
 [node name="col_scratch" type="CollisionShape2D" parent="are_scratch"]
-position = Vector2(18.6408, 0)
-scale = Vector2(1, 1)
+position = Vector2(18.932, 0)
 shape = SubResource("RectangleShape2D_r2c1m")
 
 [node name="rec_scratch" type="ColorRect" parent="are_scratch"]
+offset_left = 1.0
 offset_top = -3.0
-offset_right = 43.0
+offset_right = 38.0
 offset_bottom = 3.0
 color = Color(0.756863, 0.756863, 0.756863, 1)
 

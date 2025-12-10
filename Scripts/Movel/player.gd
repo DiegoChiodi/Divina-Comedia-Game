@@ -29,8 +29,8 @@ var attackWait : float = self.attackDelay
 const KNOCBACKSELFFEELING : float = 1000.0
 
 #HITBOX size
-const HITBOX_X := Vector2(64,96)
-const HITBOX_Y := Vector2(96,64)
+const HITBOX_X := Vector2(96,80)
+const HITBOX_Y := Vector2(80,96)
 
 #Blink
 var litghting : bool = false
@@ -66,7 +66,7 @@ func _process(_delta: float) -> void:
 	self.scale = self.iniScale
 
 func dashFunction(_delta) -> void:
-	var dashPress : bool = Input.is_action_just_pressed("space") and self.direction.length() > 0.9
+	var dashPress : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("right_click")  
 	
 	#Começo o dash
 	if dashPress && self.dash:
@@ -137,16 +137,17 @@ func velocityTarget() -> Vector2:
 	return super.velocityTarget()
 
 func checkAttack(_delta) -> void:
-	if self.attack and Input.is_action_just_pressed("left_click") or (Input.is_action_just_pressed("space") and direction ==  Vector2.ZERO):
-		if abs(self.lastDirection.x) >= abs(self.lastDirection.y):
+	if self.attack and Input.is_action_just_pressed("left_click"):
+		var mouseDir : Vector2 = (get_global_mouse_position() - self.global_position).normalized()
+		if abs(mouseDir.x) >= abs(mouseDir.y):
 			self.colHb.shape.size = self.HITBOX_X
-			if self.lastDirection.x > 0:
+			if mouseDir.x > 0:
 				self.colHb.position = self.attRight.position
 			else:
 				self.colHb.position = self.attLeft.position
 		else:
 			self.colHb.shape.size = self.HITBOX_Y
-			if self.lastDirection.y > 0:
+			if mouseDir.y > 0:
 				self.colHb.position = self.attDown.position
 			else:
 				self.colHb.position = self.attUp.position
@@ -167,6 +168,16 @@ func checkAttack(_delta) -> void:
 			self.attackWait += _delta
 		else:
 			self.attack = true
+
+	var shape : Shape2D = self.colHb.shape
+	var size = shape.size
+	
+		# Tamanho do debug
+	$attack.size = size
+		
+		# Centralizar o ColorRect no CollisionShape
+	$attack.position = self.colHb.position - size / 1.5
+	$attack.visible = !self.colHb.disabled
 
 func damageFlashing(_delta : float) -> void:
 	if self.blinkWait > self.blinkDelay:

@@ -77,7 +77,7 @@ func takeDamage(_damage : float) -> void:
 	if self.life <= 0:
 		self.dead()
 
-func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 3000):
+func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 3000) -> void:
 	if !self.invencible:
 		self.takeDamage(_damage)
 	self.takeImpulseDir(_impulseDir)

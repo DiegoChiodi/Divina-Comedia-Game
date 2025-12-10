@@ -14,7 +14,7 @@ var lastAction : State
 #Machine stats --------------------
 #Rest ---------------
 var timerRest := Timer.new() 
-const RESTDURATION : float = 1.0
+const RESTDURATION : float = 1.5
 
 #Attack----------------------
 var timerAttack := Timer.new() 
@@ -52,8 +52,10 @@ const SCRATCHSPEED : float = 0.0
 @onready var areScratch : Area2D = $are_scratch
 @onready var colScratch : CollisionShape2D = self.areScratch.get_node("col_scratch")
 @onready var recScratch : ColorRect = self.areScratch.get_node("rec_scratch")
+
 #Sprites
 @onready var enemy : Node2D = $Grafics/Enemy
+@onready var healfhBar : ColorRect = enemy.get_node('actualHelfhbar')
 
 func _ready() -> void:
 	super._ready()
@@ -61,7 +63,7 @@ func _ready() -> void:
 	self.lifeMax = 500.0
 	self.life = self.lifeMax
 	self.speedFix = 140.0
-	self.loseScale = 0.02
+	self.loseScale = 0.0
 	
 	self.shadow = BossShadow.new()
 	add_child(self.shadow)
@@ -130,7 +132,6 @@ func setNewState() -> void:
 			self.attackSpeed = self.SCRATCHSPEED
 			if game_manager.player != null:
 				self.areScratch.rotation =  (game_manager.player.position - self.position).angle() + 1.5
-				print(self.areScratch.rotation)
 			self.colScratch.disabled = false
 			self.recScratch.visible = true
 			
@@ -207,3 +208,8 @@ func setDirection() -> Vector2:
 			return self.direction
 	
 	return super.setDirection()
+
+func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 3000) -> void:
+	super.takeAttack(_impulseDir, _damage, _impulseSpeed)
+	self.healfhBar.scale.y = self.life / self.lifeMax
+	

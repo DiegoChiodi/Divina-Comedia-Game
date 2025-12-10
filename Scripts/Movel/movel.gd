@@ -70,7 +70,7 @@ func move(_delta: float) -> void:
 		var other = collision.get_collider()
 		var dirForce := Vector2.ZERO
 		var force : float = 0.0
-		if sign(abs(-collision.get_normal().x)) > sign(abs(-collision.get_normal().y)):
+		if abs(-collision.get_normal().x) > abs(-collision.get_normal().y):
 			dirForce = Vector2(-collision.get_normal().x,0)
 		else:
 			dirForce = Vector2(0,-collision.get_normal().y)

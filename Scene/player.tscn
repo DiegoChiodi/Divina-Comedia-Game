@@ -54,5 +54,10 @@ position = Vector2(16, -32)
 [node name="Mark_down" type="Marker2D" parent="."]
 position = Vector2(16, 64)
 
+[node name="attack" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 1, 1, 0.184314)
+
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
