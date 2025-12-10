@@ -45,6 +45,9 @@ const TRANSPARENCYFINAL : float = 0.8
 const SCRATCHDURATION : float = 1.0
 const SCRATCHSPEED : float = 0.0
 
+const TRADE_TIME : float = 2.0
+var trade_turn_wait : float = 0.0
+const DEAD_DELAY : float = 5.0
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
 @onready var colAttack : CollisionShape2D = $are_hbAttack/CollisionShape2D
@@ -83,6 +86,14 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	super._process(_delta)
 	self.stateMachine(_delta)
+	if self.seeingPlayer:
+		if self.trade_turn_wait < self.TRADE_TIME:
+			trade_turn_wait += _delta
+			var parent = self.get_parent()
+			parent.modulate.r = move_toward(parent.modulate.r, 0.2, _delta)
+			parent.modulate.g = move_toward(parent.modulate.g, 0.2, _delta)
+			parent.modulate.b = move_toward(parent.modulate.b, 0.2, _delta)
+	
 
 func detectPlayer() -> void:
 	pass
@@ -212,4 +223,18 @@ func setDirection() -> Vector2:
 func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 3000) -> void:
 	super.takeAttack(_impulseDir, _damage, _impulseSpeed)
 	self.healfhBar.scale.y = self.life / self.lifeMax
-	
+
+func dead () -> void:
+	super.dead()
+	self.trade_turn_wait = 0.0
+
+func dying(_delta : float) -> void:
+	if self.trade_turn_wait < self.DEAD_DELAY:
+		self.trade_turn_wait += _delta
+		var parent = self.get_parent()
+		parent.modulate.r = move_toward(parent.modulate.r, 1.0, _delta)
+		parent.modulate.g = move_toward(parent.modulate.g, 1.0, _delta)
+		parent.modulate.b = move_toward(parent.modulate.b, 1.0, _delta)
+		self.actualAction = State.REST
+	else:
+		super.dying(_delta)

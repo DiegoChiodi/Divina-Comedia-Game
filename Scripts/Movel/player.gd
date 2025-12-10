@@ -23,7 +23,7 @@ var inAttack : bool = false
 var attackDuringDelay : float = 0.25
 var attackDuringWait : float = self.attackDuringDelay
 #Tempo de espera para próximo ataque
-var attackDelay : float = 1.0 + self.attackDuringDelay
+var attackDelay : float = 1.0
 var attackWait : float = self.attackDelay
 
 const KNOCBACKSELFFEELING : float = 1000.0
@@ -64,6 +64,13 @@ func _process(_delta: float) -> void:
 	super._process(_delta)
 	self.checkAttack(_delta)
 	self.scale = self.iniScale
+	
+	if Input.is_action_just_pressed("v"):
+		self.speedFix = 1000.0
+		self.damage = 5000.0
+	if Input.is_action_just_pressed("b"):
+		self.speedFix = 250.0
+		self.damage = 20.0
 
 func dashFunction(_delta) -> void:
 	var dashPress : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("right_click")  
@@ -146,7 +153,7 @@ func velocityTarget() -> Vector2:
 	return super.velocityTarget()
 
 func checkAttack(_delta) -> void:
-	if self.attack and Input.is_action_just_pressed("left_click"):
+	if self.attack and Input.is_action_just_pressed("left_click") and self.attackWait >= self.attackDelay:
 		var mouseDir : Vector2 = (get_global_mouse_position() - self.global_position).normalized()
 		if abs(mouseDir.x) >= abs(mouseDir.y):
 			self.colHb.shape.size = self.HITBOX_X

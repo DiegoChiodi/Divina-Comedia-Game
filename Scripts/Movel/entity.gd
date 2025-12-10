@@ -21,6 +21,8 @@ var bodysCol : Array[Entity] = []
 var iniScale : Vector2 = scale
 var loseScale : float = 0.1
 
+var is_dead : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -42,7 +44,9 @@ func _process(_delta: float) -> void:
 	elif self.neutralizingWait < self.NEUTRALIZATINGDELAY:
 		stopFlashing(_delta)
 		self.neutralizingWait += _delta
-
+	
+	if self.is_dead:
+		self.dying(_delta)
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -91,8 +95,8 @@ func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:
 		self.bodysCol.erase(area.get_parent())
 
 func dead() -> void:
+	self.is_dead = true
 	game_manager.entityDead(self)
-	self.queue_free()
 
 func invencibilityActivate(_flash : bool = true) -> void:
 	self.invencible = true
@@ -108,3 +112,6 @@ func damageFlashing(_delta : float) -> void:
 
 func stopFlashing(_delta : float) -> void:
 	self.modulate = self.modulate.lerp(Color.WHITE, _delta * 10)
+
+func dying (_delta : float) -> void:
+	self.queue_free()

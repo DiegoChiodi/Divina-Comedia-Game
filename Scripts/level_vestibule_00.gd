@@ -2,6 +2,7 @@ extends Level
 class_name Level_Vestibule_00
 
 var boss : = preload("res://Scene/bossShadow.tscn").instantiate()
+
 func setup() -> void:
 	self.map = $map
 

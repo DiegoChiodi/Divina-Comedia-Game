@@ -51,7 +51,7 @@ offset_left = -20.0
 offset_top = -20.0
 offset_right = 12.0
 offset_bottom = 12.0
-color = Color(0.755386, 0.755386, 0.755386, 1)
+color = Color(0.190762, 0.190762, 0.190762, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="Grafics/Enemy"]
 offset_top = -16.0
@@ -69,6 +69,7 @@ offset_left = -19.0
 offset_top = -17.0
 offset_right = -16.0
 offset_bottom = 9.0
+color = Color(0.277528, 0.277528, 0.277528, 1)
 
 [node name="actualHelfhbar" type="ColorRect" parent="Grafics/Enemy"]
 offset_left = -16.2
@@ -102,7 +103,7 @@ offset_left = 1.0
 offset_top = -3.0
 offset_right = 38.0
 offset_bottom = 3.0
-color = Color(0.756863, 0.756863, 0.756863, 1)
+color = Color(0.192157, 0.192157, 0.192157, 1)
 
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
