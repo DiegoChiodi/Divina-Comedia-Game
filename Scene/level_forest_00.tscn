@@ -9,10 +9,10 @@ script = ExtResource("1_p4nya")
 [node name="map" parent="." instance=ExtResource("3_3juwn")]
 
 [node name="shadow_pos" type="Marker2D" parent="."]
-position = Vector2(1740, 300)
+position = Vector2(2296, 364)
 
 [node name="shadow_pos2" type="Marker2D" parent="."]
-position = Vector2(1768, 468)
+position = Vector2(1832, 504)
 
 [node name="shadow_pos3" type="Marker2D" parent="."]
-position = Vector2(1784, 640)
+position = Vector2(2304, 656)

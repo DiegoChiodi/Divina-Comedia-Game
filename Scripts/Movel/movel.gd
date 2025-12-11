@@ -102,6 +102,6 @@ func rotationSet(_delta) -> void:
 	self.rotation = 0#lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)
 
 func add_central_force(force: Vector2):
-	if self.pushWait >= PUSHDELAY:
+	if self.pushWait >= self.PUSHDELAY:
 		self.external_velocity += force
 		self.pushWait = 0.0

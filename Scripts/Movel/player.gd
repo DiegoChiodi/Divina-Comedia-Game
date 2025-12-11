@@ -23,7 +23,7 @@ var inAttack : bool = false
 var attackDuringDelay : float = 0.25
 var attackDuringWait : float = self.attackDuringDelay
 #Tempo de espera para próximo ataque
-var attackDelay : float = 1.0
+var attackDelay : float = 0.25
 var attackWait : float = self.attackDelay
 
 const KNOCBACKSELFFEELING : float = 1000.0
@@ -73,11 +73,11 @@ func _process(_delta: float) -> void:
 		self.damage = 20.0
 
 func dashFunction(_delta) -> void:
-	var dashPress : bool = Input.is_action_just_pressed("space") or Input.is_action_just_pressed("right_click")  
+	var right_click : bool = Input.is_action_just_pressed('right_click')
+	var dashPress : bool = Input.is_action_just_pressed("space") or right_click
 	
 	#Começo o dash
 	if dashPress && self.dash:
-		
 		self.speedInDash = self.dashSpeedMax
 		self.velocity *= self.speedInDash
 		
@@ -90,7 +90,6 @@ func dashFunction(_delta) -> void:
 		
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false
-		self.direction = self.lastDirection
 		self.invencibilityActivate(false)
 	
 	#Dash carregado
@@ -109,7 +108,7 @@ func dashFunction(_delta) -> void:
 		self.impulseDir = Vector2.ZERO
 	else:
 		self.speedInDash = 1
-		if self.dashWait < self.dashDelay and !dash:
+		if self.dashWait < self.dashDelay and !self.dash:
 			self.dashWait += _delta
 			self.sprite.modulate = Color(0.6 + self.dashWait / 2 , 0.6 + self.dashWait / 2, 0) #amarelo
 		else:
@@ -120,11 +119,7 @@ func speedTarget() -> float:
 	return super.speedTarget() * self.speedInDash
 
 func directionTarget() -> void:
-	if self.inDash:
-		if !self.lockDash:
-			self.lockDash = true
-	else:
-		self.direction = Input.get_vector("left", "right", "up", "down")
+	self.direction = Input.get_vector("left", "right", "up", "down")
 	
 func groupsAdd() -> void:
 	self.add_to_group("Player")
