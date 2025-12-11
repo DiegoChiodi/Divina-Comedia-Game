@@ -13,7 +13,7 @@ var acceleration : float = 0.4  # Fator de suavização
 var rotationSpeed : float = 15
 
 var impulseDelay : float =  1.0
-var impulseWait : float = impulseDelay
+var impulseWait : float = self.impulseDelay
 var impulsionable : bool = true
 
 const MINEXTERNALFORCE : float = 300.0
@@ -46,7 +46,6 @@ func _physics_process(_delta: float) -> void:
 
 func move(_delta: float) -> void:
 	var target_velocity = self.velocityTarget()
-	
 	
 	self.external_velocity = self.external_velocity.lerp(Vector2.ZERO, self.acceleration)
 	self.impulseDir = self.impulseDir.lerp(Vector2.ZERO, self.acceleration)
@@ -98,7 +97,6 @@ func speedTarget() -> float:
 	return self.speedFix
 
 func rotationSet(_delta) -> void:
-	
 	self.rotation = 0#lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)
 
 func add_central_force(force: Vector2):

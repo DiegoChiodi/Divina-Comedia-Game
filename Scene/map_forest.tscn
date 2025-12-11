@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=4 uid="uid://cbcvrtxuukd1p"]
 
 [ext_resource type="Script" uid="uid://dhpfmrt4pvvfr" path="res://Scripts/map_forest.gd" id="1_j5j0j"]
-[ext_resource type="Texture2D" uid="uid://8su6aslfvug2" path="res://Assets/Sprite-0001.png" id="2_5yj4s"]
+[ext_resource type="Texture2D" uid="uid://8su6aslfvug2" path="res://Assets/tile_set.png" id="2_5yj4s"]
 [ext_resource type="Texture2D" uid="uid://dwlktk7go06w1" path="res://Assets/objects.png" id="3_4cbb1"]
 [ext_resource type="Texture2D" uid="uid://dk61t31606n8d" path="res://Assets/movi_tut.png" id="4_26qkr"]
 [ext_resource type="Texture2D" uid="uid://cyojbqvocyvod" path="res://Assets/mouse_tut.png" id="5_fo2vt"]

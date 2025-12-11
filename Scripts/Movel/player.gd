@@ -8,6 +8,7 @@ var dashDuringWait : float = self.dashDuringDelay
 var dashSpeedMax : float = 3.5
 var speedInDash : float = 1
 var velocityInDash := Vector2.ZERO
+var dashDir := Vector2.ZERO
 
 const INVLASTDASH : float = 0.1
 
@@ -71,6 +72,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("b"):
 		self.speedFix = 250.0
 		self.damage = 20.0
+		self.life = self.lifeMax
 
 func dashFunction(_delta) -> void:
 	var right_click : bool = Input.is_action_just_pressed('right_click')
@@ -91,7 +93,9 @@ func dashFunction(_delta) -> void:
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false
 		self.invencibilityActivate(false)
-	
+		if right_click:
+			self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
+		
 	#Dash carregado
 	if self.dash:
 		self.sprite.modulate = Color(0,1,0) #Verde
@@ -120,7 +124,8 @@ func speedTarget() -> float:
 
 func directionTarget() -> void:
 	self.direction = Input.get_vector("left", "right", "up", "down")
-	
+
+
 func groupsAdd() -> void:
 	self.add_to_group("Player")
 	self.groupRival = "Enemy"
