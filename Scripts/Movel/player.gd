@@ -89,6 +89,7 @@ func dashFunction(_delta) -> void:
 		self.dash = false
 		self.dashWait = 0.0
 		self.dashDuringWait = 0.0
+
 		
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false

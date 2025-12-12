@@ -33,7 +33,7 @@ const JUMPDURATION : float = 2.25
 const JUMPSPEEDMAX : float = 3.5
 var jumpSpeed : float = 1.0
 #Shadow
-var shadow : BossShadow
+var shadowBoss : CircleDraw
 const RADIOUSMAX : float  = 40.0
 const RADIOUSMIN : float = 5.0
 var shaRadious : float = self.RADIOUSMIN
@@ -47,7 +47,10 @@ const SCRATCHSPEED : float = 0.0
 
 const TRADE_TIME : float = 2.0
 var trade_turn_wait : float = 0.0
-const DEAD_DELAY : float = 5.0
+const DEAD_DELAY : float = 3.0
+var pos_dead : Vector2 = Vector2.ZERO
+var TREMENDOUS : float = 5.0
+var shadows : Array[CircleDraw] = []
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
 @onready var colAttack : CollisionShape2D = $are_hbAttack/CollisionShape2D
@@ -68,8 +71,8 @@ func _ready() -> void:
 	self.speedFix = 140.0
 	self.loseScale = 0.0
 	
-	self.shadow = BossShadow.new()
-	add_child(self.shadow)
+	self.shadowBoss = CircleDraw.new()
+	add_child(self.shadowBoss)
 	self.colScratch.disabled = true
 	self.recScratch.visible = false
 	
@@ -126,16 +129,16 @@ func setNewState() -> void:
 			self.attackSpeed = self.JUMPSPEEDMAX
 			#Desativando visibildade e colisões
 			self.enemy.visible = false
-			self.shadow.visible = true
+			self.shadowBoss.visible = true
 			self.colTakeD.disabled = true
 			self.colAttack.disabled = true
 			self.col.disabled = true
 			
 			#Atualizando a sombra
 			self.shaRadious = self.RADIOUSMIN
-			self.shadow.modulate.a = self.TRANSPARENCYINIT
-			self.shadow.radious = self.shaRadious
-			self.shadow.queue_redraw()
+			self.shadowBoss.modulate.a = self.TRANSPARENCYINIT
+			self.shadowBoss.radious = self.shaRadious
+			self.shadowBoss.queue_redraw()
 			
 			
 		State.SCRATCH: #Start Scratch
@@ -170,7 +173,7 @@ func setRest() -> void:
 	self.timerRest.start()
 	#Neutralizando o pulo
 	self.enemy.visible = true
-	self.shadow.visible = false
+	self.shadowBoss.visible = false
 	self.colTakeD.disabled = false
 	self.colAttack.disabled = false
 	self.col.disabled = false
@@ -187,9 +190,9 @@ func inJump(_delta : float) -> void:
 		self.shaRadious = lerp(self.shaRadious, self.RADIOUSMAX, 0.02)
 	else:
 		self.shaRadious += 2 * _delta
-	self.shadow.radious = self.shaRadious
-	self.shadow.queue_redraw()
-	self.shadow.modulate.a = move_toward(self.shadow.modulate.a, self.TRANSPARENCYFINAL, _delta / self.timerAttack.wait_time)
+	self.shadowBoss.radious = self.shaRadious
+	self.shadowBoss.queue_redraw()
+	self.shadowBoss.modulate.a = move_toward(self.shadowBoss.modulate.a, self.TRANSPARENCYFINAL, _delta / self.timerAttack.wait_time)
 
 func inScratch(_delta : float) -> void:
 	self.areScratch.rotation -= _delta * 3.0
@@ -227,14 +230,35 @@ func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : fl
 func dead () -> void:
 	super.dead()
 	self.trade_turn_wait = 0.0
+	self.pos_dead = self.position
+	
+	for i in 30:
+		var shadow_new : CircleDraw= CircleDraw.new()
+		shadow_new.position = self.global_position
+		shadow_new.speed = Vector2(randf_range(-300,300),randf_range(-300,300))
+		shadow_new.radious = randf_range(3,10)
+		shadows.append(shadow_new)
+	
+	self.get_parent().start_shadows(shadows)
 
 func dying(_delta : float) -> void:
 	if self.trade_turn_wait < self.DEAD_DELAY:
+		
 		self.trade_turn_wait += _delta
 		var parent = self.get_parent()
 		parent.modulate.r = move_toward(parent.modulate.r, 1.0, _delta)
 		parent.modulate.g = move_toward(parent.modulate.g, 1.0, _delta)
 		parent.modulate.b = move_toward(parent.modulate.b, 1.0, _delta)
 		self.actualAction = State.REST
+		
+		#Efeito de morte
+		var pos_sort : Vector2 = Vector2(randf_range(-self.TREMENDOUS,self.TREMENDOUS),randf_range(-self.TREMENDOUS,self.TREMENDOUS))
+		self.position = pos_sort + self.pos_dead
+		var shadow_new : CircleDraw= CircleDraw.new()
+		shadow_new.speed = Vector2(randf_range(-300,300),randf_range(-300,300))
+		shadow_new.position = self.global_position
+		shadow_new.radious = randf_range(4,12)
+		shadows.append(shadow_new)
+		get_parent().add_child(shadow_new)
 	else:
 		super.dying(_delta)
