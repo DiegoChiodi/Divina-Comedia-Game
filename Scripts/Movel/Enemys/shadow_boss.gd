@@ -50,7 +50,6 @@ var trade_turn_wait : float = 0.0
 const DEAD_DELAY : float = 3.0
 var pos_dead : Vector2 = Vector2.ZERO
 var TREMENDOUS : float = 5.0
-var shadows : Array[CircleDraw] = []
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
 @onready var colAttack : CollisionShape2D = $are_hbAttack/CollisionShape2D
@@ -231,19 +230,11 @@ func dead () -> void:
 	super.dead()
 	self.trade_turn_wait = 0.0
 	self.pos_dead = self.position
-	
-	for i in 30:
-		var shadow_new : CircleDraw= CircleDraw.new()
-		shadow_new.position = self.global_position
-		shadow_new.speed = Vector2(randf_range(-300,300),randf_range(-300,300))
-		shadow_new.radious = randf_range(3,10)
-		shadows.append(shadow_new)
-	
-	self.get_parent().start_shadows(shadows)
 
 func dying(_delta : float) -> void:
 	if self.trade_turn_wait < self.DEAD_DELAY:
 		
+		#Mudar o tempo
 		self.trade_turn_wait += _delta
 		var parent = self.get_parent()
 		parent.modulate.r = move_toward(parent.modulate.r, 1.0, _delta)
@@ -251,14 +242,16 @@ func dying(_delta : float) -> void:
 		parent.modulate.b = move_toward(parent.modulate.b, 1.0, _delta)
 		self.actualAction = State.REST
 		
-		#Efeito de morte
+		#Tremedeira
 		var pos_sort : Vector2 = Vector2(randf_range(-self.TREMENDOUS,self.TREMENDOUS),randf_range(-self.TREMENDOUS,self.TREMENDOUS))
 		self.position = pos_sort + self.pos_dead
-		var shadow_new : CircleDraw= CircleDraw.new()
-		shadow_new.speed = Vector2(randf_range(-300,300),randf_range(-300,300))
-		shadow_new.position = self.global_position
-		shadow_new.radious = randf_range(4,12)
-		shadows.append(shadow_new)
-		get_parent().add_child(shadow_new)
+		#Sombras saindo
+		for i in range(3):
+			var shadow_new : CircleDraw= CircleDraw.new()
+			shadow_new.speed = Vector2(randf_range(-300,300),randf_range(-300,300))
+			shadow_new.position = self.global_position + shadow_new.speed / 4
+			shadow_new.radious = randf_range(4,12)
+			parent.shadows.append(shadow_new)
+			parent.add_child(shadow_new)
 	else:
 		super.dying(_delta)

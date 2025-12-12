@@ -1,0 +1,13 @@
+Correnteza ou Deafh run
+Navigation em inimigos
+Navigation em tile
+Physics em tiles
+Sprites
+Temp var
+
+------------Add
+boss animation
+sprites_tut
+quests
+life bar boss
+

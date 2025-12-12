@@ -2,14 +2,13 @@ extends Level
 class_name Level_Vestibule_00
 
 var boss : = preload("res://Scene/bossShadow.tscn").instantiate()
-var shadows : Array[CircleDraw]
+var shadows : Array[CircleDraw] = []
 
 func setup() -> void:
 	self.map = $map
 
 func _process(_delta: float) -> void:
-	if !self.shadows.is_empty():
-		shadows_destroy(_delta)
+	shadows_destroy(_delta)
 
 func init_quest_boss() -> void:
 	self.boss.position = $mar_boss.position
@@ -18,10 +17,9 @@ func init_quest_boss() -> void:
 func shadows_destroy(_delta : float) -> void:
 	for i in range(shadows.size() - 1, -1, -1):
 		shadows[i].move(_delta)
-		if shadows[i].radious <= 0:
+		if shadows[i].radious <= 0.75:
 			shadows[i].queue_free()
 			shadows.remove_at(i)
-
 
 func start_shadows(_shadows : Array[CircleDraw]) -> void:
 	self.shadows = _shadows
