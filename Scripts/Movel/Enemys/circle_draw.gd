@@ -10,5 +10,4 @@ func _draw() -> void:
 func move(_delta : float) -> void:
 	self.position += self.speed * _delta
 	self.queue_redraw()
-	self._draw()
 	self.radious = lerp(self.radious,0.0,0.02)

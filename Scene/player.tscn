@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d35d02vpcgrpg"]
+[gd_scene load_steps=7 format=3 uid="uid://d35d02vpcgrpg"]
 
 [ext_resource type="Script" uid="uid://m2exhdhgmqhi" path="res://Scripts/Movel/player.gd" id="1_vtayn"]
+[ext_resource type="AudioStream" uid="uid://bqt5r8lnfvcjn" path="res://Assets/audio/sfx/swinging-fist-swing.wav" id="2_xa75v"]
+[ext_resource type="AudioStream" uid="uid://dqu4teu0agu43" path="res://Assets/audio/sfx/imperative-resolute-swing-of-melee-weapons.wav" id="3_58ae2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8w33"]
 size = Vector2(32, 32)
@@ -58,6 +60,12 @@ position = Vector2(16, 64)
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(1, 1, 1, 0.184314)
+
+[node name="SndAttack1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_xa75v")
+
+[node name="SndAttack2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_58ae2")
 
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]

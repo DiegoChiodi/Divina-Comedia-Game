@@ -25,6 +25,7 @@ var marker_names : Dictionary = {
 var camera : Camera = Camera.new()
 var player : Player = preload("res://Scene/player.tscn").instantiate()
 var roomContainer : RoomContainer = RoomContainer.new()
+var is_paused : bool = false
 
 #Scenes
 var debugScene : String = "res://Scene/debugMap.tscn"
@@ -32,10 +33,16 @@ var debugScene : String = "res://Scene/debugMap.tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	windowsConf()
+	process_mode = self.PROCESS_MODE_ALWAYS
+
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_released("restart"):
 		restartRoom()
+	
+	if Input.is_action_just_released("menu"):
+		self.is_paused = !self.is_paused
+		get_tree().paused = self.is_paused
 
 func init(main : Node2D):
 	self.camera.setup(self.player, null)

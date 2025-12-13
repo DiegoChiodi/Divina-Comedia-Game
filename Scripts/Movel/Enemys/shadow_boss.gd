@@ -153,7 +153,7 @@ func setNewState() -> void:
 
 func stateMachine(_delta : float) -> void:
 	match self.actualAction:
-		State.DASH: pass #self.inDash()
+		#State.DASH: #self.inDash()
 		State.JUMP: self.inJump(_delta)
 		State.SCRATCH: self.inScratch(_delta)
 		State.REST: self.inRast()
@@ -181,9 +181,6 @@ func setRest() -> void:
 	#Neutralizando  scratch
 	self.colScratch.disabled = true
 	self.recScratch.visible = false
-
-func inDash() -> void:
-	pass
 
 func inJump(_delta : float) -> void:
 	if self.timerAttack.time_left < 0.6:
@@ -232,12 +229,12 @@ func dead () -> void:
 	super.dead()
 	self.trade_turn_wait = 0.0
 	self.pos_dead = self.position
+	self.setRest()
 	self.control_shadows.position = self.global_position
 	get_parent().add_child(self.control_shadows)
 
 func dying(_delta : float) -> void:
 	if self.trade_turn_wait < self.DEAD_DELAY:
-		
 		#Mudar o tempo
 		self.trade_turn_wait += _delta
 		var parent = self.get_parent()
@@ -245,7 +242,6 @@ func dying(_delta : float) -> void:
 		parent.modulate.g = move_toward(parent.modulate.g, 1.0, _delta)
 		parent.modulate.b = move_toward(parent.modulate.b, 1.0, _delta)
 		self.actualAction = State.REST
-		
 		#Tremedeira
 		var pos_sort : Vector2 = Vector2(randf_range(-self.TREMENDOUS,self.TREMENDOUS),randf_range(-self.TREMENDOUS,self.TREMENDOUS))
 		self.position = pos_sort + self.pos_dead

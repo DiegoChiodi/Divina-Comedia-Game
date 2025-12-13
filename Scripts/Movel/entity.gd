@@ -25,7 +25,6 @@ var is_dead : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	super._ready()
 	groupsAdd()
 
 func _process(_delta: float) -> void:
@@ -40,7 +39,6 @@ func _process(_delta: float) -> void:
 	if self.damageFlashWait < self.damageFlashDelay:
 		self.damageFlashWait += _delta
 		damageFlashing(_delta)
-		self.neutralizingWait = 0.0
 	elif self.neutralizingWait < self.NEUTRALIZATINGDELAY:
 		stopFlashing(_delta)
 		self.neutralizingWait += _delta
@@ -109,6 +107,7 @@ func damageFlashing(_delta : float) -> void:
 		self.modulate = Color.RED
 	else:
 		self.modulate = self.modulate.lerp(Color.WHITE, _delta * 5)
+	self.neutralizingWait = 0.0
 
 func stopFlashing(_delta : float) -> void:
 	self.modulate = self.modulate.lerp(Color.WHITE, _delta * 10)

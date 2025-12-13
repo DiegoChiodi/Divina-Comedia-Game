@@ -24,20 +24,16 @@ var pushWait : float = 0.0
 var weight : float  = 1.0
 
 var ricochet : bool = false
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-# Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	directionTarget()
 	self.rotationSet(delta)
-	
+
 	if self.direction != Vector2.ZERO:
 		self.lastDirection = direction
-	
+
 	if self.impulseWait <= self.impulseDelay:
-		self.impulseWait += delta
+			self.impulseWait += delta
 
 func _physics_process(_delta: float) -> void:
 	self.move(_delta)

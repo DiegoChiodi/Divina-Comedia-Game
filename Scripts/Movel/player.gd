@@ -48,6 +48,9 @@ var blinkWait : float = 0.0
 @onready var attLeft : Marker2D = $Mark_left
 @onready var attUp : Marker2D = $Mark_up
 @onready var attDown : Marker2D = $Mark_down
+#Sounds
+@onready var sound_attack_1 : AudioStreamPlayer2D = $SndAttack1
+@onready var sound_attack_2 : AudioStreamPlayer2D = $SndAttack2
 
 func _ready() -> void:
 	super._ready()
@@ -58,8 +61,8 @@ func _ready() -> void:
 	self.damageFlashDelay = 1.5
 
 func _physics_process(_delta: float) -> void:
-	self.dashFunction(_delta)
 	super._physics_process(_delta)
+	self.dashFunction(_delta)
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
@@ -126,7 +129,6 @@ func speedTarget() -> float:
 func directionTarget() -> void:
 	self.direction = Input.get_vector("left", "right", "up", "down")
 
-
 func groupsAdd() -> void:
 	self.add_to_group("Player")
 	self.groupRival = "Enemy"
@@ -154,7 +156,7 @@ func velocityTarget() -> Vector2:
 	return super.velocityTarget()
 
 func checkAttack(_delta) -> void:
-	if self.attack and Input.is_action_just_pressed("left_click") and self.attackWait >= self.attackDelay:
+	if self.attack and Input.is_action_just_pressed("left_click") and self.attackWait >= self.attackDelay and !self.inDash:
 		var mouseDir : Vector2 = (get_global_mouse_position() - self.global_position).normalized()
 		if abs(mouseDir.x) >= abs(mouseDir.y):
 			self.colHb.shape.size = self.HITBOX_X
@@ -172,7 +174,10 @@ func checkAttack(_delta) -> void:
 		self.colHb.disabled = !self.inAttack
 		self.attackDuringWait = 0.0
 		self.attackWait = 0.0
-	
+		if randi() % 2 == 0:
+			self.sound_attack_1.play()
+		else:
+			self.sound_attack_2.play()
 	#Está atacando
 	if self.inAttack:
 		if self.attackDuringWait < self.attackDuringDelay:
@@ -191,8 +196,7 @@ func checkAttack(_delta) -> void:
 	
 		# Tamanho do debug
 	$attack.size = size
-		
-		# Centralizar o ColorRect no CollisionShape
+	# Centralizar o ColorRect no CollisionShape
 	$attack.position = self.colHb.position - size / 1.5
 	$attack.visible = !self.colHb.disabled
 
@@ -208,7 +212,17 @@ func damageFlashing(_delta : float) -> void:
 		self.modulate.a = lerp(self.modulate.a, 1.0, 0.05)
 	else:
 		self.modulate.a = lerp(self.modulate.a, 0.2, 0.1)
+	
+	Engine.time_scale = lerp(Engine.time_scale,1.0, 0.02)
+	print(_delta)
+	self.neutralizingWait = 0.0
 
 func stopFlashing(_delta : float) -> void:
 	self.modulate.a = lerp(self.modulate.a, 1.0, 0.03)
 	self.blinkDelay = self.BLINKDELAYINIT
+	Engine.time_scale = lerp(Engine.time_scale,1.0, 0.04)
+	
+
+func takeDamage(_damage : float) -> void:
+	super.takeDamage(_damage)
+	Engine.time_scale = 0.2

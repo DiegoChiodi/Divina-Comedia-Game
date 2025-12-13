@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://p5f8k37hf6ri"]
 
-[ext_resource type="Script" uid="uid://bugeq1tvmyiva" path="res://Scripts/level_forest_00.gd" id="1_p4nya"]
+[ext_resource type="Script" uid="uid://bugeq1tvmyiva" path="res://Scripts/Words/level_forest_00.gd" id="1_p4nya"]
 [ext_resource type="PackedScene" uid="uid://cbcvrtxuukd1p" path="res://Scene/map_forest.tscn" id="3_3juwn"]
 
 [node name="Level_florest_00" type="Node2D"]
