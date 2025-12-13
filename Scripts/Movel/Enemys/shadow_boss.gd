@@ -32,24 +32,26 @@ var dashs : int = 0
 const JUMPDURATION : float = 2.25
 const JUMPSPEEDMAX : float = 3.5
 var jumpSpeed : float = 1.0
-#Shadow
-var shadowBoss : CircleDraw
-const RADIOUSMAX : float  = 40.0
-const RADIOUSMIN : float = 5.0
-var shaRadious : float = self.RADIOUSMIN
-
-const TRANSPARENCYINIT : float = 0.35
-const TRANSPARENCYFINAL : float = 0.8
 
 #Scratch ------------
 const SCRATCHDURATION : float = 1.0
 const SCRATCHSPEED : float = 0.0
 
+#Dead -------------------
+const TRANSPARENCYINIT : float = 0.35
+const TRANSPARENCYFINAL : float = 0.8
 const TRADE_TIME : float = 2.0
 var trade_turn_wait : float = 0.0
 const DEAD_DELAY : float = 3.0
 var pos_dead : Vector2 = Vector2.ZERO
 var TREMENDOUS : float = 5.0
+#Shadow
+var shadowBoss : CircleDraw
+const RADIOUSMAX : float  = 40.0
+const RADIOUSMIN : float = 5.0
+var shaRadious : float = self.RADIOUSMIN
+var control_shadows : Node2D = Node2D.new()
+
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
 @onready var colAttack : CollisionShape2D = $are_hbAttack/CollisionShape2D
@@ -230,6 +232,8 @@ func dead () -> void:
 	super.dead()
 	self.trade_turn_wait = 0.0
 	self.pos_dead = self.position
+	self.control_shadows.position = self.global_position
+	get_parent().add_child(self.control_shadows)
 
 func dying(_delta : float) -> void:
 	if self.trade_turn_wait < self.DEAD_DELAY:
@@ -247,11 +251,11 @@ func dying(_delta : float) -> void:
 		self.position = pos_sort + self.pos_dead
 		#Sombras saindo
 		for i in range(3):
-			var shadow_new : CircleDraw= CircleDraw.new()
+			var shadow_new : CircleDraw = CircleDraw.new()
 			shadow_new.speed = Vector2(randf_range(-300,300),randf_range(-300,300))
-			shadow_new.position = self.global_position + shadow_new.speed / 4
+			shadow_new.position = shadow_new.speed / 4
 			shadow_new.radious = randf_range(4,12)
 			parent.shadows.append(shadow_new)
-			parent.add_child(shadow_new)
+			self.control_shadows.add_child(shadow_new)
 	else:
 		super.dying(_delta)

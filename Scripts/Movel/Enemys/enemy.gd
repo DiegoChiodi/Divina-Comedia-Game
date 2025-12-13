@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	self.timerLengthen.timeout.connect(self.resetTimer)
 	self.timerLengthenDuration.timeout.connect(self.lengthenEnd)
-	self.timerLengthen.wait_time = 8
+	self.timerLengthen.wait_time = 8.0
 	self.timerLengthen.start()
 
 func _physics_process(delta: float) -> void:
