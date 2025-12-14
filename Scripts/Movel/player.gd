@@ -10,13 +10,13 @@ var speedInDash : float = 1
 var velocityInDash := Vector2.ZERO
 var dashDir := Vector2.ZERO
 
-const INVLASTDASH : float = 0.1
-
 var inDash : bool = false
-var dashDelay : float = 2
+var dashDelay : float = 2.0
 var dashWait : float = self.dashDelay
 var dashPoss : bool = false # se é possivel dar dash
 var lockDash : bool = false
+
+const INVLASTDASH : float = 0.1
 #inAAttack ----------------
 var attack : bool = false
 var inAttack : bool = false
@@ -93,11 +93,12 @@ func dashFunction(_delta) -> void:
 		self.dash = false
 		self.dashWait = 0.0
 		self.dashDuringWait = 0.0
-
+		
+		var inv_dash_t : float = self.dashDuringDelay + self.INVLASTDASH
+		self.invencibleWait -= inv_dash_t
 		
 		game_manager.start_shake(1.0,1.5)
 		self.lockDash = false
-		self.invencibilityActivate(false)
 		if right_click:
 			self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
 		
@@ -112,11 +113,12 @@ func dashFunction(_delta) -> void:
 	#Dando dash
 	if self.inDash:
 		self.impulseDir = Vector2.ZERO
+		self.invencible = true
 	else:
 		self.speedInDash = 1
 		if self.dashWait < self.dashDelay and !self.dash:
 			self.dashWait += _delta
-		else:
+		elif !self.dash:#Carregou o dash
 			self.dash = true
 			self.dashWait = 0.0
 
@@ -217,4 +219,5 @@ func stopFlashing(_delta : float) -> void:
 
 func takeDamage(_damage : float) -> void:
 	super.takeDamage(_damage)
-	Engine.time_scale = 0.2
+	if !self.is_dead:
+		Engine.time_scale = 0.2

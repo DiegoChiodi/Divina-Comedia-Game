@@ -22,7 +22,7 @@ var attackSpeed : float = 1.0
 
 #Dash ----------------
 const DASHDURATION : float = 1.5
-const DASHSPEED : float = 3.0
+const DASHSPEED : float = 4.0
 
 var dashDirection : Vector2 = Vector2.ZERO
 var dash : bool = false

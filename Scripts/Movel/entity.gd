@@ -7,7 +7,7 @@ var damage : float = 20.0
 
 var invencible : bool = false
 var invencibleDelay : float = 0.4
-var invencibleWait : float = 0.0
+var invencibleWait : float = self.invencibleDelay
 
 var damageFlashDelay : float = 0.5
 const DESFREEZEFLASH : float = 0.1
@@ -94,9 +94,9 @@ func dead() -> void:
 	self.is_dead = true
 	game_manager.entityDead(self)
 
-func invencibilityActivate(_flash : bool = true) -> void:
+func invencibilityActivate(_flash : bool = true, _invencible_wait : float = 0.0) -> void:
 	self.invencible = true
-	self.invencibleWait = 0.0
+	self.invencibleWait = _invencible_wait
 	if _flash:
 		self.damageFlashWait = 0.0
 
