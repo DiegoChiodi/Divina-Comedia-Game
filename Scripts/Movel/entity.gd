@@ -18,8 +18,6 @@ var neutralizingWait : float = self.NEUTRALIZATINGDELAY
 var groupRival : String = ""
 var colRival :  = false
 var bodysCol : Array[Entity] = []
-var iniScale : Vector2 = scale
-var loseScale : float = 0.1
 
 var is_dead : bool = false
 
@@ -53,7 +51,7 @@ func _physics_process(delta: float) -> void:
 func collidingRival(_body) -> void:
 	if !self.invencible:
 		_body.AttackSucess(self)
-	self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed)
+	self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed * 5)
 
 func checkColliding() -> void:
 	#Entrei na htbox de ataque de alguém
@@ -67,7 +65,7 @@ func checkColliding() -> void:
 				self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed)
 
 func AttackSucess(_body : CharacterBody2D) -> void:
-	self.takeImpulseDir((self.position - _body.position).normalized(), self.speed)
+	self.takeImpulse((self.position - _body.position).normalized(), self.speed)
 
 func groupsAdd() -> void:
 	pass
@@ -75,14 +73,14 @@ func groupsAdd() -> void:
 func takeDamage(_damage : float) -> void:
 	self.life -= _damage
 	invencibilityActivate()
-	self.scale -= self.iniScale * self.loseScale
 	if self.life <= 0:
 		self.dead()
 
-func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 3000) -> void:
+func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 1200) -> void:
 	if !self.invencible:
 		self.takeDamage(_damage)
-	self.takeImpulseDir(_impulseDir)
+
+	self.takeImpulse(_impulseDir, _impulseSpeed)
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):

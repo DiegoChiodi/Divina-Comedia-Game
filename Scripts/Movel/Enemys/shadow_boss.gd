@@ -55,6 +55,7 @@ var control_shadows : Node2D = Node2D.new()
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
 @onready var colAttack : CollisionShape2D = $are_hbAttack/CollisionShape2D
+@onready var areAttack : Area2D = $are_hbAttack
 @onready var col : CollisionShape2D = $CollisionShape2D
 @onready var areScratch : Area2D = $are_scratch
 @onready var colScratch : CollisionShape2D = self.areScratch.get_node("col_scratch")
@@ -70,7 +71,6 @@ func _ready() -> void:
 	self.lifeMax = 500.0
 	self.life = self.lifeMax
 	self.speedFix = 140.0
-	self.loseScale = 0.0
 	
 	self.shadowBoss = CircleDraw.new()
 	add_child(self.shadowBoss)
@@ -159,28 +159,29 @@ func stateMachine(_delta : float) -> void:
 		State.REST: self.inRast()
 
 func setRest() -> void:
-	#Neutralizando o dash
-	if self.dashs > 0:
-		self.dashs -= 1
-		startDash()
-		return
-	
-	self.dash = false
-	
+	match self.lastAction: #Neutralizando o dash
+		State.DASH:
+			if self.dashs > 0:
+				startDash()
+				return
+			self.dash = false
+		State.JUMP: #Neutralizando o pulo
+			self.enemy.visible = true
+			self.shadowBoss.visible = false
+			self.colTakeD.disabled = false
+			self.colAttack.disabled = false
+			if !self.bodysCol.is_empty():
+				for body in bodysCol:
+					body.checkColliding()
+			self.col.disabled = false
+		State.SCRATCH: #Neutralizando  scratch
+			self.colScratch.disabled = true
+			self.recScratch.visible = false
 	#Neutralizando tudo
 	self.attackSpeed = 1.0 #null
 	self.impulsionable = true
 	self.actualAction = State.REST
 	self.timerRest.start()
-	#Neutralizando o pulo
-	self.enemy.visible = true
-	self.shadowBoss.visible = false
-	self.colTakeD.disabled = false
-	self.colAttack.disabled = false
-	self.col.disabled = false
-	#Neutralizando  scratch
-	self.colScratch.disabled = true
-	self.recScratch.visible = false
 
 func inJump(_delta : float) -> void:
 	if self.timerAttack.time_left < 0.6:
@@ -188,6 +189,10 @@ func inJump(_delta : float) -> void:
 		self.shaRadious = lerp(self.shaRadious, self.RADIOUSMAX, 0.02)
 	else:
 		self.shaRadious += 2 * _delta
+	
+	if self.timerAttack.time_left < 0.05:
+		self.colAttack.disabled = false
+		
 	self.shadowBoss.radious = self.shaRadious
 	self.shadowBoss.queue_redraw()
 	self.shadowBoss.modulate.a = move_toward(self.shadowBoss.modulate.a, self.TRANSPARENCYFINAL, _delta / self.timerAttack.wait_time)
@@ -210,7 +215,9 @@ func startDash() -> void:
 	self.attackSpeed = self.DASHSPEED
 	self.direction = self.dashDirection
 
-	if !self.dash:
+	if self.dash:
+		self.dashs -= 1
+	else:
 		self.dashs = randi() % self.DASHSMAXRANDOM
 		self.dash = true
 
@@ -221,7 +228,7 @@ func setDirection() -> Vector2:
 	
 	return super.setDirection()
 
-func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 3000) -> void:
+func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 1200) -> void:
 	super.takeAttack(_impulseDir, _damage, _impulseSpeed)
 	self.healfhBar.scale.y = self.life / self.lifeMax
 
@@ -235,13 +242,13 @@ func dead () -> void:
 
 func dying(_delta : float) -> void:
 	if self.trade_turn_wait < self.DEAD_DELAY:
+		self.setRest()
 		#Mudar o tempo
 		self.trade_turn_wait += _delta
 		var parent = self.get_parent()
 		parent.modulate.r = move_toward(parent.modulate.r, 1.0, _delta)
 		parent.modulate.g = move_toward(parent.modulate.g, 1.0, _delta)
 		parent.modulate.b = move_toward(parent.modulate.b, 1.0, _delta)
-		self.actualAction = State.REST
 		#Tremedeira
 		var pos_sort : Vector2 = Vector2(randf_range(-self.TREMENDOUS,self.TREMENDOUS),randf_range(-self.TREMENDOUS,self.TREMENDOUS))
 		self.position = pos_sort + self.pos_dead

@@ -10,7 +10,3 @@ func _ready() -> void:
 	
 func setDirection() -> Vector2:
 	return lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)
-
-
-func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 500) -> void:
-	super.takeImpulseDir(_impulseDir,_impulseSpeed)

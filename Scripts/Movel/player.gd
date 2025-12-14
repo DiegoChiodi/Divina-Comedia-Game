@@ -59,6 +59,8 @@ func _ready() -> void:
 	self.colHb.disabled = true
 	self.invencibleDelay = 1.5
 	self.damageFlashDelay = 1.5
+	self.speedFix = 300
+	self.speed = self.speedFix
 
 func _physics_process(_delta: float) -> void:
 	super._physics_process(_delta)
@@ -67,7 +69,6 @@ func _physics_process(_delta: float) -> void:
 func _process(_delta: float) -> void:
 	super._process(_delta)
 	self.checkAttack(_delta)
-	self.scale = self.iniScale
 	
 	if Input.is_action_just_pressed("v"):
 		self.speedFix = 1000.0
@@ -101,9 +102,7 @@ func dashFunction(_delta) -> void:
 			self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
 		
 	#Dash carregado
-	if self.dash:
-		self.sprite.modulate = Color(0,1,0) #Verde
-	else:
+	if !self.dash:
 		if self.dashDuringWait < self.dashDuringDelay:
 			self.dashDuringWait += _delta
 		else:
@@ -112,13 +111,11 @@ func dashFunction(_delta) -> void:
 	
 	#Dando dash
 	if self.inDash:
-		self.sprite.modulate = Color(1,0,0) #vermelho
 		self.impulseDir = Vector2.ZERO
 	else:
 		self.speedInDash = 1
 		if self.dashWait < self.dashDelay and !self.dash:
 			self.dashWait += _delta
-			self.sprite.modulate = Color(0.6 + self.dashWait / 2 , 0.6 + self.dashWait / 2, 0) #amarelo
 		else:
 			self.dash = true
 			self.dashWait = 0.0
@@ -133,9 +130,6 @@ func groupsAdd() -> void:
 	self.add_to_group("Player")
 	self.groupRival = "Enemy"
 
-func collidingRival(_body) -> void:
-	super.collidingRival(_body)
-
 func AttackSucess(_body : CharacterBody2D) -> void:
 	if self.inDash:
 		self.dashDuringWait -= 0.1
@@ -148,12 +142,12 @@ func AttackSucess(_body : CharacterBody2D) -> void:
 	else:
 		finalImpDir.y = impDir.y
 		
-	takeImpulseDir(finalImpDir, self.KNOCBACKSELFFEELING)
+	takeImpulse(finalImpDir, self.KNOCBACKSELFFEELING)
 
-func velocityTarget() -> Vector2:
+func velocityTarget(_delta : float) -> Vector2:
 	if self.inDash:
 		return self.velocity
-	return super.velocityTarget()
+	return super.velocityTarget(_delta)
 
 func checkAttack(_delta) -> void:
 	if self.attack and Input.is_action_just_pressed("left_click") and self.attackWait >= self.attackDelay and !self.inDash:
@@ -214,14 +208,12 @@ func damageFlashing(_delta : float) -> void:
 		self.modulate.a = lerp(self.modulate.a, 0.2, 0.1)
 	
 	Engine.time_scale = lerp(Engine.time_scale,1.0, 0.02)
-	print(_delta)
 	self.neutralizingWait = 0.0
 
 func stopFlashing(_delta : float) -> void:
 	self.modulate.a = lerp(self.modulate.a, 1.0, 0.03)
 	self.blinkDelay = self.BLINKDELAYINIT
 	Engine.time_scale = lerp(Engine.time_scale,1.0, 0.04)
-	
 
 func takeDamage(_damage : float) -> void:
 	super.takeDamage(_damage)

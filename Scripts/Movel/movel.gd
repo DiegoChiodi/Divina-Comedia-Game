@@ -9,7 +9,7 @@ var lastDirection : Vector2 = Vector2.RIGHT
 var speedFix : float = 250.0
 var speed : float = self.speedFix # Velocidade constante que guia movimento
 var workaroundSpeed : float = 200.0
-var acceleration : float = 0.4  # Fator de suavização
+var acceleration : float = 15.0  # Fator de suavização
 var rotationSpeed : float = 15
 
 var impulseDelay : float =  1.0
@@ -41,20 +41,20 @@ func _physics_process(_delta: float) -> void:
 	
 
 func move(_delta: float) -> void:
-	var target_velocity = self.velocityTarget()
+	var target_velocity = self.velocityTarget(_delta)
 	
-	self.external_velocity = self.external_velocity.lerp(Vector2.ZERO, self.acceleration)
-	self.impulseDir = self.impulseDir.lerp(Vector2.ZERO, self.acceleration)
+	self.external_velocity = self.external_velocity.lerp(Vector2.ZERO, self.acceleration * _delta)
+	self.impulseDir = self.impulseDir.lerp(Vector2.ZERO, self.acceleration * _delta)
 	
 	if self.pushWait > self.PUSHDELAY:
 		self.pushWait -= _delta
 	
 	# 1. Aceleração normal (input)
 	if target_velocity != Vector2.ZERO:
-		self.velocity = self.velocity.lerp(target_velocity, self.acceleration)
+		self.velocity = self.velocity.lerp(target_velocity, self.acceleration * _delta)
 	else:
 		# Sem input → desaceleração
-		self.velocity = velocity.lerp(Vector2.ZERO, self.acceleration)
+		self.velocity = velocity.lerp(Vector2.ZERO, self.acceleration * _delta)
 	# 2. Movimento real
 	var collision = move_and_collide(self.velocity * _delta)
 	
@@ -77,13 +77,13 @@ func move(_delta: float) -> void:
 		force = min(self.MINEXTERNALFORCE, self.velocity.length())
 		other.add_central_force(dirForce * force)
 
-func velocityTarget() -> Vector2:
-	return self.velocity.lerp((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)) + self.external_velocity, self.acceleration)
+func velocityTarget(_delta : float) -> Vector2:
+	return ((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)) + self.external_velocity)
 
 func directionTarget() -> void:
 	pass
 
-func takeImpulseDir(_impulseDir : Vector2, _impulseSpeed : float = 1500) -> void:
+func takeImpulse(_impulseDir : Vector2, _impulseSpeed : float = 1200) -> void:
 	if self.impulsionable:
 		self.impulseDir = _impulseDir
 		self.impulseSpeed = _impulseSpeed
@@ -93,7 +93,7 @@ func speedTarget() -> float:
 	return self.speedFix
 
 func rotationSet(_delta) -> void:
-	self.rotation = 0#lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)
+	self.rotation = 0 #lerp_angle(self.rotation, (self.lastDirection).angle(), rotationSpeed * _delta)
 
 func add_central_force(force: Vector2):
 	if self.pushWait >= self.PUSHDELAY:
