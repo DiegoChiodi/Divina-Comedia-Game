@@ -46,7 +46,7 @@ const DEAD_DELAY : float = 3.0
 var pos_dead : Vector2 = Vector2.ZERO
 var TREMENDOUS : float = 5.0
 #Shadow
-var shadowBoss : CircleDraw
+var bossShadow : CircleDraw
 const RADIOUSMAX : float  = 40.0
 const RADIOUSMIN : float = 5.0
 var shaRadious : float = self.RADIOUSMIN
@@ -76,13 +76,14 @@ func _ready() -> void:
 	
 	#Sprite
 	self.spr_boss_bar.texture = load("res://Assets/sprites/boss-bar.png")
+	self.spr_boss_bar.name = 'boss'
 	
 	self.lifeMax = 500.0
 	self.life = self.lifeMax
 	self.speedFix = 140.0
 	
-	self.shadowBoss = CircleDraw.new()
-	add_child(self.shadowBoss)
+	self.bossShadow = CircleDraw.new()
+	add_child(self.bossShadow)
 	self.colScratch.disabled = true
 	self.recScratch.visible = false
 	
@@ -125,14 +126,14 @@ func detectPlayer() -> void:
 	get_parent().add_child(self.cor_turn)
 	game_manager.ui.add_child(self.spr_boss_bar)
 	self.cor_turn.z_index = 10
-	self.spr_boss_bar.scale *= 5
+	self.spr_boss_bar.scale *= 2
 	
 	var viewport_rect := get_viewport().get_visible_rect()
 	var cam_zoom := game_manager.camera.zoom
 	var cam_size := viewport_rect.size * cam_zoom
 	var cam_position := game_manager.camera.global_position - cam_size / 2
 	
-	self.spr_boss_bar.position = Vector2(cam_size.x / 2, cam_size.y - cam_size.y / 15)
+	self.spr_boss_bar.position = Vector2(cam_size.x / 2, + cam_size.y / 10)
 
 func setNewState() -> void:
 	var keys = State.keys() 
@@ -160,16 +161,16 @@ func setNewState() -> void:
 			self.attackSpeed = self.JUMPSPEEDMAX
 			#Desativando visibildade e colisões
 			self.enemy.visible = false
-			self.shadowBoss.visible = true
+			self.bossShadow.visible = true
 			self.colTakeD.disabled = true
 			self.colAttack.disabled = true
 			self.col.disabled = true
 			
 			#Atualizando a sombra
 			self.shaRadious = self.RADIOUSMIN
-			self.shadowBoss.modulate.a = self.TRANSPARENCYINIT
-			self.shadowBoss.radious = self.shaRadious
-			self.shadowBoss.queue_redraw()
+			self.bossShadow.modulate.a = self.TRANSPARENCYINIT
+			self.bossShadow.radious = self.shaRadious
+			self.bossShadow.queue_redraw()
 			
 			
 		State.SCRATCH: #Start Scratch
@@ -197,7 +198,7 @@ func setRest() -> void:
 			self.dash = false
 		State.JUMP: #Neutralizando o pulo
 			self.enemy.visible = true
-			self.shadowBoss.visible = false
+			self.bossShadow.visible = false
 			self.colTakeD.disabled = false
 			self.colAttack.disabled = false
 			if !self.bodysCol.is_empty():
@@ -223,9 +224,9 @@ func inJump(_delta : float) -> void:
 	if self.timerAttack.time_left < 0.05:
 		self.colAttack.disabled = false
 		
-	self.shadowBoss.radious = self.shaRadious
-	self.shadowBoss.queue_redraw()
-	self.shadowBoss.modulate.a = move_toward(self.shadowBoss.modulate.a, self.TRANSPARENCYFINAL, _delta / self.timerAttack.wait_time)
+	self.bossShadow.radious = self.shaRadious
+	self.bossShadow.queue_redraw()
+	self.bossShadow.modulate.a = move_toward(self.bossShadow.modulate.a, self.TRANSPARENCYFINAL, _delta / self.timerAttack.wait_time)
 
 func inScratch(_delta : float) -> void:
 	self.areScratch.rotation -= _delta * 3.0

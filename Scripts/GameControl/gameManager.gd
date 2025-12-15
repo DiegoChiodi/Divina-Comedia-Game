@@ -39,6 +39,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_released("restart"):
 		restartRoom()
+		if self.ui.get_node('boss') != null:
+			self.ui.get_node('boss').queue_free()
 	
 	if Input.is_action_just_released("menu"):
 		self.is_paused = !self.is_paused
