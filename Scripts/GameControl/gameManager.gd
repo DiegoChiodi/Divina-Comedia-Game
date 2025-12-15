@@ -42,7 +42,11 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_released("menu"):
 		self.is_paused = !self.is_paused
 		get_tree().paused = self.is_paused
-
+	
+	if Input.is_action_just_pressed('n'):
+		quest_manager.questFinish()
+		print('next quest')
+		
 func init(_main : Node2D):
 	self.camera.setup(self.player, null)
 	self.camera.limit_left = 0
