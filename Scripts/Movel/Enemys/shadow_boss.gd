@@ -65,6 +65,7 @@ var cor_turn : ColorRect = ColorRect.new()
 #Sprites
 @onready var enemy : Node2D = $Grafics/Enemy
 @onready var healfhBar : ColorRect = enemy.get_node('actualHelfhbar')
+@onready var spr_boss_bar : Sprite2D = Sprite2D.new()
 #Sounds
 @onready var sfx_roar : AudioStreamPlayer2D = $Sfx_roar
 @onready var sfx_dead : AudioStreamPlayer2D = $Sfx_dead
@@ -72,6 +73,9 @@ var cor_turn : ColorRect = ColorRect.new()
 
 func _ready() -> void:
 	super._ready()
+	
+	#Sprite
+	self.spr_boss_bar.texture = load("res://Assets/sprites/boss-bar.png")
 	
 	self.lifeMax = 500.0
 	self.life = self.lifeMax
@@ -107,10 +111,12 @@ func _process(_delta: float) -> void:
 		
 		var cam_zoom := game_manager.camera.zoom
 		var cam_size := viewport_rect.size * cam_zoom
-		var cam_position := game_manager.camera.global_position - cam_size
+		var cam_position := game_manager.camera.global_position - cam_size / 2
 		
-		self.cor_turn.position = cam_position
+		self.cor_turn.position = cam_position + cam_size * 1.5
 		self.cor_turn.size = cam_size * 2
+		
+		self.spr_boss_bar.position = cam_position + Vector2(cam_size.x / 2, cam_size.y - cam_size.y / 10)
 
 func detectPlayer() -> void:
 	super.detectPlayer()
@@ -118,7 +124,9 @@ func detectPlayer() -> void:
 	self.sfx_roar.play()
 	self.cor_turn.modulate = Color.BLACK
 	get_parent().add_child(self.cor_turn)
+	get_parent().add_child(self.spr_boss_bar)
 	self.cor_turn.z_index = 10
+	self.spr_boss_bar.scale *= 5
 
 func setNewState() -> void:
 	var keys = State.keys() 
