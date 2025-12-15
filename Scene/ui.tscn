@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfov4k7wybbvm"]
+
+[ext_resource type="Script" uid="uid://hku3shj8plra" path="res://Scene/ui.gd" id="1_3i1b0"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_3i1b0")
+
+[node name="mk_boss_bar" type="Marker2D" parent="."]
+position = Vector2(768, 704)

@@ -116,17 +116,23 @@ func _process(_delta: float) -> void:
 		self.cor_turn.position = cam_position + cam_size * 1.5
 		self.cor_turn.size = cam_size * 2
 		
-		self.spr_boss_bar.position = cam_position + Vector2(cam_size.x / 2, cam_size.y - cam_size.y / 10)
-
+		
 func detectPlayer() -> void:
 	super.detectPlayer()
 	self.startDash()
 	self.sfx_roar.play()
 	self.cor_turn.modulate = Color.BLACK
 	get_parent().add_child(self.cor_turn)
-	get_parent().add_child(self.spr_boss_bar)
+	game_manager.ui.add_child(self.spr_boss_bar)
 	self.cor_turn.z_index = 10
 	self.spr_boss_bar.scale *= 5
+	
+	var viewport_rect := get_viewport().get_visible_rect()
+	var cam_zoom := game_manager.camera.zoom
+	var cam_size := viewport_rect.size * cam_zoom
+	var cam_position := game_manager.camera.global_position - cam_size / 2
+	
+	self.spr_boss_bar.position = Vector2(cam_size.x / 2, cam_size.y - cam_size.y / 15)
 
 func setNewState() -> void:
 	var keys = State.keys() 
