@@ -51,6 +51,7 @@ const RADIOUSMAX : float  = 40.0
 const RADIOUSMIN : float = 5.0
 var shaRadious : float = self.RADIOUSMIN
 var control_shadows : Node2D = Node2D.new()
+var cor_turn : ColorRect = ColorRect.new()
 
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
@@ -97,16 +98,27 @@ func _process(_delta: float) -> void:
 	if self.seeingPlayer:
 		if self.trade_turn_wait < self.TRADE_TIME:
 			trade_turn_wait += _delta
-			var parent = self.get_parent()
-			parent.modulate.r = move_toward(parent.modulate.r, 0.2, _delta)
-			parent.modulate.g = move_toward(parent.modulate.g, 0.2, _delta)
-			parent.modulate.b = move_toward(parent.modulate.b, 0.2, _delta)
-	
+			
+			self.cor_turn.modulate.a = move_toward(self.cor_turn.modulate.a, 0.5, _delta)
+			#self.cor_turn.modulate.g = move_toward(self.cor_turn.modulate.g, 0.2, _delta)
+			#self.cor_turn.modulate.b = move_toward(self.cor_turn.modulate.b, 0.2, _delta)
+		
+		var viewport_rect := get_viewport().get_visible_rect()
+		
+		var cam_zoom := game_manager.camera.zoom
+		var cam_size := viewport_rect.size * cam_zoom
+		var cam_position := game_manager.camera.global_position - cam_size
+		
+		self.cor_turn.position = cam_position
+		self.cor_turn.size = cam_size * 2
 
 func detectPlayer() -> void:
 	super.detectPlayer()
 	self.startDash()
 	self.sfx_roar.play()
+	self.cor_turn.modulate = Color.BLACK
+	get_parent().add_child(self.cor_turn)
+	self.cor_turn.z_index = 10
 
 func setNewState() -> void:
 	var keys = State.keys() 
@@ -250,10 +262,8 @@ func dying(_delta : float) -> void:
 		self.setRest()
 		#Mudar o tempo
 		self.trade_turn_wait += _delta
-		var parent = self.get_parent()
-		parent.modulate.r = move_toward(parent.modulate.r, 1.0, _delta)
-		parent.modulate.g = move_toward(parent.modulate.g, 1.0, _delta)
-		parent.modulate.b = move_toward(parent.modulate.b, 1.0, _delta)
+		var parent := self.get_parent()
+		self.cor_turn.modulate.a = move_toward(self.cor_turn.modulate.a, 0.0, _delta)
 		#Tremedeira
 		var pos_sort : Vector2 = Vector2(randf_range(-self.TREMENDOUS,self.TREMENDOUS),randf_range(-self.TREMENDOUS,self.TREMENDOUS))
 		self.position = pos_sort + self.pos_dead

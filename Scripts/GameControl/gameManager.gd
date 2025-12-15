@@ -26,7 +26,6 @@ var camera : Camera = Camera.new()
 var player : Player = preload("res://Scene/player.tscn").instantiate()
 var roomContainer : RoomContainer = RoomContainer.new()
 var is_paused : bool = false
-
 #Scenes
 var debugScene : String = "res://Scene/debugMap.tscn"
 
@@ -44,14 +43,14 @@ func _process(_delta: float) -> void:
 		self.is_paused = !self.is_paused
 		get_tree().paused = self.is_paused
 
-func init(main : Node2D):
+func init(_main : Node2D):
 	self.camera.setup(self.player, null)
 	self.camera.limit_left = 0
 	self.camera.limit_top = 0
-	main.add_child(self.camera)
-	main.add_child(self.player)
+	_main.add_child(self.camera)
+	_main.add_child(self.player)
 	self.roomContainer.load_room(self.level_paths[LevelID.FOREST_00])
-	main.add_child(roomContainer)
+	_main.add_child(roomContainer)
 
 func center_window(new_size: Vector2i):
 	# define o tamanho da janela
