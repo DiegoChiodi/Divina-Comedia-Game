@@ -50,7 +50,7 @@ var blinkWait : float = 0.0
 @onready var attDown : Marker2D = $Mark_down
 #Sounds
 @onready var sound_attack_1 : AudioStreamPlayer2D = $SndAttack1
-@onready var sound_attack_2 : AudioStreamPlayer2D = $SndAttack2
+@onready var sound_dash : AudioStreamPlayer2D = $SndDash
 
 func _ready() -> void:
 	super._ready()
@@ -60,7 +60,6 @@ func _ready() -> void:
 	self.invencibleDelay = 1.5
 	self.damageFlashDelay = 1.5
 	self.speedFix = 300
-	self.speed = self.speedFix
 
 func _physics_process(_delta: float) -> void:
 	super._physics_process(_delta)
@@ -71,10 +70,10 @@ func _process(_delta: float) -> void:
 	self.checkAttack(_delta)
 	
 	if Input.is_action_just_pressed("v"):
-		self.speedFix = 1000.0
+		self.speedFix = 500.0
 		self.damage = 5000.0
 	if Input.is_action_just_pressed("b"):
-		self.speedFix = 250.0
+		self.speedFix = 300.0
 		self.damage = 20.0
 		self.life = self.lifeMax
 
@@ -101,7 +100,8 @@ func dashFunction(_delta) -> void:
 		self.lockDash = false
 		if right_click:
 			self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
-		
+		self.sound_dash.play()
+	
 	#Dash carregado
 	if !self.dash:
 		if self.dashDuringWait < self.dashDuringDelay:
@@ -170,10 +170,8 @@ func checkAttack(_delta) -> void:
 		self.colHb.disabled = !self.inAttack
 		self.attackDuringWait = 0.0
 		self.attackWait = 0.0
-		if randi() % 2 == 0:
-			self.sound_attack_1.play()
-		else:
-			self.sound_attack_2.play()
+		self.sound_attack_1.play()
+
 	#Está atacando
 	if self.inAttack:
 		if self.attackDuringWait < self.attackDuringDelay:

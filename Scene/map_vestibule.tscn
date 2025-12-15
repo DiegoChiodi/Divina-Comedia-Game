@@ -194,7 +194,7 @@ scale = Vector2(3, 3)
 position = Vector2(1792, 1024)
 
 [node name="marker_from_forest" type="Marker2D" parent="."]
-position = Vector2(96, 320)
+position = Vector2(192, 320)
 
 [node name="EnterForest" type="Area2D" parent="."]
 position = Vector2(0, 320)

@@ -64,6 +64,10 @@ var control_shadows : Node2D = Node2D.new()
 #Sprites
 @onready var enemy : Node2D = $Grafics/Enemy
 @onready var healfhBar : ColorRect = enemy.get_node('actualHelfhbar')
+#Sounds
+@onready var sfx_roar : AudioStreamPlayer2D = $Sfx_roar
+@onready var sfx_dead : AudioStreamPlayer2D = $Sfx_dead
+@onready var sfx_scratch : AudioStreamPlayer2D = $Sfx_scratch
 
 func _ready() -> void:
 	super._ready()
@@ -100,9 +104,9 @@ func _process(_delta: float) -> void:
 	
 
 func detectPlayer() -> void:
-	pass
 	super.detectPlayer()
 	self.startDash()
+	self.sfx_roar.play()
 
 func setNewState() -> void:
 	var keys = State.keys() 
@@ -149,7 +153,7 @@ func setNewState() -> void:
 				self.areScratch.rotation =  (game_manager.player.position - self.position).angle() + 1.5
 			self.colScratch.disabled = false
 			self.recScratch.visible = true
-			
+			self.sfx_scratch.play()
 
 func stateMachine(_delta : float) -> void:
 	match self.actualAction:
@@ -239,6 +243,7 @@ func dead () -> void:
 	self.setRest()
 	self.control_shadows.position = self.global_position
 	get_parent().add_child(self.control_shadows)
+	self.sfx_dead.play()
 
 func dying(_delta : float) -> void:
 	if self.trade_turn_wait < self.DEAD_DELAY:
