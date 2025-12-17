@@ -4,6 +4,3 @@
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_3i1b0")
-
-[node name="mk_boss_bar" type="Marker2D" parent="."]
-position = Vector2(768, 704)

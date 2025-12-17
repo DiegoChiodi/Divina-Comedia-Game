@@ -76,6 +76,7 @@ func move(_delta: float) -> void:
 			
 		force = min(self.MINEXTERNALFORCE, self.velocity.length())
 		other.add_central_force(dirForce * force)
+	self.farlands_limit()
 
 func velocityTarget(_delta : float) -> Vector2:
 	return ((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)) + self.external_velocity)
@@ -99,3 +100,6 @@ func add_central_force(_force: Vector2):
 	if self.pushWait >= self.PUSHDELAY:
 		self.external_velocity += _force
 		self.pushWait = 0.0
+
+func farlands_limit() -> void:
+	self.position = self.position.clamp(Vector2.ZERO, global.roomLimit)

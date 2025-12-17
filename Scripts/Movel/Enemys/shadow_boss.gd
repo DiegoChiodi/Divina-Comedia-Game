@@ -10,7 +10,12 @@ enum State  {
 
 var actualAction : State 
 var lastAction : State
-
+#Helfh Bar
+var healfh_bar_fill : ColorRect = ColorRect.new()
+var healfh_bar_lost : ColorRect = ColorRect.new()
+var life_max_px : float
+var bar_speed : Vector2 = Vector2(30000,-20000)
+var rotation_speed : float = 0.9
 #Machine stats --------------------
 #Rest ---------------
 var timerRest := Timer.new() 
@@ -63,8 +68,7 @@ var cor_turn : ColorRect = ColorRect.new()
 @onready var recScratch : ColorRect = self.areScratch.get_node("rec_scratch")
 
 #Sprites
-@onready var enemy : Node2D = $Grafics/Enemy
-@onready var healfhBar : ColorRect = enemy.get_node('actualHelfhbar')
+@onready var nod_enemy : Node2D = $Grafics/Enemy
 @onready var spr_boss_bar : Sprite2D = Sprite2D.new()
 #Sounds
 @onready var sfx_roar : AudioStreamPlayer2D = $Sfx_roar
@@ -84,9 +88,8 @@ func _ready() -> void:
 	
 	self.bossShadow = CircleDraw.new()
 	add_child(self.bossShadow)
-	self.colScratch.disabled = true
-	self.recScratch.visible = false
 	
+	#Timers
 	self.timerAttack.timeout.connect(self.setRest)
 	self.timerAttack.one_shot = true
 	self.timerAttack.wait_time = self.DASHDURATION
@@ -99,14 +102,15 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
+	
+	if self.healfh_bar_lost != null:
+		self.healfh_bar_lost.size.x = lerp(self.healfh_bar_lost.size.x, self.healfh_bar_fill.size.x, 0.1)
+	
 	self.stateMachine(_delta)
 	if self.seeingPlayer:
 		if self.trade_turn_wait < self.TRADE_TIME:
-			trade_turn_wait += _delta
-			
+			self.trade_turn_wait += _delta
 			self.cor_turn.modulate.a = move_toward(self.cor_turn.modulate.a, 0.5, _delta)
-			#self.cor_turn.modulate.g = move_toward(self.cor_turn.modulate.g, 0.2, _delta)
-			#self.cor_turn.modulate.b = move_toward(self.cor_turn.modulate.b, 0.2, _delta)
 		
 		var viewport_rect := get_viewport().get_visible_rect()
 		
@@ -116,25 +120,45 @@ func _process(_delta: float) -> void:
 		
 		self.cor_turn.position = cam_position + cam_size * 1.5
 		self.cor_turn.size = cam_size * 2
-		
-		
+
 func detectPlayer() -> void:
+	#Insta attack
 	super.detectPlayer()
 	self.startDash()
 	self.sfx_roar.play()
 	self.cor_turn.modulate = Color.BLACK
 	get_parent().add_child(self.cor_turn)
-	game_manager.ui.add_child(self.spr_boss_bar)
-	self.cor_turn.z_index = 10
-	self.spr_boss_bar.scale *= 2
 	
+	#Boss bar
+	#Get camera for positioned the boss bar
 	var viewport_rect := get_viewport().get_visible_rect()
 	var cam_zoom := game_manager.camera.zoom
 	var cam_size := viewport_rect.size * cam_zoom
 	var cam_position := game_manager.camera.global_position - cam_size / 2
+	self.cor_turn.z_index = 1
 	
-	self.spr_boss_bar.position = Vector2(cam_size.x / 2, + cam_size.y / 10)
-
+	const BOSS_BAR_SCALE : float = 1.5
+	var boss_bar_position : Vector2 = Vector2(cam_size.x / 2, + cam_size.y / 10)
+	
+	self.spr_boss_bar.position = boss_bar_position
+	self.spr_boss_bar.scale *= 1.5
+	
+	const BORDER_COMP = 12 * BOSS_BAR_SCALE
+	var life_max_px_v : Vector2 = (self.spr_boss_bar.texture.get_size() - Vector2(BORDER_COMP / 2, 0)) * BOSS_BAR_SCALE
+	self.life_max_px = life_max_px_v.x
+	
+	self.healfh_bar_fill.size = life_max_px_v
+	self.healfh_bar_fill.position = (boss_bar_position - self.healfh_bar_fill.size / 2)
+	self.healfh_bar_fill.modulate = Color.RED
+	
+	self.healfh_bar_lost.size = life_max_px_v
+	self.healfh_bar_lost.position = (boss_bar_position - self.healfh_bar_lost.size / 2)
+	self.healfh_bar_lost.modulate = Color.WHITE_SMOKE
+	
+	game_manager.ui.add_child(self.healfh_bar_lost)
+	game_manager.ui.add_child(self.healfh_bar_fill)
+	game_manager.ui.add_child(self.spr_boss_bar)
+	
 func setNewState() -> void:
 	var keys = State.keys() 
 	var playerExi : bool = game_manager.player != null
@@ -160,7 +184,7 @@ func setNewState() -> void:
 			
 			self.attackSpeed = self.JUMPSPEEDMAX
 			#Desativando visibildade e colisões
-			self.enemy.visible = false
+			self.nod_enemy.visible = false
 			self.bossShadow.visible = true
 			self.colTakeD.disabled = true
 			self.colAttack.disabled = true
@@ -197,7 +221,7 @@ func setRest() -> void:
 				return
 			self.dash = false
 		State.JUMP: #Neutralizando o pulo
-			self.enemy.visible = true
+			self.nod_enemy.visible = true
 			self.bossShadow.visible = false
 			self.colTakeD.disabled = false
 			self.colAttack.disabled = false
@@ -216,7 +240,7 @@ func setRest() -> void:
 
 func inJump(_delta : float) -> void:
 	if self.timerAttack.time_left < 0.6:
-		self.attackSpeed = lerp(self.attackSpeed, 1.0, 0.98)
+		self.attackSpeed = lerp(self.attackSpeed, 1.2, 0.98)
 		self.shaRadious = lerp(self.shaRadious, self.RADIOUSMAX, 0.02)
 	else:
 		self.shaRadious += 2 * _delta
@@ -261,7 +285,10 @@ func setDirection() -> Vector2:
 
 func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 1200) -> void:
 	super.takeAttack(_impulseDir, _damage, _impulseSpeed)
-	self.healfhBar.scale.y = self.life / self.lifeMax
+	var percent_life : float = self.life / self.lifeMax
+	if self.healfh_bar_fill != null:
+		self.healfh_bar_fill.size.x = self.life_max_px * percent_life
+	
 
 func dead () -> void:
 	super.dead()
@@ -271,6 +298,8 @@ func dead () -> void:
 	self.control_shadows.position = self.global_position
 	get_parent().add_child(self.control_shadows)
 	self.sfx_dead.play()
+	self.healfh_bar_fill.queue_free()
+	self.healfh_bar_lost.queue_free()
 
 func dying(_delta : float) -> void:
 	if self.trade_turn_wait < self.DEAD_DELAY:
@@ -290,5 +319,13 @@ func dying(_delta : float) -> void:
 			shadow_new.radious = randf_range(4,12)
 			parent.shadows.append(shadow_new)
 			self.control_shadows.add_child(shadow_new)
+		
+		self.bar_speed += get_gravity()
+		self.rotation_speed += _delta;
+		self.spr_boss_bar.position += bar_speed * _delta / 100
+		self.spr_boss_bar.rotation += rotation_speed / 500
+		self.spr_boss_bar.scale = self.spr_boss_bar.scale.lerp(Vector2.ZERO,0.004)
+		
 	else:
 		super.dying(_delta)
+		self.spr_boss_bar.queue_free()

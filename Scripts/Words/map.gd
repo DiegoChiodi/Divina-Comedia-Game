@@ -3,7 +3,7 @@ class_name Map
 
 var id : int
 
-var roomSize : Marker2D
+var roomSize : Vector2
 var playerSpawn : Marker2D
 
 func _ready() -> void:
@@ -11,5 +11,6 @@ func _ready() -> void:
 
 func setRoomSize() -> void:
 	if has_node('roomSize'):
-		roomSize = $roomSize
-		game_manager.camera.setLimit(roomSize.global_position)
+		roomSize = $roomSize.global_position
+		game_manager.camera.setLimit(roomSize)
+		global.roomLimit = roomSize
