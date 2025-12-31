@@ -1,14 +1,83 @@
-[gd_scene load_steps=7 format=3 uid="uid://d35d02vpcgrpg"]
+[gd_scene load_steps=14 format=3 uid="uid://d35d02vpcgrpg"]
 
 [ext_resource type="Script" uid="uid://m2exhdhgmqhi" path="res://Scripts/Movel/player.gd" id="1_vtayn"]
 [ext_resource type="AudioStream" uid="uid://bqt5r8lnfvcjn" path="res://Assets/audio/sfx/swinging-fist-swing.wav" id="2_xa75v"]
 [ext_resource type="AudioStream" uid="uid://dqu4teu0agu43" path="res://Assets/audio/sfx/imperative-resolute-swing-of-melee-weapons.wav" id="3_58ae2"]
+[ext_resource type="Texture2D" uid="uid://bmku3v6uqsarf" path="res://Assets/sprites/dante-player.png" id="4_58ae2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58ae2"]
+atlas = ExtResource("4_58ae2")
+region = Rect2(0, 0, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivevv"]
+atlas = ExtResource("4_58ae2")
+region = Rect2(18, 0, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6jsd"]
+atlas = ExtResource("4_58ae2")
+region = Rect2(0, 20, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6qlh"]
+atlas = ExtResource("4_58ae2")
+region = Rect2(18, 20, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sw5t"]
+atlas = ExtResource("4_58ae2")
+region = Rect2(36, 20, 18, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xa75v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58ae2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivevv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run_down",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6jsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6qlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sw5t")
+}],
+"loop": true,
+"name": &"run_x",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8w33"]
-size = Vector2(32, 32)
+size = Vector2(32, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kelma"]
-size = Vector2(32, 32)
+size = Vector2(32, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xa75v"]
 size = Vector2(0, 0)
@@ -16,18 +85,20 @@ size = Vector2(0, 0)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_vtayn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_y8w33")
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_xa75v")
+animation = &"run_x"
+frame_progress = 0.864056
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("RectangleShape2D_y8w33")
 
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
+position = Vector2(0, 14)
 shape = SubResource("RectangleShape2D_kelma")
 
 [node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
@@ -57,6 +128,7 @@ position = Vector2(16, -32)
 position = Vector2(16, 64)
 
 [node name="attack" type="ColorRect" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(1, 1, 1, 0.184314)

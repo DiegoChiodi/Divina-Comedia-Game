@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	self.rotationSet(delta)
 
 	if self.direction != Vector2.ZERO:
-		self.lastDirection = direction
+		self.lastDirection = self.direction
 
 	if self.impulseWait <= self.impulseDelay:
 			self.impulseWait += delta

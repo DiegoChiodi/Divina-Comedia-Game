@@ -1,4 +1,4 @@
-extends Entity
+extends AnimationEntity
 class_name Player
 
 #Dash ---------------
@@ -39,7 +39,6 @@ const BLINKDELAYINIT : float = 0.25
 var blinkDelay : float = self.BLINKDELAYINIT
 var blinkWait : float = 0.0
 
-@onready var sprite : ColorRect = $ColorRect
 @onready var hbTake : Area2D = $are_hbTakeDamage
 @onready var hbAttack : Area2D = $are_hbAttack
 @onready var colHb : CollisionShape2D = $are_hbAttack/CollisionShape2D

@@ -325,7 +325,6 @@ func dying(_delta : float) -> void:
 		self.spr_boss_bar.position += bar_speed * _delta / 100
 		self.spr_boss_bar.rotation += rotation_speed / 500
 		self.spr_boss_bar.scale = self.spr_boss_bar.scale.lerp(Vector2.ZERO,0.004)
-		
 	else:
 		super.dying(_delta)
 		self.spr_boss_bar.queue_free()

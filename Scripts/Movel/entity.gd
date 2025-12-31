@@ -2,7 +2,7 @@ extends Movel
 class_name Entity
 
 var lifeMax : float = 100.0
-var life : float = lifeMax
+var life : float = self.lifeMax
 var damage : float = 20.0
 
 var invencible : bool = false
