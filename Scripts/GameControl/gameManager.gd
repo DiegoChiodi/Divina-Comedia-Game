@@ -26,7 +26,7 @@ var camera : Camera = Camera.new()
 var player : Player = preload("res://Scene/player.tscn").instantiate()
 var roomContainer : RoomContainer = RoomContainer.new()
 var is_paused : bool = false
-var ui : CanvasLayer = preload("res://Scene/ui.tscn").instantiate()
+var ui : UI = preload("res://Scene/ui.tscn").instantiate()
 #Scenes
 var debugScene : String = "res://Scene/debugMap.tscn"
 
@@ -59,10 +59,10 @@ func init(_main : Node2D):
 	self.roomContainer.load_room(self.level_paths[LevelID.FOREST_00])
 	_main.add_child(roomContainer)
 	_main.add_child(self.ui)
-	
 
 func center_window(new_size: Vector2i):
 	# define o tamanho da janela
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	DisplayServer.window_set_size(new_size)
 	# pega o tamanho da tela
 	var screen_size = DisplayServer.screen_get_size()

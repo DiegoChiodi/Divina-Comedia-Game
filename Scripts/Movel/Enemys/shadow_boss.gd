@@ -56,7 +56,7 @@ const RADIOUSMAX : float  = 40.0
 const RADIOUSMIN : float = 5.0
 var shaRadious : float = self.RADIOUSMIN
 var control_shadows : Node2D = Node2D.new()
-var cor_turn : ColorRect = ColorRect.new()
+var cor_turn : ColorRect = game_manager.ui.clr_shadow
 
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
@@ -113,21 +113,12 @@ func _process(_delta: float) -> void:
 			self.cor_turn.modulate.a = move_toward(self.cor_turn.modulate.a, 0.5, _delta)
 		
 		var viewport_rect := get_viewport().get_visible_rect()
-		
-		var cam_zoom := game_manager.camera.zoom
-		var cam_size := viewport_rect.size * cam_zoom
-		var cam_position := game_manager.camera.global_position - cam_size / 2
-		
-		self.cor_turn.position = cam_position + cam_size * 1.5
-		self.cor_turn.size = cam_size * 2
 
 func detectPlayer() -> void:
 	#Insta attack
 	super.detectPlayer()
 	self.startDash()
 	self.sfx_roar.play()
-	self.cor_turn.modulate = Color.BLACK
-	get_parent().add_child(self.cor_turn)
 	
 	#Boss bar
 	#Get camera for positioned the boss bar
@@ -135,7 +126,6 @@ func detectPlayer() -> void:
 	var cam_zoom := game_manager.camera.zoom
 	var cam_size := viewport_rect.size * cam_zoom
 	var cam_position := game_manager.camera.global_position - cam_size / 2
-	self.cor_turn.z_index = 1
 	
 	const BOSS_BAR_SCALE : float = 1.5
 	var boss_bar_position : Vector2 = Vector2(cam_size.x / 2, + cam_size.y / 10)

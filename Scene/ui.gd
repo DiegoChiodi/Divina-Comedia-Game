@@ -1,11 +1,7 @@
 extends CanvasLayer
 class_name UI
 
-# Called when the node enters the scene tree for the first time.
+@onready var clr_shadow : ColorRect = $col_shadow
+
 func _ready() -> void:
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
 	pass

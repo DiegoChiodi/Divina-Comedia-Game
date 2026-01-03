@@ -125,7 +125,11 @@ func speedTarget() -> float:
 	return super.speedTarget() * self.speedInDash
 
 func directionTarget() -> void:
-	self.direction = Input.get_vector("left", "right", "up", "down")
+	var direction_target : Vector2 = Input.get_vector("left", "right", "up", "down")
+	if direction_target == Vector2.ZERO:
+		self.direction = self.direction.lerp(Vector2.ZERO,0.2)
+	else:
+		self.direction = direction_target
 
 func groupsAdd() -> void:
 	self.add_to_group("Player")
