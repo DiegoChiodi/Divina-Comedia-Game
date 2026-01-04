@@ -82,6 +82,11 @@ func _ready() -> void:
 	self.spr_boss_bar.texture = load("res://Assets/sprites/boss-bar.png")
 	self.spr_boss_bar.name = 'boss'
 	
+	self.healfh_bar_fill.modulate = Color.RED
+	self.healfh_bar_fill.name = 'boss_bar_fill'
+	self.healfh_bar_lost.modulate = Color.WHITE_SMOKE
+	self.healfh_bar_lost.name = 'boss_bar_lost'
+	
 	self.lifeMax = 500.0
 	self.life = self.lifeMax
 	self.speedFix = 140.0
@@ -105,12 +110,11 @@ func _process(_delta: float) -> void:
 	
 	if self.healfh_bar_lost != null:
 		self.healfh_bar_lost.size.x = lerp(self.healfh_bar_lost.size.x, self.healfh_bar_fill.size.x, 0.1)
-	
 	self.stateMachine(_delta)
 	if self.seeingPlayer:
 		if self.trade_turn_wait < self.TRADE_TIME:
 			self.trade_turn_wait += _delta
-			self.cor_turn.modulate.a = move_toward(self.cor_turn.modulate.a, 0.5, _delta)
+			self.cor_turn.color.a = move_toward(self.cor_turn.color.a, 0.5, _delta)
 
 func detectPlayer() -> void:
 	#Insta attack
@@ -123,7 +127,6 @@ func detectPlayer() -> void:
 	var viewport_rect := get_viewport().get_visible_rect()
 	var cam_zoom := game_manager.camera.zoom
 	var cam_size := viewport_rect.size * cam_zoom
-	var cam_position := game_manager.camera.global_position - cam_size / 2
 	
 	const BOSS_BAR_SCALE : float = 1.5
 	var boss_bar_position : Vector2 = Vector2(cam_size.x / 2, + cam_size.y / 10)
@@ -132,16 +135,16 @@ func detectPlayer() -> void:
 	self.spr_boss_bar.scale *= 1.5
 	
 	const BORDER_COMP = 12 * BOSS_BAR_SCALE
-	var life_max_px_v : Vector2 = (self.spr_boss_bar.texture.get_size() - Vector2(BORDER_COMP / 2, 0)) * BOSS_BAR_SCALE
+	var life_max_px_v : Vector2 = (self.spr_boss_bar.texture.get_size() - Vector2(BORDER_COMP / 2 + 4, 0)) * BOSS_BAR_SCALE
 	self.life_max_px = life_max_px_v.x
 	
 	self.healfh_bar_fill.size = life_max_px_v
 	self.healfh_bar_fill.position = (boss_bar_position - self.healfh_bar_fill.size / 2)
-	self.healfh_bar_fill.modulate = Color.RED
+
 	
 	self.healfh_bar_lost.size = life_max_px_v
 	self.healfh_bar_lost.position = (boss_bar_position - self.healfh_bar_lost.size / 2)
-	self.healfh_bar_lost.modulate = Color.WHITE_SMOKE
+	
 	
 	game_manager.ui.add_child(self.healfh_bar_lost)
 	game_manager.ui.add_child(self.healfh_bar_fill)
@@ -295,7 +298,7 @@ func dying(_delta : float) -> void:
 		#Mudar o tempo
 		self.trade_turn_wait += _delta
 		var parent := self.get_parent()
-		self.cor_turn.modulate.a = move_toward(self.cor_turn.modulate.a, 0.0, _delta)
+		self.cor_turn.color.a = move_toward(self.cor_turn.color.a, 0.0, _delta)
 		#Tremedeira
 		var pos_sort : Vector2 = Vector2(randf_range(-self.TREMENDOUS,self.TREMENDOUS),randf_range(-self.TREMENDOUS,self.TREMENDOUS))
 		self.position = pos_sort + self.pos_dead
