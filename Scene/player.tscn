@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d35d02vpcgrpg"]
+[gd_scene load_steps=34 format=3 uid="uid://d35d02vpcgrpg"]
 
 [ext_resource type="Script" uid="uid://m2exhdhgmqhi" path="res://Scripts/Movel/player.gd" id="1_vtayn"]
 [ext_resource type="AudioStream" uid="uid://bqt5r8lnfvcjn" path="res://Assets/audio/sfx/swinging-fist-swing.wav" id="2_xa75v"]
@@ -13,6 +13,10 @@ size = Vector2(32, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xa75v"]
 size = Vector2(0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xvy4"]
+atlas = ExtResource("4_58ae2")
+region = Rect2(0, 120, 18, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1sypm"]
 atlas = ExtResource("4_58ae2")
@@ -41,6 +45,10 @@ region = Rect2(18, 60, 18, 20)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lgjog"]
 atlas = ExtResource("4_58ae2")
 region = Rect2(36, 60, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jg3e"]
+atlas = ExtResource("4_58ae2")
+region = Rect2(54, 60, 18, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lhccw"]
 atlas = ExtResource("4_58ae2")
@@ -110,6 +118,14 @@ region = Rect2(126, 20, 18, 20)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_6xvy4")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_1sypm")
 }],
 "loop": true,
@@ -144,6 +160,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lgjog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jg3e")
 }],
 "loop": true,
 "name": &"run_down",
@@ -263,7 +282,7 @@ volume_db = 4.0
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xa75v")
-animation = &"run_up"
+animation = &"dash"
 
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]

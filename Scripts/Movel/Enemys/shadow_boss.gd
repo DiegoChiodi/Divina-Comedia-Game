@@ -111,8 +111,6 @@ func _process(_delta: float) -> void:
 		if self.trade_turn_wait < self.TRADE_TIME:
 			self.trade_turn_wait += _delta
 			self.cor_turn.modulate.a = move_toward(self.cor_turn.modulate.a, 0.5, _delta)
-		
-		var viewport_rect := get_viewport().get_visible_rect()
 
 func detectPlayer() -> void:
 	#Insta attack

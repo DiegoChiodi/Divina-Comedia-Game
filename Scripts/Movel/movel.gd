@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	self.move(_delta)
 	self.pushWait += _delta
-	
+	global_position = global_position.round()
 
 func move(_delta: float) -> void:
 	var target_velocity = self.velocityTarget(_delta)

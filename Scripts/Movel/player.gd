@@ -11,10 +11,12 @@ var velocityInDash := Vector2.ZERO
 var dashDir := Vector2.ZERO
 
 var inDash : bool = false
-var dashDelay : float = 2.0
-var dashWait : float = self.dashDelay
+const DASH_DELAY : float = 2.0
+var dashWait : float = self.DASH_DELAY
 var dashPoss : bool = false # se é possivel dar dash
-var lockDash : bool = false
+
+const DASH_SCALE_FEEL : float = 2.0
+const DASH_SHRINK_DELAY : float = 0.1
 
 const INVLASTDASH : float = 0.1
 #inAAttack ----------------
@@ -39,6 +41,9 @@ const BLINKDELAYINIT : float = 0.25
 var blinkDelay : float = self.BLINKDELAYINIT
 var blinkWait : float = 0.0
 
+#Sprite
+var initial_scale : Vector2
+
 @onready var hbTake : Area2D = $are_hbTakeDamage
 @onready var hbAttack : Area2D = $are_hbAttack
 @onready var colHb : CollisionShape2D = $are_hbAttack/CollisionShape2D
@@ -59,6 +64,7 @@ func _ready() -> void:
 	self.invencibleDelay = 1.5
 	self.damageFlashDelay = 1.5
 	self.speedFix = 300
+	self.initial_scale = self.sprite.scale
 
 func _physics_process(_delta: float) -> void:
 	super._physics_process(_delta)
@@ -68,6 +74,9 @@ func _process(_delta: float) -> void:
 	super._process(_delta)
 	self.checkAttack(_delta)
 	
+	if self.inDash:
+		self.sprite.play('dash')
+		
 	if Input.is_action_just_pressed("v"):
 		self.speedFix = 500.0
 		self.damage = 5000.0
@@ -75,6 +84,7 @@ func _process(_delta: float) -> void:
 		self.speedFix = 300.0
 		self.damage = 20.0
 		self.life = self.lifeMax
+	
 
 func dashFunction(_delta) -> void:
 	var right_click : bool = Input.is_action_just_pressed('right_click')
@@ -95,11 +105,15 @@ func dashFunction(_delta) -> void:
 		var inv_dash_t : float = self.dashDuringDelay + self.INVLASTDASH
 		self.invencibleWait -= inv_dash_t
 		
+		#Animation
 		game_manager.start_shake(1.0,1.5)
-		self.lockDash = false
+		self.sprite.scale.y = DASH_SCALE_FEEL * initial_scale.y
+		
 		if right_click:
 			self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
 		self.sound_dash.play()
+		
+		#
 	
 	#Dash carregado
 	if !self.dash:
@@ -113,12 +127,17 @@ func dashFunction(_delta) -> void:
 	if self.inDash:
 		self.impulseDir = Vector2.ZERO
 		self.invencible = true
+		if dashWait < self.DASH_SHRINK_DELAY:
+			self.sprite.scale.y = lerp(self.sprite.scale.y,1.0 * self.initial_scale.y, 0.3)
+			
 	else:
+		self.sprite.scale.y = self.initial_scale.y
 		self.speedInDash = 1
-		if self.dashWait < self.dashDelay and !self.dash:
+		if self.dashWait < self.DASH_DELAY and !self.dash:
 			self.dashWait += _delta
 		elif !self.dash:#Carregou o dash
 			self.dash = true
+			self.sprite.scale.y = self.initial_scale.y
 			self.dashWait = 0.0
 
 func speedTarget() -> float:

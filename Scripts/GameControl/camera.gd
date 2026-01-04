@@ -45,6 +45,7 @@ func _process(delta):
 	
 	#self.zoom = lerp(self.zoom,self.zoomTarget,self.zoomLissing)
 
+
 func setup(_target, _posComp) -> void:
 	setTarget(_target, _posComp)
 
