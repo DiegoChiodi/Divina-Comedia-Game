@@ -241,3 +241,15 @@ func takeDamage(_damage : float) -> void:
 	super.takeDamage(_damage)
 	if !self.is_dead:
 		Engine.time_scale = 0.2
+
+func run_x() -> void:
+	if direction.x < 0:
+		self.sprite.play("run_left")
+	else:
+		super.run_x()
+
+func idle_x() -> void:
+	if lastDirection.x < 0:
+		self.sprite.play("idle_left")
+	else:
+		super.idle_x()

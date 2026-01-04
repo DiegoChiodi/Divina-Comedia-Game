@@ -2,7 +2,7 @@ extends Entity
 class_name AnimationEntity
 
 var sprite : AnimatedSprite2D
-var lastDirectionX : float = 0
+var lastDirectionX : float = 0.0
 
 func _ready() -> void:
 	super._ready()
