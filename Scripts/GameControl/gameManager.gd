@@ -46,6 +46,8 @@ func _process(_delta: float) -> void:
 			self.ui.get_node('boss_bar_fill').queue_free()
 			self.ui.get_node('boss_bar_lost').queue_free()
 		
+		ui.clr_shadow.color.a = 0.0
+		
 		
 	
 	if Input.is_action_just_released("menu"):

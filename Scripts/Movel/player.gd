@@ -112,8 +112,6 @@ func dashFunction(_delta) -> void:
 		if right_click:
 			self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
 		self.sound_dash.play()
-		
-		#
 	
 	#Dash carregado
 	if !self.dash:
@@ -129,7 +127,6 @@ func dashFunction(_delta) -> void:
 		self.invencible = true
 		if dashWait < self.DASH_SHRINK_DELAY:
 			self.sprite.scale.y = lerp(self.sprite.scale.y,1.0 * self.initial_scale.y, 0.3)
-			
 	else:
 		self.sprite.scale.y = self.initial_scale.y
 		self.speedInDash = 1

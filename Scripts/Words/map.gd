@@ -5,7 +5,6 @@ var id : int
 
 var roomSize : Vector2
 var playerSpawn : Marker2D
-
 func _ready() -> void:
 	setRoomSize()
 
