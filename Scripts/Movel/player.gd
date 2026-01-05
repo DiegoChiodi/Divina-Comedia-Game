@@ -250,3 +250,6 @@ func idle_x() -> void:
 		self.sprite.play("idle_left")
 	else:
 		super.idle_x()
+
+func dash_intangible_col() -> void:
+	pass

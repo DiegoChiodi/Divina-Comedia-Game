@@ -85,6 +85,8 @@ func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : fl
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):
 		self.bodysCol.append(area.get_parent())
+	elif area.get_parent().is_in_group('intangibleDash'):
+		dash_intangible_col()
 
 func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:
 	if area.is_in_group("hbAttack"):
@@ -112,3 +114,6 @@ func stopFlashing(_delta : float) -> void:
 
 func dying (_delta : float) -> void:
 	self.queue_free()
+
+func dash_intangible_col() -> void:
+	velocity = velocity * -3

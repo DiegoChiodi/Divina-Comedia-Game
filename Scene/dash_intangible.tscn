@@ -6,9 +6,9 @@
 size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glsod"]
-size = Vector2(192, 192)
+size = Vector2(208, 208)
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="StaticBody2D" type="StaticBody2D" groups=["intangibleDash"]]
 script = ExtResource("1_glsod")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
