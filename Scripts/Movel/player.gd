@@ -14,7 +14,8 @@ var inDash : bool = false
 const DASH_DELAY : float = 2.0
 var dashWait : float = self.DASH_DELAY
 var dashPoss : bool = false # se é possivel dar dash
-
+const EXTEND_DASHS : int = 3
+var actual_extend_dashs = 0
 const DASH_SCALE_FEEL : float = 2.0
 const DASH_SHRINK_DELAY : float = 0.1
 
@@ -92,26 +93,7 @@ func dashFunction(_delta) -> void:
 	
 	#Começo o dash
 	if dashPress && self.dash:
-		self.speedInDash = self.dashSpeedMax
-		self.velocity *= self.speedInDash
-		
-		self.inDash = true
-		self.ricochet = self.inDash
-		#cowdow do dash para usar denovo
-		self.dash = false
-		self.dashWait = 0.0
-		self.dashDuringWait = 0.0
-		
-		var inv_dash_t : float = self.dashDuringDelay + self.INVLASTDASH
-		self.invencibleWait -= inv_dash_t
-		
-		#Animation
-		game_manager.start_shake(1.0,1.5)
-		self.sprite.scale.y = DASH_SCALE_FEEL * initial_scale.y
-		
-		if right_click:
-			self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
-		self.sound_dash.play()
+		self.dash_init(right_click)
 	
 	#Dash carregado
 	if !self.dash:
@@ -240,16 +222,48 @@ func takeDamage(_damage : float) -> void:
 		Engine.time_scale = 0.2
 
 func run_x() -> void:
-	if direction.x < 0:
+	if self.direction.x < 0:
 		self.sprite.play("run_left")
 	else:
 		super.run_x()
 
 func idle_x() -> void:
-	if lastDirection.x < 0:
+	if self.lastDirection.x < 0:
 		self.sprite.play("idle_left")
 	else:
 		super.idle_x()
 
 func dash_intangible_col() -> void:
 	pass
+
+func ricochetied(collision : KinematicCollision2D) -> void:
+	super.ricochetied(collision)
+	
+	if self.actual_extend_dashs < self.EXTEND_DASHS:
+		self.actual_extend_dashs += 1
+		self.dashDuringWait -= 0.025 * self.actual_extend_dashs
+		
+
+func dash_init(right_click : bool) -> void:
+	self.speedInDash = self.dashSpeedMax
+	self.velocity *= self.speedInDash
+	
+	self.inDash = true
+	self.ricochet = self.inDash
+	#cowdow do dash para usar denovo
+	self.dash = false
+	self.dashWait = 0.0
+	self.dashDuringWait = 0.0
+	self.actual_extend_dashs = 0
+	
+	var inv_dash_t : float = self.dashDuringDelay + self.INVLASTDASH
+	self.invencibleWait -= inv_dash_t
+	
+	#Animation
+	game_manager.start_shake(1.0,1.5)
+	self.sprite.scale.y = DASH_SCALE_FEEL * initial_scale.y
+	
+	if right_click:
+		self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
+	self.sound_dash.play()
+	

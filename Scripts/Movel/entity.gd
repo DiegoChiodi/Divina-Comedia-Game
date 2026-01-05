@@ -116,4 +116,4 @@ func dying (_delta : float) -> void:
 	self.queue_free()
 
 func dash_intangible_col() -> void:
-	velocity = velocity * -3
+	velocity = velocity * -4

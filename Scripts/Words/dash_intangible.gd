@@ -15,6 +15,6 @@ func _physics_process(delta: float) -> void:
 		var bodies := area.get_overlapping_bodies()
 		for body in bodies:
 			if body is Player:
-				body.dashDuringWait = 0.15
+				body.dashDuringWait = 0.22
 				body.invencibilityActivate(false, 0.1)
 	

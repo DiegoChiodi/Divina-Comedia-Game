@@ -56,11 +56,11 @@ func move(_delta: float) -> void:
 		# Sem input → desaceleração
 		self.velocity = velocity.lerp(Vector2.ZERO, self.acceleration * _delta)
 	# 2. Movimento real
-	var collision = move_and_collide(self.velocity * _delta)
+	var collision : KinematicCollision2D= move_and_collide(self.velocity * _delta)
 	
 	if collision:
 		if self.ricochet:
-			self.velocity = self.velocity.bounce(collision.get_normal())
+			self.ricochetied(collision)
 			return
 		
 		var other = collision.get_collider()
@@ -103,3 +103,6 @@ func add_central_force(_force: Vector2):
 
 func farlands_limit() -> void:
 	self.position = self.position.clamp(Vector2.ZERO, global.roomLimit)
+
+func ricochetied(collision : KinematicCollision2D) -> void:
+	self.velocity = self.velocity.bounce(collision.get_normal())
