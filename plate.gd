@@ -14,4 +14,3 @@ func _ready() -> void:
 			posRect = Vector2(16,16)
 	
 	self.sprite.region_rect = Rect2(posRect, Vector2(16,16))
-	print(self.written_sprite)
