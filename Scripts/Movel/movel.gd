@@ -38,7 +38,6 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	self.move(_delta)
 	self.pushWait += _delta
-	global_position = global_position.round()
 
 func move(_delta: float) -> void:
 	var target_velocity = self.velocityTarget(_delta)
@@ -56,26 +55,9 @@ func move(_delta: float) -> void:
 		# Sem input → desaceleração
 		self.velocity = velocity.lerp(Vector2.ZERO, self.acceleration * _delta)
 	# 2. Movimento real
-	var collision : KinematicCollision2D= move_and_collide(self.velocity * _delta)
 	
-	if collision:
-		if self.ricochet:
-			self.ricochetied(collision)
-			return
-		
-		var other = collision.get_collider()
-		
-		if !(other is Movel):
-			return
-		var dirForce := Vector2.ZERO
-		var force : float = 0.0
-		if abs(-collision.get_normal().x) > abs(-collision.get_normal().y):
-			dirForce = Vector2(-collision.get_normal().x,0)
-		else:
-			dirForce = Vector2(0,-collision.get_normal().y)
-			
-		force = min(self.MINEXTERNALFORCE, self.velocity.length())
-		other.add_central_force(dirForce * force)
+	move_method(_delta)
+	
 	self.farlands_limit()
 
 func velocityTarget(_delta : float) -> Vector2:
@@ -106,3 +88,6 @@ func farlands_limit() -> void:
 
 func ricochetied(collision : KinematicCollision2D) -> void:
 	self.velocity = self.velocity.bounce(collision.get_normal())
+
+func move_method(_delta : float) -> void:
+	move_and_slide()

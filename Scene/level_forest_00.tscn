@@ -12,7 +12,7 @@ script = ExtResource("1_p4nya")
 position = Vector2(2296, 364)
 
 [node name="shadow_pos2" type="Marker2D" parent="."]
-position = Vector2(1832, 504)
+position = Vector2(997, 555)
 
 [node name="shadow_pos3" type="Marker2D" parent="."]
 position = Vector2(2304, 656)

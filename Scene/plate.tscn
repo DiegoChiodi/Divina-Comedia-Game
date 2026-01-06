@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2nsiesldi5pq"]
+
+[ext_resource type="Script" uid="uid://dcqc6gwhqyuj0" path="res://plate.gd" id="1_gmc4b"]
+[ext_resource type="Texture2D" uid="uid://cblcg5lkmmjxx" path="res://Assets/sprites/plate.png" id="2_sv48e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sv48e"]
+size = Vector2(13, 13)
+
+[node name="Plate" type="Node2D"]
+script = ExtResource("1_gmc4b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sv48e")
+region_enabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_sv48e")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

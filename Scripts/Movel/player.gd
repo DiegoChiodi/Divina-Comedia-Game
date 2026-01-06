@@ -242,7 +242,6 @@ func ricochetied(collision : KinematicCollision2D) -> void:
 	if self.actual_extend_dashs < self.EXTEND_DASHS:
 		self.actual_extend_dashs += 1
 		self.dashDuringWait -= 0.025 * self.actual_extend_dashs
-		
 
 func dash_init(right_click : bool) -> void:
 	self.speedInDash = self.dashSpeedMax
@@ -266,4 +265,28 @@ func dash_init(right_click : bool) -> void:
 	if right_click:
 		self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
 	self.sound_dash.play()
+
+func move_method(_delta : float) -> void:
+	if inDash:
+		var collision : KinematicCollision2D = move_and_collide(self.velocity * _delta)
 	
+		if collision:
+			if self.ricochet:
+				self.ricochetied(collision)
+				return
+			
+			var other = collision.get_collider()
+			
+			if !(other is Movel):
+				return
+			var dirForce := Vector2.ZERO
+			var force : float = 0.0
+			if abs(-collision.get_normal().x) > abs(-collision.get_normal().y):
+				dirForce = Vector2(-collision.get_normal().x,0)
+			else:
+				dirForce = Vector2(0,-collision.get_normal().y)
+				
+			force = min(self.MINEXTERNALFORCE, self.velocity.length())
+			other.add_central_force(dirForce * force)
+	else:
+		super.move_method(_delta)
