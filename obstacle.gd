@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	self.dir = (self.global_position - area.get_parent().global_position).normalized()
-	self.forceImpact = 160.0
+	self.forceImpact = 240.0
 	if self.breaked:
 		self.falling = true
 	else:

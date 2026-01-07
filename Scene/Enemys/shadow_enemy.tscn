@@ -102,14 +102,10 @@ radius = 20.0
 max_neighbors = 8
 time_horizon_obstacles = 1.0
 max_speed = 300.0
-debug_enabled = true
 
 [node name="tim_act_path" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-radius = 40.0
 
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]

@@ -269,7 +269,7 @@ func dash_init(right_click : bool) -> void:
 	self.sound_dash.play()
 
 func move_method(_delta : float) -> void:
-	if inDash:
+	if self.inDash:
 		var collision : KinematicCollision2D = move_and_collide(self.velocity * _delta)
 	
 		if collision:

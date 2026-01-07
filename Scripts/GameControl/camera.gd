@@ -25,11 +25,11 @@ func _ready():
 	self.limit_left = 0
 	self.limit_top = 0
 
-func _process(delta):
+func _process(_delta):
 	if self.target != null:
 		self.posTarget = self.target.global_position + self.posComp
 	
-	self.position = self.position.lerp(self.posTarget, delta * self.lissing)  # Ajuste o "5.0" para mudar a suavidade
+	self.position = self.position.lerp(self.posTarget, _delta * self.lissing)  # Ajuste o "5.0" para mudar a suavidade
 	if self.shake_amount > 0:
 		# Aplica uma posição aleatória
 		self.offset = self.original_offset + Vector2(
@@ -38,7 +38,7 @@ func _process(delta):
 		) * self.shake_amount
 		
 		# Reduz a intensidade ao longo do tempo
-		self.shake_amount = max(self.shake_amount - self.shake_decay * delta, 0)
+		self.shake_amount = max(self.shake_amount - self.shake_decay * _delta, 0)
 	else:
 		# Restaura a posição original
 		self.offset = self.original_offset

@@ -24,7 +24,26 @@ func rotationSet(_delta) -> void:
 func detectPlayer() -> void:
 	super.detectPlayer()
 	self.body.play('steap')
+	var laugh_chosen : String
+	var choice := randi() % 5
 
+	match choice:
+		0:
+			laugh_chosen = "res://Assets/audio/sfx/enemy_laugh/creepy-laugh-2-401714.wav"
+		1:
+			laugh_chosen = "res://Assets/audio/sfx/enemy_laugh/evil-laugh-89423.wav"
+		2:
+			laugh_chosen = "res://Assets/audio/sfx/enemy_laugh/scary-laugh-377526.wav"
+		3:
+			laugh_chosen = "res://Assets/audio/sfx/enemy_laugh/gasp-242214.wav"
+		4:
+			laugh_chosen = "res://Assets/audio/sfx/enemy_laugh/female-sigh-450446.wav"
+
+	var laugh_player := AudioStreamPlayer2D.new()
+	laugh_player.stream = load(laugh_chosen)
+	add_child(laugh_player)
+	laugh_player.play()
+	laugh_player.finished.connect(laugh_player.queue_free)
 func takeDamage(_damage : float) -> void:
 	super.takeDamage(_damage)
 	self.body.modulate.a = min(life / lifeMax * 2, 0.8) 

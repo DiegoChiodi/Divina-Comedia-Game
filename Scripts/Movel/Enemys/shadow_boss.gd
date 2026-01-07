@@ -291,7 +291,7 @@ func dead () -> void:
 	self.sfx_dead.play()
 	self.healfh_bar_fill.queue_free()
 	self.healfh_bar_lost.queue_free()
-	self.colAttack.disabled = false
+	self.colAttack.disabled = true
 
 func dying(_delta : float) -> void:
 	if self.trade_turn_wait < self.DEAD_DELAY:
@@ -310,6 +310,7 @@ func dying(_delta : float) -> void:
 			shadow_new.position = shadow_new.speed / 4
 			shadow_new.radious = randf_range(4,12)
 			parent.shadows.append(shadow_new)
+			
 			self.control_shadows.add_child(shadow_new)
 		
 		self.bar_speed += get_gravity()
