@@ -27,11 +27,10 @@ var ricochet : bool = false
 
 func _process(delta: float) -> void:
 	directionTarget()
-	self.rotationSet(delta)
-
-	if self.direction != Vector2.ZERO:
+	if abs(self.direction.length()) > 0.1:
 		self.lastDirection = self.direction
-
+	self.rotationSet(delta)
+	
 	if self.impulseWait <= self.impulseDelay:
 			self.impulseWait += delta
 

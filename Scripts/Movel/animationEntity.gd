@@ -39,7 +39,7 @@ func idle() -> void:
 	if abs(self.lastDirection.x) >= abs(self.lastDirection.y):
 		self.idle_x()
 	else:
-		if lastDirection.y < 0:
+		if self.lastDirection.y < 0:
 			self.idle_up()  # Animação para cima
 		else: 
 			self.idle_down()

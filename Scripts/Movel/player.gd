@@ -264,6 +264,8 @@ func dash_init(right_click : bool) -> void:
 	
 	if right_click:
 		self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
+	else:
+		self.velocity = self.speedTarget() * self.lastDirection.normalized()
 	self.sound_dash.play()
 
 func move_method(_delta : float) -> void:

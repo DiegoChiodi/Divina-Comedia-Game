@@ -1,7 +1,7 @@
 extends Level
 class_name Level_Vestibule_00
 
-var boss : = preload("res://Scene/bossShadow.tscn").instantiate()
+var boss : = preload("res://Scene/shadow_boss.tscn").instantiate()
 var shadows : Array[CircleDraw] = []
 
 func setup() -> void:

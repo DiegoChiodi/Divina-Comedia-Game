@@ -291,6 +291,7 @@ func dead () -> void:
 	self.sfx_dead.play()
 	self.healfh_bar_fill.queue_free()
 	self.healfh_bar_lost.queue_free()
+	self.colAttack.disabled = false
 
 func dying(_delta : float) -> void:
 	if self.trade_turn_wait < self.DEAD_DELAY:
