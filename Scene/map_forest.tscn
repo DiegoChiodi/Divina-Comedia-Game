@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cyojbqvocyvod" path="res://Assets/mouse_tut.png" id="5_fo2vt"]
 [ext_resource type="PackedScene" uid="uid://c5k82g4kqlwuk" path="res://Scene/dash_intangible.tscn" id="6_botjh"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4cbb1"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mkod"]
 texture = ExtResource("2_5yj4s")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -312,7 +312,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 terrain_set_0/terrain_1/name = "agua"
 terrain_set_0/terrain_1/color = Color(0.07058824, 0.5686275, 0.65882355, 1)
-sources/0 = SubResource("TileSetAtlasSource_4cbb1")
+sources/0 = SubResource("TileSetAtlasSource_7mkod")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_26qkr"]
 texture = ExtResource("3_4cbb1")
