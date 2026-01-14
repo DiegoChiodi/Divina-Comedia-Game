@@ -9,3 +9,8 @@ func _ready () -> void:
 func _on_enter_forest_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Player:
 		game_manager.change_room(GameManager.LevelID.FOREST_00)
+
+
+func _on_enter_mountain_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Player:
+		game_manager.change_room(GameManager.LevelID.MOUNTAIN_00)

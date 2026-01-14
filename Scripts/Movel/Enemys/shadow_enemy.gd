@@ -50,7 +50,9 @@ func takeDamage(_damage : float) -> void:
 	self.eyes.modulate.a = (lifeMax / life) / 8
 
 func makepath() -> void:
-	self.nav_agent.target_position = game_manager.player.global_position
+	var player = game_manager.player
+	if player != null:
+		self.nav_agent.target_position = player.global_position
  
 func setDirection() -> Vector2:
 	return to_local(nav_agent.get_next_path_position()).normalized()

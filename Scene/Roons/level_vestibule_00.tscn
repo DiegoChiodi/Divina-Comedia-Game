@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://coaq7pi87l4pf"]
 
 [ext_resource type="Script" uid="uid://cf652p7qy2asr" path="res://Scripts/Words/level_vestibule_00.gd" id="1_dbkxu"]
-[ext_resource type="PackedScene" uid="uid://byefhs8t7rlgf" path="res://Scene/map_vestibule.tscn" id="2_xtd66"]
+[ext_resource type="PackedScene" uid="uid://byefhs8t7rlgf" path="res://Scene/Roons/map_vestibule.tscn" id="2_xtd66"]
 
 [node name="Level_vestibule_00" type="Node2D"]
 script = ExtResource("1_dbkxu")
