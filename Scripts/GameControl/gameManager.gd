@@ -49,8 +49,6 @@ func _process(_delta: float) -> void:
 			self.ui.get_node('boss_bar_fill').queue_free()
 			self.ui.get_node('boss_bar_lost').queue_free()
 		
-		ui.clr_shadow.color.a = 0.0
-		
 		
 	
 	if Input.is_action_just_released("menu"):
@@ -65,11 +63,13 @@ func init(_main : Node2D):
 	self.camera.setup(self.player, null)
 	self.camera.limit_left = 0
 	self.camera.limit_top = 0
+	
 	self.roomContainer.add_child(self.camera)
 	_main.add_child(self.player)
+	_main.add_child(self.ui)
 	self.roomContainer.load_room(self.level_paths[LevelID.FOREST_00])
 	_main.add_child(roomContainer)
-	_main.add_child(self.ui)
+	
 
 func center_window(new_size: Vector2i):
 	# define o tamanho da janela

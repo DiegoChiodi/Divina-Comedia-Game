@@ -13,6 +13,9 @@ func setup() -> void:
 	self.map = get_node('map')
 
 func init_quest_initial() -> void:
+	var clr_shadow = game_manager.ui.clr_shadow
+	clr_shadow.color.a = 100.0 / 255.0
+	
 	shadow.position = $shadow_pos.position
 	shadow2.position = $shadow_pos2.position
 	shadow3.position = $shadow_pos3.position

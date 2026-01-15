@@ -45,7 +45,6 @@ const SCRATCHSPEED : float = 0.0
 #Dead -------------------
 const TRANSPARENCYINIT : float = 0.35
 const TRANSPARENCYFINAL : float = 0.8
-const TRADE_TIME : float = 2.0
 var trade_turn_wait : float = 0.0
 const DEAD_DELAY : float = 3.0
 var pos_dead : Vector2 = Vector2.ZERO
@@ -56,7 +55,6 @@ const RADIOUSMAX : float  = 40.0
 const RADIOUSMIN : float = 5.0
 var shaRadious : float = self.RADIOUSMIN
 var control_shadows : Node2D = Node2D.new()
-var cor_turn : ColorRect = game_manager.ui.clr_shadow
 
 #Colisões
 @onready var colTakeD : CollisionShape2D = $are_hbTakeDamage/CollisionShape2D
@@ -111,10 +109,6 @@ func _process(_delta: float) -> void:
 	if self.healfh_bar_lost != null:
 		self.healfh_bar_lost.size.x = lerp(self.healfh_bar_lost.size.x, self.healfh_bar_fill.size.x, 0.1)
 	self.stateMachine(_delta)
-	if self.seeingPlayer:
-		if self.trade_turn_wait < self.TRADE_TIME:
-			self.trade_turn_wait += _delta
-			self.cor_turn.color.a = move_toward(self.cor_turn.color.a, 0.5, _delta)
 
 func detectPlayer() -> void:
 	#Insta attack
@@ -299,7 +293,6 @@ func dying(_delta : float) -> void:
 		#Mudar o tempo
 		self.trade_turn_wait += _delta
 		var parent := self.get_parent()
-		self.cor_turn.color.a = move_toward(self.cor_turn.color.a, 0.0, _delta)
 		#Tremedeira
 		var pos_sort : Vector2 = Vector2(randf_range(-self.TREMENDOUS,self.TREMENDOUS),randf_range(-self.TREMENDOUS,self.TREMENDOUS))
 		self.position = pos_sort + self.pos_dead

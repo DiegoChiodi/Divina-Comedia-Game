@@ -20,6 +20,7 @@ const DASH_SCALE_FEEL : float = 2.0
 const DASH_SHRINK_DELAY : float = 0.1
 
 const INVLASTDASH : float = 0.1
+
 #inAAttack ----------------
 var attack : bool = false
 var inAttack : bool = false
@@ -44,6 +45,9 @@ var blinkWait : float = 0.0
 
 #Sprite
 var initial_scale : Vector2
+
+#Debug
+var debug_velocity : bool = false
 
 @onready var hbTake : Area2D = $are_hbTakeDamage
 @onready var hbAttack : Area2D = $are_hbAttack
@@ -77,14 +81,20 @@ func _process(_delta: float) -> void:
 	
 	if self.inDash:
 		self.sprite.play('dash')
-		
+	
+	if self.debug_velocity:
+		self.dashWait = DASH_DELAY
 	if Input.is_action_just_pressed("v"):
-		self.speedFix = 500.0
-		self.damage = 5000.0
-	if Input.is_action_just_pressed("b"):
-		self.speedFix = 300.0
-		self.damage = 20.0
-		self.life = self.lifeMax
+		self.debug_velocity = !self.debug_velocity
+		
+		if self.debug_velocity:
+			self.speedFix = 800.0
+			self.damage = 5000.0
+			self.dash = true
+		else:
+			self.speedFix = 300.0
+			self.damage = 20.0
+			self.life = self.lifeMax
 	
 
 func dashFunction(_delta) -> void:
