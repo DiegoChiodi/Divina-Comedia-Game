@@ -80,8 +80,6 @@ monitorable = false
 [node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
 shape = SubResource("RectangleShape2D_cs6ny")
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="sprites" type="Node2D" parent="."]
 
 [node name="eyes" type="Sprite2D" parent="sprites"]
@@ -97,7 +95,7 @@ sprite_frames = SubResource("SpriteFrames_eswn4")
 animation = &"steap"
 frame_progress = 0.47703472
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="nav_agent" type="NavigationAgent2D" parent="."]
 radius = 20.0
 max_neighbors = 8
 time_horizon_obstacles = 1.0

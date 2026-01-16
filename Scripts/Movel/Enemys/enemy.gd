@@ -1,14 +1,20 @@
 extends Entity
 class_name Enemy
 
-var colDetectPlayer : Area2D 
 var seeingPlayer : bool = false
 var timerLengthen := Timer.new() 
 var timerLengthenDuration := Timer.new()
 var inLengthen : bool = false
 
+var nav_agent : NavigationAgent2D
+var are_check_player : Area2D
+var col_check_player : CollisionShape2D
+
 func _ready() -> void:
 	super._ready()
+	self.get_nav_agent()
+	self.get_are_check_player()
+	
 	add_child(self.timerLengthen)
 	add_child(self.timerLengthenDuration)
 	
@@ -60,4 +66,33 @@ func lengthenEnd() -> void:
 	self.inLengthen = false
 
 func detectPlayer() -> void:
+	if self.seeingPlayer:
+		return
+	
+	self.are_check_player.scale *= 1.5
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+
 	self.seeingPlayer = true
+	
+	var areas := self.are_check_player.get_overlapping_areas()
+
+	for area in areas:
+		var parent : = area.get_parent() as Enemy
+		if parent != null and parent != self:
+			parent.detectPlayer()
+
+func get_nav_agent() -> void:
+	self.nav_agent = $nav_agent
+
+func get_are_check_player() -> void:
+	self.are_check_player = $are_checkPlayer
+	self.col_check_player = $are_checkPlayer/col_checkPlayer
+
+func makepath() -> void:
+	var player = game_manager.player
+	if player != null:
+		self.nav_agent.target_position = player.global_position
+
+func _on_tim_act_path_timeout() -> void:
+	self.makepath()

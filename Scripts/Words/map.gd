@@ -5,6 +5,8 @@ var id : int
 
 var roomSize : Vector2
 var playerSpawn : Marker2D
+var locked_map : bool = false
+
 func _ready() -> void:
 	setRoomSize()
 
@@ -13,3 +15,6 @@ func setRoomSize() -> void:
 		roomSize = $roomSize.global_position
 		game_manager.camera.setLimit(roomSize)
 		global.roomLimit = roomSize
+
+func out_bounds() -> void:
+	pass

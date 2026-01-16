@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://dx66fv08rqu8j"]
+[gd_scene load_steps=17 format=4 uid="uid://dx66fv08rqu8j"]
 
 [ext_resource type="Texture2D" uid="uid://8su6aslfvug2" path="res://Assets/tile_set.png" id="1_0co87"]
 [ext_resource type="Script" uid="uid://c3ibfxym6fwl6" path="res://map_mountain.gd" id="1_n0l81"]
 [ext_resource type="Texture2D" uid="uid://dwlktk7go06w1" path="res://Assets/objects.png" id="2_fpvpu"]
 [ext_resource type="Texture2D" uid="uid://chsq3orti3yd" path="res://Assets/sprites/tile-extend.png" id="2_n0l81"]
 [ext_resource type="Texture2D" uid="uid://c507sl7smiw4r" path="res://Assets/sprites/navegation.png" id="3_n0l81"]
-[ext_resource type="PackedScene" uid="uid://c4i3vvwm18cuv" path="res://Scene/Enemys/confuseEnemy.tscn" id="6_il28f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpvpu"]
 texture = ExtResource("1_0co87")
@@ -1503,9 +1502,5 @@ shape = SubResource("RectangleShape2D_dpv2l")
 
 [node name="marker_from_vestibule" type="Marker2D" parent="."]
 position = Vector2(1298, 4250)
-
-[node name="ConfuseEnemy3" parent="." instance=ExtResource("6_il28f")]
-position = Vector2(624, 3832.0002)
-scale = Vector2(3, 3)
 
 [connection signal="area_entered" from="EnterVestibule" to="." method="_on_enter_vestibule_area_entered"]

@@ -300,16 +300,16 @@ func dying(_delta : float) -> void:
 		for i in range(3):
 			var shadow_new : CircleDraw = CircleDraw.new()
 			shadow_new.speed = Vector2(randf_range(-300,300),randf_range(-300,300))
-			shadow_new.position = shadow_new.speed / 4
+			shadow_new.position = shadow_new.speed / 4.0
 			shadow_new.radious = randf_range(4,12)
 			parent.shadows.append(shadow_new)
 			
 			self.control_shadows.add_child(shadow_new)
 		
-		self.bar_speed += get_gravity()
+		self.bar_speed += self.get_gravity()
 		self.rotation_speed += _delta;
-		self.spr_boss_bar.position += bar_speed * _delta / 100
-		self.spr_boss_bar.rotation += rotation_speed / 500
+		self.spr_boss_bar.position += bar_speed * _delta / 100.0
+		self.spr_boss_bar.rotation += rotation_speed / 500.0
 		self.spr_boss_bar.scale = self.spr_boss_bar.scale.lerp(Vector2.ZERO,0.004)
 	else:
 		super.dying(_delta)

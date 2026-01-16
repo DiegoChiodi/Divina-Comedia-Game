@@ -13,6 +13,7 @@ func _process(_delta: float) -> void:
 func init_quest_boss() -> void:
 	self.boss.position = $mar_boss.position
 	add_child(self.boss)
+	self.map.locked_map = true
 
 func shadows_destroy(_delta : float) -> void:
 	for i in range(shadows.size() - 1, -1, -1):
