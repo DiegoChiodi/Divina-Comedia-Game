@@ -57,7 +57,8 @@ func move(_delta: float) -> void:
 	
 	move_method(_delta)
 	
-	self.farlands_limit()
+	if not Rect2(Vector2.ZERO, global.roomLimit).has_point(position):
+		self.farlands_limit()
 
 func velocityTarget(_delta : float) -> Vector2:
 	return ((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)) + self.external_velocity)

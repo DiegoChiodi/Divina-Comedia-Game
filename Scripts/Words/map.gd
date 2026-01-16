@@ -17,4 +17,4 @@ func setRoomSize() -> void:
 		global.roomLimit = roomSize
 
 func out_bounds() -> void:
-	pass
+	self.position = self.position.clamp(Vector2.ZERO, global.roomLimit)
