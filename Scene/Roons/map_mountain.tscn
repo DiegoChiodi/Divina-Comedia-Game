@@ -1586,7 +1586,7 @@ position = Vector2(1298, 5522)
 [node name="par_wind" type="GPUParticles2D" parent="vfx"]
 amount = 12
 texture = ExtResource("6_lbonf")
-lifetime = 8.0
+lifetime = 5.0
 fixed_fps = 60
 trail_enabled = true
 trail_lifetime = 0.5
