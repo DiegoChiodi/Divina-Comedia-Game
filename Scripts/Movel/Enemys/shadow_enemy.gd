@@ -1,4 +1,4 @@
-extends Enemy
+extends NavEnemy
 class_name ShadowEnemy
 
 @onready var sprites := $sprites

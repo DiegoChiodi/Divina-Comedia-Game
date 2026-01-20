@@ -66,7 +66,7 @@ func velocityTarget(_delta : float) -> Vector2:
 func directionTarget() -> void:
 	pass
 
-func takeImpulse(_impulseDir : Vector2, _impulseSpeed : float = 1200) -> void:
+func takeImpulse(_impulseDir : Vector2, _impulseSpeed : float = 1000) -> void:
 	if self.impulsionable:
 		self.impulseDir = _impulseDir
 		self.impulseSpeed = _impulseSpeed

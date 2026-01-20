@@ -2,6 +2,7 @@ extends Entity
 class_name Enemy
 
 var seeingPlayer : bool = false
+var player_near : bool = false
 var timerLengthen := Timer.new() 
 var timerLengthenDuration := Timer.new()
 var inLengthen : bool = false
@@ -12,7 +13,6 @@ var col_check_player : CollisionShape2D
 
 func _ready() -> void:
 	super._ready()
-	self.get_nav_agent()
 	self.get_are_check_player()
 	
 	add_child(self.timerLengthen)
@@ -53,8 +53,14 @@ func resetTimer() -> void:
 		self.timerLengthen.start()
 
 func _on_are_check_player_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Player and !self.seeingPlayer:
-		self.detectPlayer()
+	if area.get_parent() is Player:
+		self.player_near = true
+		if !self.seeingPlayer:
+			self.detectPlayer()
+
+func _on_are_check_player_area_exited(area: Area2D) -> void:
+	if area.get_parent() is Player:
+		self.player_near = false
 
 func lengthen() -> void:
 	self.direction = Vector2(randf_range(-1,1),randf_range(-1,1))
@@ -69,7 +75,7 @@ func detectPlayer() -> void:
 	if self.seeingPlayer:
 		return
 	
-	self.are_check_player.scale *= 1.5
+	self.are_check_player.scale *= 1.2
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 
@@ -82,17 +88,10 @@ func detectPlayer() -> void:
 		if parent != null and parent != self:
 			parent.detectPlayer()
 
-func get_nav_agent() -> void:
-	self.nav_agent = $nav_agent
-
 func get_are_check_player() -> void:
 	self.are_check_player = $are_checkPlayer
 	self.col_check_player = $are_checkPlayer/col_checkPlayer
 
-func makepath() -> void:
-	var player = game_manager.player
-	if player != null:
-		self.nav_agent.target_position = player.global_position
-
-func _on_tim_act_path_timeout() -> void:
-	self.makepath()
+func colliding_projectile(projectile : Projectile) -> void:
+	if ricochet:
+		super.colliding_projectile(projectile)

@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 func collidingRival(_body) -> void:
 	if !self.invencible:
 		_body.AttackSucess(self)
-	self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed * 5)
+	self.takeAttack((self.position - _body.position).normalized(), _body.damage, _body.speed * 3)
 
 func checkColliding() -> void:
 	#Entrei na htbox de ataque de alguém
@@ -76,20 +76,25 @@ func takeDamage(_damage : float) -> void:
 	if self.life <= 0:
 		self.dead()
 
-func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 1200) -> void:
+func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 1000) -> void:
 	if !self.invencible:
 		self.takeDamage(_damage)
 
 	self.takeImpulse(_impulseDir, _impulseSpeed)
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
-	if area.is_in_group("hbAttack"):
-		self.bodysCol.append(area.get_parent())
-	elif area.get_parent().is_in_group('intangibleDash'):
+	var parent := area.get_parent()
+	if area.is_in_group("hbAttack") and parent is Entity:
+		self.bodysCol.append(parent)
+	elif parent.is_in_group('intangibleDash'):
 		dash_intangible_col()
+	elif parent is Projectile:
+		colliding_projectile(parent)
+
 
 func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:
-	if area.is_in_group("hbAttack"):
+	var parent := area.get_parent()
+	if area.is_in_group("hbAttack") and parent is Entity:
 		self.bodysCol.erase(area.get_parent())
 
 func dead() -> void:
@@ -116,4 +121,9 @@ func dying (_delta : float) -> void:
 	self.queue_free()
 
 func dash_intangible_col() -> void:
-	velocity = velocity * -4
+	self.velocity *= -4
+
+func colliding_projectile(projectile : Projectile) -> void:
+	if !self.invencible:
+		projectile.self_destruction()
+		self.takeAttack((self.position - projectile.position).normalized(), projectile.damage, projectile.speed * 5)

@@ -11,7 +11,7 @@ var velocityInDash := Vector2.ZERO
 var dashDir := Vector2.ZERO
 
 var inDash : bool = false
-const DASH_DELAY : float = 2.0
+const DASH_DELAY : float = 1.75
 var dashWait : float = self.DASH_DELAY
 var dashPoss : bool = false # se é possivel dar dash
 const EXTEND_DASHS : int = 3
@@ -25,10 +25,10 @@ const INVLASTDASH : float = 0.1
 var attack : bool = false
 var inAttack : bool = false
 #Tempo atacando
-var attackDuringDelay : float = 0.25
+var attackDuringDelay : float = 0.2
 var attackDuringWait : float = self.attackDuringDelay
 #Tempo de espera para próximo ataque
-var attackDelay : float = 0.25
+var attackDelay : float = 0.4
 var attackWait : float = self.attackDelay
 
 const KNOCBACKSELFFEELING : float = 1000.0
@@ -305,3 +305,10 @@ func move_method(_delta : float) -> void:
 
 func farlands_limit() -> void:
 	game_manager.roomContainer.currentRoom.out_bounds()
+
+func colliding_projectile(projectile : Projectile) -> void:
+	if self.inDash:
+		projectile.ricochet()
+	elif !projectile.ricocheted:
+		super.colliding_projectile(projectile)
+		
