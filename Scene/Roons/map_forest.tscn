@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://cbcvrtxuukd1p"]
+[gd_scene load_steps=18 format=4 uid="uid://cbcvrtxuukd1p"]
 
 [ext_resource type="Script" uid="uid://dhpfmrt4pvvfr" path="res://Scripts/Words/map_forest.gd" id="1_j5j0j"]
 [ext_resource type="Texture2D" uid="uid://8su6aslfvug2" path="res://Assets/tile_set.png" id="2_5yj4s"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d2nsiesldi5pq" path="res://Scene/plate.tscn" id="4_rpb0i"]
 [ext_resource type="Texture2D" uid="uid://cyojbqvocyvod" path="res://Assets/mouse_tut.png" id="5_fo2vt"]
 [ext_resource type="PackedScene" uid="uid://c5k82g4kqlwuk" path="res://Scene/dash_intangible.tscn" id="6_botjh"]
+[ext_resource type="PackedScene" uid="uid://vxtji0hjwk4t" path="res://Scene/Enemys/shieldEnemy.tscn" id="9_07yh8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mkod"]
 texture = ExtResource("2_5yj4s")
@@ -564,5 +565,8 @@ texture = ExtResource("5_fo2vt")
 [node name="Plate" parent="." instance=ExtResource("4_rpb0i")]
 position = Vector2(3528, 1016.00006)
 scale = Vector2(3, 3)
+
+[node name="ShieldEnemy" parent="." instance=ExtResource("9_07yh8")]
+position = Vector2(390, 399)
 
 [connection signal="area_entered" from="EnterVestibule" to="." method="_on_enter_vestibule_area_entered"]

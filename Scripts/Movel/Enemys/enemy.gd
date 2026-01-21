@@ -74,10 +74,6 @@ func lengthenEnd() -> void:
 func detectPlayer() -> void:
 	if self.seeingPlayer:
 		return
-	
-	self.are_check_player.scale *= 1.2
-	await get_tree().physics_frame
-	await get_tree().physics_frame
 
 	self.seeingPlayer = true
 	

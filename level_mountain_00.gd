@@ -5,4 +5,5 @@ func setup() -> void:
 	self.map = get_node('map')
 
 func _process(delta: float) -> void:
-	game_manager.ui.clr_shadow.color.a = game_manager.player.position.y / self.map.roomSize.y - 100.0 / 255.0
+	if game_manager.player != null:
+		game_manager.ui.clr_shadow.color.a = game_manager.player.position.y / self.map.roomSize.y - 100.0 / 255.0
