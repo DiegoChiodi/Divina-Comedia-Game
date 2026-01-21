@@ -246,9 +246,6 @@ func idle_x() -> void:
 func dash_intangible_col() -> void:
 	pass
 
-func ricochetied(collision : KinematicCollision2D) -> void:
-	super.ricochetied(collision)
-	
 	if self.actual_extend_dashs < self.EXTEND_DASHS:
 		self.actual_extend_dashs += 1
 		self.dashDuringWait -= 0.025 * self.actual_extend_dashs
@@ -308,7 +305,7 @@ func farlands_limit() -> void:
 
 func colliding_projectile(projectile : Projectile) -> void:
 	if self.inDash:
-		projectile.ricochet()
-	elif !projectile.ricocheted:
+		projectile.self_destruction()
+	else:
 		super.colliding_projectile(projectile)
 		

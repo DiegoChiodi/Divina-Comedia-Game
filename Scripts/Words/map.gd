@@ -12,9 +12,9 @@ func _ready() -> void:
 
 func setRoomSize() -> void:
 	if has_node('roomSize'):
-		roomSize = $roomSize.global_position
-		game_manager.camera.setLimit(roomSize)
-		global.roomLimit = roomSize
+		self.roomSize = $roomSize.global_position
+		game_manager.camera.setLimit(self.roomSize)
+		global.roomLimit = self.roomSize
 
 func out_bounds() -> void:
 	self.position = self.position.clamp(Vector2.ZERO, global.roomLimit)
