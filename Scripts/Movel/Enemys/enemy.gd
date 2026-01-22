@@ -49,7 +49,7 @@ func groupsAdd() -> void:
 func resetTimer() -> void:
 	if !self.seeingPlayer:
 		self.lengthen()
-		self.timerLengthen.wait_time = randi_range(5,12)
+		self.timerLengthen.wait_time = randi_range(20,60)
 		self.timerLengthen.start()
 
 func _on_are_check_player_area_entered(area: Area2D) -> void:
@@ -64,7 +64,7 @@ func _on_are_check_player_area_exited(area: Area2D) -> void:
 
 func lengthen() -> void:
 	self.direction = Vector2(randf_range(-1,1),randf_range(-1,1))
-	self.timerLengthenDuration.wait_time = randf_range(0.2,0.4)
+	self.timerLengthenDuration.wait_time = randf_range(0.1,0.3)
 	self.inLengthen = true
 	self.timerLengthenDuration.start()
 
@@ -80,14 +80,16 @@ func detectPlayer() -> void:
 	var areas := self.are_check_player.get_overlapping_areas()
 
 	for area in areas:
-		var parent : = area.get_parent() as Enemy
-		if parent != null and parent != self:
+		var parent := area.get_parent()
+		if parent != null and parent != self and parent is Enemy:
 			parent.detectPlayer()
+		elif area is WarningTower:
+			area.detectPlayer()
 
 func get_are_check_player() -> void:
 	self.are_check_player = $are_checkPlayer
 	self.col_check_player = $are_checkPlayer/col_checkPlayer
 
 func colliding_projectile(projectile : Projectile) -> void:
-	if ricochet:
+	if self.ricochet:
 		super.colliding_projectile(projectile)

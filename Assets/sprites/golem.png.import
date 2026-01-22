@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6rc0icapay2k"
-path="res://.godot/imported/pixilart-sprite.png-8ec804bc0828045d8df1ca3b7cdb23bd.ctex"
+uid="uid://58uemhqq2dso"
+path="res://.godot/imported/golem.png-c0ea398bc0e28078785fe0ba3fec197e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/pixilart-sprite.png"
-dest_files=["res://.godot/imported/pixilart-sprite.png-8ec804bc0828045d8df1ca3b7cdb23bd.ctex"]
+source_file="res://Assets/sprites/golem.png"
+dest_files=["res://.godot/imported/golem.png-c0ea398bc0e28078785fe0ba3fec197e.ctex"]
 
 [params]
 

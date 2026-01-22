@@ -72,7 +72,7 @@ func groupsAdd() -> void:
 
 func takeDamage(_damage : float) -> void:
 	self.life -= _damage
-	invencibilityActivate()
+	self.invencibilityActivate()
 	if self.life <= 0:
 		self.dead()
 
@@ -87,9 +87,9 @@ func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hbAttack") and parent is Entity:
 		self.bodysCol.append(parent)
 	elif parent.is_in_group('intangibleDash'):
-		dash_intangible_col()
+		self.dash_intangible_col()
 	elif parent is Projectile:
-		colliding_projectile(parent)
+		self.colliding_projectile(parent)
 
 
 func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:

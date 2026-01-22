@@ -1,20 +1,20 @@
 [gd_scene load_steps=13 format=3 uid="uid://ctywwb1pfgx4y"]
 
 [ext_resource type="Script" uid="uid://b7ggyfwv8bqgm" path="res://Scripts/Movel/Enemys/shadow_enemy.gd" id="1_uclx1"]
-[ext_resource type="Texture2D" uid="uid://b6rc0icapay2k" path="res://Assets/sprites/pixilart-sprite.png" id="2_lhbr1"]
+[ext_resource type="Texture2D" uid="uid://c5k24hr5rh7jl" path="res://Assets/sprites/Enemy.png" id="2_lhbr1"]
 [ext_resource type="Texture2D" uid="uid://difuydim0tih4" path="res://Assets/sprites/enemy-eyes.png" id="3_enmux"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enmux"]
 radius = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs6ny"]
+size = Vector2(512, 512)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3k1e"]
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki401"]
 size = Vector2(34, 34)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs6ny"]
-size = Vector2(512, 464)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g0dna"]
 atlas = ExtResource("2_lhbr1")
@@ -60,6 +60,12 @@ script = ExtResource("1_uclx1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_enmux")
 
+[node name="are_checkPlayer" type="Area2D" parent="."]
+monitorable = false
+
+[node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
+shape = SubResource("RectangleShape2D_cs6ny")
+
 [node name="are_hbTakeDamage" type="Area2D" parent="."]
 monitorable = false
 
@@ -73,12 +79,6 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_ki401")
-
-[node name="are_checkPlayer" type="Area2D" parent="."]
-monitorable = false
-
-[node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
-shape = SubResource("RectangleShape2D_cs6ny")
 
 [node name="sprites" type="Node2D" parent="."]
 
@@ -105,8 +105,8 @@ max_speed = 300.0
 wait_time = 0.2
 autostart = true
 
-[connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
-[connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
 [connection signal="area_entered" from="are_checkPlayer" to="." method="_on_are_check_player_area_entered"]
 [connection signal="area_exited" from="are_checkPlayer" to="." method="_on_are_check_player_area_exited"]
+[connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
+[connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
 [connection signal="timeout" from="tim_act_path" to="." method="_on_tim_act_path_timeout"]

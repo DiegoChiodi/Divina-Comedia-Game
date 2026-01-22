@@ -12,9 +12,9 @@ size = Vector2(32, 32)
 size = Vector2(34, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_df5n6"]
-size = Vector2(160, 160)
+size = Vector2(768, 768)
 
-[node name="ConfuseEnemy" type="CharacterBody2D"]
+[node name="ConfuseEnemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_df5n6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -61,17 +61,6 @@ monitorable = false
 [node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
 shape = SubResource("RectangleShape2D_df5n6")
 
-[node name="nav_agent" type="NavigationAgent2D" parent="."]
-radius = 20.0
-max_neighbors = 8
-time_horizon_obstacles = 1.0
-max_speed = 300.0
-
-[node name="tim_act_path" type="Timer" parent="."]
-wait_time = 0.2
-autostart = true
-
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_exited" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_exited"]
 [connection signal="area_entered" from="are_checkPlayer" to="." method="_on_are_check_player_area_entered"]
-[connection signal="timeout" from="tim_act_path" to="." method="_on_tim_act_path_timeout"]

@@ -20,6 +20,7 @@ const DASH_SCALE_FEEL : float = 2.0
 const DASH_SHRINK_DELAY : float = 0.1
 
 const INVLASTDASH : float = 0.1
+var ricochet_enemy : int = 0
 
 #inAAttack ----------------
 var attack : bool = false
@@ -48,6 +49,7 @@ var initial_scale : Vector2
 
 #Debug
 var debug_velocity : bool = false
+
 
 @onready var hbTake : Area2D = $are_hbTakeDamage
 @onready var hbAttack : Area2D = $are_hbAttack
@@ -111,7 +113,6 @@ func dashFunction(_delta) -> void:
 			self.dashDuringWait += _delta
 		else:
 			self.inDash = false
-			self.ricochet = self.inDash
 	
 	#Dando dash
 	if self.inDash:
@@ -244,8 +245,6 @@ func idle_x() -> void:
 		super.idle_x()
 
 func dash_intangible_col() -> void:
-	pass
-
 	if self.actual_extend_dashs < self.EXTEND_DASHS:
 		self.actual_extend_dashs += 1
 		self.dashDuringWait -= 0.025 * self.actual_extend_dashs
@@ -255,7 +254,8 @@ func dash_init(right_click : bool) -> void:
 	self.velocity *= self.speedInDash
 	
 	self.inDash = true
-	self.ricochet = self.inDash
+	self.ricochet = true
+	self.ricochet_enemy = false
 	#cowdow do dash para usar denovo
 	self.dash = false
 	self.dashWait = 0.0
@@ -280,22 +280,25 @@ func move_method(_delta : float) -> void:
 		var collision : KinematicCollision2D = move_and_collide(self.velocity * _delta)
 	
 		if collision:
-			if self.ricochet:
+			if self.inDash and self.ricochet:
 				self.ricochetied(collision)
+				print('ricochet')
+				self.ricochet = !self.ricochet_enemy
+					
 				return
 			
 			var other = collision.get_collider()
 			
 			if !(other is Movel):
 				return
-			var dirForce := Vector2.ZERO
+			var dirForce := collision.get_normal().normalized()
 			var force : float = 0.0
-			if abs(-collision.get_normal().x) > abs(-collision.get_normal().y):
+			"if abs(collision.get_normal().x) > abs(collision.get_normal().y):
 				dirForce = Vector2(-collision.get_normal().x,0)
 			else:
-				dirForce = Vector2(0,-collision.get_normal().y)
-				
-			force = min(self.MINEXTERNALFORCE, self.velocity.length())
+				dirForce = Vector2(0,-collision.get_normal().y)"
+			
+			force = min(self.MINEXTERNALFORCE, self.speedFix)
 			other.add_central_force(dirForce * force)
 	else:
 		super.move_method(_delta)
@@ -308,4 +311,7 @@ func colliding_projectile(projectile : Projectile) -> void:
 		projectile.self_destruction()
 	else:
 		super.colliding_projectile(projectile)
-		
+
+func collidingRival(_body) -> void:
+	super.collidingRival(_body)
+	self.ricochet_enemy = !self.ricochet_enemy

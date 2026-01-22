@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Projectile
 
 var dir : Vector2 = Vector2.RIGHT
-var speed : float = 250
+var speed : float = 300
 var damage : float = 10
 var decreaseScale : float = 1.0
 
