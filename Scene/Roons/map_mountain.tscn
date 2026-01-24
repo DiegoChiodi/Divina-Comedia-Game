@@ -1615,9 +1615,6 @@ script = ExtResource("8_58r5h")
 position = Vector2(1600, 3136)
 gizmo_extents = 200.0
 
-[node name="rangeEnemy" parent="." instance=ExtResource("9_jiyf4")]
-position = Vector2(664, 5080)
-
 [node name="rangeEnemy5" parent="." instance=ExtResource("9_jiyf4")]
 position = Vector2(3688, 1536)
 
@@ -1639,12 +1636,6 @@ position = Vector2(4648, 1536)
 [node name="rangeEnemy4" parent="." instance=ExtResource("9_jiyf4")]
 position = Vector2(4096, 4072)
 
-[node name="rangeEnemy3" parent="." instance=ExtResource("9_jiyf4")]
-position = Vector2(832, 4848)
-
-[node name="rangeEnemy2" parent="." instance=ExtResource("9_jiyf4")]
-position = Vector2(2576, 5208)
-
 [node name="rangeEnemy20" parent="." instance=ExtResource("9_jiyf4")]
 position = Vector2(4560, 3168)
 
@@ -1652,7 +1643,7 @@ position = Vector2(4560, 3168)
 position = Vector2(4240, 3176)
 
 [node name="ShieldEnemy" parent="." instance=ExtResource("10_e0h4n")]
-position = Vector2(704, 4152)
+position = Vector2(744, 4128)
 rotation = 0.7853982
 
 [node name="ShieldEnemy4" parent="." instance=ExtResource("10_e0h4n")]
@@ -1714,18 +1705,6 @@ position = Vector2(696, 2592)
 [node name="rangeEnemy15" parent="." instance=ExtResource("9_jiyf4")]
 position = Vector2(720, 2800)
 
-[node name="Shadow3" parent="." instance=ExtResource("11_k7mgo")]
-position = Vector2(3344, 5048)
-
-[node name="Shadow4" parent="." instance=ExtResource("11_k7mgo")]
-position = Vector2(3104, 5288)
-
-[node name="Shadow5" parent="." instance=ExtResource("11_k7mgo")]
-position = Vector2(2840, 5448)
-
-[node name="Shadow7" parent="." instance=ExtResource("11_k7mgo")]
-position = Vector2(920, 5096)
-
 [node name="Shadow8" parent="." instance=ExtResource("11_k7mgo")]
 position = Vector2(1864, 3888)
 
@@ -1744,17 +1723,11 @@ position = Vector2(3368, 3216)
 [node name="Shadow13" parent="." instance=ExtResource("11_k7mgo")]
 position = Vector2(3368, 3368)
 
-[node name="Shadow14" parent="." instance=ExtResource("11_k7mgo")]
-position = Vector2(1488, 3232)
-
 [node name="Shadow15" parent="." instance=ExtResource("11_k7mgo")]
 position = Vector2(1352, 3144)
 
-[node name="Shadow16" parent="." instance=ExtResource("11_k7mgo")]
-position = Vector2(1576, 3272)
-
 [node name="Shadow17" parent="." instance=ExtResource("11_k7mgo")]
-position = Vector2(1480, 3320)
+position = Vector2(1512, 3248)
 
 [node name="Shadow18" parent="." instance=ExtResource("11_k7mgo")]
 position = Vector2(1352, 3352)
@@ -1778,10 +1751,10 @@ position = Vector2(1632, 1336)
 position = Vector2(1648, 2016)
 
 [node name="Shadow23" parent="." instance=ExtResource("11_k7mgo")]
-position = Vector2(1648, 2688)
+position = Vector2(1680, 2656)
 
 [node name="ConfuseEnemy" parent="." instance=ExtResource("12_k7mgo")]
-position = Vector2(2424, 2608)
+position = Vector2(2280, 2528)
 
 [node name="ConfuseEnemy6" parent="." instance=ExtResource("12_k7mgo")]
 position = Vector2(4184, 1568)
@@ -1790,7 +1763,7 @@ position = Vector2(4184, 1568)
 position = Vector2(1872, 1368)
 
 [node name="ConfuseEnemy8" parent="." instance=ExtResource("12_k7mgo")]
-position = Vector2(1864, 2032)
+position = Vector2(1904, 2032)
 
 [node name="ConfuseEnemy9" parent="." instance=ExtResource("12_k7mgo")]
 position = Vector2(1456, 1664)
@@ -1808,6 +1781,10 @@ position = Vector2(3584, 2696)
 position = Vector2(2032, 2568)
 scale = Vector2(2.2663283, 1.4183728)
 
+[node name="WarningTower6" parent="." instance=ExtResource("13_sv2qq")]
+position = Vector2(1328, 3232)
+scale = Vector2(1.968124, 0.5409721)
+
 [node name="WarningTower2" parent="." instance=ExtResource("13_sv2qq")]
 position = Vector2(4120, 1776)
 scale = Vector2(2.974955, 1.3708093)
@@ -1818,6 +1795,10 @@ scale = Vector2(0.6351878, 1.8158479)
 
 [node name="WarningTower3" parent="." instance=ExtResource("13_sv2qq")]
 position = Vector2(3888, 4096)
+scale = Vector2(2.2663283, 1.4183728)
+
+[node name="WarningTower5" parent="." instance=ExtResource("13_sv2qq")]
+position = Vector2(3048, 3304)
 scale = Vector2(2.2663283, 1.4183728)
 
 [connection signal="area_entered" from="EnterVestibule" to="." method="_on_enter_vestibule_area_entered"]

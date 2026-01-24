@@ -4,9 +4,6 @@ class_name Level_Vestibule_00
 var boss : = preload("res://Scene/shadow_boss.tscn").instantiate()
 var shadows : Array[CircleDraw] = []
 
-func setup() -> void:
-	self.map = $map
-
 func _process(_delta: float) -> void:
 	shadows_destroy(_delta)
 

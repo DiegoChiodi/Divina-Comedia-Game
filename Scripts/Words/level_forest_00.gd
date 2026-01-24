@@ -9,9 +9,6 @@ func _process(_delta: float) -> void:
 	if shadow == null:
 		global.shadowLive = false
 
-func setup() -> void:
-	self.map = get_node('map')
-
 func init_quest_initial() -> void:
 	var clr_shadow = game_manager.ui.clr_shadow
 	clr_shadow.color.a = 100.0 / 255.0

@@ -12,4 +12,5 @@ func setDirection() -> Vector2:
 	return lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)
 
 func takeDamage(_damage : float) -> void:
+	super.takeDamage(_damage)
 	self.direction *= 0.3

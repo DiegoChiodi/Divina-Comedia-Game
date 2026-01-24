@@ -4,7 +4,7 @@ class_name Level
 var map : Map = null
 
 func setup() -> void:
-	pass
+	self.map = get_node('map')
 
 func out_bounds() -> void:
 	map.out_bounds()

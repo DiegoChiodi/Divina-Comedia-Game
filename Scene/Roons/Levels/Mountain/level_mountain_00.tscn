@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk2gotdxpd2ks"]
+
+[ext_resource type="Script" uid="uid://m85jb4ma3gdx" path="res://Scripts/Words/level_mountain_00.gd" id="1_hlly7"]
+[ext_resource type="PackedScene" uid="uid://b07deevdlc6bx" path="res://Scene/Enemys/rangeEnemy.tscn" id="2_emjro"]
+[ext_resource type="PackedScene" uid="uid://ctywwb1pfgx4y" path="res://Scene/Enemys/shadow_enemy.tscn" id="3_bsume"]
+[ext_resource type="PackedScene" uid="uid://dx66fv08rqu8j" path="res://Scene/Roons/map_mountain.tscn" id="4_on35d"]
+
+[node name="level_mountain_00" type="Node2D"]
+script = ExtResource("1_hlly7")
+
+[node name="map" parent="." instance=ExtResource("4_on35d")]
+
+[node name="rangeEnemy" parent="." instance=ExtResource("2_emjro")]
+position = Vector2(608, 5160)
+
+[node name="rangeEnemy3" parent="." instance=ExtResource("2_emjro")]
+position = Vector2(856, 4888)
+
+[node name="Shadow7" parent="." instance=ExtResource("3_bsume")]
+position = Vector2(944, 5136)
+
+[node name="rangeEnemy2" parent="." instance=ExtResource("2_emjro")]
+position = Vector2(2576, 5208)
+
+[node name="Shadow3" parent="." instance=ExtResource("3_bsume")]
+position = Vector2(3344, 5048)
+
+[node name="Shadow4" parent="." instance=ExtResource("3_bsume")]
+position = Vector2(3104, 5288)
+
+[node name="Shadow5" parent="." instance=ExtResource("3_bsume")]
+position = Vector2(2840, 5448)
+
+[node name="pt_1" type="Node2D" parent="."]
+
+[node name="mar_shadow_01" type="Marker2D" parent="pt_1" groups=["shadow"]]
+position = Vector2(3344, 5048)
+
+[node name="mar_shadow_02" type="Marker2D" parent="pt_1" groups=["shadow"]]
+position = Vector2(3104, 5288)
+
+[node name="mar_shadow_03" type="Marker2D" parent="pt_1" groups=["shadow"]]
+position = Vector2(2840, 5448)
+
+[node name="mar_shadow_04" type="Marker2D" parent="pt_1" groups=["shadow"]]
+position = Vector2(944, 5136)
+
+[node name="mar_ranged_02" type="Marker2D" parent="pt_1" groups=["ranged"]]
+position = Vector2(872, 4904)
+
+[node name="mar_ranged_03" type="Marker2D" parent="pt_1" groups=["ranged"]]
+position = Vector2(624, 5176)
+
+[node name="pt_2" type="Node2D" parent="."]
+
+[node name="mar_shadow_01" type="Marker2D" parent="pt_2" groups=["shadow"]]
+position = Vector2(1872, 4224)
+
+[node name="mar_shadow_02" type="Marker2D" parent="pt_2" groups=["shadow"]]
+position = Vector2(2264, 4232)
+
+[node name="mar_shadow_03" type="Marker2D" parent="pt_2" groups=["shadow"]]
+position = Vector2(2232, 3880)
+
+[node name="mar_shadow_04" type="Marker2D" parent="pt_2" groups=["shadow"]]
+position = Vector2(1864, 3888)
+
+[node name="mar_shield_01" type="Marker2D" parent="pt_2" groups=["shield"]]
+position = Vector2(2064, 4024)
+
+[node name="mar_shield_02" type="Marker2D" parent="pt_2" groups=["shield"]]
+position = Vector2(744, 4128)
+
+[node name="mar_shield_03" type="Marker2D" parent="pt_2" groups=["shield"]]
+position = Vector2(3600, 3928)
+
+[node name="mar_shield_04" type="Marker2D" parent="pt_2" groups=["shield"]]
+position = Vector2(3592, 4240)

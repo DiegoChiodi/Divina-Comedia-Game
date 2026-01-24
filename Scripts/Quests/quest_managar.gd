@@ -4,15 +4,16 @@ class_name QuestManager
 enum QuestID {
 	INITIAL,
 	BOSS,
-	MOUNTAIN
+	MOUNTAIN,
+	RUN
 }
 
 var quest_types = {
 	QuestID.INITIAL : QuestInitial,
 	QuestID.BOSS : QuestBoss,
-	QuestID.MOUNTAIN : QuestMountain
+	QuestID.MOUNTAIN: QuestMountain,
+	QuestID.RUN : QuestRun
 }
-
 
 
 var current_quest : Quest

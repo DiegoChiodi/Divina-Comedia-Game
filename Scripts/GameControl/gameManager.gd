@@ -14,15 +14,15 @@ enum LevelID {
 }
 
 var level_paths : Dictionary = {
-	LevelID.FOREST_00 : 'res://Scene/Roons/level_forest_00.tscn',
-	LevelID.VESTIBULE_00 : 'res://Scene/Roons/level_vestibule_00.tscn',
-	LevelID.MOUNTAIN_00 : 'res://Scene/Roons/level_mountain_00.tscn'
+	LevelID.FOREST_00 : 'res://Scene/Roons/Levels/level_forest_00.tscn',
+	LevelID.VESTIBULE_00 : 'res://Scene/Roons/Levels/level_vestibule_00.tscn',
+	LevelID.MOUNTAIN_00 : 'res://Scene/Roons/Levels/Mountain/level_mountain_00.tscn'
 }
 
 var marker_names : Dictionary = {
-	MapID.FOREST : 'marker_from_forest',
-	MapID.VESTIBULE:  'marker_from_vestibule',
-	MapID.MOUNTAIN: 'marker_from_mountain'
+	MapID.FOREST :     'marker_from_forest',
+	MapID.VESTIBULE:   'marker_from_vestibule',
+	MapID.MOUNTAIN:    'marker_from_mountain'
 }
 
 var camera : Camera = Camera.new()

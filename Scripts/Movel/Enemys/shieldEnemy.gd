@@ -18,8 +18,8 @@ func are_directions_similar(a: Vector2, b: Vector2, tolerance_degrees: float = 1
 
 	return dot_value >= cos_tolerance
 
-func _process(delta: float) -> void:
-	super._process(delta)
+func _process(_delta: float) -> void:
+	super._process(_delta)
 
 func collidingRival(_body : Player) -> void:
 	var player_dir : Vector2 = self.position.direction_to(_body.position)
@@ -29,9 +29,9 @@ func collidingRival(_body : Player) -> void:
 		return
 	super.collidingRival(_body)
 
-func rotationSet(delta) -> void:
-	if self.seeingPlayer:
-		self.rotation = lerp_angle(self.rotation, (game_manager.player.position - self.position).angle(), delta * 1)
+func rotationSet(_delta) -> void:
+	if self.seeingPlayer and game_manager.player != null:
+		self.rotation = lerp_angle(self.rotation, (game_manager.player.position - self.position).angle(), _delta * 1)
 
 func setDirection() -> Vector2:
 	return lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)
