@@ -57,7 +57,6 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed('n'):
 		quest_manager.questFinish()
-		print('next quest')
 		
 func init(_main : Node2D):
 	self.camera.setup(self.player, null)
@@ -93,12 +92,12 @@ func start_shake(intensity: float, decay: float = 1.0) -> void:
 
 func restartRoom() -> void:
 	var actualMapId = self.roomContainer.currentRoom.map.id
-	
 	startPlayer()
 	self.camera.setup(self.player, null)
 	self.roomContainer.restartRoom(self.level_paths[actualMapId])
 	self.camera.setPosition(self.player.position)
-
+	
+	
 func startPlayer() -> void:
 	if self.player != null:
 		self.player.queue_free()

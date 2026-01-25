@@ -282,7 +282,6 @@ func move_method(_delta : float) -> void:
 		if collision:
 			if self.inDash and self.ricochet:
 				self.ricochetied(collision)
-				print('ricochet')
 				self.ricochet = !self.ricochet_enemy
 					
 				return

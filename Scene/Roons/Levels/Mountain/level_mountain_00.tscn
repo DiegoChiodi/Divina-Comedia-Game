@@ -26,10 +26,10 @@ position = Vector2(944, 5136)
 position = Vector2(2592, 5224)
 
 [node name="mar_ranged_02" type="Marker2D" parent="pt_0" groups=["ranged"]]
-position = Vector2(872, 4904)
+position = Vector2(816, 4952)
 
 [node name="mar_ranged_03" type="Marker2D" parent="pt_0" groups=["ranged"]]
-position = Vector2(624, 5176)
+position = Vector2(688, 5128)
 
 [node name="pt_1" type="Node2D" parent="."]
 
@@ -61,142 +61,140 @@ position = Vector2(3592, 4240)
 position = Vector2(4112, 4088)
 
 [node name="pt_2" type="Node2D" parent="."]
-position = Vector2(4112, 4088)
 
 [node name="mar_ranged_01" type="Marker2D" parent="pt_2" groups=["ranged"]]
-position = Vector2(144, -896)
+position = Vector2(4258, 3202)
 
 [node name="mar_ranged_02" type="Marker2D" parent="pt_2" groups=["ranged"]]
-position = Vector2(464, -904)
+position = Vector2(4578, 3194)
 
 [node name="mar_ranged_03" type="Marker2D" parent="pt_2" groups=["ranged"]]
-position = Vector2(-1192, -784)
+position = Vector2(2922, 3314)
 
 [node name="mar_ranged_04" type="Marker2D" parent="pt_2" groups=["ranged"]]
-position = Vector2(-1368, -856)
+position = Vector2(2746, 3242)
 
 [node name="mar_ranged_05" type="Marker2D" parent="pt_2" groups=["ranged"]]
-position = Vector2(-1376, -728)
+position = Vector2(2738, 3370)
 
 [node name="mar_ranged_06" type="Marker2D" parent="pt_2" groups=["ranged"]]
-position = Vector2(-3008, -872)
+position = Vector2(1106, 3226)
 
 [node name="mar_shield_01" type="Marker2D" parent="pt_2" groups=["shield"]]
-position = Vector2(304, -768)
+position = Vector2(4418, 3330)
 
 [node name="mar_shield_02" type="Marker2D" parent="pt_2" groups=["shield"]]
-position = Vector2(-896, -784)
+position = Vector2(3218, 3314)
 
 [node name="mar_shadow_01" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-744, -720)
+position = Vector2(3370, 3378)
 
 [node name="mar_shadow_02" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-744, -872)
+position = Vector2(3370, 3226)
 
 [node name="mar_shadow_03" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-2520, -840)
+position = Vector2(1594, 3258)
 
 [node name="mar_shadow_04" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-2592, -880)
+position = Vector2(1522, 3218)
 
 [node name="mar_shadow_05" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-2592, -800)
+position = Vector2(1522, 3298)
 
 [node name="mar_shadow_06" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-2696, -896)
+position = Vector2(1418, 3202)
 
 [node name="mar_shadow_07" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-2696, -792)
+position = Vector2(1418, 3306)
 
 [node name="mar_shadow_08" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-2760, -944)
+position = Vector2(1354, 3154)
 
 [node name="mar_shadow_09" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-2776, -824)
+position = Vector2(1338, 3274)
 
 [node name="mar_shadow_10" type="Marker2D" parent="pt_2" groups=["shadow"]]
-position = Vector2(-2760, -728)
+position = Vector2(1354, 3370)
 
 [node name="pt_3" type="Node2D" parent="."]
-position = Vector2(4112, 4088)
 
 [node name="mar_ranged_01" type="Marker2D" parent="pt_3" groups=["ranged"]]
-position = Vector2(-3376, -1272)
+position = Vector2(760, 2808)
 
 [node name="mar_ranged_02" type="Marker2D" parent="pt_3" groups=["ranged"]]
-position = Vector2(-3400, -1480)
+position = Vector2(680, 2616)
 
 [node name="mar_ranged_03" type="Marker2D" parent="pt_3" groups=["ranged"]]
-position = Vector2(-3592, -1592)
+position = Vector2(538, 2498)
 
 [node name="mar_ranged_04" type="Marker2D" parent="pt_3" groups=["ranged"]]
-position = Vector2(-3760, -1480)
+position = Vector2(370, 2610)
 
 [node name="mar_ranged_05" type="Marker2D" parent="pt_3" groups=["ranged"]]
-position = Vector2(-3872, -1280)
+position = Vector2(258, 2810)
 
 [node name="mar_shadow_1" type="Marker2D" parent="pt_3" groups=["shadow"]]
-position = Vector2(-2432, -1432)
+position = Vector2(1688, 2768)
 
 [node name="mar_shadow_2" type="Marker2D" parent="pt_3" groups=["shadow"]]
-position = Vector2(-2480, -1704)
+position = Vector2(1672, 2400)
 
 [node name="mar_confused_01" type="Marker2D" parent="pt_3" groups=["confused"]]
-position = Vector2(-1832, -1560)
+position = Vector2(2272, 2600)
 
 [node name="mar_confused_02" type="Marker2D" parent="pt_3" groups=["confused"]]
-position = Vector2(-584, -1576)
+position = Vector2(3632, 2544)
 
 [node name="mar_confused_03" type="Marker2D" parent="pt_3" groups=["confused"]]
-position = Vector2(-840, -1424)
+position = Vector2(3320, 2672)
 
 [node name="mar_confused_04" type="Marker2D" parent="pt_3" groups=["confused"]]
-position = Vector2(-528, -1392)
+position = Vector2(3672, 2776)
 
 [node name="pt_4" type="Node2D" parent="."]
-position = Vector2(4112, 4088)
+scale = Vector2(1.0088745, 1.0004894)
 
 [node name="mar_shadow_01" type="Marker2D" parent="pt_4" groups=["shadow"]]
-position = Vector2(-2480, -2752)
+position = Vector2(1578, 1282)
 
 [node name="mar_shadow_02" type="Marker2D" parent="pt_4" groups=["shadow"]]
-position = Vector2(-2480, -2064)
+position = Vector2(1578, 1970)
 
 [node name="mar_confused_01" type="Marker2D" parent="pt_4" groups=["confused"]]
-position = Vector2(-2208, -2056)
+position = Vector2(1850, 1978)
 
 [node name="mar_confused_02" type="Marker2D" parent="pt_4" groups=["confused"]]
-position = Vector2(-2240, -2720)
+position = Vector2(1818, 1314)
 
 [node name="mar_confused_03" type="Marker2D" parent="pt_4" groups=["confused"]]
-position = Vector2(80, -2520)
+position = Vector2(4138, 1514)
 
 [node name="mar_ranged_01" type="Marker2D" parent="pt_4" groups=["ranged"]]
-position = Vector2(-2920, -2560)
+position = Vector2(1138, 1474)
 
 [node name="mar_ranged_02" type="Marker2D" parent="pt_4" groups=["ranged"]]
-position = Vector2(-3040, -2400)
+position = Vector2(1018, 1634)
 
 [node name="mar_ranged_03" type="Marker2D" parent="pt_4" groups=["ranged"]]
-position = Vector2(-3032, -2256)
+position = Vector2(1026, 1778)
 
 [node name="mar_ranged_04" type="Marker2D" parent="pt_4" groups=["ranged"]]
-position = Vector2(-2912, -2104)
+position = Vector2(1146, 1930)
 
 [node name="mar_ranged_05" type="Marker2D" parent="pt_4" groups=["ranged"]]
-position = Vector2(552, -2536)
+position = Vector2(4610, 1498)
 
 [node name="mar_ranged_06" type="Marker2D" parent="pt_4" groups=["ranged"]]
-position = Vector2(-408, -2536)
+position = Vector2(3650, 1498)
 
 [node name="mar_shield_01" type="Marker2D" parent="pt_4" groups=["shield"]]
-position = Vector2(496, -2288)
+position = Vector2(4554, 1746)
 
 [node name="mar_shield_02" type="Marker2D" parent="pt_4" groups=["shield"]]
-position = Vector2(-368, -2296)
+position = Vector2(3690, 1738)
 
 [node name="mar_shield_03" type="Marker2D" parent="pt_4" groups=["shield"]]
-position = Vector2(-2672, -2600)
+position = Vector2(1386, 1434)
 
 [node name="mar_shield_04" type="Marker2D" parent="pt_4" groups=["shield"]]
-position = Vector2(-2656, -2168)
+position = Vector2(1402, 1866)
