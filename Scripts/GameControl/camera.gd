@@ -24,6 +24,8 @@ func _ready():
 	self.original_offset = offset  # Armazena a posição original da câmera
 	self.limit_left = 0
 	self.limit_top = 0
+	
+
 
 func _process(_delta):
 	if self.target != null:

@@ -19,3 +19,6 @@ func _process(delta: float) -> void:
 	if player != null:
 		par_wind.emitting = player.position.y < self.control_wind.position.y
 		par_snow.emitting = player.position.y < self.control_snow.position.y
+
+func _on_enter_top_mountain_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.

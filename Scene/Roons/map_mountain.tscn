@@ -1566,6 +1566,20 @@ tile_set = SubResource("TileSet_8hgu1")
 [node name="roomSize" type="Marker2D" parent="."]
 position = Vector2(4848, 5688)
 
+[node name="EnterTopMountain" type="Area2D" parent="."]
+position = Vector2(200, 904)
+
+[node name="ColorRect" type="ColorRect" parent="EnterTopMountain"]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 24.0
+offset_bottom = 24.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTopMountain"]
+position = Vector2(-8, -8)
+shape = SubResource("RectangleShape2D_dpv2l")
+
 [node name="EnterVestibule" type="Area2D" parent="."]
 position = Vector2(4328, 5664)
 
@@ -1643,4 +1657,9 @@ scale = Vector2(2.2663283, 1.4183728)
 position = Vector2(3048, 3304)
 scale = Vector2(2.2663283, 1.4183728)
 
+[node name="WarningTower9" parent="." instance=ExtResource("13_sv2qq")]
+position = Vector2(752, 5112)
+scale = Vector2(2.2883222, -2.0367053)
+
+[connection signal="area_entered" from="EnterTopMountain" to="." method="_on_enter_top_mountain_area_entered"]
 [connection signal="area_entered" from="EnterVestibule" to="." method="_on_enter_vestibule_area_entered"]

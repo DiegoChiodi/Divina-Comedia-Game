@@ -4,9 +4,6 @@ class_name QuestInitial
 const ENEMYSMAX : int = 3
 var enemys_dead : int = 0
 
-func _ready() -> void:
-	self.id = QuestManager.QuestID.INITIAL
-
 func on_level_loaded (_level: Level) -> void:
 	if _level is Level_Florest_00:
 		_level.init_quest_initial()

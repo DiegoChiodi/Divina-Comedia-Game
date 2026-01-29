@@ -6,9 +6,6 @@ var enemys_dead : int = 0
 
 var actual_pt : int = 0
 
-func _ready() -> void:
-	self.id = QuestManager.QuestID.MOUNTAIN
-
 func on_level_loaded (_level: Level) -> void:
 	if _level is Level_Moutain_00:
 		self.enemys_dead = 0

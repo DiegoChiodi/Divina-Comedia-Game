@@ -38,7 +38,6 @@ func _ready() -> void:
 	windowsConf()
 	process_mode = self.PROCESS_MODE_ALWAYS
 
-
 func _process(_delta: float) -> void:
 	if Input.is_action_just_released("restart"):
 		restartRoom()
