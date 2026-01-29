@@ -21,4 +21,5 @@ func _process(delta: float) -> void:
 		par_snow.emitting = player.position.y < self.control_snow.position.y
 
 func _on_enter_top_mountain_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.
+	if area.get_parent() is Player:
+		game_manager.change_room(GameManager.LevelID.TOP_MOUNTAIN_00)

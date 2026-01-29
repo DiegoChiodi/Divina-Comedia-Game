@@ -1567,7 +1567,7 @@ tile_set = SubResource("TileSet_8hgu1")
 position = Vector2(4848, 5688)
 
 [node name="EnterTopMountain" type="Area2D" parent="."]
-position = Vector2(200, 904)
+position = Vector2(3904, 5560)
 
 [node name="ColorRect" type="ColorRect" parent="EnterTopMountain"]
 offset_left = -40.0
@@ -1579,6 +1579,9 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTopMountain"]
 position = Vector2(-8, -8)
 shape = SubResource("RectangleShape2D_dpv2l")
+
+[node name="marker_from_top_mountain" type="Marker2D" parent="."]
+position = Vector2(3896, 5456)
 
 [node name="EnterVestibule" type="Area2D" parent="."]
 position = Vector2(4328, 5664)

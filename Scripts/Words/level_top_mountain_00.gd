@@ -1,0 +1,2 @@
+extends Level
+class_name Level_Top_Mountain_00

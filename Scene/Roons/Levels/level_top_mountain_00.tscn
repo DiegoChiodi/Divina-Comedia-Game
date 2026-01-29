@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlkcgvv4eywe4"]
+
+[ext_resource type="PackedScene" uid="uid://drd0iwaxayuk5" path="res://Scene/Roons/map_top_mountain.tscn" id="1_53oxa"]
+[ext_resource type="Script" uid="uid://byrj2psi1ajcc" path="res://Scripts/Words/level_top_mountain_00.gd" id="1_vo8p8"]
+
+[node name="level_top_mountain_00" type="Node2D"]
+script = ExtResource("1_vo8p8")
+
+[node name="map" parent="." instance=ExtResource("1_53oxa")]

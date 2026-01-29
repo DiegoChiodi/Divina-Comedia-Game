@@ -16,5 +16,5 @@ func setRoomSize() -> void:
 		game_manager.camera.setLimit(self.roomSize)
 		global.roomLimit = self.roomSize
 
-func out_bounds() -> void:
-	self.position = self.position.clamp(Vector2.ZERO, global.roomLimit)
+func out_bounds(body : Entity) -> void:
+	body.position = body.position.clamp(Vector2.ZERO, global.roomLimit)

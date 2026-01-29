@@ -4,25 +4,29 @@ class_name GameManager
 enum MapID {
 	FOREST,
 	VESTIBULE,
-	MOUNTAIN
+	MOUNTAIN,
+	TOP_MOUNTAIN
 }
 
 enum LevelID {
 	FOREST_00,
 	VESTIBULE_00,
-	MOUNTAIN_00
+	MOUNTAIN_00,
+	TOP_MOUNTAIN_00
 }
 
 var level_paths : Dictionary = {
 	LevelID.FOREST_00 : 'res://Scene/Roons/Levels/level_forest_00.tscn',
 	LevelID.VESTIBULE_00 : 'res://Scene/Roons/Levels/level_vestibule_00.tscn',
-	LevelID.MOUNTAIN_00 : 'res://Scene/Roons/Levels/Mountain/level_mountain_00.tscn'
+	LevelID.MOUNTAIN_00 : 'res://Scene/Roons/Levels/level_mountain_00.tscn',
+	LevelID.TOP_MOUNTAIN_00 : 'res://Scene/Roons/Levels/level_top_mountain_00.tscn'
 }
 
 var marker_names : Dictionary = {
 	MapID.FOREST :     'marker_from_forest',
 	MapID.VESTIBULE:   'marker_from_vestibule',
-	MapID.MOUNTAIN:    'marker_from_mountain'
+	MapID.MOUNTAIN:    'marker_from_mountain',
+	MapID.TOP_MOUNTAIN:'marker_from_top_mountain'
 }
 
 var camera : Camera = Camera.new()
