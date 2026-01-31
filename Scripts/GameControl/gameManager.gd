@@ -97,8 +97,10 @@ func restartRoom() -> void:
 	var actualMapId = self.roomContainer.currentRoom.map.id
 	startPlayer()
 	self.camera.setup(self.player, null)
+	self.camera.zoomTarget = Vector2(1.0,1.0)
 	self.roomContainer.restartRoom(self.level_paths[actualMapId])
-	self.camera.setPosition(self.player.position)
+	self.camera.position = self.player.position
+	
 	
 	
 func startPlayer() -> void:
@@ -110,8 +112,10 @@ func startPlayer() -> void:
 	self.add_child(self.player)
 
 func change_room(_map_id) -> void:
+	self.camera.zoomTarget = Vector2(1.0,1.0)
 	self.roomContainer.call_deferred("change_room", self.level_paths[_map_id])
-	self.camera.setPosition(self.player.position)
+	self.camera.position = self.player.position
+	
 
 func entityDead(_entity : Entity) -> void:
 	if _entity is Enemy:

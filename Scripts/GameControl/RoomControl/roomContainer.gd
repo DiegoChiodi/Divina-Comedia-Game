@@ -37,14 +37,14 @@ func restartRoom(path: String) -> void:
 func posPlayerSpawn() -> void:
 	var mark_position = self.currentRoom.map.get_node("player_spawn").position
 	game_manager.player.set_deferred("position", mark_position)
-	game_manager.camera.setPosition(mark_position)
+	game_manager.camera.global_position = mark_position
 
 func posPlayerPreviousRomm() -> void:
 	var marker_name = game_manager.marker_names[previousMapId]
 	var marker : Marker2D = self.currentRoom.map.get_node(marker_name)
 	var mark_position = marker.position
 	game_manager.player.set_deferred("position", mark_position)
-	game_manager.camera.setPosition(mark_position)
+	game_manager.camera.position = mark_position
 
 func positionPlayer() -> void:
 	if self.inInit: #Inicío do jogo, previousMapId = null
@@ -64,3 +64,4 @@ func positionPlayer() -> void:
 		self.previousMapId = self.previousCurrentRoomTemp
 	posPlayerPreviousRomm()
 	self.restart = false
+	
