@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://1w0623pfg2ms"]
+
+[ext_resource type="Script" uid="uid://btfg6cyhrwy8u" path="res://Scripts/Movel/Enemys/Boss/beasts_manager.gd" id="1_ceuve"]
+[ext_resource type="PackedScene" uid="uid://b4ao3vpk0s1ao" path="res://Scene/Enemys/Beasts/panther.tscn" id="2_w8kw0"]
+[ext_resource type="PackedScene" uid="uid://dq21u5tcf4e5w" path="res://Scene/Enemys/Beasts/lion.tscn" id="3_6pjin"]
+[ext_resource type="PackedScene" uid="uid://ptabs5givuy2" path="res://Scene/Enemys/Beasts/wolf.tscn" id="4_h2vht"]
+
+[node name="beasts" type="Node2D"]
+rotation = -6.2831855
+script = ExtResource("1_ceuve")
+
+[node name="panther" parent="." instance=ExtResource("2_w8kw0")]
+position = Vector2(-5.4551812e-05, 312)
+
+[node name="lion" parent="." instance=ExtResource("3_6pjin")]
+position = Vector2(312, 56.000053)
+
+[node name="wolf" parent="." instance=ExtResource("4_h2vht")]
+position = Vector2(-312, 55.999947)

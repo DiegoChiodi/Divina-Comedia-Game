@@ -7,3 +7,6 @@
 script = ExtResource("1_vo8p8")
 
 [node name="map" parent="." instance=ExtResource("1_53oxa")]
+
+[node name="mar_beasts_spawn" type="Marker2D" parent="."]
+position = Vector2(704, 96)
