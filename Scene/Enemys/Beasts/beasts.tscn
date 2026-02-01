@@ -10,10 +10,10 @@ rotation = -6.2831855
 script = ExtResource("1_ceuve")
 
 [node name="panther" parent="." instance=ExtResource("2_w8kw0")]
-position = Vector2(-5.4551812e-05, 312)
+position = Vector2(-4.476046e-05, 256)
 
 [node name="lion" parent="." instance=ExtResource("3_6pjin")]
-position = Vector2(312, 56.000053)
+position = Vector2(216.00003, -127.99996)
 
 [node name="wolf" parent="." instance=ExtResource("4_h2vht")]
-position = Vector2(-312, 55.999947)
+position = Vector2(-223.99998, -128.00005)

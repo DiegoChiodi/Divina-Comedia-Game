@@ -1,25 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://ptabs5givuy2"]
+[gd_scene load_steps=3 format=3 uid="uid://ptabs5givuy2"]
 
 [ext_resource type="Script" uid="uid://bbvq0u2sj4wvo" path="res://Scripts/Movel/Enemys/Boss/beast_base.gd" id="1_kg31o"]
+[ext_resource type="Texture2D" uid="uid://boam2wb5mmejc" path="res://Assets/sprites/wolf.png" id="2_gekwf"]
 
 [node name="wolf" type="Node2D"]
 script = ExtResource("1_kg31o")
-
-[node name="clr_head" type="ColorRect" parent="."]
-offset_left = -56.0
-offset_top = -56.0
-offset_right = 56.0
-offset_bottom = 56.0
-color = Color(0.62152386, 0.62152386, 0.6215238, 1)
 
 [node name="clr_left_hand" type="ColorRect" parent="."]
 offset_left = -128.0
 offset_top = 80.0
 offset_right = -80.0
 offset_bottom = 128.0
+color = Color(0.49411765, 0.5647059, 0.6039216, 1)
 
 [node name="clr_right_hand" type="ColorRect" parent="."]
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 128.0
 offset_bottom = 128.0
+color = Color(0.49411765, 0.5647059, 0.6039216, 1)
+
+[node name="Wolf" type="Sprite2D" parent="."]
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("2_gekwf")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
