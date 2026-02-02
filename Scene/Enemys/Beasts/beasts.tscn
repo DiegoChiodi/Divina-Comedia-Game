@@ -17,3 +17,9 @@ position = Vector2(216.00003, -127.99996)
 
 [node name="wolf" parent="." instance=ExtResource("4_h2vht")]
 position = Vector2(-223.99998, -128.00005)
+
+[node name="mar_next_beast" type="Marker2D" parent="."]
+position = Vector2(216.00002, -127.99996)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-575.9997, -1600.0001)

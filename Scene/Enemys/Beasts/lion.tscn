@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dq21u5tcf4e5w"]
 
-[ext_resource type="Script" uid="uid://bbvq0u2sj4wvo" path="res://Scripts/Movel/Enemys/Boss/beast_base.gd" id="1_vvnnm"]
+[ext_resource type="Script" uid="uid://ba51wkn2gxr0m" path="res://Scripts/Movel/Enemys/Boss/lion.gd" id="1_4r4tq"]
 [ext_resource type="Texture2D" uid="uid://dtwyp8qhm1ht5" path="res://Assets/sprites/lion.png" id="2_4r4tq"]
 
 [node name="lion" type="Node2D"]
-script = ExtResource("1_vvnnm")
+script = ExtResource("1_4r4tq")
 
 [node name="clr_left_hand" type="ColorRect" parent="."]
 offset_left = -128.0

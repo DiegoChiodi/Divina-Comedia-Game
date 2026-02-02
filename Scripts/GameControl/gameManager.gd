@@ -72,6 +72,7 @@ func init(_main : Node2D):
 	_main.add_child(self.ui)
 	self.roomContainer.load_room(self.level_paths[LevelID.FOREST_00])
 	_main.add_child(roomContainer)
+	randomize()
 	
 
 func center_window(new_size: Vector2i):
