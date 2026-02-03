@@ -1567,7 +1567,7 @@ tile_set = SubResource("TileSet_8hgu1")
 position = Vector2(4848, 5688)
 
 [node name="EnterTopMountain" type="Area2D" parent="."]
-position = Vector2(3904, 5560)
+position = Vector2(4080, 5320)
 
 [node name="ColorRect" type="ColorRect" parent="EnterTopMountain"]
 offset_left = -40.0
