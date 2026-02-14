@@ -1,38 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4ao3vpk0s1ao"]
+[gd_scene format=3 uid="uid://b4ao3vpk0s1ao"]
 
 [ext_resource type="Script" uid="uid://tvjiuc2tp37v" path="res://Scripts/Movel/Enemys/Boss/panther.gd" id="1_5n7be"]
 [ext_resource type="Texture2D" uid="uid://baatle6rnkg4p" path="res://Assets/sprites/panther.png" id="2_5n7be"]
+[ext_resource type="Script" uid="uid://c45gd6ktrk8b0" path="res://Scripts/path_2d.gd" id="3_wbhso"]
 
-[sub_resource type="Curve2D" id="Curve2D_5n7be"]
+[sub_resource type="Curve2D" id="Curve2D_5jwa5"]
 _data = {
-"points": PackedVector2Array(92.6526, 34.271057, -92.6526, -34.271057, -104, 96, 55.51822, -13.487381, -55.51822, 13.487381, -288, 59.42857, 0, 0, 0, 0, -312, 141.14285, -105.167946, 14.029751, 105.167946, -14.029751, -192, 185.71428, 0, 0, 0, 0, -72.00001, 163.42857, 0, 0, 0, 0, 152, 208)
+"points": PackedVector2Array(0, 0, 0, 0, -129.77092, 51.07143, 0, 0, 0, 0, -512.9251, 65.92857, 0, 0, 0, 0, -150.72467, 397.4286, 0, 0, 0, 0, -49.947124, 299.9286, 0, 0, 0, 0, -85.867836, 140.2143, 0, 0, 0, 0, -129.77092, 51.07143)
 }
 point_count = 6
 
-[node name="panther" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_wbhso"]
+_data = {
+"points": PackedVector2Array(171.54063, 12.326817, 0, 0, -104, 96, 136.5919, 58.687614, -136.5919, -58.687614, -369, 61.285713, 0, 0, 0, 0, -481, 210.7857, 0, 0, 0, 0, -26.000008, 317.5714, 151.94582, -45.322803, -151.94582, 45.322803, -104, 96)
+}
+point_count = 5
+
+[node name="panther" type="Node2D" unique_id=1435477022]
 script = ExtResource("1_5n7be")
 
-[node name="clr_left_hand" type="ColorRect" parent="."]
-offset_left = -128.0
-offset_top = 80.0
-offset_right = -80.0
-offset_bottom = 128.0
-color = Color(0.27058825, 0.25882354, 0.38431373, 1)
-
-[node name="clr_right_hand" type="ColorRect" parent="."]
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 128.0
-offset_bottom = 128.0
-color = Color(0.27058825, 0.25882354, 0.38431373, 1)
-
-[node name="Panther" type="Sprite2D" parent="."]
+[node name="Panther" type="Sprite2D" parent="." unique_id=571474953]
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("2_5n7be")
 region_enabled = true
 region_rect = Rect2(0, 0, 92, 96)
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="path_left_hand" type="Path2D" parent="." unique_id=1881339681]
+self_modulate = Color(1, 0, 1, 1)
+position = Vector2(1.0573807, 0)
+scale = Vector2(1.0022075, 1.0769231)
+curve = SubResource("Curve2D_5jwa5")
+script = ExtResource("3_wbhso")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="path_left_hand" unique_id=635233665]
+position = Vector2(-129.77092, 51.07143)
+rotation = 2.9570212
+rotates = false
+
+[node name="clr_left_hand" type="ColorRect" parent="path_left_hand/PathFollow2D" unique_id=1472411454 groups=["hand"]]
+offset_left = 19.051414
+offset_top = 26.163994
+offset_right = 67.051414
+offset_bottom = 74.163994
+color = Color(0.27058825, 0.25882354, 0.38431373, 1)
+
+[node name="path_right_hand" type="Path2D" parent="." unique_id=1337319009]
+self_modulate = Color(1, 0, 1, 1)
 position = Vector2(7.6293945e-06, 0)
-scale = Vector2(1, 1.0769231)
-curve = SubResource("Curve2D_5n7be")
+scale = Vector2(-1, 1.077)
+curve = SubResource("Curve2D_wbhso")
+script = ExtResource("3_wbhso")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="path_right_hand" unique_id=1218675972]
+position = Vector2(-104, 96)
+rotation = 2.9570212
+rotates = false
+
+[node name="clr_right_hand" type="ColorRect" parent="path_right_hand/PathFollow2D" unique_id=1470409652 groups=["hand"]]
+offset_left = 19.051414
+offset_top = 26.163994
+offset_right = 67.051414
+offset_bottom = 74.163994
+color = Color(0.27058825, 0.25882354, 0.38431373, 1)

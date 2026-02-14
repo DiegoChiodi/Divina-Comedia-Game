@@ -11,13 +11,12 @@ var duration := 1.0
 @onready var beasts : Array[BeastBase] = [self.panther, self.lion, self.wolf]
 
 func _ready() -> void:
-	for beast in beasts:
+	for beast in self.beasts:
 		beast.setup(self)
-	beasts[0].start_attack()
+	self.beasts[0].start_attack()
 
 func _process(_delta : float):
 	self.beasts[0].attacking(_delta)
-	trading_beast(_delta)
 
 func trading_beast(_delta : float) -> void:
 	var weight = _delta / self.duration
