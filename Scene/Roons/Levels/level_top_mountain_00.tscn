@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlkcgvv4eywe4"]
+[gd_scene format=3 uid="uid://dlkcgvv4eywe4"]
 
 [ext_resource type="PackedScene" uid="uid://drd0iwaxayuk5" path="res://Scene/Roons/map_top_mountain.tscn" id="1_53oxa"]
 [ext_resource type="Script" uid="uid://byrj2psi1ajcc" path="res://Scripts/Words/level_top_mountain_00.gd" id="1_vo8p8"]
 
-[node name="level_top_mountain_00" type="Node2D"]
+[node name="level_top_mountain_00" type="Node2D" unique_id=1267111287]
 script = ExtResource("1_vo8p8")
 
-[node name="map" parent="." instance=ExtResource("1_53oxa")]
+[node name="map" parent="." unique_id=642389121 instance=ExtResource("1_53oxa")]
 
-[node name="mar_beasts_spawn" type="Marker2D" parent="."]
+[node name="mar_beasts_spawn" type="Marker2D" parent="." unique_id=1764267472]
 position = Vector2(704, -128)

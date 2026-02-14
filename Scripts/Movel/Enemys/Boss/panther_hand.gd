@@ -1,0 +1,39 @@
+extends Node2D
+class_name PantherHand
+
+var dir : Vector2 = Vector2.ZERO
+var attack_speed : float = 200.0
+var attack_speed_fix : float = 100.0
+var attack_speed_target : float = 2000.0
+var punchs : int = 3
+var end_attack_1 : bool = false
+var attack_cou : float = 0.0
+var attack_cou_fix : float = 0.0
+var mar_ambush : Marker2D
+
+
+func setup(_mar_ambush : Marker2D):
+	self.mar_ambush = _mar_ambush
+	
+func in_attack_1 (_delta : float) -> void:
+	if self.punchs > 0:
+		if self.attack_cou < 0.8:
+			self.global_position = self.global_position.lerp(self.mar_ambush.global_position, 3 * _delta)
+			self.scale = self.scale.lerp(Vector2.ONE * 2.5, 3 * _delta)
+			self.attack_speed = self.attack_speed_fix
+			self.dir = (game_manager.player.global_position - self.global_position).normalized()
+		elif !self.end_attack_1:
+			self.attack_speed = lerp(self.attack_speed, self.attack_speed_target, 10 * _delta)
+			self.position += self.attack_speed * _delta * self.dir
+		else:
+			self.global_position = self.global_position.lerp(self.mar_ambush.global_position, 3 * _delta)
+			if self.attack_cou_fix + 1.0 < self.attack_cou:
+				self.attack_cou = 0.0
+				self.punchs -= 1
+				self.end_attack_1 = false
+		
+		if not Rect2(Vector2.ZERO, global.roomLimit).has_point(self.global_position):
+			self.end_attack_1 = true
+			self.attack_cou_fix = self.attack_cou
+		
+		self.attack_cou += _delta

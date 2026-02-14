@@ -1,25 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://1w0623pfg2ms"]
+[gd_scene format=3 uid="uid://1w0623pfg2ms"]
 
 [ext_resource type="Script" uid="uid://btfg6cyhrwy8u" path="res://Scripts/Movel/Enemys/Boss/beasts_manager.gd" id="1_ceuve"]
 [ext_resource type="PackedScene" uid="uid://b4ao3vpk0s1ao" path="res://Scene/Enemys/Beasts/panther.tscn" id="2_w8kw0"]
 [ext_resource type="PackedScene" uid="uid://dq21u5tcf4e5w" path="res://Scene/Enemys/Beasts/lion.tscn" id="3_6pjin"]
 [ext_resource type="PackedScene" uid="uid://ptabs5givuy2" path="res://Scene/Enemys/Beasts/wolf.tscn" id="4_h2vht"]
 
-[node name="beasts" type="Node2D"]
-rotation = -6.2831855
+[node name="beasts" type="Node2D" unique_id=1198893125]
 script = ExtResource("1_ceuve")
 
-[node name="panther" parent="." instance=ExtResource("2_w8kw0")]
+[node name="mar_ambush_l" type="Marker2D" parent="." unique_id=776146039]
+position = Vector2(-512.00006, 255.99991)
+
+[node name="mar_ambush_r" type="Marker2D" parent="." unique_id=823936100]
+position = Vector2(511.99997, 256.0001)
+
+[node name="panther" parent="." unique_id=1316271090 instance=ExtResource("2_w8kw0")]
 position = Vector2(-4.476046e-05, 256)
 
-[node name="lion" parent="." instance=ExtResource("3_6pjin")]
+[node name="lion" parent="." unique_id=612878331 instance=ExtResource("3_6pjin")]
 position = Vector2(216.00003, -127.99996)
 
-[node name="wolf" parent="." instance=ExtResource("4_h2vht")]
+[node name="wolf" parent="." unique_id=1953930706 instance=ExtResource("4_h2vht")]
 position = Vector2(-223.99998, -128.00005)
 
-[node name="mar_next_beast" type="Marker2D" parent="."]
+[node name="mar_next_beast" type="Marker2D" parent="." unique_id=83719154]
 position = Vector2(216.00002, -127.99996)
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Marker2D" type="Marker2D" parent="." unique_id=2001779264]
 position = Vector2(-575.9997, -1600.0001)
