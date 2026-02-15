@@ -3,8 +3,18 @@
 [ext_resource type="Script" uid="uid://tvjiuc2tp37v" path="res://Scripts/Movel/Enemys/Boss/panther.gd" id="1_5n7be"]
 [ext_resource type="Texture2D" uid="uid://baatle6rnkg4p" path="res://Assets/sprites/panther.png" id="2_5n7be"]
 [ext_resource type="Script" uid="uid://7oskqm51nlpm" path="res://Scripts/Movel/Enemys/Boss/panther_hand.gd" id="3_wbhso"]
+[ext_resource type="Script" uid="uid://74tv5mbiou2s" path="res://Scripts/spike.gd" id="4_5jwa5"]
 
-[node name="panther" type="Node2D" unique_id=1435477022]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5jwa5"]
+size = Vector2(48, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl8yy"]
+size = Vector2(48, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbhso"]
+size = Vector2(128, 128)
+
+[node name="panther" type="Node2D" unique_id=1435477022 groups=["Enemy"]]
 script = ExtResource("1_5n7be")
 
 [node name="Panther" type="Sprite2D" parent="." unique_id=571474953]
@@ -13,7 +23,7 @@ texture = ExtResource("2_5n7be")
 region_enabled = true
 region_rect = Rect2(0, 0, 92, 96)
 
-[node name="hand_right" type="Node2D" parent="." unique_id=1035724413]
+[node name="hand_right" type="Node2D" parent="." unique_id=1035724413 groups=["Enemy", "spike"]]
 position = Vector2(104, 104)
 script = ExtResource("3_wbhso")
 
@@ -26,7 +36,13 @@ tooltip_text = "
 "
 color = Color(0.27058825, 0.25882354, 0.38431373, 1)
 
-[node name="hand_left" type="Node2D" parent="." unique_id=978076932]
+[node name="are_hbAttack" type="Area2D" parent="hand_right" unique_id=2015710595 groups=["hbAttack"]]
+script = ExtResource("4_5jwa5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hand_right/are_hbAttack" unique_id=1631970510]
+shape = SubResource("RectangleShape2D_5jwa5")
+
+[node name="hand_left" type="Node2D" parent="." unique_id=978076932 groups=["Enemy", "spike"]]
 position = Vector2(-104, 104)
 script = ExtResource("3_wbhso")
 
@@ -36,3 +52,15 @@ offset_top = -24.0
 offset_right = 24.0
 offset_bottom = 24.0
 color = Color(0.27058825, 0.25882354, 0.38431373, 1)
+
+[node name="are_hbAttack" type="Area2D" parent="hand_left" unique_id=749242694 groups=["hbAttack"]]
+script = ExtResource("4_5jwa5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hand_left/are_hbAttack" unique_id=1596717966]
+shape = SubResource("RectangleShape2D_jl8yy")
+
+[node name="are_hbTakeDamage" type="Area2D" parent="." unique_id=875225963 groups=["Enemy"]]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage" unique_id=1838516714]
+shape = SubResource("RectangleShape2D_wbhso")

@@ -41,6 +41,6 @@ func in_attack_1 (_delta : float) -> void:
 		self.attack_cou += _delta
 
 func end_attack(_delta : float) -> void:
-	self.global_position = self.global_position.lerp(self.mar_relax.global_position, 3 * _delta)
+	self.position = self.position.lerp(self.mar_relax.position, 3 * _delta)
 	self.scale = self.scale.lerp(Vector2.ONE, 3 * _delta)
 	self.attack_speed = self.attack_speed_fix

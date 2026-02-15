@@ -90,6 +90,9 @@ func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 		self.dash_intangible_col()
 	elif parent is Projectile:
 		self.colliding_projectile(parent)
+	elif area is Spike:
+		self.takeAttack((self.position - area.position).normalized(), area.damage)
+		print('a')
 
 
 func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:

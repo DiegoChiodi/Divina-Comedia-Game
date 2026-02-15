@@ -36,6 +36,7 @@ Player=""
 Enemy=""
 Object=""
 intangibleDash=""
+spike=""
 
 [input]
 

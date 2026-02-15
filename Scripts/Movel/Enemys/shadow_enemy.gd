@@ -45,7 +45,7 @@ func detectPlayer() -> void:
 func takeDamage(_damage : float) -> void:
 	super.takeDamage(_damage)
 	self.body.modulate.a = min(life / lifeMax * 2, 0.8) 
-	self.eyes.modulate.a = (lifeMax / life) / 8
+	self.eyes.modulate.a = (lifeMax / life) / 8.0
 	
 func setDirection() -> Vector2:
 	return to_local(nav_agent.get_next_path_position()).normalized()
