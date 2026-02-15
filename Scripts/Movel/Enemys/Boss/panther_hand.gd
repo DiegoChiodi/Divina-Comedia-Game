@@ -5,15 +5,17 @@ var dir : Vector2 = Vector2.ZERO
 var attack_speed : float = 200.0
 var attack_speed_fix : float = 100.0
 var attack_speed_target : float = 2000.0
-var punchs : int = 3
+var punchs : int = 2
 var end_attack_1 : bool = false
 var attack_cou : float = 0.0
 var attack_cou_fix : float = 0.0
 var mar_ambush : Marker2D
+var mar_relax : Marker2D
 
 
-func setup(_mar_ambush : Marker2D):
+func setup(_mar_ambush : Marker2D, _mar_relax : Marker2D):
 	self.mar_ambush = _mar_ambush
+	self.mar_relax = _mar_relax
 	
 func in_attack_1 (_delta : float) -> void:
 	if self.punchs > 0:
@@ -37,3 +39,8 @@ func in_attack_1 (_delta : float) -> void:
 			self.attack_cou_fix = self.attack_cou
 		
 		self.attack_cou += _delta
+
+func end_attack(_delta : float) -> void:
+	self.global_position = self.global_position.lerp(self.mar_relax.global_position, 3 * _delta)
+	self.scale = self.scale.lerp(Vector2.ONE, 3 * _delta)
+	self.attack_speed = self.attack_speed_fix

@@ -13,11 +13,15 @@ var attacks_poss : int = 2
 
 var mar_ambush_r : Marker2D
 var mar_ambush_l : Marker2D
+var mar_relax_r : Marker2D
+var mar_relax_l : Marker2D
 
-func setup(_beast_manager : BeastsManager, _mar_ambush_r : Marker2D, _mar_ambush_l : Marker2D) -> void:
+func setup(_beast_manager : BeastsManager, _mar_ambush_r : Marker2D, _mar_ambush_l : Marker2D, _mar_relax_r : Marker2D, _mar_relax_l : Marker2D) -> void:
 	self.beast_manager = _beast_manager
 	self.mar_ambush_r = _mar_ambush_r
 	self.mar_ambush_l = _mar_ambush_l
+	self.mar_relax_l = _mar_relax_l
+	self.mar_relax_r = _mar_relax_r
 
 func _ready() -> void:
 	pass
@@ -26,7 +30,7 @@ func _process(_delta: float) -> void:
 	self.global_rotation = 0
 
 func start_attack () -> void:
-	self.attack_actual = randi() % self.attacks_poss + 1
+	self.attack_actual = 1 #+ randi() % self.attacks_poss
 
 func attacking(_delta : float) -> void:
 	match self.attack_actual:

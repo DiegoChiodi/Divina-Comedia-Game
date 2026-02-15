@@ -1,27 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://ptabs5givuy2"]
+[gd_scene format=3 uid="uid://ptabs5givuy2"]
 
 [ext_resource type="Script" uid="uid://dl21mij5nbdac" path="res://Scripts/Movel/Enemys/Boss/wolf.gd" id="1_gekwf"]
 [ext_resource type="Texture2D" uid="uid://boam2wb5mmejc" path="res://Assets/sprites/wolf.png" id="2_gekwf"]
 
-[node name="wolf" type="Node2D"]
+[node name="wolf" type="Node2D" unique_id=1010971644]
 script = ExtResource("1_gekwf")
 
-[node name="clr_left_hand" type="ColorRect" parent="."]
-offset_left = -128.0
-offset_top = 80.0
-offset_right = -80.0
-offset_bottom = 128.0
-color = Color(0.49411765, 0.5647059, 0.6039216, 1)
-
-[node name="clr_right_hand" type="ColorRect" parent="."]
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 128.0
-offset_bottom = 128.0
-color = Color(0.49411765, 0.5647059, 0.6039216, 1)
-
-[node name="Wolf" type="Sprite2D" parent="."]
+[node name="Wolf" type="Sprite2D" parent="." unique_id=707482454]
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_gekwf")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
+
+[node name="hand_right" type="Node2D" parent="." unique_id=1341019590]
+position = Vector2(104, 104)
+
+[node name="clr_right_hand" type="ColorRect" parent="hand_right" unique_id=606515017]
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+color = Color(0.49411765, 0.5647059, 0.6039216, 1)
+
+[node name="hand_left" type="Node2D" parent="." unique_id=324101121]
+position = Vector2(-104, 104)
+
+[node name="clr_left_hand" type="ColorRect" parent="hand_left" unique_id=1497300120]
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+color = Color(0.49411765, 0.5647059, 0.6039216, 1)

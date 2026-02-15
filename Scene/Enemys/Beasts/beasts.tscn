@@ -23,8 +23,8 @@ position = Vector2(216.00003, -127.99996)
 [node name="wolf" parent="." unique_id=1953930706 instance=ExtResource("4_h2vht")]
 position = Vector2(-223.99998, -128.00005)
 
-[node name="mar_next_beast" type="Marker2D" parent="." unique_id=83719154]
-position = Vector2(216.00002, -127.99996)
+[node name="mar_relax_l" type="Marker2D" parent="." unique_id=2057644693]
+position = Vector2(-104, 360)
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=2001779264]
-position = Vector2(-575.9997, -1600.0001)
+[node name="mar_relax_r" type="Marker2D" parent="." unique_id=47861251]
+position = Vector2(104, 360)

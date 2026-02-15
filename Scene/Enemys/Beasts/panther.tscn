@@ -14,7 +14,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 92, 96)
 
 [node name="hand_right" type="Node2D" parent="." unique_id=1035724413]
-position = Vector2(168, 104)
+position = Vector2(104, 104)
 script = ExtResource("3_wbhso")
 
 [node name="clr_right_hand" type="ColorRect" parent="hand_right" unique_id=1470409652 groups=["hand"]]
@@ -27,7 +27,7 @@ tooltip_text = "
 color = Color(0.27058825, 0.25882354, 0.38431373, 1)
 
 [node name="hand_left" type="Node2D" parent="." unique_id=978076932]
-position = Vector2(-168, 104)
+position = Vector2(-104, 104)
 script = ExtResource("3_wbhso")
 
 [node name="clr_left_hand" type="ColorRect" parent="hand_left" unique_id=255576187 groups=["hand"]]

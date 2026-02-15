@@ -1,27 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://dq21u5tcf4e5w"]
+[gd_scene format=3 uid="uid://dq21u5tcf4e5w"]
 
 [ext_resource type="Script" uid="uid://ba51wkn2gxr0m" path="res://Scripts/Movel/Enemys/Boss/lion.gd" id="1_4r4tq"]
 [ext_resource type="Texture2D" uid="uid://dtwyp8qhm1ht5" path="res://Assets/sprites/lion.png" id="2_4r4tq"]
 
-[node name="lion" type="Node2D"]
+[node name="lion" type="Node2D" unique_id=1462392226]
 script = ExtResource("1_4r4tq")
 
-[node name="clr_left_hand" type="ColorRect" parent="."]
-offset_left = -128.0
-offset_top = 80.0
-offset_right = -80.0
-offset_bottom = 128.0
-color = Color(0.8745098, 0.44313726, 0.14901961, 1)
-
-[node name="clr_right_hand" type="ColorRect" parent="."]
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 128.0
-offset_bottom = 128.0
-color = Color(0.8745098, 0.44313726, 0.14901961, 1)
-
-[node name="Lion" type="Sprite2D" parent="."]
+[node name="Lion" type="Sprite2D" parent="." unique_id=1749525844]
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_4r4tq")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
+
+[node name="hand_right" type="Node2D" parent="." unique_id=1795477697]
+position = Vector2(104, 104)
+
+[node name="clr_right_hand" type="ColorRect" parent="hand_right" unique_id=1430285661]
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+color = Color(0.8745098, 0.44313726, 0.14901961, 1)
+
+[node name="hand_left" type="Node2D" parent="." unique_id=1232844406]
+position = Vector2(-104, 104)
+
+[node name="clr_left_hand" type="ColorRect" parent="hand_left" unique_id=616188525]
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+color = Color(0.8745098, 0.44313726, 0.14901961, 1)
