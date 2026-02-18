@@ -5,7 +5,7 @@ var target_rotation := self.rotation_degrees
 var trade_delay : float = 1.0
 var trade_wait : float = 2.0
 
-var attack_delay : float = 1.5;
+var attack_delay : float = 0.8;
 var attack_wait : float = 0.0
 
 @onready var panther : Panther = $panther

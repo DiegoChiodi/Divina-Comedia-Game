@@ -1,7 +1,7 @@
 extends Quest
 class_name QuestMountain
 
-const ENEMYSMAX_PTS : Array[int] = [7, 9, 18, 11, 16]
+const ENEMYSMAX_PTS : Array[int] = [7, 9, 18, 11, 15]
 var enemys_dead : int = 0
 
 var actual_pt : int = 0
