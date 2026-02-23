@@ -48,4 +48,4 @@ func takeDamage(_damage : float) -> void:
 	self.eyes.modulate.a = (lifeMax / life) / 8.0
 	
 func setDirection() -> Vector2:
-	return to_local(nav_agent.get_next_path_position()).normalized()
+	return to_local(self.nav_agent.get_next_path_position()).normalized()

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://btfg6cyhrwy8u" path="res://Scripts/Movel/Enemys/Boss/beasts_manager.gd" id="1_ceuve"]
 [ext_resource type="PackedScene" uid="uid://b4ao3vpk0s1ao" path="res://Scene/Enemys/Beasts/panther.tscn" id="2_w8kw0"]
-[ext_resource type="PackedScene" uid="uid://dq21u5tcf4e5w" path="res://Scene/Enemys/Beasts/lion.tscn" id="3_6pjin"]
 [ext_resource type="PackedScene" uid="uid://ptabs5givuy2" path="res://Scene/Enemys/Beasts/wolf.tscn" id="4_h2vht"]
 
 [node name="beasts" type="Node2D" unique_id=1198893125]
@@ -17,9 +16,6 @@ position = Vector2(511.99997, 256.0001)
 [node name="panther" parent="." unique_id=1316271090 instance=ExtResource("2_w8kw0")]
 position = Vector2(-4.476046e-05, 256)
 
-[node name="lion" parent="." unique_id=612878331 instance=ExtResource("3_6pjin")]
-position = Vector2(216.00003, -127.99996)
-
 [node name="wolf" parent="." unique_id=1953930706 instance=ExtResource("4_h2vht")]
 position = Vector2(-223.99998, -128.00005)
 
@@ -28,3 +24,6 @@ position = Vector2(-104, 360)
 
 [node name="mar_relax_r" type="Marker2D" parent="." unique_id=47861251]
 position = Vector2(104, 360)
+
+[node name="mar_lion" type="Marker2D" parent="." unique_id=1465107266]
+position = Vector2(216, -128)

@@ -7,7 +7,7 @@ const ranged_path : String = "res://Scene/Enemys/rangeEnemy.tscn"
 const confused_path : String = "res://Scene/Enemys/confuseEnemy.tscn"
 
 func _process(_delta: float) -> void:
-	if game_manager.player != null:
+	if game_manager.player != null and quest_manager.current_quest is QuestMountain:
 		game_manager.ui.clr_shadow.color.a = game_manager.player.position.y / self.map.roomSize.y - 100.0 / 255.0
 
 func load_pt(pt : int) -> void:

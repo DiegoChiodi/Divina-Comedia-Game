@@ -10,12 +10,10 @@ func _ready() -> void:
 
 func setup(_beast_manager : BeastsManager, _mar_ambush_r : Marker2D, _mar_ambush_l : Marker2D, _mar_relax_r : Marker2D, _mar_relax_l : Marker2D) -> void:
 	super.setup(_beast_manager, _mar_ambush_r, _mar_ambush_l, _mar_relax_r, _mar_relax_l)
-	var relax_l : Marker2D = Marker2D.new()
-	var relax_r : Marker2D = Marker2D.new()
-	relax_l.position = self.mar_relax_l.global_position - self.global_position
-	relax_r.position = self.mar_relax_r.global_position - self.global_position
-	self.hand_l.setup(self.mar_ambush_l, relax_l)
-	self.hand_r.setup(self.mar_ambush_r, relax_r)
+	var relax_l = self.mar_relax_l.global_position - self.global_position
+	var relax_r = self.mar_relax_r.global_position - self.global_position
+	self.hand_l.setup(self.mar_ambush_l.global_position, relax_l)
+	self.hand_r.setup(self.mar_ambush_r.global_position, relax_r)
 	
 
 func _process(_delta: float) -> void:

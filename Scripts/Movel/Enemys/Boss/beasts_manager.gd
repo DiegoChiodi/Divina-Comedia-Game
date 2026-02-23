@@ -9,7 +9,8 @@ var attack_delay : float = 0.8;
 var attack_wait : float = 0.0
 
 @onready var panther : Panther = $panther
-@onready var lion : Lion = $lion
+var lion : LionMain = LionMain.new()
+@onready var mar_lion : Marker2D = $mar_lion
 @onready var wolf : Wolf = $wolf
 @onready var mar_ambush_r : Marker2D = $mar_ambush_r
 @onready var mar_ambush_l : Marker2D = $mar_ambush_l
@@ -19,9 +20,11 @@ var attack_wait : float = 0.0
 @onready var beasts : Array[BeastBase] = [self.panther, self.lion, self.wolf]
 
 func _ready() -> void:
+	self.add_child(self.lion)
 	for beast in self.beasts:
 		beast.setup(self, self.mar_ambush_r, self.mar_ambush_l, self.mar_relax_r, self.mar_relax_l)
 	self.beasts[0].start_attack()
+	self.lion.global_position = self.mar_lion.global_position
 
 func _process(_delta : float):
 	self.trading_beast(_delta)
