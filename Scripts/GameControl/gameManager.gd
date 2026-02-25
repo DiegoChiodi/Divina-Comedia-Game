@@ -34,6 +34,7 @@ var player : Player = preload("res://Scene/player.tscn").instantiate()
 var roomContainer : RoomContainer = RoomContainer.new()
 var is_paused : bool = false
 var ui : UI = preload("res://Scene/ui.tscn").instantiate()
+var acc_mode : bool = false
 #Scenes
 var debugScene : String = "res://Scene/debugMap.tscn"
 
@@ -53,14 +54,19 @@ func _process(_delta: float) -> void:
 			self.ui.get_node('boss_bar_lost').queue_free()
 	
 	if Input.is_action_just_pressed("b"):
-		pass
+		self.acc_mode = !self.acc_mode
+		if self.acc_mode:
+			Engine.time_scale = 3.0
+		else:
+			Engine.time_scale = 1.0
+		
+	if Input.is_action_just_pressed('n'):
+		quest_manager.questFinish()
 	
 	if Input.is_action_just_pressed("menu"):
 		self.is_paused = !self.is_paused
 		get_tree().paused = self.is_paused
 	
-	if Input.is_action_just_pressed('n'):
-		quest_manager.questFinish()
 		
 func init(_main : Node2D):
 	self.camera.setup(self.player, null)
