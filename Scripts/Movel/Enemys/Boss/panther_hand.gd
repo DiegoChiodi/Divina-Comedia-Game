@@ -4,7 +4,7 @@ class_name PantherHand
 var dir : Vector2 = Vector2.ZERO
 var attack_speed : float = 200.0
 var attack_speed_fix : float = 100.0
-var attack_speed_target : float = 2000.0
+var attack_speed_target : float = 1800.0
 var punchs : int = 2
 var end_attack_1 : bool = false
 var attack_cou : float = 0.0
@@ -23,7 +23,8 @@ func in_attack_1 (_delta : float) -> void:
 			self.global_position = self.global_position.lerp(self.pos_ambush, 3 * _delta)
 			self.scale = self.scale.lerp(Vector2.ONE * 2.5, 3 * _delta)
 			self.attack_speed = self.attack_speed_fix
-			self.dir = (game_manager.player.global_position - self.global_position).normalized()
+			if game_manager.player != null:
+				self.dir = (game_manager.player.global_position - self.global_position).normalized()
 		elif !self.end_attack_1:
 			self.attack_speed = lerp(self.attack_speed, self.attack_speed_target, 10 * _delta)
 			self.position += self.attack_speed * _delta * self.dir
