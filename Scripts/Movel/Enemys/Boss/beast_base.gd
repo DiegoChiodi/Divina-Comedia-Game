@@ -24,7 +24,7 @@ func setup(_beast_manager : BeastsManager, _mar_ambush_r : Marker2D, _mar_ambush
 	self.mar_relax_r = _mar_relax_r
 
 func _ready() -> void:
-	pass
+	self.add_to_group('spike')
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	self.global_rotation = 0

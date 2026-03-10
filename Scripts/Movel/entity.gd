@@ -76,11 +76,11 @@ func takeDamage(_damage : float) -> void:
 	if self.life <= 0:
 		self.dead()
 
-func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 1000) -> void:
-	if !self.invencible:
-		self.takeDamage(_damage)
-
+func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 1000, _ignorable : bool = true) -> void:
 	self.takeImpulse(_impulseDir, _impulseSpeed)
+	if (self.invencible and _ignorable):
+		return
+	self.takeDamage(_damage)
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	var parent := area.get_parent()
@@ -91,7 +91,7 @@ func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	elif parent is Projectile:
 		self.colliding_projectile(parent)
 	elif area is Spike:
-		self.takeAttack((self.position - area.position).normalized(), area.damage)
+		self.takeAttack((self.position - area.position).normalized(), area.damage, 1000.0, false)
 
 
 func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:

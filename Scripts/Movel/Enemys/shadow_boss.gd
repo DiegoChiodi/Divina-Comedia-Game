@@ -268,7 +268,7 @@ func setDirection() -> Vector2:
 	
 	return super.setDirection()
 
-func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 1200) -> void:
+func takeAttack(_impulseDir : Vector2, _damage : float = 0.0, _impulseSpeed : float = 1200, _penetration = false) -> void:
 	super.takeAttack(_impulseDir, _damage, _impulseSpeed)
 	var percent_life : float = self.life / self.lifeMax
 	if self.healfh_bar_fill != null:
