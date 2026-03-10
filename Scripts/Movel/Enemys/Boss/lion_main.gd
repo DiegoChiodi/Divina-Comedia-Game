@@ -7,7 +7,7 @@ var speed_dash = 700.0
 
 var started_attack : bool = true
 
-var return_pos_delay : float = 1.5
+var return_pos_delay : float = 1.8
 var return_pos_wait : float = 0.0
 
 var dash_duration_delay : float = 2.5
@@ -59,7 +59,7 @@ func in_attack_1 (_delta : float) -> void:
 				self.lions.pop_back()
 				self.lions.pop_back()
 			
-			self.lions[0].set_pos(lerp(self.lions[0].global_position, self.global_position, 0.02))
+			self.lions[0].set_pos(lerp(self.lions[0].global_position, self.global_position, 0.03))
 			self.lions[0].dir_dash = Vector2.ZERO
 			self.lions[0].rotation = lerp_angle(self.lions[0].rotation, 0.0, deg_to_rad(150) * _delta)
 		else:
