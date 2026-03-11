@@ -18,13 +18,13 @@ func _ready() -> void:
 	var lion : Lion = self.lion_scene.instantiate()
 	self.add_child(lion)
 	self.lions.append(lion)
-	self.attack_delay_1 = 1000.0
+	self.attack_delay = 1000.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	super._process(delta)
 
-func in_attack_1 (_delta : float) -> void:
+func attack_process(_delta : float) -> void:
 	if self.started_attack:
 		var lion_new_1 : Lion = self.lion_scene.instantiate()
 		var lion_new_2 : Lion = self.lion_scene.instantiate()
@@ -59,11 +59,11 @@ func in_attack_1 (_delta : float) -> void:
 				self.lions.pop_back()
 				self.lions.pop_back()
 			
-			self.lions[0].set_pos(lerp(self.lions[0].global_position, self.global_position, 0.03))
+			self.lions[0].set_pos(lerp(self.lions[0].global_position, self.global_position, 2.25 * _delta))
 			self.lions[0].dir_dash = Vector2.ZERO
 			self.lions[0].rotation = lerp_angle(self.lions[0].rotation, 0.0, deg_to_rad(150) * _delta)
 		else:
-			self.attack_wait_1 = 1000.0
+			self.attack_wait = 1000.0
 			self.started_attack = true
 			self.dash_duration_wait = 0.0
 			self.return_pos_wait = 0.0

@@ -6,7 +6,7 @@ class_name Panther
 
 func _ready() -> void:
 	super._ready()
-	self.attack_delay_1 = 10000.0
+	self.attack_delay = 1000.0
 
 func setup(_beast_manager : BeastsManager, _mar_ambush_r : Marker2D, _mar_ambush_l : Marker2D, _mar_relax_r : Marker2D, _mar_relax_l : Marker2D) -> void:
 	super.setup(_beast_manager, _mar_ambush_r, _mar_ambush_l, _mar_relax_r, _mar_relax_l)
@@ -18,13 +18,13 @@ func setup(_beast_manager : BeastsManager, _mar_ambush_r : Marker2D, _mar_ambush
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
-	if self.attack_actual == 0:
-		self.hand_l.end_attack(_delta)
-		self.hand_r.end_attack(_delta)
+	if !self.in_attack:
+		self.hand_l.ending_attack(_delta)
+		self.hand_r.ending_attack(_delta)
 	
-func in_attack_1 (_delta : float) -> void:
-	self.hand_r.in_attack_1(_delta)
-	self.hand_l.in_attack_1(_delta)
+func attack_process(_delta : float) -> void:
+	self.hand_r.in_attack(_delta)
+	self.hand_l.in_attack(_delta)
 	
 	if self.hand_l.punchs == 0 and self.hand_r.punchs == 0:
 		self.beast_manager.trading()

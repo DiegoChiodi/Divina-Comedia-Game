@@ -13,3 +13,7 @@ func set_pos(pos : Vector2) -> void:
 func init_dir_dash() -> void:
 	self.dir_dash = self.global_position.direction_to(game_manager.player.global_position)
 	print(self.dir_dash)
+
+
+func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.

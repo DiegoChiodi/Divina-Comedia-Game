@@ -2,6 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dl21mij5nbdac" path="res://Scripts/Movel/Enemys/Boss/wolf.gd" id="1_gekwf"]
 [ext_resource type="Texture2D" uid="uid://boam2wb5mmejc" path="res://Assets/sprites/wolf.png" id="2_gekwf"]
+[ext_resource type="Script" uid="uid://7oskqm51nlpm" path="res://Scripts/Movel/Enemys/Boss/panther_hand.gd" id="3_yjxgt"]
+[ext_resource type="Script" uid="uid://74tv5mbiou2s" path="res://Scripts/spike.gd" id="4_16rin"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fju8o"]
+size = Vector2(48, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3hai"]
+size = Vector2(48, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjxgt"]
+size = Vector2(128, 128)
 
 [node name="wolf" type="Node2D" unique_id=1010971644]
 script = ExtResource("1_gekwf")
@@ -12,22 +23,53 @@ texture = ExtResource("2_gekwf")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 
-[node name="hand_right" type="Node2D" parent="." unique_id=1341019590]
+[node name="hand_right" type="Node2D" parent="." unique_id=1147054561 groups=["Enemy", "spike"]]
 position = Vector2(104, 104)
+script = ExtResource("3_yjxgt")
 
-[node name="clr_right_hand" type="ColorRect" parent="hand_right" unique_id=606515017]
+[node name="are_hbAttack" type="Area2D" parent="hand_right" unique_id=1688551150 groups=["hbAttack"]]
+script = ExtResource("4_16rin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hand_right/are_hbAttack" unique_id=1040699134]
+shape = SubResource("RectangleShape2D_fju8o")
+
+[node name="clr_right_hand" type="ColorRect" parent="hand_right" unique_id=355266247 groups=["hand"]]
 offset_left = -24.0
 offset_top = -24.0
 offset_right = 24.0
 offset_bottom = 24.0
-color = Color(0.49411765, 0.5647059, 0.6039216, 1)
+tooltip_text = "
+"
+color = Color(0.5137255, 0.5921569, 0.63529414, 1)
 
-[node name="hand_left" type="Node2D" parent="." unique_id=324101121]
+[node name="hand_left" type="Node2D" parent="." unique_id=1444976837 groups=["Enemy", "spike"]]
 position = Vector2(-104, 104)
+script = ExtResource("3_yjxgt")
 
-[node name="clr_left_hand" type="ColorRect" parent="hand_left" unique_id=1497300120]
+[node name="are_hbAttack" type="Area2D" parent="hand_left" unique_id=208660339 groups=["hbAttack"]]
+script = ExtResource("4_16rin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hand_left/are_hbAttack" unique_id=272675181]
+shape = SubResource("RectangleShape2D_x3hai")
+
+[node name="clr_left_hand" type="ColorRect" parent="hand_left" unique_id=1012563654 groups=["hand"]]
 offset_left = -24.0
 offset_top = -24.0
 offset_right = 24.0
 offset_bottom = 24.0
-color = Color(0.49411765, 0.5647059, 0.6039216, 1)
+color = Color(0.5137255, 0.5921569, 0.63529414, 1)
+
+[node name="are_hbTakeDamage" type="Area2D" parent="." unique_id=425665154 groups=["Enemy"]]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage" unique_id=863207554]
+scale = Vector2(1.25, 1.25)
+shape = SubResource("RectangleShape2D_yjxgt")
+
+[node name="are_hbAttack" type="Area2D" parent="." unique_id=1337280511 groups=["hbAttack"]]
+script = ExtResource("4_16rin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack" unique_id=940331465]
+shape = SubResource("RectangleShape2D_yjxgt")
+
+[connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]

@@ -11,7 +11,7 @@ size = Vector2(48, 48)
 size = Vector2(48, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mbenc"]
-size = Vector2(128, 128)
+size = Vector2(130, 128)
 
 [node name="lion" type="Node2D" unique_id=1236601597]
 script = ExtResource("1_4r4tq")
@@ -62,5 +62,14 @@ region_rect = Rect2(0, 0, 128, 128)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage" unique_id=753267180]
-visible = false
+position = Vector2(-1, 0)
+scale = Vector2(1.25, 1.25)
 shape = SubResource("RectangleShape2D_mbenc")
+
+[node name="are_hbAttack" type="Area2D" parent="." unique_id=1576433525 groups=["hbAttack"]]
+script = ExtResource("3_x6bug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack" unique_id=921984745]
+shape = SubResource("RectangleShape2D_mbenc")
+
+[connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
