@@ -59,9 +59,12 @@ func attack_process(_delta : float) -> void:
 	pass
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Player:
-		self.life -= game_manager.player.damage
-		self.damageFlashWait = 0.0
+	if area.get_parent() is Player and area.is_in_group("hbAttack"):
+		self.take_damage()
+
+func take_damage() -> void:
+	self.life -= game_manager.player.damage
+	self.damageFlashWait = 0.0
 
 func damageFlashing(_delta : float) -> void:
 	if self.damageFlashWait < self.DESFREEZEFLASH:

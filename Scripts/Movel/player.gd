@@ -267,7 +267,7 @@ func dash_init(right_click : bool) -> void:
 	
 	#Animation
 	game_manager.start_shake(1.0,1.5)
-	self.sprite.scale.y = DASH_SCALE_FEEL * initial_scale.y
+	self.sprite.scale.y = self.DASH_SCALE_FEEL * self.initial_scale.y
 	
 	if right_click:
 		self.velocity = self.speedTarget() * (self.get_global_mouse_position() - self.global_position).normalized()
@@ -292,10 +292,6 @@ func move_method(_delta : float) -> void:
 				return
 			var dirForce := collision.get_normal().normalized()
 			var force : float = 0.0
-			"if abs(collision.get_normal().x) > abs(collision.get_normal().y):
-				dirForce = Vector2(-collision.get_normal().x,0)
-			else:
-				dirForce = Vector2(0,-collision.get_normal().y)"
 			
 			force = min(self.MINEXTERNALFORCE, self.speedFix)
 			other.add_central_force(dirForce * force)

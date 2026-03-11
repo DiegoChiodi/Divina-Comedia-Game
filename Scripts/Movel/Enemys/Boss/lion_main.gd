@@ -16,8 +16,10 @@ var dash_duration_wait : float = 0.0
 func _ready() -> void:
 	super._ready()
 	var lion : Lion = self.lion_scene.instantiate()
+	lion.setup(self)
 	self.add_child(lion)
 	self.lions.append(lion)
+	
 	self.attack_delay = 1000.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,10 +30,13 @@ func attack_process(_delta : float) -> void:
 	if self.started_attack:
 		var lion_new_1 : Lion = self.lion_scene.instantiate()
 		var lion_new_2 : Lion = self.lion_scene.instantiate()
+		lion_new_1.setup(self)
+		lion_new_2.setup(self)
 		self.add_child(lion_new_1)
 		self.add_child(lion_new_2)
 		self.lions.append(lion_new_1)
 		self.lions.append(lion_new_2)
+		self.lions[1].setup(self)
 		
 		var random_angle : int = randi() % 360
 		for i in range(3):

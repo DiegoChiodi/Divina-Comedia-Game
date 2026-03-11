@@ -20,6 +20,7 @@ func attack_process(_delta : float) -> void:
 		self.radious = lerp(self.radious, 0.0, 0.98 * _delta / 4 * self.difficult)
 		self.angle += angle_speed * _delta * max(self.radious / self.RADIOUS_MAX, 0.2) * self.difficult
 		self.position = self.radious * dir - self.center
+		self.rotation_degrees = self.angle
 
 func start_attack () -> void:
 	super.start_attack()
