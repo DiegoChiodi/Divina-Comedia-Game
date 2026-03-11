@@ -45,6 +45,7 @@ func trading_beast(_delta : float) -> void:
 
 func trading() -> void:
 	var next_beast_dir : bool = randi() % 2 == 0
+	next_beast_dir = false
 	beasts[0].in_attack = false
 	if next_beast_dir:
 		self.target_rotation += 120.0

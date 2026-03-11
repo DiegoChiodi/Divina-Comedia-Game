@@ -22,6 +22,7 @@ var neutralizingWait : float = self.NEUTRALIZATINGDELAY
 
 var in_attack : bool = false
 var life : int = 200
+var rotation_personality : float = 0.0
 
 func setup(_beast_manager : BeastsManager, _mar_ambush_r : Marker2D, _mar_ambush_l : Marker2D, _mar_relax_r : Marker2D, _mar_relax_l : Marker2D) -> void:
 	self.beast_manager = _beast_manager
@@ -34,7 +35,7 @@ func _ready() -> void:
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	self.global_rotation = 0
+	self.global_rotation_degrees = rotation_personality
 	
 	if self.damageFlashWait < self.damageFlashDelay:
 		self.damageFlashWait += _delta
