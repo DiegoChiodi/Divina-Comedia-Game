@@ -13,6 +13,10 @@ var normal_position : Vector2 = Vector2(703, 128)
 var difficult = 0.5
 var mult_difficult = 1.0
 
+func _ready() -> void:
+	super._ready()
+	self.life = 10000.0
+
 func attack_process(_delta : float) -> void:
 	if self.attack_wait > self.attack_delay - 1.5:
 		self.return_normal(_delta)

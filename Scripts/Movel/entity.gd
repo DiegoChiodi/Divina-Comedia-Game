@@ -9,6 +9,10 @@ var invencible : bool = false
 var invencibleDelay : float = 0.4
 var invencibleWait : float = self.invencibleDelay
 
+var invencible_spike : bool = false
+const INVENCIBLE_DELAY_SPIKE : float = 0.4
+var invencible_wait_spike : float = self.INVENCIBLE_DELAY_SPIKE
+
 var damageFlashDelay : float = 0.5
 const DESFREEZEFLASH : float = 0.1
 var damageFlashWait : float = 100.0 #Alto para n começar piscando já que não tem bool controlando
@@ -33,6 +37,12 @@ func _process(_delta: float) -> void:
 			self.invencibleWait += _delta
 		else:
 			self.invencible = false
+	
+	if self.invencible_spike:
+		if self.invencible_wait_spike < self.INVENCIBLE_DELAY_SPIKE:
+			self.invencible_wait_spike += _delta
+		else:
+			self.invencible_spike = false
 	
 	if self.damageFlashWait < self.damageFlashDelay:
 		self.damageFlashWait += _delta
@@ -91,7 +101,10 @@ func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 	elif parent is Projectile:
 		self.colliding_projectile(parent)
 	elif area is Spike:
-		self.takeAttack((self.position - area.position).normalized(), area.damage, 1000.0, false)
+		if !self.invencible_spike:
+			self.takeAttack((self.position - area.position).normalized(), area.damage, 1000.0, false)
+			self.invencible_wait_spike = 0.0
+			self.invencible_spike = true
 
 
 func _on_are_hb_take_damage_area_exited(area: Area2D) -> void:

@@ -11,8 +11,8 @@ var mar_relax_r : Marker2D
 var mar_relax_l : Marker2D
 
 var invencible : bool = false
-var invencibleDelay : float = 0.4
-var invencibleWait : float = self.invencibleDelay
+const INVENCIBLE_DELAY : float = 0.3
+var invencibleWait : float = self.INVENCIBLE_DELAY
 
 var damageFlashDelay : float = 0.5
 const DESFREEZEFLASH : float = 0.1
@@ -38,6 +38,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	self.global_rotation_degrees = rotation_personality
+	
+	if self.invencibleWait < self.INVENCIBLE_DELAY:
+		self.invencibleWait += _delta
+	else:
+		self.invencible = false
 	
 	if self.damageFlashWait < self.damageFlashDelay:
 		self.damageFlashWait += _delta
@@ -75,6 +80,9 @@ func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
 func take_damage() -> void:
 	self.life -= int(game_manager.player.damage)
 	self.damageFlashWait = 0.0
+	
+	self.invencible = true
+	self.invencibleWait = 0.0
 	if self.life <= 0:
 		self.to_die()
 
@@ -102,5 +110,5 @@ func return_normal(_delta : float) -> void:
 	pass
 
 func check_damage(_area : Area2D) -> void:
-	if _area.get_parent() is Player and _area.is_in_group("hbAttack"):
+	if _area.get_parent() is Player and _area.is_in_group("hbAttack") and !self.invencible:
 		self.take_damage()
