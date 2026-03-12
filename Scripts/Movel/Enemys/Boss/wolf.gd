@@ -15,8 +15,7 @@ var mult_difficult = 1.0
 
 func attack_process(_delta : float) -> void:
 	if self.attack_wait > self.attack_delay - 1.5:
-		self.global_position = lerp(self.global_position, self.normal_position, 2.5 * _delta)
-		self.rotation_personality = 0.0
+		self.return_normal(_delta)
 	else:
 		var dir : Vector2 = Vector2(cos(deg_to_rad(self.angle)), sin(deg_to_rad(self.angle))).normalized()
 		self.radious = lerp(self.radious, 0.0, 0.98 * _delta / 4 * self.difficult)
@@ -31,3 +30,7 @@ func start_attack () -> void:
 	self.difficult += self.mult_difficult
 	self.radious = self.RADIOUS_MAX
 	self.angle = 0.0
+
+func return_normal(_delta : float) -> void:
+	self.global_position = lerp(self.global_position, self.normal_position, 2.5 * _delta)
+	self.rotation_personality = 0.0

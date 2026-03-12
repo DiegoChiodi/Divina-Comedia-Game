@@ -10,6 +10,7 @@ func _process(delta: float) -> void:
 
 func setup(_lion_main : LionMain) -> void:
 	self.lion_main = _lion_main
+
 func set_pos(pos : Vector2) -> void:
 	self.global_position = pos
 
@@ -18,5 +19,4 @@ func init_dir_dash() -> void:
 	print(self.dir_dash)
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Player and area.is_in_group("hbAttack"):
-		lion_main.take_damage()
+	self.lion_main.check_damage(area)

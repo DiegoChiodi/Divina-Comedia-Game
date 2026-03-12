@@ -21,8 +21,10 @@ const NEUTRALIZATINGDELAY : float = 1.0
 var neutralizingWait : float = self.NEUTRALIZATINGDELAY
 
 var in_attack : bool = false
-var life : int = 200
+var life : float = 200
 var rotation_personality : float = 0.0
+var is_dead : bool = false
+var is_dying : bool = false
 
 func setup(_beast_manager : BeastsManager, _mar_ambush_r : Marker2D, _mar_ambush_l : Marker2D, _mar_relax_r : Marker2D, _mar_relax_l : Marker2D) -> void:
 	self.beast_manager = _beast_manager
@@ -46,11 +48,19 @@ func _process(_delta: float) -> void:
 		
 func start_attack () -> void:
 	self.in_attack = true
+	if self.is_dying:
+		self.is_dead = true
+
 
 func attacking(_delta : float) -> void:
 	if self.attack_wait < self.attack_delay:
 		self.attack_wait += _delta 
-		attack_process(_delta)
+		if self.is_dead:
+			self.beast_manager.trading()
+		elif self.is_dying:
+			self.dying(_delta)
+		else:
+			attack_process(_delta)
 	else:
 		self.beast_manager.trading()
 		self.attack_wait = 0.0
@@ -60,12 +70,13 @@ func attack_process(_delta : float) -> void:
 	pass
 
 func _on_are_hb_take_damage_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Player and area.is_in_group("hbAttack"):
-		self.take_damage()
+	self.check_damage(area)
 
 func take_damage() -> void:
-	self.life -= game_manager.player.damage
+	self.life -= int(game_manager.player.damage)
 	self.damageFlashWait = 0.0
+	if self.life <= 0:
+		self.to_die()
 
 func damageFlashing(_delta : float) -> void:
 	if self.damageFlashWait < self.DESFREEZEFLASH:
@@ -76,3 +87,20 @@ func damageFlashing(_delta : float) -> void:
 
 func stopFlashing(_delta : float) -> void:
 	self.modulate = self.modulate.lerp(Color.WHITE, _delta * 10)
+
+func to_die() -> void:
+	self.beast_manager.beast_dead(self)
+	if !self.is_dying: 
+		self.is_dying = true
+		self.attack_delay = 1.5
+		self.attack_wait = 0.0
+
+func dying(_delta : float) -> void:
+	self.return_normal(_delta)
+
+func return_normal(_delta : float) -> void:
+	pass
+
+func check_damage(_area : Area2D) -> void:
+	if _area.get_parent() is Player and _area.is_in_group("hbAttack"):
+		self.take_damage()

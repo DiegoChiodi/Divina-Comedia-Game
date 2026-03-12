@@ -7,7 +7,7 @@ var speed_dash = 700.0
 
 var started_attack : bool = true
 
-var return_pos_delay : float = 1.8
+var return_pos_delay : float = 1.5
 var return_pos_wait : float = 0.0
 
 var dash_duration_delay : float = 2.5
@@ -58,17 +58,21 @@ func attack_process(_delta : float) -> void:
 	else:
 		if self.return_pos_wait < self.return_pos_delay:
 			self.return_pos_wait += _delta
-			if self.lions.size() > 1:
-				self.lions[1].queue_free()
-				self.lions[2].queue_free()
-				self.lions.pop_back()
-				self.lions.pop_back()
 			
-			self.lions[0].set_pos(lerp(self.lions[0].global_position, self.global_position, 2.25 * _delta))
-			self.lions[0].dir_dash = Vector2.ZERO
-			self.lions[0].rotation = lerp_angle(self.lions[0].rotation, 0.0, deg_to_rad(150) * _delta)
+			self.return_normal(_delta)
 		else:
 			self.attack_wait = 1000.0
 			self.started_attack = true
 			self.dash_duration_wait = 0.0
 			self.return_pos_wait = 0.0
+
+func return_normal(_delta : float) -> void:
+	if self.lions.size() > 1:
+		self.lions[1].queue_free()
+		self.lions[2].queue_free()
+		self.lions.pop_back()
+		self.lions.pop_back()
+			
+	self.lions[0].set_pos(lerp(self.lions[0].global_position, self.global_position, 2.25 * _delta))
+	self.lions[0].dir_dash = Vector2.ZERO
+	self.lions[0].rotation = lerp_angle(self.lions[0].rotation, 0.0, deg_to_rad(150) * _delta)

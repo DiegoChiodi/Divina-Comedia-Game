@@ -19,8 +19,7 @@ func setup(_beast_manager : BeastsManager, _mar_ambush_r : Marker2D, _mar_ambush
 func _process(_delta: float) -> void:
 	super._process(_delta)
 	if !self.in_attack:
-		self.hand_l.ending_attack(_delta)
-		self.hand_r.ending_attack(_delta)
+		self.return_normal(_delta)
 	
 func attack_process(_delta : float) -> void:
 	self.hand_r.in_attack(_delta)
@@ -30,3 +29,7 @@ func attack_process(_delta : float) -> void:
 		self.beast_manager.trading()
 		self.hand_l.punchs = 3
 		self.hand_r.punchs = 3
+
+func return_normal(_delta : float) -> void:
+	self.hand_l.ending_attack(_delta)
+	self.hand_r.ending_attack(_delta)
