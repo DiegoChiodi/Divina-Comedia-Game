@@ -8,6 +8,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jwa5"]
 size = Vector2(48, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w4jd"]
+size = Vector2(64, 64)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl8yy"]
 size = Vector2(48, 48)
 
@@ -42,6 +45,13 @@ script = ExtResource("4_5jwa5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hand_right/are_hbAttack" unique_id=1631970510]
 shape = SubResource("RectangleShape2D_5jwa5")
 
+[node name="are_hbTakeDamage" type="Area2D" parent="hand_right" unique_id=325152431 groups=["Enemy"]]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hand_right/are_hbTakeDamage" unique_id=1754279213]
+scale = Vector2(1.25, 1.25)
+shape = SubResource("RectangleShape2D_7w4jd")
+
 [node name="hand_left" type="Node2D" parent="." unique_id=978076932 groups=["Enemy", "spike"]]
 position = Vector2(-104, 104)
 script = ExtResource("3_wbhso")
@@ -59,6 +69,14 @@ script = ExtResource("4_5jwa5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hand_left/are_hbAttack" unique_id=1596717966]
 shape = SubResource("RectangleShape2D_jl8yy")
 
+[node name="are_hbTakeDamage" type="Area2D" parent="hand_left" unique_id=1660365782 groups=["Enemy"]]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hand_left/are_hbTakeDamage" unique_id=442466614]
+position = Vector2(-1, 0)
+scale = Vector2(1.25, 1.25)
+shape = SubResource("RectangleShape2D_7w4jd")
+
 [node name="are_hbTakeDamage" type="Area2D" parent="." unique_id=1017661063 groups=["Enemy"]]
 scale = Vector2(1.25, 1.25)
 monitorable = false
@@ -72,4 +90,6 @@ script = ExtResource("4_5jwa5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack" unique_id=666042544]
 shape = SubResource("RectangleShape2D_xlqy1")
 
+[connection signal="area_entered" from="hand_right/are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
+[connection signal="area_entered" from="hand_left/are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
 [connection signal="area_entered" from="are_hbTakeDamage" to="." method="_on_are_hb_take_damage_area_entered"]
