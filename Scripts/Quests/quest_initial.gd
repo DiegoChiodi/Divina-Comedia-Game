@@ -8,7 +8,7 @@ func on_level_loaded (_level: Level) -> void:
 	if _level is Level_Florest_00:
 		_level.init_quest_initial()
 
-func on_enemy_destroyed (_enemy: Enemy) -> void:
+func on_enemy_destroyed (_enemy) -> void:
 	self.enemys_dead += 1
 	if self.enemys_dead == self.ENEMYSMAX:
 		quest_manager.questFinish()

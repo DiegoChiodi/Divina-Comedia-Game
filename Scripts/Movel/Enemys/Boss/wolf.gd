@@ -15,7 +15,7 @@ var mult_difficult = 1.0
 
 func _ready() -> void:
 	super._ready()
-	self.life = 10000.0
+	self.life = 400.0
 
 func attack_process(_delta : float) -> void:
 	if self.attack_wait > self.attack_delay - 1.5:
@@ -38,3 +38,6 @@ func start_attack () -> void:
 func return_normal(_delta : float) -> void:
 	self.global_position = lerp(self.global_position, self.normal_position, 2.5 * _delta)
 	self.rotation_personality = 0.0
+	
+func to_die() -> void:
+	game_manager.entityDead(self)

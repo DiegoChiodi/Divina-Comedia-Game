@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 		actual_level.load_pt(actual_pt)
 		
 
-func on_enemy_destroyed (_enemy: Enemy) -> void:
+func on_enemy_destroyed (_enemy) -> void:
 	var actual_level := game_manager.roomContainer.currentRoom 
 	if actual_level is Level_Moutain_00:
 		self.enemys_dead += 1

@@ -20,6 +20,7 @@ func _ready() -> void:
 	self.add_child(lion)
 	self.lions.append(lion)
 	
+	self.life = 300.0
 	self.attack_delay = 1000.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

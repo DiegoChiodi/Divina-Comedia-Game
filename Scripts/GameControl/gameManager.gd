@@ -125,6 +125,6 @@ func change_room(_map_id) -> void:
 	self.camera.position = self.player.position
 	
 
-func entityDead(_entity : Entity) -> void:
-	if _entity is Enemy:
-		quest_manager.current_quest.on_enemy_destroyed(_entity)
+func entityDead(enemy) -> void:
+	if enemy is Enemy or enemy is BeastBase:
+		quest_manager.current_quest.on_enemy_destroyed(enemy)

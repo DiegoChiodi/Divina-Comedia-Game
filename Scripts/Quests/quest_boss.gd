@@ -5,7 +5,7 @@ func on_level_loaded (_level: Level) -> void:
 	if _level is Level_Vestibule_00:
 		_level.init_quest_boss()
 
-func on_enemy_destroyed (_enemy: Enemy) -> void:
+func on_enemy_destroyed (_enemy) -> void:
 	if _enemy is ShadowBoss:
 		quest_manager.questFinish()
 		print('finish')
