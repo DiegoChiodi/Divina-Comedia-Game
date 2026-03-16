@@ -78,6 +78,7 @@ scale = Vector2(1.25, 1.25)
 shape = SubResource("RectangleShape2D_7w4jd")
 
 [node name="are_hbTakeDamage" type="Area2D" parent="." unique_id=1017661063 groups=["Enemy"]]
+visible = false
 scale = Vector2(1.25, 1.25)
 monitorable = false
 
@@ -85,6 +86,7 @@ monitorable = false
 shape = SubResource("RectangleShape2D_xlqy1")
 
 [node name="are_hbAttack" type="Area2D" parent="." unique_id=82543975 groups=["hbAttack"]]
+visible = false
 script = ExtResource("4_5jwa5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack" unique_id=666042544]

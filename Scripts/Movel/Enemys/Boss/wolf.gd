@@ -15,7 +15,7 @@ var mult_difficult = 1.0
 
 func _ready() -> void:
 	super._ready()
-	self.life = 400.0
+	self.life = 200.0
 
 func attack_process(_delta : float) -> void:
 	if self.attack_wait > self.attack_delay - 1.5:

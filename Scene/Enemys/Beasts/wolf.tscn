@@ -35,6 +35,7 @@ offset_right = 48.0
 color = Color(0.5137255, 0.5921569, 0.63529414, 1)
 
 [node name="are_hbTakeDamage" type="Area2D" parent="." unique_id=425665154 groups=["Enemy"]]
+visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage" unique_id=863207554]
@@ -42,6 +43,7 @@ scale = Vector2(1.25, 1.25)
 shape = SubResource("RectangleShape2D_yjxgt")
 
 [node name="are_hbAttack" type="Area2D" parent="." unique_id=1337280511 groups=["hbAttack"]]
+visible = false
 script = ExtResource("4_16rin")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack" unique_id=940331465]

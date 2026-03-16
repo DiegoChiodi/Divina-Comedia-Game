@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsegh6r4mf7tv"
-path="res://.godot/imported/wind.png-f73ef13f0edf6ced6c3fedb3c288ab7a.ctex"
+uid="uid://byrxc0eekmmal"
+path="res://.godot/imported/lion.png-38c2ee6636ac93577bd76bee7b5fd1d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/wind.png"
-dest_files=["res://.godot/imported/wind.png-f73ef13f0edf6ced6c3fedb3c288ab7a.ctex"]
+source_file="res://Assets/sprites/cut_scenes/save_dante/lion.png"
+dest_files=["res://.godot/imported/lion.png-38c2ee6636ac93577bd76bee7b5fd1d9.ctex"]
 
 [params]
 

@@ -39,6 +39,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 
 [node name="are_hbTakeDamage" type="Area2D" parent="." unique_id=1400448653 groups=["Enemy"]]
+visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage" unique_id=753267180]
@@ -47,6 +48,7 @@ scale = Vector2(1.25, 1.25)
 shape = SubResource("RectangleShape2D_mbenc")
 
 [node name="are_hbAttack" type="Area2D" parent="." unique_id=1576433525 groups=["hbAttack"]]
+visible = false
 script = ExtResource("3_x6bug")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack" unique_id=921984745]

@@ -10,7 +10,5 @@ func on_level_loaded (_level: Level) -> void:
 
 func on_enemy_destroyed (_enemy) -> void:
 	self.boss_lose += 1
-	print('F')
 	if self.boss_lose == self.BOSS_LOSE_MAX:
 		quest_manager.questFinish()
-		print('end')

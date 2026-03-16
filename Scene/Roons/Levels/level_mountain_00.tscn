@@ -1,200 +1,200 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk2gotdxpd2ks"]
+[gd_scene format=3 uid="uid://bk2gotdxpd2ks"]
 
 [ext_resource type="Script" uid="uid://m85jb4ma3gdx" path="res://Scripts/Words/level_mountain_00.gd" id="1_hlly7"]
 [ext_resource type="PackedScene" uid="uid://dx66fv08rqu8j" path="res://Scene/Roons/map_mountain.tscn" id="4_on35d"]
 
-[node name="level_mountain_00" type="Node2D"]
+[node name="level_mountain_00" type="Node2D" unique_id=1975123033]
 script = ExtResource("1_hlly7")
 
-[node name="map" parent="." instance=ExtResource("4_on35d")]
+[node name="map" parent="." unique_id=1755309240 instance=ExtResource("4_on35d")]
 
-[node name="pt_0" type="Node2D" parent="."]
+[node name="pt_0" type="Node2D" parent="." unique_id=823498220]
 
-[node name="mar_shadow_01" type="Marker2D" parent="pt_0" groups=["shadow"]]
+[node name="mar_shadow_01" type="Marker2D" parent="pt_0" unique_id=1548243716 groups=["shadow"]]
 position = Vector2(3344, 5048)
 
-[node name="mar_shadow_02" type="Marker2D" parent="pt_0" groups=["shadow"]]
+[node name="mar_shadow_02" type="Marker2D" parent="pt_0" unique_id=1008213498 groups=["shadow"]]
 position = Vector2(3104, 5288)
 
-[node name="mar_shadow_03" type="Marker2D" parent="pt_0" groups=["shadow"]]
+[node name="mar_shadow_03" type="Marker2D" parent="pt_0" unique_id=482374206 groups=["shadow"]]
 position = Vector2(2840, 5448)
 
-[node name="mar_shadow_04" type="Marker2D" parent="pt_0" groups=["shadow"]]
+[node name="mar_shadow_04" type="Marker2D" parent="pt_0" unique_id=510205747 groups=["shadow"]]
 position = Vector2(944, 5136)
 
-[node name="mar_ranged_01" type="Marker2D" parent="pt_0" groups=["ranged"]]
+[node name="mar_ranged_01" type="Marker2D" parent="pt_0" unique_id=731335185 groups=["ranged"]]
 position = Vector2(2592, 5224)
 
-[node name="mar_ranged_02" type="Marker2D" parent="pt_0" groups=["ranged"]]
+[node name="mar_ranged_02" type="Marker2D" parent="pt_0" unique_id=1410483596 groups=["ranged"]]
 position = Vector2(816, 4952)
 
-[node name="mar_ranged_03" type="Marker2D" parent="pt_0" groups=["ranged"]]
+[node name="mar_ranged_03" type="Marker2D" parent="pt_0" unique_id=336326781 groups=["ranged"]]
 position = Vector2(688, 5128)
 
-[node name="pt_1" type="Node2D" parent="."]
+[node name="pt_1" type="Node2D" parent="." unique_id=138165223]
 
-[node name="mar_shadow_01" type="Marker2D" parent="pt_1" groups=["shadow"]]
+[node name="mar_shadow_01" type="Marker2D" parent="pt_1" unique_id=393936318 groups=["shadow"]]
 position = Vector2(1872, 4224)
 
-[node name="mar_shadow_02" type="Marker2D" parent="pt_1" groups=["shadow"]]
+[node name="mar_shadow_02" type="Marker2D" parent="pt_1" unique_id=1458981132 groups=["shadow"]]
 position = Vector2(2264, 4232)
 
-[node name="mar_shadow_03" type="Marker2D" parent="pt_1" groups=["shadow"]]
+[node name="mar_shadow_03" type="Marker2D" parent="pt_1" unique_id=1642327413 groups=["shadow"]]
 position = Vector2(2232, 3880)
 
-[node name="mar_shadow_04" type="Marker2D" parent="pt_1" groups=["shadow"]]
+[node name="mar_shadow_04" type="Marker2D" parent="pt_1" unique_id=671705224 groups=["shadow"]]
 position = Vector2(1864, 3888)
 
-[node name="mar_shield_01" type="Marker2D" parent="pt_1" groups=["shield"]]
+[node name="mar_shield_01" type="Marker2D" parent="pt_1" unique_id=659213702 groups=["shield"]]
 position = Vector2(2064, 4024)
 
-[node name="mar_shield_02" type="Marker2D" parent="pt_1" groups=["shield"]]
+[node name="mar_shield_02" type="Marker2D" parent="pt_1" unique_id=1140377180 groups=["shield"]]
 position = Vector2(744, 4128)
 
-[node name="mar_shield_03" type="Marker2D" parent="pt_1" groups=["shield"]]
+[node name="mar_shield_03" type="Marker2D" parent="pt_1" unique_id=1021637042 groups=["shield"]]
 position = Vector2(3600, 3928)
 
-[node name="mar_shield_04" type="Marker2D" parent="pt_1" groups=["shield"]]
+[node name="mar_shield_04" type="Marker2D" parent="pt_1" unique_id=508340696 groups=["shield"]]
 position = Vector2(3592, 4240)
 
-[node name="mar_ranged_01" type="Marker2D" parent="pt_1" groups=["ranged"]]
+[node name="mar_ranged_01" type="Marker2D" parent="pt_1" unique_id=1963680392 groups=["ranged"]]
 position = Vector2(4112, 4088)
 
-[node name="pt_2" type="Node2D" parent="."]
+[node name="pt_2" type="Node2D" parent="." unique_id=1424992821]
 
-[node name="mar_ranged_01" type="Marker2D" parent="pt_2" groups=["ranged"]]
+[node name="mar_ranged_01" type="Marker2D" parent="pt_2" unique_id=206950587 groups=["ranged"]]
 position = Vector2(4258, 3202)
 
-[node name="mar_ranged_02" type="Marker2D" parent="pt_2" groups=["ranged"]]
+[node name="mar_ranged_02" type="Marker2D" parent="pt_2" unique_id=1778362399 groups=["ranged"]]
 position = Vector2(4578, 3194)
 
-[node name="mar_ranged_03" type="Marker2D" parent="pt_2" groups=["ranged"]]
+[node name="mar_ranged_03" type="Marker2D" parent="pt_2" unique_id=2058775609 groups=["ranged"]]
 position = Vector2(2922, 3314)
 
-[node name="mar_ranged_04" type="Marker2D" parent="pt_2" groups=["ranged"]]
+[node name="mar_ranged_04" type="Marker2D" parent="pt_2" unique_id=1305426014 groups=["ranged"]]
 position = Vector2(2746, 3242)
 
-[node name="mar_ranged_05" type="Marker2D" parent="pt_2" groups=["ranged"]]
+[node name="mar_ranged_05" type="Marker2D" parent="pt_2" unique_id=1447207355 groups=["ranged"]]
 position = Vector2(2738, 3370)
 
-[node name="mar_ranged_06" type="Marker2D" parent="pt_2" groups=["ranged"]]
+[node name="mar_ranged_06" type="Marker2D" parent="pt_2" unique_id=2043487205 groups=["ranged"]]
 position = Vector2(1106, 3226)
 
-[node name="mar_shield_01" type="Marker2D" parent="pt_2" groups=["shield"]]
+[node name="mar_shield_01" type="Marker2D" parent="pt_2" unique_id=692797029 groups=["shield"]]
 position = Vector2(4418, 3330)
 
-[node name="mar_shield_02" type="Marker2D" parent="pt_2" groups=["shield"]]
+[node name="mar_shield_02" type="Marker2D" parent="pt_2" unique_id=135703358 groups=["shield"]]
 position = Vector2(3218, 3314)
 
-[node name="mar_shadow_01" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_01" type="Marker2D" parent="pt_2" unique_id=362548351 groups=["shadow"]]
 position = Vector2(3370, 3378)
 
-[node name="mar_shadow_02" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_02" type="Marker2D" parent="pt_2" unique_id=672399715 groups=["shadow"]]
 position = Vector2(3370, 3226)
 
-[node name="mar_shadow_03" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_03" type="Marker2D" parent="pt_2" unique_id=1664816634 groups=["shadow"]]
 position = Vector2(1594, 3258)
 
-[node name="mar_shadow_04" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_04" type="Marker2D" parent="pt_2" unique_id=884237198 groups=["shadow"]]
 position = Vector2(1522, 3218)
 
-[node name="mar_shadow_05" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_05" type="Marker2D" parent="pt_2" unique_id=1902568062 groups=["shadow"]]
 position = Vector2(1522, 3298)
 
-[node name="mar_shadow_06" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_06" type="Marker2D" parent="pt_2" unique_id=776167799 groups=["shadow"]]
 position = Vector2(1418, 3202)
 
-[node name="mar_shadow_07" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_07" type="Marker2D" parent="pt_2" unique_id=2066812742 groups=["shadow"]]
 position = Vector2(1418, 3306)
 
-[node name="mar_shadow_08" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_08" type="Marker2D" parent="pt_2" unique_id=150605130 groups=["shadow"]]
 position = Vector2(1354, 3154)
 
-[node name="mar_shadow_09" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_09" type="Marker2D" parent="pt_2" unique_id=1109970868 groups=["shadow"]]
 position = Vector2(1338, 3274)
 
-[node name="mar_shadow_10" type="Marker2D" parent="pt_2" groups=["shadow"]]
+[node name="mar_shadow_10" type="Marker2D" parent="pt_2" unique_id=2142097024 groups=["shadow"]]
 position = Vector2(1354, 3370)
 
-[node name="pt_3" type="Node2D" parent="."]
+[node name="pt_3" type="Node2D" parent="." unique_id=2093710145]
 
-[node name="mar_ranged_01" type="Marker2D" parent="pt_3" groups=["ranged"]]
+[node name="mar_ranged_01" type="Marker2D" parent="pt_3" unique_id=1026542715 groups=["ranged"]]
 position = Vector2(760, 2808)
 
-[node name="mar_ranged_02" type="Marker2D" parent="pt_3" groups=["ranged"]]
+[node name="mar_ranged_02" type="Marker2D" parent="pt_3" unique_id=225001082 groups=["ranged"]]
 position = Vector2(680, 2616)
 
-[node name="mar_ranged_03" type="Marker2D" parent="pt_3" groups=["ranged"]]
+[node name="mar_ranged_03" type="Marker2D" parent="pt_3" unique_id=1539757084 groups=["ranged"]]
 position = Vector2(538, 2498)
 
-[node name="mar_ranged_04" type="Marker2D" parent="pt_3" groups=["ranged"]]
+[node name="mar_ranged_04" type="Marker2D" parent="pt_3" unique_id=674048666 groups=["ranged"]]
 position = Vector2(370, 2610)
 
-[node name="mar_ranged_05" type="Marker2D" parent="pt_3" groups=["ranged"]]
+[node name="mar_ranged_05" type="Marker2D" parent="pt_3" unique_id=652674139 groups=["ranged"]]
 position = Vector2(258, 2810)
 
-[node name="mar_shadow_1" type="Marker2D" parent="pt_3" groups=["shadow"]]
+[node name="mar_shadow_1" type="Marker2D" parent="pt_3" unique_id=382023400 groups=["shadow"]]
 position = Vector2(1688, 2768)
 
-[node name="mar_shadow_2" type="Marker2D" parent="pt_3" groups=["shadow"]]
+[node name="mar_shadow_2" type="Marker2D" parent="pt_3" unique_id=1358763789 groups=["shadow"]]
 position = Vector2(1672, 2400)
 
-[node name="mar_confused_01" type="Marker2D" parent="pt_3" groups=["confused"]]
+[node name="mar_confused_01" type="Marker2D" parent="pt_3" unique_id=1799778717 groups=["confused"]]
 position = Vector2(2272, 2600)
 
-[node name="mar_confused_02" type="Marker2D" parent="pt_3" groups=["confused"]]
+[node name="mar_confused_02" type="Marker2D" parent="pt_3" unique_id=1967557032 groups=["confused"]]
 position = Vector2(3632, 2544)
 
-[node name="mar_confused_03" type="Marker2D" parent="pt_3" groups=["confused"]]
+[node name="mar_confused_03" type="Marker2D" parent="pt_3" unique_id=1883808874 groups=["confused"]]
 position = Vector2(3320, 2672)
 
-[node name="mar_confused_04" type="Marker2D" parent="pt_3" groups=["confused"]]
+[node name="mar_confused_04" type="Marker2D" parent="pt_3" unique_id=1675019007 groups=["confused"]]
 position = Vector2(3672, 2776)
 
-[node name="pt_4" type="Node2D" parent="."]
+[node name="pt_4" type="Node2D" parent="." unique_id=707776059]
 scale = Vector2(1.0088745, 1.0004894)
 
-[node name="mar_shadow_01" type="Marker2D" parent="pt_4" groups=["shadow"]]
+[node name="mar_shadow_01" type="Marker2D" parent="pt_4" unique_id=508336010 groups=["shadow"]]
 position = Vector2(1578, 1282)
 
-[node name="mar_shadow_02" type="Marker2D" parent="pt_4" groups=["shadow"]]
+[node name="mar_shadow_02" type="Marker2D" parent="pt_4" unique_id=267529016 groups=["shadow"]]
 position = Vector2(1578, 1970)
 
-[node name="mar_confused_01" type="Marker2D" parent="pt_4" groups=["confused"]]
+[node name="mar_confused_01" type="Marker2D" parent="pt_4" unique_id=776579901 groups=["confused"]]
 position = Vector2(1850, 1978)
 
-[node name="mar_confused_02" type="Marker2D" parent="pt_4" groups=["confused"]]
+[node name="mar_confused_02" type="Marker2D" parent="pt_4" unique_id=1413624504 groups=["confused"]]
 position = Vector2(1818, 1314)
 
-[node name="mar_confused_03" type="Marker2D" parent="pt_4" groups=["confused"]]
+[node name="mar_confused_03" type="Marker2D" parent="pt_4" unique_id=1793421125 groups=["confused"]]
 position = Vector2(4138, 1514)
 
-[node name="mar_ranged_01" type="Marker2D" parent="pt_4" groups=["ranged"]]
+[node name="mar_ranged_01" type="Marker2D" parent="pt_4" unique_id=1025979591 groups=["ranged"]]
 position = Vector2(1138, 1474)
 
-[node name="mar_ranged_02" type="Marker2D" parent="pt_4" groups=["ranged"]]
+[node name="mar_ranged_02" type="Marker2D" parent="pt_4" unique_id=1674941900 groups=["ranged"]]
 position = Vector2(1018, 1634)
 
-[node name="mar_ranged_03" type="Marker2D" parent="pt_4" groups=["ranged"]]
+[node name="mar_ranged_03" type="Marker2D" parent="pt_4" unique_id=1475819580 groups=["ranged"]]
 position = Vector2(1026, 1778)
 
-[node name="mar_ranged_04" type="Marker2D" parent="pt_4" groups=["ranged"]]
+[node name="mar_ranged_04" type="Marker2D" parent="pt_4" unique_id=713513731 groups=["ranged"]]
 position = Vector2(1146, 1930)
 
-[node name="mar_ranged_05" type="Marker2D" parent="pt_4" groups=["ranged"]]
+[node name="mar_ranged_05" type="Marker2D" parent="pt_4" unique_id=742137734 groups=["ranged"]]
 position = Vector2(4610, 1498)
 
-[node name="mar_ranged_06" type="Marker2D" parent="pt_4" groups=["ranged"]]
+[node name="mar_ranged_06" type="Marker2D" parent="pt_4" unique_id=303651394 groups=["ranged"]]
 position = Vector2(3650, 1498)
 
-[node name="mar_shield_01" type="Marker2D" parent="pt_4" groups=["shield"]]
+[node name="mar_shield_01" type="Marker2D" parent="pt_4" unique_id=2055830631 groups=["shield"]]
 position = Vector2(4554, 1746)
 
-[node name="mar_shield_02" type="Marker2D" parent="pt_4" groups=["shield"]]
+[node name="mar_shield_02" type="Marker2D" parent="pt_4" unique_id=1486700473 groups=["shield"]]
 position = Vector2(3690, 1738)
 
-[node name="mar_shield_03" type="Marker2D" parent="pt_4" groups=["shield"]]
+[node name="mar_shield_03" type="Marker2D" parent="pt_4" unique_id=557181094 groups=["shield"]]
 position = Vector2(1386, 1434)
 
-[node name="mar_shield_04" type="Marker2D" parent="pt_4" groups=["shield"]]
+[node name="mar_shield_04" type="Marker2D" parent="pt_4" unique_id=1459649489 groups=["shield"]]
 position = Vector2(1402, 1866)
