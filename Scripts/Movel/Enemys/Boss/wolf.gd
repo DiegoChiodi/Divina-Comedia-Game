@@ -29,14 +29,15 @@ func attack_process(_delta : float) -> void:
 
 func start_attack () -> void:
 	super.start_attack()
-	self.center = game_manager.player.global_position
+	self.center = game_manager.player.position - self.position
+	#Ou o fato de estar colocand a posição global dele igual a camera
 	self.attack_delay = max(9.0 - self.difficult * 2, 4.0)
 	self.difficult += self.mult_difficult
 	self.radious = self.RADIOUS_MAX
 	self.angle = 0.0
 
 func return_normal(_delta : float) -> void:
-	self.global_position = lerp(self.global_position, self.normal_position, 2.5 * _delta)
+	self.position = lerp(self.position, self.normal_position + game_manager.camera.position, 2.5 * _delta)
 	self.rotation_personality = 0.0
 	
 func to_die() -> void:
