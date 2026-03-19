@@ -20,7 +20,7 @@ func setup(_pos_ambush : Vector2, _mar_relax : Vector2):
 func in_attack (_delta : float) -> void:
 	if self.punchs > 0:
 		if self.attack_cou < 0.8:
-			self.global_position = self.global_position.lerp(self.pos_ambush, 3 * _delta)
+			self.position = self.position.lerp(self.pos_ambush, 3 * _delta)
 			self.scale = self.scale.lerp(Vector2.ONE * 2.5, 3 * _delta)
 			self.attack_speed = self.attack_speed_fix
 			if game_manager.player != null:
@@ -29,7 +29,7 @@ func in_attack (_delta : float) -> void:
 			self.attack_speed = lerp(self.attack_speed, self.attack_speed_target, 10 * _delta)
 			self.position += self.attack_speed * _delta * self.dir
 		else:
-			self.global_position = self.global_position.lerp(self.pos_ambush, 3 * _delta)
+			self.position = self.position.lerp(self.pos_ambush, 3 * _delta)
 			if self.attack_cou_fix + 1.0 < self.attack_cou:
 				self.attack_cou = 0.0
 				self.punchs -= 1

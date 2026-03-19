@@ -1464,9 +1464,6 @@ texture = ExtResource("5_s6e2s")
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_s2ci4")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpv2l"]
-size = Vector2(63.9999, 64)
-
 [sub_resource type="Curve" id="Curve_jiyf4"]
 _data = [Vector2(0, 0.20062119), 0.0, 0.0, 0, 0, Vector2(0.49689445, 0.6043478), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -1576,20 +1573,6 @@ tile_set = SubResource("TileSet_8hgu1")
 [node name="roomSize" type="Marker2D" parent="." unique_id=512749617]
 position = Vector2(1440, 808)
 
-[node name="EnterTopMountain" type="Area2D" parent="." unique_id=1521760088]
-position = Vector2(288, 736)
-
-[node name="ColorRect" type="ColorRect" parent="EnterTopMountain" unique_id=701151061]
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 24.0
-offset_bottom = 24.0
-metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTopMountain" unique_id=1999501812]
-position = Vector2(-8, -8)
-shape = SubResource("RectangleShape2D_dpv2l")
-
 [node name="marker_from_mountain" type="Marker2D" parent="." unique_id=321508262]
 position = Vector2(272, 608)
 
@@ -1613,5 +1596,3 @@ texture = ExtResource("6_yjk7u")
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_lbonf")
 script = ExtResource("8_mbtd3")
-
-[connection signal="area_entered" from="EnterTopMountain" to="." method="_on_enter_top_mountain_area_entered"]

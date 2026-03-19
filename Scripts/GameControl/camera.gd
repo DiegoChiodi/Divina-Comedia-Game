@@ -67,3 +67,11 @@ func setTarget(_target, _posComp) -> void:
 	self.target = _target
 	if _posComp != null:
 		self.posComp = _posComp
+
+func get_camera_rect() -> Rect2:
+	var viewport_size = self.get_viewport_rect().size
+
+	var size = viewport_size * self.zoom
+	var position = self.global_position - size / 2
+
+	return Rect2(position, size)

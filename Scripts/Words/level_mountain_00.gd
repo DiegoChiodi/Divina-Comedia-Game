@@ -7,10 +7,15 @@ const ranged_path : String = "res://Scene/Enemys/rangeEnemy.tscn"
 const confused_path : String = "res://Scene/Enemys/confuseEnemy.tscn"
 
 const beasts : String = "res://Scene/Enemys/Beasts/beasts.tscn"
+var beasts_ins : BeastsManager = load(self.beasts).instantiate()
+
+var in_ascend_quest : bool = false
 
 func _process(_delta: float) -> void:
 	if game_manager.player != null and quest_manager.current_quest is QuestMountain:
 		game_manager.ui.clr_shadow.color.a = game_manager.player.position.y / self.map.roomSize.y - 100.0 / 255.0
+	if self.in_ascend_quest:
+		self.beasts_ins.global_position = lerp(self.beasts_ins.global_position, game_manager.camera.global_position + Vector2.UP * 500, 0.98 * _delta)
 
 func load_pt(pt : int) -> void:
 	var pt_node := self.get_node('pt_' + str(pt))
@@ -32,6 +37,8 @@ func load_pt(pt : int) -> void:
 			var shield : ShieldEnemy = load(self.shield_path).instantiate()
 			shield.position = children.position
 			self.add_child(shield)
+	
+
 
 func unload(pt : int) -> void:
 	var pt_node = get_node('pt_' + str(pt)) 
@@ -40,8 +47,9 @@ func unload(pt : int) -> void:
 			children.queue_free()
 
 func init_quest_descend () -> void:
-	var beasts_ins : BeastsManager = load(self.beasts).instantiate()
-	beasts_ins.position = game_manager.player.position
-	for i in beasts_ins.beasts:
+	self.beasts_ins.position = game_manager.player.position
+	for i in self.beasts_ins.beasts:
 		i.life = 100000.0
-	self.add_child(beasts_ins)
+	self.add_child(self.beasts_ins)
+	self.in_ascend_quest = true
+	game_manager.camera.zoomTarget *= 0.8

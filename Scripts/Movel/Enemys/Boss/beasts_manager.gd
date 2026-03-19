@@ -46,17 +46,17 @@ func trading_beast(_delta : float) -> void:
 func trading() -> void:
 	var next_beast_dir : bool = randi() % 2 == 0
 	next_beast_dir = false #<---------------------------------------------------------
-	beasts[0].in_attack = false
+	self.beasts[0].in_attack = false
 	if next_beast_dir:
 		self.target_rotation += 120.0
-		var first = beasts.pop_front()
-		beasts.append(first)
+		var first = self.beasts.pop_front()
+		self.beasts.append(first)
 	else:
 		self.target_rotation -= 120.0
-		var last = beasts.pop_back()
-		beasts.insert(0, last)
+		var last = self.beasts.pop_back()
+		self.beasts.insert(0, last)
 	self.attack_wait = 0.0
-	beasts[0].start_attack()
+	self.beasts[0].start_attack()
 
 func beast_dead(_best : BeastBase) -> void:
 	pass

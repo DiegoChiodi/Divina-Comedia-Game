@@ -29,7 +29,7 @@ func attack_process(_delta : float) -> void:
 
 func start_attack () -> void:
 	super.start_attack()
-	self.center = global.roomLimit / 2 + Vector2(0, -200.0) 
+	self.center = game_manager.player.global_position
 	self.attack_delay = max(9.0 - self.difficult * 2, 4.0)
 	self.difficult += self.mult_difficult
 	self.radious = self.RADIOUS_MAX
