@@ -11,4 +11,8 @@ func on_level_loaded (_level: Level) -> void:
 func on_enemy_destroyed (_enemy) -> void:
 	self.boss_lose += 1
 	if self.boss_lose == self.BOSS_LOSE_MAX:
-		quest_manager.questFinish()
+		on_quest_finish()
+
+func on_quest_finish() -> void:
+	super.on_quest_finish()
+	game_manager.change_room(GameManager.LevelID.MOUNTAIN_00)

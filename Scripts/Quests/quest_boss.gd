@@ -7,5 +7,4 @@ func on_level_loaded (_level: Level) -> void:
 
 func on_enemy_destroyed (_enemy) -> void:
 	if _enemy is ShadowBoss:
-		quest_manager.questFinish()
-		print('finish')
+		on_quest_finish()

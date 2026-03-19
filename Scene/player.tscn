@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://d35d02vpcgrpg"]
+[gd_scene format=3 uid="uid://d35d02vpcgrpg"]
 
 [ext_resource type="Script" uid="uid://m2exhdhgmqhi" path="res://Scripts/Movel/player.gd" id="1_vtayn"]
 [ext_resource type="AudioStream" uid="uid://bqt5r8lnfvcjn" path="res://Assets/audio/sfx/swinging-fist-swing.wav" id="2_xa75v"]
@@ -307,60 +307,60 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=121915959]
 motion_mode = 1
 script = ExtResource("1_vtayn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=378503296]
 position = Vector2(-1.5, 11.5)
 shape = SubResource("RectangleShape2D_y8w33")
 
-[node name="are_hbTakeDamage" type="Area2D" parent="."]
+[node name="are_hbTakeDamage" type="Area2D" parent="." unique_id=1483295378]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage" unique_id=1288942889]
 position = Vector2(-1.5, 11.5)
 shape = SubResource("RectangleShape2D_kelma")
 
-[node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+[node name="are_hbAttack" type="Area2D" parent="." unique_id=1834154785 groups=["hbAttack"]]
 position = Vector2(-16, -16)
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack" unique_id=596113137]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_xa75v")
 
-[node name="Mark_right" type="Marker2D" parent="."]
+[node name="Mark_right" type="Marker2D" parent="." unique_id=1973143099]
 position = Vector2(64, 16)
 
-[node name="Mark_left" type="Marker2D" parent="."]
+[node name="Mark_left" type="Marker2D" parent="." unique_id=144768962]
 position = Vector2(-32, 16)
 
-[node name="Mark_left2" type="Marker2D" parent="."]
+[node name="Mark_left2" type="Marker2D" parent="." unique_id=833157951]
 position = Vector2(-32, 16)
 
-[node name="Mark_left3" type="Marker2D" parent="."]
+[node name="Mark_left3" type="Marker2D" parent="." unique_id=193028358]
 position = Vector2(-32, 16)
 
-[node name="Mark_up" type="Marker2D" parent="."]
+[node name="Mark_up" type="Marker2D" parent="." unique_id=1197292965]
 position = Vector2(16, -32)
 
-[node name="Mark_down" type="Marker2D" parent="."]
+[node name="Mark_down" type="Marker2D" parent="." unique_id=137627796]
 position = Vector2(16, 64)
 
-[node name="attack" type="ColorRect" parent="."]
+[node name="attack" type="ColorRect" parent="." unique_id=1692101521]
 visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(1, 1, 1, 0.184314)
 
-[node name="SndAttack1" type="AudioStreamPlayer2D" parent="."]
+[node name="SndAttack1" type="AudioStreamPlayer2D" parent="." unique_id=1903791341]
 stream = ExtResource("2_xa75v")
 
-[node name="SndDash" type="AudioStreamPlayer2D" parent="."]
+[node name="SndDash" type="AudioStreamPlayer2D" parent="." unique_id=180395172]
 stream = ExtResource("3_58ae2")
 volume_db = 4.0
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1964346048]
 position = Vector2(-3, 0)
 scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_xa75v")

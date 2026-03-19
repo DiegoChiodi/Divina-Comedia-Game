@@ -6,6 +6,8 @@ const shield_path : String = "res://Scene/Enemys/shieldEnemy.tscn"
 const ranged_path : String = "res://Scene/Enemys/rangeEnemy.tscn"
 const confused_path : String = "res://Scene/Enemys/confuseEnemy.tscn"
 
+const beasts : String = "res://Scene/Enemys/Beasts/beasts.tscn"
+
 func _process(_delta: float) -> void:
 	if game_manager.player != null and quest_manager.current_quest is QuestMountain:
 		game_manager.ui.clr_shadow.color.a = game_manager.player.position.y / self.map.roomSize.y - 100.0 / 255.0
@@ -36,3 +38,10 @@ func unload(pt : int) -> void:
 	for children in pt_node.get_children(false):
 		if children is Enemy:
 			children.queue_free()
+
+func init_quest_descend () -> void:
+	var beasts_ins : BeastsManager = load(self.beasts).instantiate()
+	beasts_ins.position = game_manager.player.position
+	for i in beasts_ins.beasts:
+		i.life = 100000.0
+	self.add_child(beasts_ins)

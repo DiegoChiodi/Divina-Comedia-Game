@@ -55,14 +55,15 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("b"):
 		self.acc_mode = !self.acc_mode
-		if self.acc_mode:
-			Engine.time_scale = 3.0
-		else:
+		if !self.acc_mode:
 			Engine.time_scale = 1.0
-		
-	if Input.is_action_just_pressed('n'):
-		quest_manager.questFinish()
 	
+	if self.acc_mode:
+		Engine.time_scale = 3.0
+
+	if Input.is_action_just_pressed('n'):
+		quest_manager.current_quest.on_quest_finish()
+		
 	if Input.is_action_just_pressed("menu"):
 		self.is_paused = !self.is_paused
 		get_tree().paused = self.is_paused

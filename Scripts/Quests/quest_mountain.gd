@@ -29,7 +29,7 @@ func on_enemy_destroyed (_enemy) -> void:
 			self.actual_pt += 1
 			self.enemys_dead = 0
 			if self.actual_pt == self.ENEMYSMAX_PTS.size():
-				quest_manager.questFinish()
+				on_quest_finish()
 				return
 			
-			actual_level.load_pt(actual_pt)
+			self.actual_level.load_pt(self.actual_pt)

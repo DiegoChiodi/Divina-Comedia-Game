@@ -11,4 +11,4 @@ func on_level_loaded (_level: Level) -> void:
 func on_enemy_destroyed (_enemy) -> void:
 	self.enemys_dead += 1
 	if self.enemys_dead == self.ENEMYSMAX:
-		quest_manager.questFinish()
+		on_quest_finish()

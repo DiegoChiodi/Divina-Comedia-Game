@@ -1590,6 +1590,9 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-8, -8)
 shape = SubResource("RectangleShape2D_dpv2l")
 
+[node name="marker_from_mountain" type="Marker2D" parent="." unique_id=321508262]
+position = Vector2(272, 608)
+
 [node name="vfx" type="Node2D" parent="." unique_id=1047707631]
 
 [node name="par_wind" type="GPUParticles2D" parent="vfx" unique_id=295307887]
@@ -1610,8 +1613,5 @@ texture = ExtResource("6_yjk7u")
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_lbonf")
 script = ExtResource("8_mbtd3")
-
-[node name="marker_from_mountain" type="Marker2D" parent="." unique_id=321508262]
-position = Vector2(272, 608)
 
 [connection signal="area_entered" from="EnterTopMountain" to="." method="_on_enter_top_mountain_area_entered"]

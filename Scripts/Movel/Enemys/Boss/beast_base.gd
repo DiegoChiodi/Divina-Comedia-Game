@@ -21,7 +21,7 @@ const NEUTRALIZATINGDELAY : float = 1.0
 var neutralizingWait : float = self.NEUTRALIZATINGDELAY
 
 var in_attack : bool = false
-var life : float = 200
+var life : float = 200.0
 var rotation_personality : float = 0.0
 var is_dead : bool = false
 var is_dying : bool = false
@@ -65,7 +65,7 @@ func attacking(_delta : float) -> void:
 		elif self.is_dying:
 			self.dying(_delta)
 		else:
-			attack_process(_delta)
+			self.attack_process(_delta)
 	else:
 		self.beast_manager.trading()
 		self.attack_wait = 0.0

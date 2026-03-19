@@ -1596,7 +1596,7 @@ position = Vector2(-8, -8)
 shape = SubResource("RectangleShape2D_dpv2l")
 
 [node name="marker_from_top_mountain" type="Marker2D" parent="." unique_id=1891873457]
-position = Vector2(3896, 5456)
+position = Vector2(348, 1654)
 
 [node name="EnterVestibule" type="Area2D" parent="." unique_id=926839656]
 position = Vector2(4328, 5664)
