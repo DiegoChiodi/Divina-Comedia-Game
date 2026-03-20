@@ -11,7 +11,8 @@ var attack_cou : float = 0.0
 var attack_cou_fix : float = 0.0
 var pos_ambush : Vector2
 var mar_relax : Vector2
-
+const RET_DELAY : float = 1.0
+var ret_wait : float = -100.0
 
 func setup(_pos_ambush : Vector2, _mar_relax : Vector2):
 	self.pos_ambush = _pos_ambush
@@ -25,20 +26,24 @@ func in_attack (_delta : float) -> void:
 			self.attack_speed = self.attack_speed_fix
 			if game_manager.player != null:
 				self.dir = (game_manager.player.global_position - self.global_position).normalized()
+			self.ret_wait = 0.0
 		elif !self.end_attack:
 			self.attack_speed = lerp(self.attack_speed, self.attack_speed_target, 10 * _delta)
 			self.position += self.attack_speed * _delta * self.dir
+			
 		else:
 			self.position = self.position.lerp(self.pos_ambush, 3 * _delta)
 			if self.attack_cou_fix + 1.0 < self.attack_cou:
 				self.attack_cou = 0.0
 				self.punchs -= 1
 				self.end_attack = false
+				self.ret_wait = 0.0
 		
-		if not Rect2(Vector2.ZERO, global.roomLimit).has_point(self.global_position):
+		if (not Rect2(Vector2.ZERO, global.roomLimit).has_point(self.global_position) or self.ret_wait > self.RET_DELAY) and !self.end_attack:
 			self.end_attack = true
 			self.attack_cou_fix = self.attack_cou
 		
+		self.ret_wait += _delta
 		self.attack_cou += _delta
 
 func ending_attack(_delta : float) -> void:

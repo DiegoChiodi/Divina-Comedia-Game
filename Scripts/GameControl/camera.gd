@@ -72,6 +72,6 @@ func get_camera_rect() -> Rect2:
 	var viewport_size = self.get_viewport_rect().size
 
 	var size = viewport_size * self.zoom
-	var position = self.global_position - size / 2
+	var position_g = self.global_position - size / 2
 
-	return Rect2(position, size)
+	return Rect2(position_g, size)
