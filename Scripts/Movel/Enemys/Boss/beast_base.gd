@@ -98,11 +98,11 @@ func stopFlashing(_delta : float) -> void:
 
 func to_die() -> void:
 	self.beast_manager.beast_dead(self)
-	game_manager.entityDead(self)
 	if !self.is_dying: 
 		self.is_dying = true
 		self.attack_delay = 1.5
 		self.attack_wait = 0.0
+		game_manager.entityDead(self)
 
 func dying(_delta : float) -> void:
 	self.return_normal(_delta)
