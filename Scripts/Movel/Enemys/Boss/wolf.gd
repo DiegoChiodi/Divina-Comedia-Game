@@ -12,10 +12,11 @@ var normal_position : Vector2 = Vector2(703, 128)
 
 var difficult = 0.5
 var mult_difficult = 1.0
-
+var acceleration_return : float = 1.0
 func _ready() -> void:
 	super._ready()
 	self.life = 200.0
+	self.attack_delay -= 2.0
 
 func attack_process(_delta : float) -> void:
 	if self.attack_wait > self.attack_delay - 1.5:
@@ -29,8 +30,15 @@ func attack_process(_delta : float) -> void:
 
 func start_attack () -> void:
 	super.start_attack()
-	if game_manager.player != null:
-		self.center = game_manager.player.position - self.position
+	self.position = Vector2.ZERO
+	var pos_real : Vector2 = self.global_position - self.position.rotated(self.beast_manager.rotation)
+	
+	if quest_manager.current_quest is QuestBeasts:
+		self.center = global.roomLimit / 2
+	else:
+		if game_manager.player != null:
+			self.center = game_manager.player.global_position - pos_real
+			self.difficult = 2.0
 	#Ou o fato de estar colocand a posição global dele igual a camera
 	self.attack_delay = max(9.0 - self.difficult * 2, 4.0)
 	self.difficult += self.mult_difficult
@@ -38,8 +46,8 @@ func start_attack () -> void:
 	self.angle = 0.0
 
 func return_normal(_delta : float) -> void:
-	self.position = lerp(self.position, self.normal_position, 2.5 * _delta)
+	self.global_position = lerp(self.global_position, self.normal_position, 2.5 * _delta)
 	self.rotation_personality = 0.0
-	
+
 func to_die() -> void:
 	game_manager.entityDead(self)

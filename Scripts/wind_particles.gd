@@ -10,9 +10,9 @@ func _process(delta: float) -> void:
 	folliwing_cam()
 
 func folliwing_cam() -> void:
-	self.position = game_manager.camera.position
+	self.global_position = game_manager.camera.global_position
 
 func set_size_viewport() -> void:
 	var viewport_size := get_viewport().get_visible_rect().size
-	process_material.emission_box_extents.x = viewport_size.x * 0.5
-	process_material.emission_box_extents.y = viewport_size.y * 0.5
+	self.process_material.emission_box_extents.x = viewport_size.x * 0.5
+	self.process_material.emission_box_extents.y = viewport_size.y * 0.5

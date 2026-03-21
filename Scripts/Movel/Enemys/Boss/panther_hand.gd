@@ -4,7 +4,7 @@ class_name PantherHand
 var dir : Vector2 = Vector2.ZERO
 var attack_speed : float = 200.0
 var attack_speed_fix : float = 100.0
-var attack_speed_target : float = 1800.0
+var attack_speed_target : float = 3000.0
 var punchs : int = 2
 var end_attack : bool = false
 var attack_cou : float = 0.0
@@ -17,6 +17,8 @@ var ret_wait : float = -100.0
 func setup(_pos_ambush : Vector2, _mar_relax : Vector2):
 	self.pos_ambush = _pos_ambush
 	self.mar_relax = _mar_relax
+	if not quest_manager.current_quest is QuestBeasts:
+		self.attack_speed_target = 2000.0
 	
 func in_attack (_delta : float) -> void:
 	if self.punchs > 0:
@@ -28,7 +30,7 @@ func in_attack (_delta : float) -> void:
 				self.dir = (game_manager.player.global_position - self.global_position).normalized()
 			self.ret_wait = 0.0
 		elif !self.end_attack:
-			self.attack_speed = lerp(self.attack_speed, self.attack_speed_target, 10 * _delta)
+			self.attack_speed = lerp(self.attack_speed, self.attack_speed_target, 2.5 * _delta)
 			self.position += self.attack_speed * _delta * self.dir
 			
 		else:

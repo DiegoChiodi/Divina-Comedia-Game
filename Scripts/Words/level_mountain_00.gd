@@ -15,8 +15,8 @@ func _process(_delta: float) -> void:
 	if game_manager.player != null and quest_manager.current_quest is QuestMountain:
 		game_manager.ui.clr_shadow.color.a = game_manager.player.position.y / self.map.roomSize.y - 100.0 / 255.0
 	if self.in_ascend_quest:
-		self.beasts_ins.global_position.x = lerp(self.beasts_ins.global_position.x, game_manager.camera.global_position.x, 1.0 * _delta)
-		self.beasts_ins.global_position.y = lerp(self.beasts_ins.global_position.y, game_manager.camera.global_position.y - 500, 3.0 * _delta)
+		self.beasts_ins.global_position.x = lerp(self.beasts_ins.global_position.x, game_manager.camera.global_position.x, 0.5 * _delta)
+		self.beasts_ins.global_position.y = lerp(self.beasts_ins.global_position.y, game_manager.camera.global_position.y - 600, 3.0 * _delta)
 		
 		
 
