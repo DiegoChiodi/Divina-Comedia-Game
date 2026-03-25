@@ -27,18 +27,23 @@ func attack_process(_delta : float) -> void:
 		self.angle += self.angle_speed * _delta * max(self.radious / self.RADIOUS_MAX, 0.2) * self.difficult
 		self.position = self.radious * dir - self.center
 		self.rotation_personality = self.angle + 90
+		if self.radious < 30.0:
+			self.attack_wait = self.attack_delay
+		
 
 func start_attack () -> void:
 	super.start_attack()
 	self.position = Vector2.ZERO
-	var pos_real : Vector2 = self.global_position - self.position.rotated(self.beast_manager.rotation)
-	
 	if quest_manager.current_quest is QuestBeasts:
 		self.center = global.roomLimit / 2
 	else:
 		if game_manager.player != null:
-			self.center = game_manager.player.global_position - pos_real
+			var viewport_size = game_manager.camera.get_viewport_rect().size
+			var size = viewport_size * game_manager.camera.zoom
+			self.center = size / 2
 			self.difficult = 2.0
+
+
 	#Ou o fato de estar colocand a posição global dele igual a camera
 	self.attack_delay = max(9.0 - self.difficult * 2, 4.0)
 	self.difficult += self.mult_difficult
@@ -50,4 +55,6 @@ func return_normal(_delta : float) -> void:
 	self.rotation_personality = 0.0
 
 func to_die() -> void:
-	game_manager.entityDead(self)
+	if !self.is_dying: 
+		self.is_dying = true
+		game_manager.entityDead(self)
