@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctywwb1pfgx4y"]
+[gd_scene format=3 uid="uid://ctywwb1pfgx4y"]
 
 [ext_resource type="Script" uid="uid://b7ggyfwv8bqgm" path="res://Scripts/Movel/Enemys/shadow_enemy.gd" id="1_uclx1"]
 [ext_resource type="Texture2D" uid="uid://c5k24hr5rh7jl" path="res://Assets/sprites/Enemy.png" id="2_lhbr1"]
@@ -52,56 +52,56 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Shadow" type="CharacterBody2D"]
+[node name="Shadow" type="CharacterBody2D" unique_id=149196866]
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_uclx1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=90072781]
 shape = SubResource("CircleShape2D_enmux")
 
-[node name="are_checkPlayer" type="Area2D" parent="."]
+[node name="are_checkPlayer" type="Area2D" parent="." unique_id=2107954195]
 monitorable = false
 
-[node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer"]
+[node name="col_checkPlayer" type="CollisionShape2D" parent="are_checkPlayer" unique_id=1020035675]
 shape = SubResource("RectangleShape2D_cs6ny")
 
-[node name="are_hbTakeDamage" type="Area2D" parent="."]
+[node name="are_hbTakeDamage" type="Area2D" parent="." unique_id=1234741799]
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbTakeDamage" unique_id=1383794570]
 shape = SubResource("RectangleShape2D_b3k1e")
 
-[node name="are_hbAttack" type="Area2D" parent="." groups=["hbAttack"]]
+[node name="are_hbAttack" type="Area2D" parent="." unique_id=661177224 groups=["hbAttack"]]
 position = Vector2(-16, -16)
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="are_hbAttack" unique_id=133249842]
 position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_ki401")
 
-[node name="sprites" type="Node2D" parent="."]
+[node name="sprites" type="Node2D" parent="." unique_id=32521244]
 
-[node name="eyes" type="Sprite2D" parent="sprites"]
+[node name="eyes" type="Sprite2D" parent="sprites" unique_id=1079689341]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-1.0000005, -1)
 scale = Vector2(3, 3)
 texture = ExtResource("3_enmux")
 
-[node name="body" type="AnimatedSprite2D" parent="sprites"]
+[node name="body" type="AnimatedSprite2D" parent="sprites" unique_id=2130372124]
 position = Vector2(0, -4)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_eswn4")
 animation = &"steap"
 frame_progress = 0.47703472
 
-[node name="nav_agent" type="NavigationAgent2D" parent="."]
+[node name="nav_agent" type="NavigationAgent2D" parent="." unique_id=1568478499]
 radius = 20.0
 max_neighbors = 8
 time_horizon_obstacles = 1.0
 max_speed = 300.0
 
-[node name="tim_act_path" type="Timer" parent="."]
+[node name="tim_act_path" type="Timer" parent="." unique_id=872913709]
 wait_time = 0.2
 autostart = true
 

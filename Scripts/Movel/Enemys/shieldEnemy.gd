@@ -35,3 +35,9 @@ func rotationSet(_delta) -> void:
 
 func setDirection() -> Vector2:
 	return lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)
+
+func flip_sprite(_delta : float) -> void:
+	pass
+
+func feel_damage() -> void:
+	pass

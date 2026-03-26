@@ -32,4 +32,4 @@ func on_enemy_destroyed (_enemy) -> void:
 				on_quest_finish()
 				return
 			
-			self.actual_level.load_pt(self.actual_pt)
+			actual_level.load_pt(self.actual_pt)

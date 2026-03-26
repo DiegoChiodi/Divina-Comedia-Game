@@ -148,6 +148,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tbec"]
+size = Vector2(8.285719, 8.571432)
+
 [node name="virgilio" type="CharacterBody2D" unique_id=539167267]
 scale = Vector2(3.5, 3.5)
 script = ExtResource("1_kwvws")
@@ -155,3 +158,8 @@ script = ExtResource("1_kwvws")
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=761553538]
 sprite_frames = SubResource("SpriteFrames_x1oun")
 animation = &"run_x"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=76551977]
+position = Vector2(1.8571424, 3.4285707)
+scale = Vector2(0.9999994, 0.9999994)
+shape = SubResource("RectangleShape2D_5tbec")
