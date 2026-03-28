@@ -29,6 +29,7 @@ var marker_names : Dictionary = {
 	MapID.TOP_MOUNTAIN:'marker_from_top_mountain'
 }
 
+var main : Main
 var camera : Camera = Camera.new()
 var player : Player = preload("res://Scene/player.tscn").instantiate()
 var roomContainer : RoomContainer = RoomContainer.new()
@@ -41,7 +42,7 @@ var debugScene : String = "res://Scene/debugMap.tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	windowsConf()
-	process_mode = self.PROCESS_MODE_ALWAYS
+	self.process_mode = self.PROCESS_MODE_ALWAYS
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("restart"):
@@ -70,15 +71,16 @@ func _process(_delta: float) -> void:
 	
 		
 func init(_main : Node2D):
+	self.main = _main
 	self.camera.setup(self.player, null)
 	self.camera.limit_left = 0
 	self.camera.limit_top = 0
 	
 	self.roomContainer.add_child(self.camera)
-	_main.add_child(self.player)
-	_main.add_child(self.ui)
+	self.main.add_child(self.player)
+	self.main.add_child(self.ui)
 	self.roomContainer.load_room(self.level_paths[LevelID.FOREST_00])
-	_main.add_child(roomContainer)
+	self.main.add_child(roomContainer)
 	randomize()
 	
 
@@ -118,7 +120,7 @@ func startPlayer() -> void:
 	
 	var newPlayer : Player = preload("res://Scene/player.tscn").instantiate()
 	self.player = newPlayer
-	self.add_child(self.player)
+	main.add_child(self.player)
 
 func change_room(_map_id) -> void:
 	self.camera.zoomTarget = Vector2(1.0,1.0)

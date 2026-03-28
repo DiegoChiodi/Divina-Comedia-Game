@@ -24,7 +24,15 @@ func _ready() -> void:
 	self.timerLengthen.start()
 
 func _physics_process(delta: float) -> void:
+	if global.pause_dialogue:
+		return
 	super._physics_process(delta)
+
+func _process(delta: float) -> void:
+	if global.pause_dialogue:
+		return
+	super._process(delta)
+
 
 func checkCollidingRival(body) -> bool:
 	if (body == game_manager.player):
@@ -38,6 +46,8 @@ func directionTarget() -> void:
 		if self.inLengthen:
 			return
 		self.direction = self.direction.lerp(Vector2.ZERO,0.1)
+	
+	
 
 func setDirection() -> Vector2:
 	return (game_manager.player.position - self.position).normalized()

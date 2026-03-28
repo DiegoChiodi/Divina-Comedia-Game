@@ -9,6 +9,8 @@ var restart : bool = false
 var tentativa : int = 0
 var prev_room : Level
 
+var main : MainLoop
+
 func destroy_room() -> void:
 	self.currentRoom.call_deferred("queue_free")
 

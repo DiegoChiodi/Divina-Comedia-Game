@@ -31,7 +31,6 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
-	
 	if self.invencible:
 		if self.invencibleWait < self.invencibleDelay:
 			self.invencibleWait += _delta

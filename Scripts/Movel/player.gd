@@ -97,7 +97,8 @@ func _process(_delta: float) -> void:
 			self.speedFix = 300.0
 			self.damage = 20.0
 			self.life = self.lifeMax
-	
+	if global.pause_dialogue:
+		self.dash = false
 
 func dashFunction(_delta) -> void:
 	var right_click : bool = Input.is_action_just_pressed('right_click')
@@ -134,6 +135,9 @@ func speedTarget() -> float:
 	return super.speedTarget() * self.speedInDash
 
 func directionTarget() -> void:
+	if global.pause_dialogue:
+		return
+
 	var direction_target : Vector2 = Input.get_vector("left", "right", "up", "down")
 	if direction_target == Vector2.ZERO:
 		self.direction = self.direction.lerp(Vector2.ZERO,0.2)
