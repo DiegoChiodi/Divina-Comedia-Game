@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://coaq7pi87l4pf"]
+[gd_scene format=3 uid="uid://coaq7pi87l4pf"]
 
 [ext_resource type="Script" uid="uid://cf652p7qy2asr" path="res://Scripts/Words/level_vestibule_00.gd" id="1_dbkxu"]
 [ext_resource type="PackedScene" uid="uid://byefhs8t7rlgf" path="res://Scene/Roons/map_vestibule.tscn" id="2_xtd66"]
+[ext_resource type="PackedScene" uid="uid://c4i3vvwm18cuv" path="res://Scene/Enemys/confuseEnemy.tscn" id="3_7grsd"]
+[ext_resource type="PackedScene" uid="uid://b5wsskg1ffoq4" path="res://Scene/virgilio.tscn" id="4_701to"]
 
-[node name="Level_vestibule_00" type="Node2D"]
+[node name="Level_vestibule_00" type="Node2D" unique_id=1319787395]
 script = ExtResource("1_dbkxu")
 
-[node name="map" parent="." instance=ExtResource("2_xtd66")]
+[node name="map" parent="." unique_id=2144583773 instance=ExtResource("2_xtd66")]
 
-[node name="mar_boss" type="Marker2D" parent="."]
+[node name="mar_boss" type="Marker2D" parent="." unique_id=104242413]
 position = Vector2(1128, 322)
 gizmo_extents = 20.2
+
+[node name="ConfuseEnemy" parent="." unique_id=120914113 instance=ExtResource("3_7grsd")]
+position = Vector2(776, 496)
+
+[node name="virgilio" parent="." unique_id=539167267 instance=ExtResource("4_701to")]
+position = Vector2(1620, 254.00002)

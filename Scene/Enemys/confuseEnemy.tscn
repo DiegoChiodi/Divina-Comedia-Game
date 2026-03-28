@@ -85,7 +85,6 @@ animations = [{
 }]
 
 [node name="ConfuseEnemy" type="CharacterBody2D" unique_id=120914113 groups=["Enemy"]]
-scale = Vector2(1.2, 1.2)
 script = ExtResource("1_df5n6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=542848626]

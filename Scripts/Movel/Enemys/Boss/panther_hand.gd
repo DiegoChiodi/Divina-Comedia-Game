@@ -3,7 +3,7 @@ class_name PantherHand
 
 var dir : Vector2 = Vector2.ZERO
 var attack_speed : float = 200.0
-var attack_speed_fix : float = 100.0
+var attack_speed_fix : float  = 100.0
 var attack_speed_target : float = 3000.0
 var punchs : int = 2
 var end_attack : bool = false
@@ -11,7 +11,7 @@ var attack_cou : float = 0.0
 var attack_cou_fix : float = 0.0
 var pos_ambush : Vector2
 var mar_relax : Vector2
-const RET_DELAY : float = 1.0
+const RET_DELAY : float = 0.7
 var ret_wait : float = -100.0
 
 func setup(_pos_ambush : Vector2, _mar_relax : Vector2):
@@ -41,7 +41,7 @@ func in_attack (_delta : float) -> void:
 				self.end_attack = false
 				self.ret_wait = 0.0
 		
-		if (not Rect2(Vector2.ZERO, global.roomLimit).has_point(self.global_position) or self.ret_wait > self.RET_DELAY) and !self.end_attack:
+		if self.ret_wait > self.RET_DELAY and !self.end_attack:
 			self.end_attack = true
 			self.attack_cou_fix = self.attack_cou
 		

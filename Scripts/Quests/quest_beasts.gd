@@ -16,3 +16,4 @@ func on_enemy_destroyed (_enemy) -> void:
 func on_quest_finish() -> void:
 	super.on_quest_finish()
 	game_manager.change_room(GameManager.LevelID.MOUNTAIN_00)
+	game_manager.player.life = game_manager.player.lifeMax

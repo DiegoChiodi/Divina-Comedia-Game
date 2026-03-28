@@ -15,3 +15,6 @@ func on_enemy_destroyed (_enemy: Enemy) -> void:
 
 func on_quest_finish() -> void:
 	quest_manager.questFinish()
+
+func on_trade_map(_map_prev : Map, _map_prox : Map) -> void:
+	pass

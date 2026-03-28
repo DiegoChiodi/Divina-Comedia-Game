@@ -47,5 +47,4 @@ func flip_sprite(_delta : float) -> void:
 			self.in_ani_speed = true
 	
 func feel_damage() -> void:
-	self.sprite.scale.y -= 0.4
-	self.sprite.scale.x -= 0.2
+	pass

@@ -11,6 +11,12 @@ var beasts_ins : BeastsManager = load(self.beasts).instantiate()
 
 var in_ascend_quest : bool = false
 
+func _ready() -> void:
+	super._ready()
+	if global.enter_top_mountain:
+		self.map.ent_top_moutain.queue_free()
+		self.map.ent_top_moutain = null
+	
 func _process(_delta: float) -> void:
 	if game_manager.player != null and quest_manager.current_quest is QuestMountain:
 		game_manager.ui.clr_shadow.color.a = game_manager.player.position.y / self.map.roomSize.y - 100.0 / 255.0

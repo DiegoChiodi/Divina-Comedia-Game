@@ -42,8 +42,7 @@ func start_attack () -> void:
 			var size = viewport_size * game_manager.camera.zoom
 			self.center = size / 2
 			self.difficult = 2.0
-
-
+	
 	#Ou o fato de estar colocand a posição global dele igual a camera
 	self.attack_delay = max(9.0 - self.difficult * 2, 4.0)
 	self.difficult += self.mult_difficult

@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bugeq1tvmyiva" path="res://Scripts/Words/level_forest_00.gd" id="1_p4nya"]
 [ext_resource type="PackedScene" uid="uid://cbcvrtxuukd1p" path="res://Scene/Roons/map_forest.tscn" id="3_3juwn"]
-[ext_resource type="PackedScene" uid="uid://b5wsskg1ffoq4" path="res://Scene/virgilio.tscn" id="3_30uhe"]
-[ext_resource type="PackedScene" uid="uid://c4i3vvwm18cuv" path="res://Scene/Enemys/confuseEnemy.tscn" id="4_vufc6"]
 
 [node name="Level_florest_00" type="Node2D" unique_id=2118227629]
 script = ExtResource("1_p4nya")
@@ -18,9 +16,3 @@ position = Vector2(2468, 379)
 
 [node name="shadow_pos3" type="Marker2D" parent="." unique_id=583675088]
 position = Vector2(2585, 610)
-
-[node name="virgilio" parent="." unique_id=539167267 instance=ExtResource("3_30uhe")]
-position = Vector2(168, 176)
-
-[node name="ConfuseEnemy" parent="." unique_id=120914113 instance=ExtResource("4_vufc6")]
-position = Vector2(776, 496)

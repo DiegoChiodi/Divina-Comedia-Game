@@ -5,6 +5,9 @@ class_name MapMountain
 @onready var par_snow : GPUParticles2D = $vfx/par_snow
 @onready var control_wind : Marker2D = $vfx/control_wind
 @onready var control_snow : Marker2D = $vfx/control_snow
+
+@onready var ent_top_moutain = $EnterTopMountain
+
 # Called when the node enters the scene tree for the first time.
 func _ready () -> void:
 	super._ready()
@@ -23,3 +26,4 @@ func _process(delta: float) -> void:
 func _on_enter_top_mountain_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Player:
 		game_manager.change_room(GameManager.LevelID.TOP_MOUNTAIN_00)
+		global.enter_top_mountain = true

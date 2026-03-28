@@ -7,20 +7,23 @@ var previousMapId : int = -1
 var inInit : bool = true
 var restart : bool = false
 var tentativa : int = 0
-var previousCurrentRoomTemp : int
+var prev_room : Level
 
 func destroy_room() -> void:
 	self.currentRoom.call_deferred("queue_free")
 
 func load_room(path) -> void:
-	#Guarda o id da cena atual que está preste a ser modificada antes que modifique
+	#Guarda o id da cena atual que está preste a ser modificada antes que modifique	
 	if self.currentRoom != null:
-		self.previousCurrentRoomTemp  = self.currentRoom.map.id
+		self.prev_room  = self.currentRoom
 	
 	#Instancia a scena atual, configura e adiciona
 	self.currentRoom = load(path).instantiate()
 	self.currentRoom.setup()
 	self.add_child(self.currentRoom)
+	
+	if self.prev_room != null:
+		quest_manager.current_quest.on_trade_map(self.prev_room.map, self.currentRoom.map)
 	
 	quest_manager.current_quest.on_level_loaded(self.currentRoom)
 	
@@ -61,7 +64,7 @@ func positionPlayer() -> void:
 	
 	#Para reiniciar no marker certo da scena anterior
 	if !self.restart:
-		self.previousMapId = self.previousCurrentRoomTemp
+		self.previousMapId = self.prev_room.map.id
 	posPlayerPreviousRomm()
 	self.restart = false
 	

@@ -5,10 +5,6 @@ var shadow := preload("res://Scene/Enemys/shadow_enemy.tscn").instantiate()
 var shadow2 := preload("res://Scene/Enemys/shadow_enemy.tscn").instantiate()
 var shadow3 := preload("res://Scene/Enemys/shadow_enemy.tscn").instantiate()
 
-func _process(_delta: float) -> void:
-	if shadow == null:
-		global.shadowLive = false
-
 func init_quest_initial() -> void:
 	var clr_shadow = game_manager.ui.clr_shadow
 	clr_shadow.color.a = 100.0 / 255.0
