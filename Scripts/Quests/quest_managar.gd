@@ -2,7 +2,7 @@ extends Node
 class_name QuestManager
 
 var current_quest : Quest
-var quests : Array[Quest] = [QuestBeasts.new(), QuestDescend.new(), QuestInitial.new(), QuestBoss.new(), QuestMountain.new()]
+var quests : Array[Quest] = [QuestFoundVirgilio.new(), QuestBeasts.new(), QuestDescend.new(), QuestInitial.new(), QuestBoss.new(), QuestMountain.new()]
 
 func _init () -> void:
 	self.current_quest = self.quests[0]

@@ -19,3 +19,84 @@ position = Vector2(776, 496)
 
 [node name="virgilio" parent="." unique_id=539167267 instance=ExtResource("4_701to")]
 position = Vector2(1620, 254.00002)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1685211987]
+offset_left = 3518.0
+offset_top = 484.99988
+offset_right = 3558.0
+offset_bottom = 524.9999
+rotation = 0.32267672
+scale = Vector2(-42.242203, 39.09265)
+color = Color(0, 0, 0, 0.078431375)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=126335373]
+offset_left = 3457.0
+offset_top = 517.0
+offset_right = 3497.0
+offset_bottom = 557.0
+rotation = 0.32267672
+scale = Vector2(-42.242203, 39.09265)
+color = Color(0, 0, 0, 0.078431375)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=2055292055]
+offset_left = 3459.0
+offset_top = 574.0001
+offset_right = 3499.0
+offset_bottom = 614.0001
+rotation = 0.32267672
+scale = Vector2(-42.242203, 39.09265)
+color = Color(0, 0, 0, 0.078431375)
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=162320761]
+offset_left = 3513.0
+offset_top = 556.0001
+offset_right = 3553.0
+offset_bottom = 596.0001
+rotation = 0.32267672
+scale = Vector2(-42.242203, 39.09265)
+color = Color(0, 0, 0, 0.078431375)
+
+[node name="ColorRect5" type="ColorRect" parent="." unique_id=1239540495]
+offset_left = 3532.0
+offset_top = 609.0001
+offset_right = 3572.0
+offset_bottom = 649.0001
+rotation = 0.32267672
+scale = Vector2(-42.242203, 39.09265)
+color = Color(0, 0, 0, 0.078431375)
+
+[node name="ColorRect6" type="ColorRect" parent="." unique_id=282536503]
+offset_left = 3561.0002
+offset_top = 613.00006
+offset_right = 3601.0002
+offset_bottom = 653.00006
+rotation = 0.32267672
+scale = Vector2(-42.242203, 39.09265)
+color = Color(0, 0, 0, 0.078431375)
+
+[node name="ColorRect7" type="ColorRect" parent="." unique_id=765623635]
+offset_left = 3595.0
+offset_top = 611.00006
+offset_right = 3635.0
+offset_bottom = 651.00006
+rotation = 0.32267672
+scale = Vector2(-42.242203, 39.09265)
+color = Color(0, 0, 0, 0.078431375)
+
+[node name="ColorRect8" type="ColorRect" parent="." unique_id=199548102]
+offset_left = 3606.9998
+offset_top = 672.0
+offset_right = 3646.9998
+offset_bottom = 712.0
+rotation = 0.32267672
+scale = Vector2(-42.242203, 39.09265)
+color = Color(0, 0, 0, 0.078431375)
+
+[node name="ColorRect9" type="ColorRect" parent="." unique_id=191451850]
+offset_left = 3657.0
+offset_top = 603.0
+offset_right = 3697.0
+offset_bottom = 643.0
+rotation = 0.32267672
+scale = Vector2(-42.242203, 39.09265)
+color = Color(0, 0, 0, 0.078431375)

@@ -1,16 +1,17 @@
 extends Node
-class_name Speak
+class_name Speech
 
-enum Speakers {
+enum Speaker {
 	DANTE,
-	VIRGILIO
+	VIRGILIO,
+	VOID
 }
 
-var speaker : Speakers
+var speaker : Speaker
 var text : String
 var event : String
 
-func _init(_speaker : Speakers, _text := "", _event := ""):
-	speaker = _speaker
-	text = _text
-	event = _event
+func _init(_speaker : Speaker, _text := "", _event := ""):
+	self.speaker = _speaker
+	self.text = _text
+	self.event = _event

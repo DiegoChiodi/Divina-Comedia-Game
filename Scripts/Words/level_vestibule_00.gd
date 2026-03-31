@@ -3,6 +3,8 @@ class_name Level_Vestibule_00
 
 var boss : = preload("res://Scene/shadow_boss.tscn").instantiate()
 var shadows : Array[CircleDraw] = []
+var dialogue := DiaFoundVirgilio.new()
+
 
 func _process(_delta: float) -> void:
 	shadows_destroy(_delta)
@@ -11,6 +13,11 @@ func init_quest_boss() -> void:
 	self.boss.position = $mar_boss.position
 	add_child(self.boss)
 	self.map.locked_map = true
+
+func init_dialogue() -> void:
+	game_manager.ui.start_dialogue(self.dialogue)
+	self.dialogue.start = true
+	global.pause_dialogue = true
 
 func shadows_destroy(_delta : float) -> void:
 	for i in range(shadows.size() - 1, -1, -1):
