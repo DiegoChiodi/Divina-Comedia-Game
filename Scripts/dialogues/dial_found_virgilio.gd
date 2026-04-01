@@ -16,17 +16,22 @@ func set_speechs() -> void:
 	Speech.new(D, "Isso não faz sentido…"),
 	Speech.new(D, "Nada faz sentido."),
 
-	Speech.new(V, "", Speech.Event.SPAWN_ENTITY, [self.virgilio, game_manager.roomContainer.currentRoom.spawn_virg.global_position]),
+	Speech.new(V, "", global.Event.SPAWN_ENTITY, [self.virgilio, game_manager.roomContainer.currentRoom.spawn_virg.global_position]),
 
 	Speech.new(G, "Faz mais sentido do que você imagina."),
-
+	
+	Speech.new(V, "", global.Event.TRADE_MODULATE, [self.virgilio, Color(0,0,0, 0.8)]),
+	
 	Speech.new(D, "Quem está aí?"),
-	Speech.new(D, "Mostre-se!"),
 
-	Speech.new(V, "", Speech.Event.MOVE_ENTITY, [game_manager.player, game_manager.roomContainer.currentRoom.spawn_virg.global_position + Vector2.LEFT * 530]),
-	Speech.new(V, "", Speech.Event.CAM_ZOOM, [1.6]),
+	Speech.new(V, "", global.Event.MOVE_ENTITY, [game_manager.player, game_manager.roomContainer.currentRoom.spawn_virg.global_position + Vector2.LEFT * 530]),
+	
+
+	Speech.new(D, "Mostre-se!"),
+	Speech.new(V, "", global.Event.CAM_ZOOM, [1.6]),
 	
 	Speech.new(G, "Alguém que conhece este caminho."),
+	Speech.new(V, "", global.Event.TRADE_MODULATE, [self.virgilio, Color(1,1,1, 1.0)]),
 	Speech.new(G, "E o seu destino."),
 
 	Speech.new(D, "Se conhece o caminho… me tire daqui."),
@@ -77,7 +82,9 @@ func set_speechs() -> void:
 	Speech.new(G, "O caminho começa… aqui."),
 
 	Speech.new(D, "…Certo."),
-	Speech.new(D, "Eu vou.")
+	Speech.new(D, "Eu vou."),
+	Speech.new(V, "", global.Event.TRADE_PAUSE),
+	Speech.new(V, "", global.Event.END)
 	]
 
 func event_control(_delta : float) -> void:
@@ -85,21 +92,28 @@ func event_control(_delta : float) -> void:
 		return
 	var data : Array = speechs[current_speench].data
 	match speechs[current_speench].event:
-		Speech.Event.MOVE_ENTITY:
+		global.Event.MOVE_ENTITY:
 			self.per_pass_spreench = self.move_ani_entity_to_point(data[0], data[1])
 			if self.per_pass_spreench:
 				self.pass_text()
 			
-		Speech.Event.SPAWN_ENTITY:
+		global.Event.SPAWN_ENTITY:
 			self.spawn_entity(data[0], data[1])
-		Speech.Event.CAM_ZOOM:
+		global.Event.CAM_ZOOM:
 			self.per_pass_spreench = self.camera_zoom(data[0])
 			if self.per_pass_spreench:
 				self.pass_text()
-		Speech.Event.VOID:
+		global.Event.VOID:
 			pass
+		global.Event.TRADE_PAUSE:
+			self.trade_pause()
+			self.camera_zoom(1.0)
+		global.Event.END:
+			self.end()
+		global.Event.TRADE_MODULATE:
+			self.trade_modulate(data[0], data[1])
 
-func move_ani_entity_to_point(entity : AnimationEntity, point : Vector2, stop_marge : float = 50.0) -> bool:
+func move_ani_entity_to_point(entity : AnimationEntity, point : Vector2, stop_marge : float = 2.0) -> bool:
 	if abs((entity.global_position - point).length()) > stop_marge:
 		entity.direction = entity.global_position.direction_to(point)
 		return false
@@ -115,3 +129,6 @@ func camera_zoom(zoom : float) -> bool:
 func spawn_entity(entity, pos : Vector2) -> void:
 	game_manager.roomContainer.currentRoom.add_child(entity)
 	entity.global_position = pos
+
+func trade_modulate(entity : Node2D, color : Color) -> void:
+	entity.modulate = color

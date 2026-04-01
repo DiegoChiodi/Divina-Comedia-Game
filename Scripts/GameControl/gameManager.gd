@@ -111,9 +111,7 @@ func restartRoom() -> void:
 	self.camera.zoomTarget = Vector2(1.0,1.0)
 	self.roomContainer.restartRoom(self.level_paths[actualMapId])
 	self.camera.position = self.player.position
-	
-	
-	
+
 func startPlayer() -> void:
 	if self.player != null:
 		self.player.queue_free()

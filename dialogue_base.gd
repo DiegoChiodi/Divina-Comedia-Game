@@ -11,21 +11,25 @@ var label : Label = Label.new()
 
 var per_pass_spreench : bool = true
 
-const V = Speech.Speaker.VOID
-const D = Speech.Speaker.DANTE
-const G = Speech.Speaker.VIRGILIO
+const V = global.Speaker.VOID
+const D = global.Speaker.DANTE
+const G = global.Speaker.VIRGILIO
 
 const DELAY_ADD : float = 0.02
 var wait_add : float = 0.0
 
+signal finished
+
 func _ready() -> void:
 	self.set_speechs()
 	self.add_child(self.label)
+	
 
 func _process(_delta: float) -> void:
 	if self.start:
-		self.print_text(_delta)
-		self.event_control(_delta)
+		for i in range(int(Engine.time_scale)):
+			self.print_text(_delta)
+			self.event_control(_delta)
 
 func pass_text() -> void:
 	self.current_speench += 1
@@ -39,8 +43,11 @@ func set_speechs() -> void:
 func print_text(_delta : float) -> void:
 	if self.current_speench >= self.speechs.size():
 		return
+	
 	self.finish_line = self.speechs[self.current_speench].text.length() <= self.current_char
-	if self.finish_line and Input.is_action_just_pressed('space') and self.per_pass_spreench:
+	if self.finish_line and Input.is_action_pressed('space') and self.per_pass_spreench:
+		if Input.is_action_pressed('space'):
+			await 0.2
 		self.pass_text()
 	
 	if self.wait_add > self.DELAY_ADD and !self.speechs.is_empty() and !self.finish_line:
@@ -67,3 +74,10 @@ func move_ani_entity_to_point(entity : AnimationEntity, point : Vector2) -> bool
 
 func spawn_entity(entity, pos : Vector2) -> void:
 	pass
+
+func trade_pause():
+	global.pause_dialogue = !global.pause_dialogue
+
+func end() -> void:
+	emit_signal("finished")
+	queue_free()
