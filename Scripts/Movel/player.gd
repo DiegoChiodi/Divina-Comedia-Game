@@ -97,6 +97,7 @@ func _process(_delta: float) -> void:
 			self.speedFix = 300.0
 			self.damage = 20.0
 			self.life = self.lifeMax
+	
 	if global.pause_dialogue:
 		self.dash = false
 
@@ -132,6 +133,8 @@ func dashFunction(_delta) -> void:
 			self.dashWait = 0.0
 
 func speedTarget() -> float:
+	if global.pause_dialogue:
+		return self.speed
 	return super.speedTarget() * self.speedInDash
 
 func directionTarget() -> void:

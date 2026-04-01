@@ -1,8 +1,12 @@
 extends DialogueBase
 class_name DiaFoundVirgilio
 
+var virgilio : Virgilio = preload("res://Scene/virgilio.tscn").instantiate()
+var zoom_normals : Vector2 = game_manager.camera.zoom
+
 func _ready() -> void:
 	super._ready()
+
 func set_speechs() -> void:
 	self.speechs = [
 	Speech.new(D, "A saída… estava tão perto…"),
@@ -12,13 +16,16 @@ func set_speechs() -> void:
 	Speech.new(D, "Isso não faz sentido…"),
 	Speech.new(D, "Nada faz sentido."),
 
-	Speech.new(V, "", "spawn_virgilio"),
+	Speech.new(V, "", Speech.Event.SPAWN_ENTITY, [self.virgilio, game_manager.roomContainer.currentRoom.spawn_virg.global_position]),
 
 	Speech.new(G, "Faz mais sentido do que você imagina."),
 
 	Speech.new(D, "Quem está aí?"),
 	Speech.new(D, "Mostre-se!"),
 
+	Speech.new(V, "", Speech.Event.MOVE_ENTITY, [game_manager.player, game_manager.roomContainer.currentRoom.spawn_virg.global_position + Vector2.LEFT * 530]),
+	Speech.new(V, "", Speech.Event.CAM_ZOOM, [1.6]),
+	
 	Speech.new(G, "Alguém que conhece este caminho."),
 	Speech.new(G, "E o seu destino."),
 
@@ -66,9 +73,45 @@ func set_speechs() -> void:
 
 	Speech.new(G, "Mas você não está sozinho."),
 
-	Speech.new(G, "Venha.", "start_follow"),
+	Speech.new(G, "Venha."),
 	Speech.new(G, "O caminho começa… aqui."),
 
 	Speech.new(D, "…Certo."),
 	Speech.new(D, "Eu vou.")
 	]
+
+func event_control(_delta : float) -> void:
+	if self.current_speench >= self.speechs.size():
+		return
+	var data : Array = speechs[current_speench].data
+	match speechs[current_speench].event:
+		Speech.Event.MOVE_ENTITY:
+			self.per_pass_spreench = self.move_ani_entity_to_point(data[0], data[1])
+			if self.per_pass_spreench:
+				self.pass_text()
+			
+		Speech.Event.SPAWN_ENTITY:
+			self.spawn_entity(data[0], data[1])
+		Speech.Event.CAM_ZOOM:
+			self.per_pass_spreench = self.camera_zoom(data[0])
+			if self.per_pass_spreench:
+				self.pass_text()
+		Speech.Event.VOID:
+			pass
+
+func move_ani_entity_to_point(entity : AnimationEntity, point : Vector2, stop_marge : float = 50.0) -> bool:
+	if abs((entity.global_position - point).length()) > stop_marge:
+		entity.direction = entity.global_position.direction_to(point)
+		return false
+	entity.direction = Vector2.ZERO
+	return true
+
+func camera_zoom(zoom : float) -> bool:
+	if abs(game_manager.camera.zoomTarget.length() - (self.zoom_normals * zoom).length()) >= 0.1:
+		game_manager.camera.zoomTarget = self.zoom_normals * zoom
+		game_manager.camera.posComp = Vector2(300.0, 150.0)
+	return true
+
+func spawn_entity(entity, pos : Vector2) -> void:
+	game_manager.roomContainer.currentRoom.add_child(entity)
+	entity.global_position = pos

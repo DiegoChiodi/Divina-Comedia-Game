@@ -44,7 +44,7 @@ func _process(_delta):
 		# Restaura a posição original
 		self.offset = self.original_offset
 	
-	self.zoom = lerp(self.zoom,self.zoomTarget,self.zoomLissing)
+	self.zoom = lerp(self.zoom,self.zoomTarget, self.zoomLissing * _delta)
 
 
 func setup(_target, _posComp) -> void:

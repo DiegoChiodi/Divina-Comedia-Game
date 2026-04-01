@@ -9,6 +9,8 @@ var start : bool = false
 var finish_line : bool = false
 var label : Label = Label.new()
 
+var per_pass_spreench : bool = true
+
 const V = Speech.Speaker.VOID
 const D = Speech.Speaker.DANTE
 const G = Speech.Speaker.VIRGILIO
@@ -23,6 +25,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if self.start:
 		self.print_text(_delta)
+		self.event_control(_delta)
 
 func pass_text() -> void:
 	self.current_speench += 1
@@ -34,14 +37,13 @@ func set_speechs() -> void:
 	pass
 
 func print_text(_delta : float) -> void:
-	self.finish_line = self.speechs[self.current_speench].text.length() <= self.current_char
-	if self.finish_line:
-		if Input.is_action_just_pressed('space'):
-			self.pass_text()
+	if self.current_speench >= self.speechs.size():
 		return
+	self.finish_line = self.speechs[self.current_speench].text.length() <= self.current_char
+	if self.finish_line and Input.is_action_just_pressed('space') and self.per_pass_spreench:
+		self.pass_text()
 	
-	self.finish_line = false
-	if self.wait_add > self.DELAY_ADD and !self.speechs.is_empty():
+	if self.wait_add > self.DELAY_ADD and !self.speechs.is_empty() and !self.finish_line:
 		self.wait_add = 0.0
 		self.text_vis = self.text_vis + self.speechs[self.current_speench].text[self.current_char]
 		self.current_char += 1
@@ -49,8 +51,19 @@ func print_text(_delta : float) -> void:
 		self.wait_add += _delta
 	
 	self.label.text = self.text_vis
-	var speeaker_pos_comp = Vector2.RIGHT * 200.0 * (-1 if self.speechs[self.current_speench].speaker == D else 1)
-	var color := Color(1, 0.95, 0.8) if self.speechs[self.current_speench].speaker == D else Color(0.6, 0.7, 1.0)
-	
-	self.label.position = -self.label.size / 2 + speeaker_pos_comp
-	self.label.modulate = color
+	if self.current_speench < self.speechs.size():
+		var speeaker_pos_comp = Vector2.RIGHT * 200.0 * (-1 if self.speechs[self.current_speench].speaker == D else 1)
+		var color := Color(1, 0.95, 0.8) if self.speechs[self.current_speench].speaker == D else Color(0.6, 0.7, 1.0)
+		
+		self.label.position = -self.label.size / 2 + speeaker_pos_comp
+		self.label.modulate = color
+
+func event_control(_delta : float) -> void:
+	pass
+
+func move_ani_entity_to_point(entity : AnimationEntity, point : Vector2) -> bool:
+	print(self, "Não era pra tar printando isso, metodo abstrato")
+	return false
+
+func spawn_entity(entity, pos : Vector2) -> void:
+	pass
