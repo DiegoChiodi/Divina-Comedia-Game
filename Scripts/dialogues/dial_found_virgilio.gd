@@ -14,25 +14,16 @@ func set_speechs() -> void:
 	Speech.new(D, "Estou… preso aqui."),
 
 	Speech.new(D, "Isso não faz sentido…"),
-	Speech.new(D, "Nada faz sentido."),
+	Speech.new(D, "Nada faz sentido.", global.Event.SPAWN_ENTITY, [self.virgilio, game_manager.roomContainer.currentRoom.spawn_virg.global_position]),
 
-	Speech.new(V, "", global.Event.SPAWN_ENTITY, [self.virgilio, game_manager.roomContainer.currentRoom.spawn_virg.global_position]),
-
-	Speech.new(G, "Faz mais sentido do que você imagina."),
+	Speech.new(G, "Faz mais sentido do que você imagina.", global.Event.TRADE_MODULATE, [self.virgilio, Color(0,0,0, 1.0)]),
 	
-	Speech.new(V, "", global.Event.TRADE_MODULATE, [self.virgilio, Color(0,0,0, 0.8)]),
-	
-	Speech.new(D, "Quem está aí?"),
+	Speech.new(D, "Quem está aí?", global.Event.MOVE_ENTITY, [game_manager.player, game_manager.roomContainer.currentRoom.spawn_virg.global_position + Vector2.LEFT * 530, 5.0, 1.4]),
 
-	Speech.new(V, "", global.Event.MOVE_ENTITY, [game_manager.player, game_manager.roomContainer.currentRoom.spawn_virg.global_position + Vector2.LEFT * 530]),
-	
-
-	Speech.new(D, "Mostre-se!"),
-	Speech.new(V, "", global.Event.CAM_ZOOM, [1.6]),
+	Speech.new(D, "Mostre-se!", global.Event.CAM_ZOOM, [1.6]),
 	
 	Speech.new(G, "Alguém que conhece este caminho."),
-	Speech.new(V, "", global.Event.TRADE_MODULATE, [self.virgilio, Color(1,1,1, 1.0)]),
-	Speech.new(G, "E o seu destino."),
+	Speech.new(G, "E o seu destino.", global.Event.TRADE_MODULATE, [self.virgilio, Color(1,1,1, 1.0)]),
 
 	Speech.new(D, "Se conhece o caminho… me tire daqui."),
 
@@ -44,7 +35,7 @@ func set_speechs() -> void:
 	Speech.new(G, "Há."),
 	Speech.new(G, "Mas não acima."),
 
-	Speech.new(G, "Você deve descer… antes de subir."),
+	Speech.new(G, "Você deve descer… antes de subir.", global.Event.MOVE_ENTITY, [self.virgilio, game_manager.roomContainer.currentRoom.spawn_virg.global_position + Vector2.LEFT * 8, 2.0, 0.2]),
 	Speech.new(G, "Atravessar aquilo que teme."),
 
 	Speech.new(D, "Descer… para onde?"),
@@ -93,12 +84,16 @@ func event_control(_delta : float) -> void:
 	var data : Array = speechs[current_speench].data
 	match speechs[current_speench].event:
 		global.Event.MOVE_ENTITY:
-			self.per_pass_spreench = self.move_ani_entity_to_point(data[0], data[1])
+			if data.size() > 3:
+				self.per_pass_spreench = self.move_ani_entity_to_point(data[0], data[1], data[2], data[3])
+			else:
+				self.per_pass_spreench = self.move_ani_entity_to_point(data[0], data[1], data[2])
 			if self.per_pass_spreench:
 				self.pass_text()
 			
 		global.Event.SPAWN_ENTITY:
 			self.spawn_entity(data[0], data[1])
+			self.pass_text()
 		global.Event.CAM_ZOOM:
 			self.per_pass_spreench = self.camera_zoom(data[0])
 			if self.per_pass_spreench:
@@ -111,13 +106,17 @@ func event_control(_delta : float) -> void:
 		global.Event.END:
 			self.end()
 		global.Event.TRADE_MODULATE:
-			self.trade_modulate(data[0], data[1])
+			self.per_pass_spreench = self.trade_modulate(data[0], data[1], _delta)
+			if self.per_pass_spreench:
+				self.pass_text()
+			
 
-func move_ani_entity_to_point(entity : AnimationEntity, point : Vector2, stop_marge : float = 2.0) -> bool:
-	if abs((entity.global_position - point).length()) > stop_marge:
-		entity.direction = entity.global_position.direction_to(point)
+func move_ani_entity_to_point(entity : AnimationEntity, point : Vector2, stop_marge : float = 2.0, extra_speed : float = 1.0) -> bool:
+	if abs(entity.global_position.distance_to(point)) > stop_marge:
+		entity.direction = entity.global_position.direction_to(point) * extra_speed
+		
 		return false
-	entity.direction = Vector2.ZERO
+	entity.direction = Vector2.ZERO 
 	return true
 
 func camera_zoom(zoom : float) -> bool:
@@ -127,8 +126,14 @@ func camera_zoom(zoom : float) -> bool:
 	return true
 
 func spawn_entity(entity, pos : Vector2) -> void:
-	game_manager.roomContainer.currentRoom.add_child(entity)
+	game_manager.roomContainer.currentRoom.add_child(entity)#Problem, instanciando mesmo objeto mais de uma vez
+	#tendo varios parentes
 	entity.global_position = pos
 
-func trade_modulate(entity : Node2D, color : Color) -> void:
+func trade_modulate(entity : Node2D, color : Color, _delta : float) -> bool:
+	if global.color_distance(entity.modulate, color) > 0.05:
+		entity.modulate = entity.modulate.lerp(color, 0.98 * _delta)
+		return false
 	entity.modulate = color
+	return true
+		

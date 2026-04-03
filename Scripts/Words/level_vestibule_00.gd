@@ -20,6 +20,9 @@ func init_dialogue() -> void:
 	self.dialogue = DiaFoundVirgilio.new()
 	game_manager.ui.start_dialogue(self.dialogue)
 	
+	game_manager.camera.zoomTarget = Vector2.ONE
+	game_manager.camera.zoom = game_manager.camera.zoomTarget
+	
 	self.dialogue.start = true
 	global.pause_dialogue = true
 	game_manager.player.direction = Vector2.ZERO
