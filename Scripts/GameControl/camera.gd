@@ -25,7 +25,6 @@ func _ready():
 	self.limit_left = 0
 	self.limit_top = 0
 
-
 func _process(_delta):
 	if self.target != null:
 		self.posTarget = self.target.global_position + self.posComp

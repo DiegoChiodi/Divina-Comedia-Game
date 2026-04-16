@@ -38,7 +38,7 @@ func _process(_delta : float):
 	self.mar_relax_r.global_rotation = 0
 	
 	if Input.is_action_just_pressed('m'):
-		trading()
+		self.trading()
 
 func trading_beast(_delta : float) -> void:
 	self.rotation = lerp_angle(self.rotation, deg_to_rad(self.target_rotation), _delta * 2.5)

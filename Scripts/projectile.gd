@@ -4,11 +4,11 @@ class_name Projectile
 var dir : Vector2 = Vector2.RIGHT
 var speed : float = 300
 var damage : float = 10
-var decreaseScale : float = 1.0
+const DECREASE_SCALE : float = 0.2
 
 func _process(_delta: float) -> void:
 	self.position += self.dir * self.speed * _delta
-	self.scale = self.scale.lerp(Vector2.ZERO, 0.2 * _delta * self.decreaseScale)
+	self.scale = self.scale.lerp(Vector2.ZERO, _delta * self.DECREASE_SCALE)
 	
 	if self.scale.length() < 0.1:
 		self.self_destruction()

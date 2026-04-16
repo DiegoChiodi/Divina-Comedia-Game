@@ -1,6 +1,8 @@
 extends Enemy
 class_name NavEnemy
 
+var nav_agent : NavigationAgent2D
+
 func _ready() -> void:
 	super._ready()
 	self.get_nav_agent()

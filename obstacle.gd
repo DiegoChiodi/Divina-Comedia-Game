@@ -3,13 +3,13 @@ class_name Obstacle
 
 @onready var colHb : Area2D = $Area2D
 @onready var sprite : Sprite2D = $Sprite2D
-var lessing : float = 5
+var lessing : float = 5.0
 var dir : Vector2
 var dirFalling : Vector2
 var forceImpact : float
 var breaked : bool = false
 var falling : bool = false
-var fallingLissing : float = 5
+var fallingLissing : float = 5.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,7 +30,6 @@ func _physics_process(delta: float) -> void:
 		self.rotation_degrees = lerp(self.rotation_degrees, 90.0, self.fallingLissing * delta)
 	else:
 		self.rotation_degrees = lerp(self.rotation_degrees, -90.0, self.fallingLissing * delta)
-
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	self.dir = (self.global_position - area.get_parent().global_position).normalized()

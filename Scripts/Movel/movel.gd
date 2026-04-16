@@ -26,7 +26,7 @@ var weight : float  = 1.0
 var ricochet : bool = false
 
 func _process(delta: float) -> void:
-	directionTarget()
+	self.directionTarget()
 	if abs(self.direction.length()) > 0.1:
 		self.lastDirection = self.direction
 	self.rotationSet(delta)
@@ -55,18 +55,18 @@ func move(_delta: float) -> void:
 		self.velocity = velocity.lerp(Vector2.ZERO, self.acceleration * _delta)
 	# 2. Movimento real
 	
-	move_method(_delta)
+	self.move_method(_delta)
 	
 	if not Rect2(Vector2.ZERO, global.roomLimit).has_point(position):
 		self.farlands_limit()
 
 func velocityTarget(_delta : float) -> Vector2:
-	return ((self.direction * speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)) + self.external_velocity)
+	return ((self.direction * self.speedTarget()) + (self.impulseSpeed * self.impulseDir * (1 / self.weight)) + self.external_velocity)
 
 func directionTarget() -> void:
 	pass
 
-func takeImpulse(_impulseDir : Vector2, _impulseSpeed : float = 1000) -> void:
+func takeImpulse(_impulseDir : Vector2, _impulseSpeed : float = 1000.0) -> void:
 	if self.impulsionable:
 		self.impulseDir = _impulseDir
 		self.impulseSpeed = _impulseSpeed
@@ -90,4 +90,4 @@ func ricochetied(collision : KinematicCollision2D) -> void:
 	self.velocity = self.velocity.bounce(collision.get_normal())
 
 func move_method(_delta : float) -> void:
-	move_and_slide()
+	self.move_and_slide()

@@ -7,8 +7,8 @@ class_name ShadowEnemy
 
 func _ready() -> void:
 	super._ready()
-	self.speedFix = 150
-	self.life = 80
+	self.speedFix = 150.0
+	self.life = 80.0
 	
 	self.makepath()
 	#Sprites
@@ -38,14 +38,14 @@ func detectPlayer() -> void:
 
 	var laugh_player := AudioStreamPlayer2D.new()
 	laugh_player.stream = load(laugh_chosen)
-	add_child(laugh_player)
+	self.add_child(laugh_player)
 	laugh_player.play()
 	laugh_player.finished.connect(laugh_player.queue_free)
 	
 func takeDamage(_damage : float) -> void:
 	super.takeDamage(_damage)
-	self.body.modulate.a = min(life / lifeMax * 2, 0.8) 
-	self.eyes.modulate.a = (lifeMax / life) / 8.0
+	self.body.modulate.a = min(self.life / self.lifeMax * 2, 0.8) 
+	self.eyes.modulate.a = (self.lifeMax / self.life) / 8.0
 	
 func setDirection() -> Vector2:
 	return to_local(self.nav_agent.get_next_path_position()).normalized()

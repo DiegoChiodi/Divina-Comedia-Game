@@ -29,7 +29,6 @@ func attack_process(_delta : float) -> void:
 		self.rotation_personality = self.angle + 90
 		if self.radious < 30.0:
 			self.attack_wait = self.attack_delay
-		
 
 func start_attack () -> void:
 	super.start_attack()

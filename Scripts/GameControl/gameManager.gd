@@ -82,7 +82,7 @@ func init(_main : Node2D):
 	self.roomContainer.load_room(self.level_paths[LevelID.FOREST_00])
 	self.main.add_child(roomContainer)
 	randomize()
-	
+
 
 func center_window(new_size: Vector2i):
 	# define o tamanho da janela

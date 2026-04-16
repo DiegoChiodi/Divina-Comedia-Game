@@ -7,16 +7,12 @@ var timerLengthen := Timer.new()
 var timerLengthenDuration := Timer.new()
 var inLengthen : bool = false
 
-var nav_agent : NavigationAgent2D
 var are_check_player : Area2D
 var col_check_player : CollisionShape2D
 
 func _ready() -> void:
 	super._ready()
 	self.get_are_check_player()
-	
-	add_child(self.timerLengthen)
-	add_child(self.timerLengthenDuration)
 	
 	self.timerLengthen.timeout.connect(self.resetTimer)
 	self.timerLengthenDuration.timeout.connect(self.lengthenEnd)
@@ -39,9 +35,9 @@ func checkCollidingRival(body) -> bool:
 		return true
 	return false
 
-func directionTarget() -> void:
+func directionTarget() -> void: #override
 	if game_manager.player != null and self.seeingPlayer:
-		self.direction = setDirection()
+		self.direction = self.setDirection()
 	else:
 		if self.inLengthen:
 			return
@@ -49,7 +45,7 @@ func directionTarget() -> void:
 	
 	
 
-func setDirection() -> Vector2:
+func setDirection() -> Vector2: 
 	return (game_manager.player.position - self.position).normalized()
 
 func groupsAdd() -> void:

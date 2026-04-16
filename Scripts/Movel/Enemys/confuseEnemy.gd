@@ -15,22 +15,21 @@ func _ready() -> void:
 		self.default_scale = self.sprite.scale
 	
 func setDirection() -> Vector2:
-	return lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)
+	return lerp(self.direction, (game_manager.player.position - self.position).normalized(), self.perseguition)
 
 func takeDamage(_damage : float) -> void:
 	super.takeDamage(_damage)
 	self.direction *= 0.3
 	
-	feel_damage()
+	self.feel_damage()
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
-	flip_sprite(_delta)
-	
+	self.flip_sprite(_delta)
 
 func flip_sprite(_delta : float) -> void:
 	var dir_angle = abs(int(rad_to_deg(self.direction.angle())) % 360)
-	if dir_angle + 90 % 360 >= 180:
+	if (dir_angle + 90) % 360 >= 180:
 		self.flip_scale_x = lerp(self.flip_scale_x, -1.0, 8 * _delta)
 	else:
 		self.flip_scale_x = lerp(self.flip_scale_x, 1.0, 8 *_delta)

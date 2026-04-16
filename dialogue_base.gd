@@ -23,7 +23,7 @@ signal finished
 func _ready() -> void:
 	self.set_speechs()
 	self.add_child(self.label)
-	
+	label.add_theme_font_size_override("font_size", 20)
 
 func _process(_delta: float) -> void:
 	if self.start:
@@ -79,5 +79,5 @@ func trade_pause():
 	global.pause_dialogue = !global.pause_dialogue
 
 func end() -> void:
-	emit_signal("finished")
-	queue_free()
+	self.emit_signal("finished")
+	self.queue_free()

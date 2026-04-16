@@ -1,0 +1,11 @@
+Tomar cuidado com as grandesas físicas e respectivos nomes de variaveis
+
+Revisão, pois está faltando self. em muitos lugares (principalmente funções)
+
+corotina no tiro (sugestão)
+
+Direção como vetor unitário (confuseEnemy.gd)
+
+Usar como padrão radiano
+
+Tomar cuidado com global_position

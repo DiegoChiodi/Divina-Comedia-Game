@@ -37,7 +37,7 @@ func _ready() -> void:
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	self.global_rotation_degrees = rotation_personality
+	self.global_rotation_degrees = self.rotation_personality
 	
 	if self.invencibleWait < self.INVENCIBLE_DELAY:
 		self.invencibleWait += _delta

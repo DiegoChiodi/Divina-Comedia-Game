@@ -5,15 +5,15 @@ class_name ShieldEnemy
 
 func _ready() -> void:
 	super._ready()
-	self.speedFix = 200
+	self.speedFix = 200.0
 	self.perseguition = 0.01
-	self.life = 100
+	self.life = 100.0
 
-func are_directions_similar(a: Vector2, b: Vector2, tolerance_degrees: float = 120.0) -> bool:
+func are_directions_similar(a: Vector2, b: Vector2, tolerance_angle: float = deg_to_rad(120.0)) -> bool:
 	if a == Vector2.ZERO or b == Vector2.ZERO:
 		return false
 
-	var cos_tolerance = cos(deg_to_rad(tolerance_degrees))
+	var cos_tolerance = cos((tolerance_angle))
 	var dot_value = a.normalized().dot(b.normalized())
 
 	return dot_value >= cos_tolerance
@@ -34,7 +34,7 @@ func rotationSet(_delta) -> void:
 		self.rotation = lerp_angle(self.rotation, (game_manager.player.position - self.position).angle(), _delta * 1)
 
 func setDirection() -> Vector2:
-	return lerp(self.direction, (game_manager.player.position - self.position).normalized(), perseguition)
+	return lerp(self.direction, (game_manager.player.position - self.position).normalized(), self.perseguition)
 
 func flip_sprite(_delta : float) -> void:
 	pass

@@ -2,7 +2,6 @@ extends DialogueBase
 class_name DiaFoundVirgilio
 
 var virgilio : Virgilio = preload("res://Scene/virgilio.tscn").instantiate()
-var zoom_normals : Vector2 = game_manager.camera.zoom
 
 func _ready() -> void:
 	super._ready()
@@ -20,9 +19,9 @@ func set_speechs() -> void:
 	
 	Speech.new(D, "Quem está aí?", global.Event.MOVE_ENTITY, [game_manager.player, game_manager.roomContainer.currentRoom.spawn_virg.global_position + Vector2.LEFT * 530, 5.0, 1.4]),
 
-	Speech.new(D, "Mostre-se!", global.Event.CAM_ZOOM, [1.6]),
+	Speech.new(D, "Mostre-se!", global.Event.MOVE_ENTITY,[game_manager.player, game_manager.roomContainer.currentRoom.spawn_virg.global_position + Vector2.LEFT * 510, 5.0, 0.2]),
 	
-	Speech.new(G, "Alguém que conhece este caminho."),
+	Speech.new(G, "Alguém que conhece este caminho.", global.Event.CAM_ZOOM, [1.6]),
 	Speech.new(G, "E o seu destino.", global.Event.TRADE_MODULATE, [self.virgilio, Color(1,1,1, 1.0)]),
 
 	Speech.new(D, "Se conhece o caminho… me tire daqui."),
@@ -120,8 +119,8 @@ func move_ani_entity_to_point(entity : AnimationEntity, point : Vector2, stop_ma
 	return true
 
 func camera_zoom(zoom : float) -> bool:
-	if abs(game_manager.camera.zoomTarget.length() - (self.zoom_normals * zoom).length()) >= 0.1:
-		game_manager.camera.zoomTarget = self.zoom_normals * zoom
+	if abs(game_manager.camera.zoomTarget.length() - (Vector2.ONE * zoom).length()) >= 0.1:
+		game_manager.camera.zoomTarget = Vector2.ONE * zoom
 		game_manager.camera.posComp = Vector2(300.0, 150.0)
 	return true
 

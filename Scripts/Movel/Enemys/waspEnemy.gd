@@ -1,9 +1,9 @@
 extends Enemy
 class_name WaspEnemy
 
-var perseguition : Array[Vector2] = []
+var persecution : Array[Vector2] = []
 var disPerDelay : float = 0.05
-var disPerWait : float = disPerDelay
+var disPerWait : float = self.disPerDelay
 var secondsDis : int = 4
 var posTarget : Vector2 = Vector2.ZERO
 
@@ -16,9 +16,9 @@ func _process(delta: float) -> void:
 	
 	if self.disPerWait > self.disPerDelay and game_manager.player != null:
 		self.disPerWait = 0.0
-		self.perseguition.append(game_manager.player.position)
-		if self.perseguition.size() > secondsDis:
-			posTarget = perseguition.pop_front()
+		self.persecution.append(game_manager.player.position)
+		if self.persecution.size() > self.secondsDis:
+			self.posTarget = self.persecution.pop_front()
 	else:
 		self.disPerWait += delta
 

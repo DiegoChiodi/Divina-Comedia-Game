@@ -124,7 +124,7 @@ func dashFunction(_delta) -> void:
 			self.sprite.scale.y = lerp(self.sprite.scale.y,1.0 * self.initial_scale.y, 0.3)
 	else:
 		self.sprite.scale.y = self.initial_scale.y
-		self.speedInDash = 1
+		self.speedInDash = 1.0
 		if self.dashWait < self.DASH_DELAY and !self.dash:
 			self.dashWait += _delta
 		elif !self.dash:#Carregou o dash
@@ -163,7 +163,7 @@ func AttackSucess(_body : CharacterBody2D) -> void:
 	else:
 		finalImpDir.y = impDir.y
 		
-	takeImpulse(finalImpDir, self.KNOCBACKSELFFEELING)
+	self.takeImpulse(finalImpDir, self.KNOCBACKSELFFEELING)
 
 func velocityTarget(_delta : float) -> Vector2:
 	if self.inDash:
@@ -171,8 +171,8 @@ func velocityTarget(_delta : float) -> Vector2:
 	return super.velocityTarget(_delta)
 
 func checkAttack(_delta) -> void:
-	if self.attack and Input.is_action_just_pressed("left_click") and self.attackWait >= self.attackDelay and !self.inDash:
-		var mouseDir : Vector2 = (get_global_mouse_position() - self.global_position).normalized()
+	if self.attack and Input.is_action_just_pressed("attack") and self.attackWait >= self.attackDelay and !self.inDash:
+		var mouseDir : Vector2 = (self.get_global_mouse_position() - self.global_position).normalized()
 		if abs(mouseDir.x) >= abs(mouseDir.y):
 			self.colHb.shape.size = self.HITBOX_X
 			if mouseDir.x > 0:
@@ -207,7 +207,7 @@ func checkAttack(_delta) -> void:
 	var shape : Shape2D = self.colHb.shape
 	var size = shape.size
 	
-		# Tamanho do debug
+	# Tamanho do debug
 	$attack.size = size
 	# Centralizar o ColorRect no CollisionShape
 	$attack.position = self.colHb.position - size / 1.5
@@ -298,9 +298,11 @@ func move_method(_delta : float) -> void:
 			if !(other is Movel):
 				return
 			var dirForce := collision.get_normal().normalized()
+			
 			var force : float = 0.0
 			
 			force = min(self.MINEXTERNALFORCE, self.speedFix)
+			
 			other.add_central_force(dirForce * force)
 	else:
 		super.move_method(_delta)

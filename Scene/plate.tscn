@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2nsiesldi5pq"]
+[gd_scene format=3 uid="uid://d2nsiesldi5pq"]
 
 [ext_resource type="Script" uid="uid://dcqc6gwhqyuj0" path="res://plate.gd" id="1_gmc4b"]
 [ext_resource type="Texture2D" uid="uid://cblcg5lkmmjxx" path="res://Assets/sprites/plate.png" id="2_sv48e"]
@@ -6,16 +6,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sv48e"]
 size = Vector2(13, 13)
 
-[node name="Plate" type="Node2D"]
+[node name="Plate" type="Node2D" unique_id=1340972232]
 script = ExtResource("1_gmc4b")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=110763662]
 texture = ExtResource("2_sv48e")
 region_enabled = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=153689380]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1286216588]
 shape = SubResource("RectangleShape2D_sv48e")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

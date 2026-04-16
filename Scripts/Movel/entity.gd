@@ -27,7 +27,7 @@ var is_dead : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	groupsAdd()
+	self.groupsAdd()
 
 func _process(_delta: float) -> void:
 	super._process(_delta)
@@ -45,9 +45,9 @@ func _process(_delta: float) -> void:
 	
 	if self.damageFlashWait < self.damageFlashDelay:
 		self.damageFlashWait += _delta
-		damageFlashing(_delta)
+		self.damageFlashing(_delta)
 	elif self.neutralizingWait < self.NEUTRALIZATINGDELAY:
-		stopFlashing(_delta)
+		self.stopFlashing(_delta)
 		self.neutralizingWait += _delta
 	
 	if self.is_dead:
@@ -55,7 +55,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	checkColliding()
+	self.checkColliding()
 
 func collidingRival(_body) -> void:
 	if !self.invencible:
@@ -135,7 +135,7 @@ func dying (_delta : float) -> void:
 	self.queue_free()
 
 func dash_intangible_col() -> void:
-	self.velocity *= -4
+	self.velocity *= -4.0
 
 func colliding_projectile(projectile : Projectile) -> void:
 	if !self.invencible:

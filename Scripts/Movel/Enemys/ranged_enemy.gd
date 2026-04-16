@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 		self.shot_wait += _delta
 	else:
 		self.shot_wait = randf_range(0.0,2.0)
-		if seeingPlayer and game_manager.player != null:
+		if self.seeingPlayer and game_manager.player != null:
 			self.invencibilityActivate(false, 0.02)
 			var projectile_add = self.projectile.instantiate()
 			projectile_add.dir = (game_manager.player.position - self.position).normalized()

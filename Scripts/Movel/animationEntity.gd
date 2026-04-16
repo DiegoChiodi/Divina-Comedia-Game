@@ -6,11 +6,11 @@ var lastDirectionX : float = 0.0
 
 func _ready() -> void:
 	super._ready()
-	set_sprite()
+	self.set_sprite()
 	
 func _process(delta: float) -> void:
 	super._process(delta)
-	drawSelfDir()
+	self.drawSelfDir()
 
 func set_sprite() -> void:
 	self.sprite = $sprite
@@ -18,9 +18,9 @@ func set_sprite() -> void:
 	
 func drawSelfDir() -> void:
 	if abs(self.direction.length()) <= 0.2:
-		idle()
+		self.idle()
 	else:
-		run()
+		self.run()
 
 func run() -> void:
 	if abs(self.direction.x) >= abs(self.direction.y):
