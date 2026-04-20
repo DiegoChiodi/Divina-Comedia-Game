@@ -308,7 +308,8 @@ func move_method(_delta : float) -> void:
 		super.move_method(_delta)
 
 func farlands_limit() -> void:
-	game_manager.roomContainer.currentRoom.out_bounds(self)
+	if game_manager.roomContainer.currentRoom != null:
+		game_manager.roomContainer.currentRoom.out_bounds(self)
 
 func colliding_projectile(projectile : Projectile) -> void:
 	if self.inDash:

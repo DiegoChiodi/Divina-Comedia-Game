@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b6d43pqvej1w"]
+
+[ext_resource type="Script" uid="uid://bartvqq4k63xn" path="res://Scripts/Words/level_circle_00.gd" id="1_oh1o0"]
+[ext_resource type="PackedScene" uid="uid://cikyl33csv1th" path="res://Scene/map_circle.tscn" id="2_im4t0"]
+
+[node name="level_circle_00" type="Node2D" unique_id=2015568479]
+script = ExtResource("1_oh1o0")
+
+[node name="map" parent="." unique_id=1196019893 instance=ExtResource("2_im4t0")]

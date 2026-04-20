@@ -5,28 +5,36 @@ enum MapID {
 	FOREST,
 	VESTIBULE,
 	MOUNTAIN,
-	TOP_MOUNTAIN
+	TOP_MOUNTAIN,
+	VESTIBULE_ENTER,
+	CIRCLE
 }
 
 enum LevelID {
 	FOREST_00,
 	VESTIBULE_00,
 	MOUNTAIN_00,
-	TOP_MOUNTAIN_00
+	TOP_MOUNTAIN_00,
+	VESTIBULE_ENTER_00,
+	CIRCLE_00
 }
 
 var level_paths : Dictionary = {
 	LevelID.FOREST_00 : 'res://Scene/Roons/Levels/level_forest_00.tscn',
 	LevelID.VESTIBULE_00 : 'res://Scene/Roons/Levels/level_vestibule_00.tscn',
 	LevelID.MOUNTAIN_00 : 'res://Scene/Roons/Levels/level_mountain_00.tscn',
-	LevelID.TOP_MOUNTAIN_00 : 'res://Scene/Roons/Levels/level_top_mountain_00.tscn'
+	LevelID.TOP_MOUNTAIN_00 : 'res://Scene/Roons/Levels/level_top_mountain_00.tscn',
+	LevelID.VESTIBULE_ENTER_00: 'res://Scene/Roons/Levels/level_vestibule_enter_00.tscn',
+	LevelID.CIRCLE_00:          'res://Scene/Roons/Levels/level_circle_00.tscn'
 }
 
 var marker_names : Dictionary = {
-	MapID.FOREST :     'marker_from_forest',
-	MapID.VESTIBULE:   'marker_from_vestibule',
-	MapID.MOUNTAIN:    'marker_from_mountain',
-	MapID.TOP_MOUNTAIN:'marker_from_top_mountain'
+	MapID.FOREST :           'marker_from_forest',
+	MapID.VESTIBULE:         'marker_from_vestibule',
+	MapID.MOUNTAIN:          'marker_from_mountain',
+	MapID.TOP_MOUNTAIN:      'marker_from_top_mountain',
+	MapID.VESTIBULE_ENTER:   'marker_from_vestibule_enter',
+	MapID.CIRCLE:            'marker_from_circle'
 }
 
 var main : Main
@@ -41,12 +49,12 @@ var debugScene : String = "res://Scene/debugMap.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	windowsConf()
+	self.windowsConf()
 	self.process_mode = self.PROCESS_MODE_ALWAYS
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("restart"):
-		restartRoom()
+		self.restartRoom()
 		if self.ui.get_node_or_null('boss') != null:
 			self.ui.get_node('boss').queue_free()
 		
@@ -67,7 +75,7 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("menu"):
 		self.is_paused = !self.is_paused
-		get_tree().paused = self.is_paused
+		self.get_tree().paused = self.is_paused
 	
 		
 func init(_main : Node2D):

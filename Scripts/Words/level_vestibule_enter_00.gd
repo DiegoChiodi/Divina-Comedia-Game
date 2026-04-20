@@ -1,0 +1,2 @@
+extends Level
+class_name Level_Vestibule_enter_00

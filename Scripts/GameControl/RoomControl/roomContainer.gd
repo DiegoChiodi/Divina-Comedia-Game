@@ -32,12 +32,12 @@ func load_room(path) -> void:
 	self.positionPlayer()
 
 func change_room(path) -> void:
-	destroy_room()
-	load_room(path)
+	self.destroy_room()
+	self.load_room(path)
 
 func restartRoom(path: String) -> void:
 	self.restart = true
-	change_room(path)
+	self.change_room(path)
 
 func posPlayerSpawn() -> void:
 	var mark_position = self.currentRoom.map.get_node("player_spawn").position
@@ -45,7 +45,7 @@ func posPlayerSpawn() -> void:
 	game_manager.camera.global_position = mark_position
 
 func posPlayerPreviousRomm() -> void:
-	var marker_name = game_manager.marker_names[previousMapId]
+	var marker_name = game_manager.marker_names[self.previousMapId]
 	var marker : Marker2D = self.currentRoom.map.get_node(marker_name)
 	var mark_position = marker.position
 	game_manager.player.set_deferred("position", mark_position)
@@ -53,20 +53,20 @@ func posPlayerPreviousRomm() -> void:
 
 func positionPlayer() -> void:
 	if self.inInit: #Inicío do jogo, previousMapId = null
-		posPlayerSpawn()
+		self.posPlayerSpawn()
 		self.inInit = false
 		return
 	
 	#Se o jogo acabou de iniciar e previousMapId acabou de ser criado
 	#Estou no mapa inicial e acabei de vir dele
 	if self.restart and self.previousMapId == -1 and self.currentRoom.map.get_node("player_spawn") != null:
-		posPlayerSpawn()
+		self.posPlayerSpawn()
 		self.restart = false
 		return
 	
 	#Para reiniciar no marker certo da scena anterior
 	if !self.restart:
 		self.previousMapId = self.prev_room.map.id
-	posPlayerPreviousRomm()
+	self.posPlayerPreviousRomm()
 	self.restart = false
 	

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://drmn6i6ehgp5c"]
+
+[ext_resource type="Script" uid="uid://b04rfrdjsjfsb" path="res://Scripts/Words/level_vestibule_enter_00.gd" id="1_8ayl7"]
+[ext_resource type="PackedScene" uid="uid://krsdfx0sa0us" path="res://Scene/Roons/map_vestibule_enter.tscn" id="2_a02es"]
+
+[node name="level_vestibule_enter_00" type="Node2D" unique_id=431940734]
+script = ExtResource("1_8ayl7")
+
+[node name="map" parent="." unique_id=1196019893 instance=ExtResource("2_a02es")]

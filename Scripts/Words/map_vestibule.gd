@@ -15,3 +15,8 @@ func _on_enter_forest_area_entered(area: Area2D) -> void:
 func _on_enter_mountain_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Player and !self.locked_map:
 		game_manager.change_room(GameManager.LevelID.MOUNTAIN_00)
+
+
+func _on_enter_vestibule_enter_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Player and !self.locked_map:
+		game_manager.change_room(GameManager.LevelID.VESTIBULE_ENTER_00)
