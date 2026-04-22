@@ -3,7 +3,17 @@
 [ext_resource type="Script" uid="uid://bartvqq4k63xn" path="res://Scripts/Words/level_circle_00.gd" id="1_oh1o0"]
 [ext_resource type="PackedScene" uid="uid://cikyl33csv1th" path="res://Scene/map_circle.tscn" id="2_im4t0"]
 
+[sub_resource type="Curve2D" id="Curve2D_im4t0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2150, 758, 0, 0, 0, 0, 1737, 897, 0, 0, 0, 0, 1277, 1191, 0, 0, 0, 0, 925, 1534, 0, 0, 0, 0, 809, 1814, 0, 0, 0, 0, 646, 2540, 0, 0, 0, 0, 660, 3005, 0, 0, 0, 0, 789, 3363, 0, 0, 0, 0, 972, 3700, 0, 0, 0, 0, 1462, 4217, 0, 0, 0, 0, 2055, 4530, 0, 0, 0, 0, 2352, 4624, 0, 0, 0, 0, 2687, 4677, 0, 0, 0, 0, 3139, 4677, 0, 0, 0, 0, 3804, 4482, 0, 0, 0, 0, 4199, 4255, 0, 0, 0, 0, 4656, 3679, 0, 0, 0, 0, 4855, 3106, 0, 0, 0, 0, 4923, 2718, 0, 0, 0, 0, 4920, 2314, 0, 0, 0, 0, 4764, 1831, 0, 0, 0, 0, 4399, 1224, 0, 0, 0, 0, 3837, 816, 0, 0, 0, 0, 3502, 713, 0, 0, 0, 0, 2974, 644, 0, 0, 0, 0, 2541, 672, 0, 0, 0, 0, 2152, 759)
+}
+point_count = 27
+
 [node name="level_circle_00" type="Node2D" unique_id=2015568479]
 script = ExtResource("1_oh1o0")
 
 [node name="map" parent="." unique_id=1196019893 instance=ExtResource("2_im4t0")]
+
+[node name="Path2D" type="Path2D" parent="." unique_id=5664277]
+visible = false
+curve = SubResource("Curve2D_im4t0")

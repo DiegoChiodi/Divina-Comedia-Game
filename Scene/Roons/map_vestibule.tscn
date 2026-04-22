@@ -194,7 +194,7 @@ tile_set = SubResource("TileSet_7e3sg")
 scale = Vector2(3, 3)
 
 [node name="roomSize" type="Marker2D" parent="." unique_id=569743502]
-position = Vector2(1792, 1024)
+position = Vector2(1816, 1056)
 
 [node name="marker_from_forest" type="Marker2D" parent="." unique_id=698592331]
 position = Vector2(192, 320)

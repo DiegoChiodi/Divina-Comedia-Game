@@ -224,7 +224,7 @@ tile_set = SubResource("TileSet_yofix")
 scale = Vector2(3, 3)
 
 [node name="roomSize" type="Marker2D" parent="." unique_id=1406204703]
-position = Vector2(1160, 680)
+position = Vector2(1152, 648)
 
 [node name="marker_from_vestibule" type="Marker2D" parent="." unique_id=1502387893]
 position = Vector2(192, 320)
